@@ -1,4 +1,5 @@
 import {Company} from "./company";
+import {Locations} from "./locations";
 
 export interface Job {
   id: number;
@@ -13,6 +14,6 @@ export interface Job {
   quantity: number;
   gender: number;
   status: boolean;
-  location: Location;
+  location: Locations;
   company: Company;
 }
