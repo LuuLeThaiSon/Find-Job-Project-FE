@@ -1,6 +1,4 @@
 import {AfterViewInit, Component, ElementRef} from '@angular/core';
-import {JobService} from "./components/service/job.service";
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
