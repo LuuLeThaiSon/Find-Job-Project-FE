@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+
 import {Company} from "../model/company";
 import {Observable} from "rxjs";
 import {Role} from "../model/role";
@@ -8,12 +9,16 @@ import {Candidate} from "../model/candidate";
 
 const apiUrl = environments.apiUrl
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
 
-  constructor(private httpClient: HttpClient) { }
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   findAllCompany(): Observable<Company[]> {
     return this.httpClient.get<Company[]>(`${apiUrl}/companies`)
@@ -23,7 +28,7 @@ export class CompanyService {
     return this.httpClient.get<Role[]>(`${apiUrl}/companies/role`)
   }
 
-  findAllCandidate() : Observable<Candidate[]> {
+  findAllCandidate(): Observable<Candidate[]> {
     return this.httpClient.get<Candidate[]>(`${apiUrl}/candidates`)
   }
 
@@ -37,5 +42,11 @@ export class CompanyService {
 
   delete(id: number): Observable<any> {
     return this.httpClient.delete<any>(`${apiUrl}/companies/${id}`)
+
+    // constructor(private http: HttpClient) { }
+    //
+    // findAll(): Observable<Company[]> {
+    //   return this.http.get<Company[]>("http://localhost:8080/companies")
+    // }
   }
 }

@@ -5,6 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomePageComponent} from "./components/pages/home-page/home-page.component";
 import {HttpClientModule} from "@angular/common/http";
+import { CompanyListComponent } from './components/pages/company-list/company-list.component';
+// @ts-ignore
+import { NgxPaginationModule } from 'ngx-pagination';
+
+import { JobListComponent } from './components/pages/job-list/job-list.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { RegisterComponent } from './components/pages/register/register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -12,6 +17,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
+    HomePageComponent,
+    CompanyListComponent,
+    JobListComponent,
     HomePageComponent,
     LoginComponent,
     RegisterComponent
@@ -21,6 +29,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    NgxPaginationModule,
     FormsModule
   ],
   providers: [],
