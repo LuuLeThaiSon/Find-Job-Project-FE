@@ -8,12 +8,14 @@ import {HttpClientModule} from "@angular/common/http";
 import { CompanyListComponent } from './components/pages/company-list/company-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import {FormsModule} from "@angular/forms";
+import { JobListComponent } from './components/pages/job-list/job-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    JobListComponent
   ],
   imports: [
     BrowserModule,
