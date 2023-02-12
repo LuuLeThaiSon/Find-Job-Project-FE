@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {JobService} from "../../service/job.service";
 import {Job} from "../../model/job";
+import {Candidate} from "../../model/candidate";
 
 @Component({
   selector: 'app-home-page',
@@ -8,6 +9,7 @@ import {Job} from "../../model/job";
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent{
+  candidate!: Candidate
   jobs: Job[] = [];
   constructor(private jobService: JobService) {
     this.findAll();
@@ -18,4 +20,6 @@ export class HomePageComponent{
       console.log(data)
     })
   }
+
+
 }

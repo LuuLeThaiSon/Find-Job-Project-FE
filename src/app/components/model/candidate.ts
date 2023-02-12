@@ -6,5 +6,5 @@ export interface Candidate {
   email: string;
   password: string;
   tel: string;
-  role: Role;
+  role: Role
 }
