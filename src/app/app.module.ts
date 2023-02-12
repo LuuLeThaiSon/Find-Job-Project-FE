@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import {HomePageComponent} from "./components/pages/home-page/home-page.component";
 import {HttpClientModule} from "@angular/common/http";
 import { CompanyListComponent } from './components/pages/company-list/company-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { CompanyListComponent } from './components/pages/company-list/company-li
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

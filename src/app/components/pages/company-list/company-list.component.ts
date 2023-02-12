@@ -9,6 +9,8 @@ import {Company} from "../../model/company";
 })
 export class CompanyListComponent {
   companies: Company[] = [];
+  p: number = 1;
+  itemsPerPage: number = 9;
   constructor(private companyService: CompanyService) {
     this.findAll()
   }
