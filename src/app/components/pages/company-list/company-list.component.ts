@@ -1,0 +1,21 @@
+import { Component } from '@angular/core';
+import {CompanyService} from "../../service/company.service";
+import {Company} from "../../model/company";
+
+@Component({
+  selector: 'app-company-list',
+  templateUrl: './company-list.component.html',
+  styleUrls: ['./company-list.component.css']
+})
+export class CompanyListComponent {
+  companies: Company[] = [];
+  constructor(private companyService: CompanyService) {
+    this.findAll()
+  }
+  findAll() {
+    this.companyService.findAll().subscribe((data) => {
+      this.companies = data;
+      console.log(data)
+    })
+  }
+}
