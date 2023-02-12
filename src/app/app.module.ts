@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import {HomePageComponent} from "./components/pages/home-page/home-page.component";
 import {HttpClientModule} from "@angular/common/http";
 import { CompanyListComponent } from './components/pages/company-list/company-list.component';
-// @ts-ignore
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { JobListComponent } from './components/pages/job-list/job-list.component';

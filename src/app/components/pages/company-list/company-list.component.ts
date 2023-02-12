@@ -15,7 +15,7 @@ export class CompanyListComponent {
     this.findAll()
   }
   findAll() {
-    this.companyService.findAll().subscribe((data) => {
+    this.companyService.findAllCompany().subscribe((data) => {
       this.companies = data;
       console.log(data)
     })
