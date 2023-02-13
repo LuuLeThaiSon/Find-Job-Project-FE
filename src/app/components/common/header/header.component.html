@@ -205,11 +205,11 @@
               </div>
             </li>
             <li class="list-inline-item dropdown">
-            <a href="javascript:void(0)" class="header-item" id="userdropdown3" data-bs-toggle="dropdown"
+            <a href="javascript:void(0)" class="header-item" id="userdropdown" data-bs-toggle="dropdown"
                aria-expanded="false">
               <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name.split(' ')[0]}}</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown3">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" href="manage-jobs.html">To Admin Page</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
@@ -302,14 +302,14 @@
               </div>
             </li>
             <li class="list-inline-item dropdown">
-            <a href="javascript:void(0)" class="header-item" id="userdropdown2" data-bs-toggle="dropdown"
+            <a href="javascript:void(0)" class="header-item" id="userdropdown" data-bs-toggle="dropdown"
                aria-expanded="false">
-              <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name}}</span>
+              <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">{{user.name}}</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown2">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" href="manage-jobs.html">Post New Jobs</a></li>
               <li><a class="dropdown-item" href="bookmark-jobs.html">Manage Jobs</a></li>
-              <li><a class="dropdown-item" href="profile.html">Company Profile</a></li>
+              <li><a class="dropdown-item" href="" [routerLink]="['/company-detail', user.id]">Company Profile</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
             </li>
@@ -401,11 +401,11 @@
               </div>
             </li>
             <li class="list-inline-item dropdown">
-            <a href="javascript:void(0)" class="header-item" id="userdropdown1" data-bs-toggle="dropdown"
+            <a href="javascript:void(0)" class="header-item" id="userdropdown" data-bs-toggle="dropdown"
                aria-expanded="false">
               <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name}}</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown1">
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>

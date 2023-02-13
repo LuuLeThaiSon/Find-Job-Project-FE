@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { JobListComponent } from './components/pages/job-list/job-list.component';
 import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
+import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {RegisterComponent} from "./components/pages/register/register.component"
     CompanyListComponent,
     JobListComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CompanyDetailComponent
   ],
   imports: [
     BrowserModule,

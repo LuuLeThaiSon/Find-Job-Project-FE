@@ -7,6 +7,7 @@ import {CompanyListComponent} from "./components/pages/company-list/company-list
 import {JobListComponent} from "./components/pages/job-list/job-list.component";
 import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
+import {CompanyDetailComponent} from "./components/pages/company-detail/company-detail.component";
 
 const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:"company",component:CompanyListComponent},
   {path:"job",component:JobListComponent},
   {path:"login",component:LoginComponent},
-  {path:"register",component:RegisterComponent}
+  {path:"register",component:RegisterComponent},
+  {path:"company-detail/:id",component:CompanyDetailComponent}
 ];
 
 @NgModule({
