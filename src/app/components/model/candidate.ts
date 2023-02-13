@@ -7,4 +7,5 @@ export interface Candidate {
   password: string;
   tel: string;
   role: Role;
+  avatar:string;
 }
