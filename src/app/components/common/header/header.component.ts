@@ -1,20 +1,23 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {Company} from "../../model/company";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent{
   city!: string;
   constructor(private http: HttpClient) {
   }
   ip!:string;
-  url = "";
+  user!:any;
+  role!:any;
 
   ngOnInit() {{
-    this.getGeoLocationData();
+    // this.getGeoLocationData();
+    this.role = sessionStorage.getItem("user");
   }}
 
   getIp() {
@@ -32,3 +35,4 @@ export class HeaderComponent {
     )
   }}
 }
+
