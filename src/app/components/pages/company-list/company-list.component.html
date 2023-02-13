@@ -62,7 +62,7 @@
               <div class="selection-widget mt-2 mt-lg-0">
                 <select class="form-select" data-trigger name="choices-candidate-page" id="choices-candidate-page"
                         aria-label="Default select example" [(ngModel)]="itemsPerPage">
-                  <option [ngValue]="100">All</option>
+                  <option [ngValue]=100>All</option>
                   <option [ngValue]=3>3 per Page</option>
                   <option [ngValue]="6">6 per Page</option>
                 </select>
@@ -76,11 +76,11 @@
       <div class="col-lg-4 col-md-6" *ngFor="let c of companies | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
         <div class="card text-center mb-4">
           <div class="card-body px-4 py-5">
-            <img src="{{c.avatar}}" alt="" class="img-fluid rounded-3">
+            <img src="{{c.company?.avatar}}" alt="" class="img-fluid rounded-3">
             <div class="mt-4">
-              <a href="company-details.html" class="primary-link"><h6 class="fs-18 mb-2">{{c.name}}</h6></a>
-              <p class="text-muted mb-4">{{c.address}}</p>
-              <a href="company-details.html" class="btn btn-primary">Tổng số lượng job</a>
+              <a href="company-details.html" class="primary-link"><h6 class="fs-18 mb-2">{{c.company?.name}}</h6></a>
+              <p class="text-muted mb-4">{{c.company?.address}}</p>
+              <a href="company-details.html" class="btn btn-primary">{{c.count}} Opening Jobs</a>
             </div>
           </div>
         </div>
