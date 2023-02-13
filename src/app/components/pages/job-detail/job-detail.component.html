@@ -145,7 +145,7 @@
                 <div class="col-md-3">
                   <div class="mb-2 mb-md-0">
                     <h5 class="fs-18 mb-1"><a [routerLink]="['/job-detail', j.id]"
-                                              class="text-dark" (click)="onTop()">{{j.title}}</a>
+                                              class="text-dark" (click)="onTop(0, 600)">{{j.title}}</a>
                     </h5>
                     <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
                   </div>
@@ -211,7 +211,7 @@
         </div>
 
         <div class="text-center mt-4">
-          <a href="" routerLink="/job" class="primary-link form-text" (click)="onTop()">View More <i
+          <a href="" routerLink="/job" class="primary-link form-text" (click)="onTop(0, 600)">View More <i
             class="mdi mdi-arrow-right"></i></a>
         </div>
 
@@ -328,8 +328,8 @@
                 </li>
               </ul>
               <div class="mt-4">
-                <a href=""
-                   class="btn btn-primary btn-hover w-100 rounded"><i
+                <a href="" [routerLink]="['/company-detail/',job.company.id]"
+                   class="btn btn-primary btn-hover w-100 rounded" (click)="onTop(0, 0)"><i
                   class="mdi mdi-eye"></i> View Profile</a>
               </div>
             </div>

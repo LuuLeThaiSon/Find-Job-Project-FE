@@ -33,7 +33,7 @@ export class JobDetailComponent {
     })
   }
 
-  onTop() {
-    window.scrollTo(0, 600);
+  onTop(x: number, y: number) {
+    window.scrollTo(x, y);
   }
 }
