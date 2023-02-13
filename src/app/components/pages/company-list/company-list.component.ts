@@ -1,7 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {CompanyService} from "../../service/company.service";
 import {Company} from "../../model/company";
-import {JobCount} from "../../model/jobCount";
 
 @Component({
   selector: 'app-company-list',
@@ -9,29 +8,27 @@ import {JobCount} from "../../model/jobCount";
   styleUrls: ['./company-list.component.css']
 })
 export class CompanyListComponent {
-  companies: Company[] = [];
-  company!: Company;
-  jobCounts: Company[] = [];
-  job!: JobCount;
+  companies: CountJobs[] = [];
   p: number = 1;
-  itemsPerPage: number = 9;
-  a!: number
-
+  itemsPerPage: number = 100;
   constructor(private companyService: CompanyService) {
     this.findAll()
   }
-
   findAll() {
     this.companyService.findAll().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
-        this.jobCounts = data
-
-        // this.companyService.countQuantityJob(3).subscribe((value) => {
-        //   for (let i = 0; i < value.length; i++) {
-        //     this.job.count = value.length
-        //   }
-        // })
+        this.companies.push(new CountJobs(i, data[i]));
       }
     })
+  }
+}
+
+export class CountJobs {
+  count?: number;
+  company?: Company;
+
+  constructor(a: number, b: Company) {
+    this.count = a;
+    this.company = b;
   }
 }

@@ -73,14 +73,14 @@
       </div><!--end col-->
     </div><!--end row-->
     <div class="row">
-      <div class="col-lg-4 col-md-6" *ngFor="let c of jobCounts | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+      <div class="col-lg-4 col-md-6" *ngFor="let c of companies | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
         <div class="card text-center mb-4">
           <div class="card-body px-4 py-5">
-            <img src="{{c.company.avatar}}" alt="" class="img-fluid rounded-3">
+            <img src="{{c.avatar}}" alt="" class="img-fluid rounded-3">
             <div class="mt-4">
-              <a href="company-details.html" class="primary-link"><h6 class="fs-18 mb-2">{{c.company.name}}</h6></a>
-              <p class="text-muted mb-4">{{c.company.address}}</p>
-              <a href="company-details.html" class="btn btn-primary">Tổng số lượng {{c.count}}job </a>
+              <a href="company-details.html" class="primary-link"><h6 class="fs-18 mb-2">{{c.name}}</h6></a>
+              <p class="text-muted mb-4">{{c.address}}</p>
+              <a href="company-details.html" class="btn btn-primary">Tổng số lượng job</a>
             </div>
           </div>
         </div>
