@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Company} from "../../model/company";
 
@@ -15,9 +15,12 @@ export class HeaderComponent{
   user!:any;
   role!:any;
 
+
   ngOnInit() {{
     // this.getGeoLocationData();
-    this.role = sessionStorage.getItem("user");
+    // @ts-ignore
+    this.user = JSON.parse(sessionStorage.getItem("user")) as any;
+    this.role = this.user.role.id;
   }}
 
   getIp() {
@@ -34,5 +37,9 @@ export class HeaderComponent{
       }
     )
   }}
+
+  signOut() {
+    sessionStorage.clear()
+  }
 }
 

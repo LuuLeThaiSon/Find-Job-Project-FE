@@ -45,20 +45,22 @@ export class LoginComponent {
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
         if (this.candidate.email == data[i].email && this.candidate.password == data[i].password) {
-          alert("Login successfully!")
-          this.router.navigate([''])
+          sessionStorage.setItem("user",JSON.stringify(data[i]));
+          alert("Login successfully!");
+          this.router.navigate(['']);
           break;
         }
         this.companyService.findAllCompany().subscribe((data) => {
           for (let j = 0; j < data.length; j++) {
             if (this.company.email == data[j].email && this.company.password == data[j].password) {
-              alert("Login successfully!")
-              this.router.navigate([''])
+              sessionStorage.setItem("user",JSON.stringify(data[j]));
+              alert("Login successfully!");
+              this.router.navigate(['']);
               break;
             }
             alert("Login failed! You can try again!")
             this.router.navigate(['/login'])
-            this.formLogin.reset()
+            this.formLogin.reset();
           }
         })
       }

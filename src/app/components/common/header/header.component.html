@@ -204,15 +204,13 @@
       <li class="list-inline-item dropdown">
         <div [ngSwitch]="role">
           <div *ngSwitchCase = "1">
-            <a href="javascript:void(0)" class="header-item" id="userdropdown1" data-bs-toggle="dropdown"
+            <a href="javascript:void(0)" class="header-item" id="userdropdown3" data-bs-toggle="dropdown"
                aria-expanded="false">
-              <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name}}</span>
+              <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name.split('')[0]}}</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown1">
-              <li><a class="dropdown-item" href="manage-jobs.html">Manage Jobs</a></li>
-              <li><a class="dropdown-item" href="bookmark-jobs.html">Bookmarks Jobs</a></li>
-              <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-              <li><a class="dropdown-item" href="sign-out.html">Logout</a></li>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown3">
+              <li><a class="dropdown-item" href="manage-jobs.html">To Admin Page</a></li>
+              <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
           </div>
           <div *ngSwitchCase = "2">
@@ -222,23 +220,30 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown2">
               <li><a class="dropdown-item" href="manage-jobs.html">Post New Jobs</a></li>
-              <li><a class="dropdown-item" href="bookmark-jobs.html">Bookmarks Jobs</a></li>
-              <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-              <li><a class="dropdown-item" href="sign-out.html">Logout</a></li>
+              <li><a class="dropdown-item" href="bookmark-jobs.html">Manage Jobs</a></li>
+              <li><a class="dropdown-item" href="profile.html">Company Profile</a></li>
+              <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
           </div>
           <div *ngSwitchCase = "3">
-            <a href="javascript:void(0)" class="header-item" id="userdropdown3" data-bs-toggle="dropdown"
+            <a href="javascript:void(0)" class="header-item" id="userdropdown1" data-bs-toggle="dropdown"
                aria-expanded="false">
               <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name}}</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown3">
-              <li><a class="dropdown-item" href="manage-jobs.html">To Admin Page</a></li>
-              <li><a class="dropdown-item" href="sign-out.html">Logout</a></li>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown1">
+              <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+              <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
           </div>
           <div *ngSwitchDefault>
-           <a routerLink="/job" class="nav-link" role="button">Register/Login</a>
+            <a href="javascript:void(0)" class="header-item" id="userdropdown" data-bs-toggle="dropdown"
+               aria-expanded="false">
+              <span class="d-none d-md-inline-block fw-medium">Login/Register</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
+              <li><a class="dropdown-item" routerLink="/login">Login</a></li>
+              <li><a class="dropdown-item" routerLink="/register">Register</a></li>
+            </ul>
           </div>
         </div>
       </li>
