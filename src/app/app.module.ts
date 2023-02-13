@@ -36,8 +36,6 @@ import {RegisterComponent} from "./components/pages/register/register.component"
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]

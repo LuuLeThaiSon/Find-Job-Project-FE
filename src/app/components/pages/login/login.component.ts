@@ -21,6 +21,7 @@ export class LoginComponent {
   imageFile: any
   path!: string
   pathName!: string
+  flag: boolean | undefined;
 
   ngOnInit(): void {
     this.formLogin = new FormGroup({
@@ -45,25 +46,24 @@ export class LoginComponent {
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
         if (this.candidate.email == data[i].email && this.candidate.password == data[i].password) {
-          sessionStorage.setItem("user",JSON.stringify(data[i]));
+          sessionStorage.setItem("user", JSON.stringify(data[i]));
           alert("Login successfully!");
-          this.router.navigate(['']);
-          break;
+          this.router.navigate(['']).finally();
+          return
         }
-        this.companyService.findAllCompany().subscribe((data) => {
-          for (let j = 0; j < data.length; j++) {
-            if (this.company.email == data[j].email && this.company.password == data[j].password) {
-              sessionStorage.setItem("user",JSON.stringify(data[j]));
-              alert("Login successfully!");
-              this.router.navigate(['']);
-              break;
-            }
-            alert("Login failed! You can try again!")
-            this.router.navigate(['/login'])
-            this.formLogin.reset();
-          }
-        })
       }
+      this.companyService.findAllCompany().subscribe((data) => {
+        for (let j = 0; j < data.length; j++) {
+          if (this.company.email == data[j].email && this.company.password == data[j].password) {
+            sessionStorage.setItem("user", JSON.stringify(data[j]));
+            alert("Login successfully!");
+            this.router.navigate(['']).finally();
+            return
+          }
+        }
+        alert("Login failed! You can try again!")
+      })
     })
   }
 }
+

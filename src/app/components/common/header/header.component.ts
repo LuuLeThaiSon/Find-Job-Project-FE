@@ -21,6 +21,7 @@ export class HeaderComponent{
     // @ts-ignore
     this.user = JSON.parse(sessionStorage.getItem("user")) as any;
     this.role = this.user.role.id;
+
   }}
 
   getIp() {
