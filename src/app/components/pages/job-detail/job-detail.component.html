@@ -264,8 +264,8 @@
                   <div class="d-flex mt-4">
                     <i class="uil uil-history icon bg-soft-primary"></i>
                     <div class="ms-3">
-                      <h6 class="fs-14 mb-2">Date Posted</h6>
-                      <p class="text-muted mb-0">Posted 2 hrs ago</p>
+                      <h6 class="fs-14 mb-2">Expired date</h6>
+                      <p class="text-muted mb-0">{{job.expiredDate}}</p>
                     </div>
                   </div>
                 </li>
@@ -274,9 +274,6 @@
                 <a href="#applyNow" data-bs-toggle="modal"
                    class="btn btn-primary btn-hover w-100 mt-2">Apply Now <i
                   class="uil uil-arrow-right"></i></a>
-                <a href="bookmark-jobs.html"
-                   class="btn btn-soft-warning btn-hover w-100 mt-2"><i
-                  class="uil uil-bookmark"></i> Add Bookmark</a>
               </div>
             </div><!--end card-body-->
           </div><!--end job-overview-->
@@ -284,12 +281,11 @@
           <div class="card company-profile mt-4">
             <div class="card-body p-4">
               <div class="text-center">
-                <img src="../../../../assets/images/featured-job/img-02.png" alt=""
+                <img src="{{job.company.avatar}}" alt=""
                      class="img-fluid rounded-3">
 
                 <div class="mt-4">
-                  <h6 class="fs-17 mb-1">Jobcy Technology Pvt.Ltd</h6>
-                  <p class="text-muted">Since July 2017</p>
+                  <h6 class="fs-17 mb-1">{{job.company.name}}</h6>
                 </div>
               </div>
               <ul class="list-unstyled mt-4">
@@ -298,7 +294,7 @@
                     <i class="uil uil-phone-volume text-primary fs-4"></i>
                     <div class="ms-3">
                       <h6 class="fs-14 mb-2">Phone</h6>
-                      <p class="text-muted fs-14 mb-0">+589 560 56555</p>
+                      <p class="text-muted fs-14 mb-0">+{{job.company.tel}}</p>
                     </div>
                   </div>
                 </li>
@@ -307,7 +303,7 @@
                     <i class="uil uil-envelope text-primary fs-4"></i>
                     <div class="ms-3">
                       <h6 class="fs-14 mb-2">Email</h6>
-                      <p class="text-muted fs-14 mb-0">pixltechnology@info.com</p>
+                      <p class="text-muted fs-14 mb-0">{{job.company.email}}</p>
                     </div>
                   </div>
                 </li>
@@ -317,7 +313,7 @@
                     <div class="ms-3">
                       <h6 class="fs-14 mb-2">Website</h6>
                       <p class="text-muted fs-14 text-break mb-0">
-                        www.Jobcytechnology.pvt.ltd.com</p>
+                        {{job.company.website}}</p>
                     </div>
                   </div>
                 </li>
@@ -326,13 +322,13 @@
                     <i class="uil uil-map-marker text-primary fs-4"></i>
                     <div class="ms-3">
                       <h6 class="fs-14 mb-2">Location</h6>
-                      <p class="text-muted fs-14 mb-0">Oakridge Lane Richardson.</p>
+                      <p class="text-muted fs-14 mb-0">{{job.company.address}}</p>
                     </div>
                   </div>
                 </li>
               </ul>
               <div class="mt-4">
-                <a href="company-details.html"
+                <a href=""
                    class="btn btn-primary btn-hover w-100 rounded"><i
                   class="mdi mdi-eye"></i> View Profile</a>
               </div>
