@@ -45,4 +45,5 @@ export class AppComponent implements AfterViewInit{
     s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
     this.elementRef.nativeElement.appendChild(s7);
   }
+
 }
