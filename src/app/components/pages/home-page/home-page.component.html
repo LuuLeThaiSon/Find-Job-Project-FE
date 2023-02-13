@@ -602,7 +602,8 @@
                     <!--end col-->
                     <div class="col-md-2">
                       <div>
-                        <span class="badge bg-soft-success fs-13 mt-1">{{j.type ? 'Full time' : 'Part time'}}</span>
+                        <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
+                        <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
                       </div>
                     </div>
                     <!--end col-->
