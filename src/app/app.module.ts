@@ -7,22 +7,29 @@ import {HomePageComponent} from "./components/pages/home-page/home-page.componen
 import {HttpClientModule} from "@angular/common/http";
 import { CompanyListComponent } from './components/pages/company-list/company-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { JobListComponent } from './components/pages/job-list/job-list.component';
+import {LoginComponent} from "./components/pages/login/login.component";
+import {RegisterComponent} from "./components/pages/register/register.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     CompanyListComponent,
-    JobListComponent
+    JobListComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

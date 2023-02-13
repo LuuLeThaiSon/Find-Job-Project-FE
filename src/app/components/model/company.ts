@@ -1,4 +1,5 @@
 import {Role} from "./role";
+import {JobCount} from "./jobCount";
 
 export interface Company {
   id: number;
