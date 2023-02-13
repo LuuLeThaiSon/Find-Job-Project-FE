@@ -1,3 +1,4 @@
+<app-header></app-header>
 <!-- Start home -->
 <section class="page-title-box">
   <div class="container">
@@ -8,8 +9,7 @@
           <div class="page-next">
             <nav class="d-inline-block" aria-label="breadcrumb text-center">
               <ol class="breadcrumb justify-content-center">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+                <li class="breadcrumb-item"><a href="" routerLink="">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"> Company List</li>
               </ol>
             </nav>
@@ -78,9 +78,9 @@
           <div class="card-body px-4 py-5">
             <img src="{{c.company?.avatar}}" alt="" class="img-fluid rounded-3">
             <div class="mt-4">
-              <a href="company-details.html" class="primary-link"><h6 class="fs-18 mb-2">{{c.company?.name}}</h6></a>
+              <a href="" routerLink="/company-detail" [state]="c.company" class="primary-link"><h6 class="fs-18 mb-2">{{c.company?.name}}</h6></a>
               <p class="text-muted mb-4">{{c.company?.address}}</p>
-              <a href="company-details.html" class="btn btn-primary">Tổng số lượng job</a>
+              <a href="" [routerLink]="['/company-detail/',c.company?.id]" class="btn btn-primary">Tổng số lượng job</a>
             </div>
           </div>
         </div>
@@ -97,3 +97,5 @@
   </div><!--end container-->
 </section>
 <!-- END COMPANY-LIST -->
+
+<app-footer></app-footer>

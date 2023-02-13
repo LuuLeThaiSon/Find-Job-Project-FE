@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -39,5 +39,11 @@ export class AppComponent implements AfterViewInit{
     s5.type = "text/javascript";
     s5.src = "../../assets/js/pages/switcher.init.js";
     this.elementRef.nativeElement.appendChild(s5);
+
+    var s7 = document.createElement("script");
+    s7.type = "text/javascript";
+    s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
+    this.elementRef.nativeElement.appendChild(s7);
   }
+
 }

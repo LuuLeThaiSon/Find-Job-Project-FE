@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="page-content">
 
   <!-- Start home -->
@@ -10,8 +11,7 @@
             <div class="page-next">
               <nav class="d-inline-block" aria-label="breadcrumb text-center">
                 <ol class="breadcrumb justify-content-center">
-                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                  <li class="breadcrumb-item"><a href="javascript:void(0)">Pages</a></li>
+                  <li class="breadcrumb-item"><a href="" routerLink="">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page"> Job List</li>
                 </ol>
               </nav>
@@ -146,7 +146,7 @@
                     <!--end col-->
                     <div class="col-md-3">
                       <div class="mb-2 mb-md-0">
-                        <h5 class="fs-18 mb-0"><a href="job-details.html" class="text-dark">{{j.title}}</a></h5>
+                        <h5 class="fs-18 mb-0"><a [routerLink]="['/job-detail', j.id]" class="text-dark">{{j.title}}</a></h5>
                         <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
                       </div>
                     </div>
@@ -433,3 +433,4 @@
 
 </div>
 <!-- End Page-content -->
+<app-footer></app-footer>
