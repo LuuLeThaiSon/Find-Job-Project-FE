@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {CompanyService} from "../../service/company.service";
 import {Company} from "../../model/company";
 
-
 @Component({
   selector: 'app-company-list',
   templateUrl: './company-list.component.html',
