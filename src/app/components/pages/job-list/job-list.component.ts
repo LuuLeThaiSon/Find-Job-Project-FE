@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Job} from "../../model/job";
 import {JobService} from "../../service/job.service";
 import {Locations} from "../../model/locations";
@@ -11,7 +11,7 @@ import {Category} from "../../model/category";
   templateUrl: './job-list.component.html',
   styleUrls: ['./job-list.component.css']
 })
-export class JobListComponent {
+export class JobListComponent implements OnInit{
   locationText: string = 'Location';
   categoryText: string = 'Category';
   locations: Locations[] = [];
@@ -22,9 +22,7 @@ export class JobListComponent {
   constructor(private jobService: JobService,
               private locationsService: LocationsService,
               private categoryService: CategoryService) {
-    this.findAll();
-    this.findAllLocations();
-    this.findAllCategories();
+
   }
   findAll() {
     return this.jobService.findAll().subscribe((data) => {
@@ -41,23 +39,13 @@ export class JobListComponent {
   findAllCategories() {
     return this.categoryService.findAll().subscribe((data) => {
       this.categories = data;
+      console.log(this.categories)
     })
   }
 
-  changeLocation(name: string) {
-    this.locationText = name;
-  }
-
-  changeCategory(name: string) {
-    this.categoryText = name;
-
-  }
-
-  removeLocation() {
-    this.locationText = 'Location'
-  }
-
-  removeCategory() {
-    this.categoryText = 'Category'
+  ngOnInit(): void {
+    this.findAll();
+    this.findAllLocations();
+    this.findAllCategories();
   }
 }

@@ -73,7 +73,7 @@
                               name="choices-single-categories"
                               id="choices-single-categories"
                               aria-label="Default select example">
-                        <option value="4">Chose category</option>
+                        <option [value]="">Chose category</option>
                         <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>
                       </select>
                     </div>
