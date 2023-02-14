@@ -50,30 +50,37 @@
                   <div class="col-lg-3 col-md-6">
                     <div class="filler-job-form">
                       <i class="uil uil-briefcase-alt"></i>
-                      <input type="search" class="form-control filter-job-input-box" id="exampleFormControlInput1"
+                      <input type="search" class="form-control filter-job-input-box border border-primary"
+                             id="exampleFormControlInput1"
                              placeholder="Job, company... ">
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
                     <div class="filler-job-form">
                       <i class="uil uil-location-point"></i>
-                      <select class="form-select" data-trigger name="choices-single-location"
-                              id="choices-single-location" aria-label="Default select example">
-                        <option value="AF">Afghanistan</option>
+                      <select class="form-select" data-trigger
+                              name="choices-single-location" id="choices-single-location"
+                              aria-label="Default select example">
+                        <option [value]="">Chose location</option>
+                        <option [value]="l.id" *ngFor="let l of locations">{{l.name}}</option>
                       </select>
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
                     <div class="filler-job-form">
                       <i class="uil uil-clipboard-notes"></i>
-                      <select class="form-select " data-trigger name="choices-single-categories"
-                              id="choices-single-categories" aria-label="Default select example">
-                        <option value="4">Accounting</option>
+                      <select class="form-select " data-trigger
+                              name="choices-single-categories"
+                              id="choices-single-categories"
+                              aria-label="Default select example">
+                        <option [value]="">Chose category</option>
+                        <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>
                       </select>
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
-                    <a href="javascript:void(0)" class="btn btn-primary w-100"><i class="uil uil-filter"></i> Fliter</a>
+                    <a href="javascript:void(0)" class="btn btn-primary w-100"><i
+                      class="uil uil-filter"></i> Fliter</a>
                   </div><!--end col-->
                 </div><!--end row-->
               </form>
@@ -131,10 +138,8 @@
             <!-- Job-list -->
             <div>
 
-              <div class="job-box bookmark-post card mt-4" *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }">
-                <div class="bookmark-label text-center">
-                  <a href="javascript:void(0)" class="align-middle text-white"><i class="mdi mdi-star"></i></a>
-                </div>
+              <div class="job-box bookmark-post card mt-4"
+                   *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }">
                 <div class="p-4">
                   <div class="row align-items-center">
                     <div class="col-md-2">
@@ -146,7 +151,8 @@
                     <!--end col-->
                     <div class="col-md-3">
                       <div class="mb-2 mb-md-0">
-                        <h5 class="fs-18 mb-0"><a [routerLink]="['/job-detail', j.id]" class="text-dark">{{j.title}}</a></h5>
+                        <h5 class="fs-18 mb-0"><a [routerLink]="['/job-detail', j.id]" class="text-dark">{{j.title}}</a>
+                        </h5>
                         <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
                       </div>
                     </div>
@@ -228,12 +234,6 @@
                           <button class="bg-transparent border-0 position-absolute top-50 end-0 translate-middle-y me-2"
                                   type="submit"><span class="mdi mdi-magnify text-muted"></span></button>
                         </form>
-                      </div>
-                      <div class="area-range">
-                        <div class="form-label mb-3">Area Range: <span class="example-val mt-2"
-                                                                       id="slider1-span">0</span> miles
-                        </div>
-                        <div id="slider1"></div>
                       </div>
                     </div>
                   </div>

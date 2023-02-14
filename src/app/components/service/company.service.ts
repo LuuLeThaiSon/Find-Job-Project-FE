@@ -46,7 +46,7 @@ export class CompanyService {
   }
 
   countQuantityJob(idCompany: number): Observable<Job[]> {
-    return this.httpClient.get<Job[]>(`${apiUrl}/jobs/quantity/${idCompany}`)
+    return this.httpClient.get<Job[]>(`${apiUrl}/jobs/current/opening/${idCompany}`)
   }
 
 }
