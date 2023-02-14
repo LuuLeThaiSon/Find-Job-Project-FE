@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {JobService} from "../../service/job.service";
 import {Job} from "../../model/job";
+import {MessageService} from 'primeng/api';
+import {PrimeNGConfig} from 'primeng/api';
 
 
 @Component({

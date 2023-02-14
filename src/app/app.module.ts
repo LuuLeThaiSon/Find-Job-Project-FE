@@ -55,7 +55,8 @@ import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookma
     AngularFireModule.initializeApp(environments.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    ToastModule
+    ToastModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
