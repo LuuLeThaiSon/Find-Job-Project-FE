@@ -18,6 +18,12 @@ import {RegisterComponent} from "./components/pages/register/register.component"
 import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
 import { ManageCompanyProfileComponent } from './components/pages/manage-company-profile/manage-company-profile.component';
 import { JobDetailComponent } from './components/pages/job-detail/job-detail.component';
+import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
+import {ButtonModule} from 'primeng/button';
+import {ToastModule} from 'primeng/toast';
+import {RippleModule} from 'primeng/ripple';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AccordionModule} from "primeng/accordion";
 
 @NgModule({
   declarations: [
@@ -35,7 +41,8 @@ import { JobDetailComponent } from './components/pages/job-detail/job-detail.com
     ManageCompanyProfileComponent,
     CompanyDetailComponent,
     RegisterComponent,
-    JobDetailComponent
+    JobDetailComponent,
+    BookmarksJobsComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +51,11 @@ import { JobDetailComponent } from './components/pages/job-detail/job-detail.com
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    AccordionModule,
+    ToastModule,
+    BrowserAnimationsModule,
+    ButtonModule,
+    RippleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
