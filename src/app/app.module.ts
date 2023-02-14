@@ -27,6 +27,7 @@ import {ToastModule} from "primeng/toast";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     CompanyDetailComponent,
     RegisterComponent,
     JobDetailComponent,
+    BookmarksJobsComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     ToastModule,
     ButtonModule,
     RippleModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

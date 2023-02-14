@@ -25,4 +25,11 @@ export class JobService {
     return this.http.get<Job[]>(`http://localhost:8080/jobs/company/${id}`)
   }
 
+  deleteJob(id: number) {
+    return this.http.delete("http://localhost:8080/jobs/" + id)
+  }
+
+  blockJob(id: number, job: Job) {
+    return this.http.put<Job>("http://localhost:8080/jobs/set/" + id, job);
+  }
 }

@@ -12,6 +12,7 @@ import {
   ManageCompanyProfileComponent
 } from "./components/pages/manage-company-profile/manage-company-profile.component";
 import {JobDetailComponent} from "./components/pages/job-detail/job-detail.component";
+import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
 import {HeaderComponent} from "./components/common/header/header.component";
 
 const routes: Routes = [
@@ -26,6 +27,8 @@ const routes: Routes = [
   {path: "job-detail/:id", component: JobDetailComponent},
   {path:"company-detail/:id",component:CompanyDetailComponent},
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
+  {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
+  {path:"manage-jobs/:id",component:BookmarksJobsComponent}
 ];
 
 @NgModule({
