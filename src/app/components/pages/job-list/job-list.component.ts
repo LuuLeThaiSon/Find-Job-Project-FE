@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Job} from "../../model/job";
 import {JobService} from "../../service/job.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-job-list',
@@ -9,6 +10,7 @@ import {JobService} from "../../service/job.service";
 })
 export class JobListComponent {
   p: number = 1;
+  jobId!: number;
   jobs: Job[] = [];
   constructor(private jobService: JobService) {
     this.findAll()

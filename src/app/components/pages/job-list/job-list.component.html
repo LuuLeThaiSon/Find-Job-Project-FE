@@ -146,7 +146,7 @@
                     <!--end col-->
                     <div class="col-md-3">
                       <div class="mb-2 mb-md-0">
-                        <h5 class="fs-18 mb-0"><a href="job-details.html" class="text-dark">{{j.title}}</a></h5>
+                        <h5 class="fs-18 mb-0"><a [routerLink]="['/job-detail', j.id]" class="text-dark">{{j.title}}</a></h5>
                         <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
                       </div>
                     </div>

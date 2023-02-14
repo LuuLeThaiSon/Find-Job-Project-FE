@@ -17,6 +17,7 @@ import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
 import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
 import { ManageCompanyProfileComponent } from './components/pages/manage-company-profile/manage-company-profile.component';
+import { JobDetailComponent } from './components/pages/job-detail/job-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,10 @@ import { ManageCompanyProfileComponent } from './components/pages/manage-company
     LoginComponent,
     RegisterComponent,
     CompanyDetailComponent,
-    ManageCompanyProfileComponent
+    ManageCompanyProfileComponent,
+    CompanyDetailComponent,
+    RegisterComponent,
+    JobDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +44,6 @@ import { ManageCompanyProfileComponent } from './components/pages/manage-company
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
-
-
   ],
   providers: [],
   bootstrap: [AppComponent]

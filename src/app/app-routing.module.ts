@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {HomePageComponent} from "./components/pages/home-page/home-page.component";
 import {ContactComponent} from "./components/pages/contact/contact.component";
 import {BlogComponent} from "./components/pages/blog/blog.component";
@@ -11,6 +11,7 @@ import {CompanyDetailComponent} from "./components/pages/company-detail/company-
 import {
   ManageCompanyProfileComponent
 } from "./components/pages/manage-company-profile/manage-company-profile.component";
+import {JobDetailComponent} from "./components/pages/job-detail/job-detail.component";
 
 const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -20,6 +21,8 @@ const routes: Routes = [
   {path:"job",component:JobListComponent},
   {path:"login",component:LoginComponent},
   {path:"register",component:RegisterComponent},
+  {path: "company", component: CompanyListComponent},
+  {path: "job-detail/:id", component: JobDetailComponent},
   {path:"company-detail/:id",component:CompanyDetailComponent},
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent}
 ];

@@ -59,6 +59,7 @@ export class HeaderComponent implements AfterViewInit{
     // @ts-ignore
     this.user = JSON.parse(sessionStorage.getItem("user")) as any;
     this.role = this.user.role.id;
+
   }}
 
   getIp() {
