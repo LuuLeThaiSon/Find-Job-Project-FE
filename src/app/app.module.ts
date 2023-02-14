@@ -18,6 +18,12 @@ import {RegisterComponent} from "./components/pages/register/register.component"
 import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
 import { ManageCompanyProfileComponent } from './components/pages/manage-company-profile/manage-company-profile.component';
 import { JobDetailComponent } from './components/pages/job-detail/job-detail.component';
+import {DropdownModule} from "primeng/dropdown";
+import {AngularFireModule} from "@angular/fire/compat";
+import {environments} from "../environment/enviroments";
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -35,7 +41,7 @@ import { JobDetailComponent } from './components/pages/job-detail/job-detail.com
     ManageCompanyProfileComponent,
     CompanyDetailComponent,
     RegisterComponent,
-    JobDetailComponent
+    JobDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +50,10 @@ import { JobDetailComponent } from './components/pages/job-detail/job-detail.com
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environments.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    ToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

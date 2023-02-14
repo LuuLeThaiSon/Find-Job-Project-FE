@@ -47,12 +47,12 @@
             <div class="card-body p-4">
               <div class="text-center pb-4 border-bottom">
                 <img src="{{company.avatar}}" alt=""
-                     class="avatar-lg img-thumbnail rounded-circle mb-4" />
+                     class="avatar-lg img-thumbnail rounded-circle mb-4"/>
                 <h5 class="mb-0">{{company.name}}</h5>
                 <p class="text-muted">{{company.email}}</p>
                 <ul class="candidate-detail-social-menu list-inline mb-0">
                   <li class="list-inline-item">
-                    <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-primary"><i
+                    <a href="" class="social-link rounded-3 btn-soft-primary"><i
                       class="uil uil-facebook-f"></i></a>
                   </li>
                   <li class="list-inline-item">
@@ -96,7 +96,8 @@
                       <div class="d-flex">
                         <label>Size</label>
                         <div>
-                          <p class="text-muted mb-0">{{company.numberOfEmployees}} <i class="mdi mdi-human-male-male"></i> </p>
+                          <p class="text-muted mb-0">{{company.numberOfEmployees}} <i
+                            class="mdi mdi-human-male-male"></i></p>
                         </div>
                       </div>
                     </li>
@@ -119,20 +120,10 @@
                   </ul>
                 </div>
               </div>
-              <div class="mt-4 border-bottom pb-4">
-                <h5 class="fs-17 fw-bold mb-3">Categories</h5>
-              <div>
-                <span class="badge bg-soft-success fs-13 mt-1">User Interface Design</span>
-                <span class="badge bg-soft-success fs-13 mt-1">Web Design</span>
-                <span class="badge bg-soft-success fs-13 mt-1">Responsive Design</span>
-                <span class="badge bg-soft-success fs-13 mt-1">Mobile App Design</span>
-                <span class="badge bg-soft-success fs-13 mt-1">UI Design</span>
-              </div>
-              </div>
               <!--end document-->
               <div class="mt-4" *ngIf="company.googleMap">
                 <h5 class="fs-17 fw-bold mb-3">Location</h5>
-                  <div [innerHTML]="ggMap"></div>
+                <div [innerHTML]="ggMap"></div>
               </div>
               <!--end contact-details-->
             </div>
@@ -191,14 +182,16 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                  <form action="#">
+                  <form [formGroup]="formCompany" (ngSubmit)="onSubmit()">
                     <div>
-                      <h5 class="fs-17 fw-semibold mb-3 mb-0">My Account</h5>
+                      <h5 class="fs-17 fw-semibold mb-3 mb-0">Company Account</h5>
                       <div class="text-center">
                         <div class="mb-4 profile-user">
-                          <img src="assets/images/user/img-02.jpg" class="rounded-circle img-thumbnail profile-img" id="profile-img" alt="">
+                          <img src="assets/images/user/img-02.jpg" class="rounded-circle img-thumbnail profile-img"
+                               id="profile-img" alt="">
                           <div class="p-0 rounded-circle profile-photo-edit">
-                            <input id="profile-img-file-input" type="file" class="profile-img-file-input" onchange="previewImg()" >
+                            <input id="profile-img-file-input" type="file" class="profile-img-file-input"
+                                   onchange="previewImg()">
                             <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
                               <i class="uil uil-edit"></i>
                             </label>
@@ -207,41 +200,42 @@
                       </div>
                       <div class="row">
                         <div class="col-lg-6">
+                          <input type="text" class="form-control" formControlName="id" hidden/>
+                          <input type="text" class="form-control" formControlName="banner" hidden/>
+                          <input type="text" class="form-control" formControlName="code" hidden/>
+                          <input type="text" class="form-control" formControlName="googleMap" hidden/>
+                          <input type="text" class="form-control" formControlName="avatar" hidden/>
                           <div class="mb-3">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName"
-                                   value="Jansh" />
+                            <label for="name" class="form-label">Name*</label>
+                            <input type="text" class="form-control" id="name"
+                                   formControlName="name"
+                            />
                           </div>
                         </div>
                         <!--end col-->
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName"
-                                   value="Dickens" />
+                            <label for="shortName" class="form-label">Short Name</label>
+                            <input type="text" class="form-control" id="shortName"
+                                   formControlName="shortName"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="password" class="form-label">Pass Word</label>
+                            <input type="text" class="form-control" id="password"
+                                   formControlName="password"
+                            />
                           </div>
                         </div>
                         <!--end col-->
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="choices-single-categories" class="form-label">Account Type</label>
-                            <select class="form-select" data-trigger
-                                    name="choices-single-categories"
-                                    id="choices-single-categories"
-                                    aria-label="Default select example">
-                              <option value="4">Accounting</option>
-                              <option value="1">IT & Software</option>
-                              <option value="3">Marketing</option>
-                              <option value="5">Banking</option>
-                            </select>
-                          </div>
-                        </div>
-                        <!--end col-->
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email"
-                                   value="Jansh@gmail.com" />
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address"
+                                   formControlName="address"
+                                   />
                           </div>
                         </div>
                         <!--end col-->
@@ -250,14 +244,16 @@
                     </div>
                     <!--end account-->
                     <div class="mt-4">
-                      <h5 class="fs-17 fw-semibold mb-3">Profile</h5>
+                      <h5 class="fs-17 fw-semibold mb-3">Description</h5>
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="mb-3">
-                            <label for="exampleFormControlTextarea1"
-                                   class="form-label">Introduce Yourself</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1"
-                                      rows="5">Developer with over 5 years' experience working in both the public and private sectors. Diplomatic, personable, and adept at managing sensitive situations. Highly organized, self-motivated, and proficient with computers. Looking to boost students’ satisfactions scores for International University. Bachelor's degree in communications.</textarea>
+                            <label for="description"
+                                   class="form-label">Introduce Your Company</label>
+                            <textarea class="form-control" id="description"
+                                      rows="5"
+                                      formControlName = "description"
+                            ></textarea>
                           </div>
                         </div>
                         <!--end col-->
@@ -265,7 +261,7 @@
                           <div class="mb-3">
                             <label for="languages" class="form-label">Languages</label>
                             <input type="text" class="form-control" id="languages"
-                                   value="English, German, French" />
+                                   value="English, German, French"/>
                           </div>
                         </div>
                         <!--end col-->
@@ -274,21 +270,12 @@
                             <label for="choices-single-location" class="form-label">Location</label>
                             <select class="form-select" data-trigger
                                     name="choices-single-location" id="choices-single-location"
-                                    aria-label="Default select exam
-                                                                            ple">
+                                    aria-label="Default select example">
                               <option value="ME">Montenegro</option>
                               <option value="MS">Montserrat</option>
                               <option value="MA">Morocco</option>
                               <option value="MZ">Mozambique</option>
                             </select>
-                          </div>
-                        </div>
-                        <!--end col-->
-                        <div class="col-lg-12">
-                          <div class="mb-3">
-                            <label for="attachmentscv" class="form-label">Attachments
-                              CV</label>
-                            <input class="form-control" type="file" id="attachmentscv" />
                           </div>
                         </div>
                         <!--end col-->
@@ -303,7 +290,7 @@
                           <div class="mb-3">
                             <label for="facebook" class="form-label">Facebook</label>
                             <input type="text" class="form-control" id="facebook"
-                                   value="https://www.facebook.com" />
+                                   value="https://www.facebook.com"/>
                           </div>
                         </div>
                         <!--end col-->
@@ -311,7 +298,7 @@
                           <div class="mb-3">
                             <label for="twitter" class="form-label">Twitter</label>
                             <input type="text" class="form-control" id="twitter"
-                                   value="https://www.twitter.com" />
+                                   value="https://www.twitter.com"/>
                           </div>
                         </div>
                         <!--end col-->
@@ -319,7 +306,7 @@
                           <div class="mb-3">
                             <label for="linkedin" class="form-label">Linkedin</label>
                             <input type="text" class="form-control" id="linkedin"
-                                   value="https://www.linkedin.com" />
+                                   value="https://www.linkedin.com"/>
                           </div>
                         </div>
                         <!--end col-->
@@ -327,7 +314,7 @@
                           <div class="mb-3">
                             <label for="whatsapp" class="form-label">Whatsapp</label>
                             <input type="text" class="form-control" id="whatsapp"
-                                   value="https://www.whatsapp.com" />
+                                   value="https://www.whatsapp.com"/>
                           </div>
                         </div>
                         <!--end col-->
@@ -346,7 +333,7 @@
                               password</label>
                             <input type="password" class="form-control"
                                    placeholder="Enter Current password"
-                                   id="current-password-input" />
+                                   id="current-password-input"/>
                           </div>
                         </div>
                         <!--end col-->
@@ -356,7 +343,7 @@
                               password</label>
                             <input type="password" class="form-control"
                                    placeholder="Enter new password"
-                                   id="new-password-input" />
+                                   id="new-password-input"/>
                           </div>
                         </div>
                         <!--end col-->
@@ -365,14 +352,14 @@
                             <label for="confirm-password-input" class="form-label">Confirm Password</label>
                             <input type="password" class="form-control"
                                    placeholder="Confirm Password"
-                                   id="confirm-password-input" />
+                                   id="confirm-password-input"/>
                           </div>
                         </div>
                         <!--end col-->
                         <div class="col-lg-12">
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" value=""
-                                   id="verification" />
+                                   id="verification"/>
                             <label class="form-check-label" for="verification">
                               Enable Two-Step Verification via email
                             </label>
@@ -408,3 +395,4 @@
 </div>
 <!-- End Page-content -->
 <app-footer></app-footer>
+<p-toast position="top-left" key="tl"></p-toast>

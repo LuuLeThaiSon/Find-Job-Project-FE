@@ -7,6 +7,9 @@ import {CompanyService} from "../../service/company.service";
 import {JobService} from "../../service/job.service";
 import {Job} from "../../model/job";
 import {DomSanitizer} from "@angular/platform-browser";
+import {Category} from "../../model/category";
+import {CategoryService} from "../../service/category.service";
+
 
 @Component({
   selector: 'app-company-detail',
@@ -16,12 +19,14 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class CompanyDetailComponent {
   company!: Company;
   companyId!: number;
-  currentOpeningJobs!:Job[];
-  ggMap!:any;
+  currentOpeningJobs: Job[] = [];
+  ggMap!: any;
+  categories!: Category[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private companyService: CompanyService,
               private jobService: JobService,
+              private categoryService: CategoryService,
               private sanitized: DomSanitizer) {
   }
 
@@ -37,14 +42,20 @@ export class CompanyDetailComponent {
     this.companyService.findCompany(id).subscribe(res => {
       this.company = res;
       this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
-      this.ggMap.setAttribute("style:width","100%");
+      this.ggMap.setAttribute("style:width", "100%");
     })
   }
 
-  findCurrentOpeningJobsByCompany(id:number) {
+  findCurrentOpeningJobsByCompany(id: number) {
     this.jobService.findCurrentOpeningJobsByCompany(id).subscribe(res => {
       this.currentOpeningJobs = res;
     })
   }
 
+  findCategoriesByJobId(id: number) {
+    this.categoryService.findCategoriesByJobId(id).subscribe(res => {
+      this.categories = res;
+    })
+  }
 }
+
