@@ -1,15 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {JobService} from "../../service/job.service";
 import {Job} from "../../model/job";
-import {MessageService} from 'primeng/api';
-import {PrimeNGConfig} from 'primeng/api';
 
 
 @Component({
   selector: 'app-bookmarks-jobs',
   templateUrl: './bookmarks-jobs.component.html',
-  styleUrls: ['./bookmarks-jobs.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./bookmarks-jobs.component.css']
 })
 export class BookmarksJobsComponent implements OnInit {
   user!: any;
@@ -24,13 +21,10 @@ export class BookmarksJobsComponent implements OnInit {
     this.user = JSON.parse(sessionStorage.getItem("user")) as any;
     this.role = this.user.role.id;
     this.findAll();
-    this.primengConfig.ripple = true;
   }
 
 
-  constructor(private jobService: JobService,
-              private messageService: MessageService,
-              private primengConfig: PrimeNGConfig) {
+  constructor(private jobService: JobService) {
   }
 
   findAll() {
@@ -42,16 +36,11 @@ export class BookmarksJobsComponent implements OnInit {
   delete(id: number) {
     return this.jobService.deleteJob(id).subscribe(() => {
       this.findAll();
-      this.showSuccess()
     })
   }
 
   getJobId(id: number) {
     this.jobId = id;
-  }
-
-  showSuccess() {
-    this.messageService.add({severity:'info', summary: 'Success', detail: 'Message Content'});
   }
 
   blockJob(job: Job) {

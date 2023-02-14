@@ -24,6 +24,7 @@ import {environments} from "../environment/enviroments";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {ToastModule} from "primeng/toast";
+import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {ToastModule} from "primeng/toast";
     CompanyDetailComponent,
     RegisterComponent,
     JobDetailComponent,
+    BookmarksJobsComponent,
   ],
   imports: [
     BrowserModule,
