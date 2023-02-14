@@ -17,7 +17,9 @@ export class CompanyListComponent {
   findAll() {
     this.companyService.findAll().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
-        this.companies.push(new CountJobs(i, data[i]));
+        this.companyService.countQuantityJob(data[i].id).subscribe((data1) => {
+          this.companies.push(new CountJobs(data1.length, data[i]));
+        });
       }
     })
   }

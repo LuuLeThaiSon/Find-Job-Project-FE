@@ -80,7 +80,7 @@
             <div class="mt-4">
               <a href="" [routerLink]="['/company-detail/',c.company?.id]" class="primary-link"><h6 class="fs-18 mb-2">{{c.company?.name}}</h6></a>
               <p class="text-muted mb-4">{{c.company?.address}}</p>
-              <a href="" [routerLink]="['/company-detail/',c.company?.id]" class="btn btn-primary">Tổng số lượng job</a>
+              <a href="" [routerLink]="['/company-detail/',c.company?.id]" class="btn btn-primary">{{c.count}} Opening Jobs</a>
             </div>
           </div>
         </div>
