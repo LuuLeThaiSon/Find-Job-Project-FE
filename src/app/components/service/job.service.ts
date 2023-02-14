@@ -16,9 +16,7 @@ export class JobService {
   findOne(id: number): Observable<Job> {
     return this.http.get<Job>("http://localhost:8080/jobs/" + id)
   }
-  countJobsOfCompany(count: number) {
 
-  }
   findCurrentOpeningJobsByCompany(id:number) {
     return this.http.get<Job[]>(`http://localhost:8080/jobs/current/opening/${id}`)
   }

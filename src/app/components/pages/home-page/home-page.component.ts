@@ -11,6 +11,8 @@ import {LocationsService} from "../../service/locations.service";
 })
 export class HomePageComponent implements AfterViewInit{
   jobs: Job[] = [];
+  partTimeJobs: Job[] = [];
+  fullTimeJobs: Job[] = [];
   locations: Locations[] = [];
   constructor(private elementRef:ElementRef,
               private jobService: JobService,
@@ -22,6 +24,13 @@ export class HomePageComponent implements AfterViewInit{
   findAll() {
     return this.jobService.findAll().subscribe((data) => {
       this.jobs = data;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].type) {
+          this.fullTimeJobs.push(data[i])
+        } else {
+          this.partTimeJobs.push(data[i])
+        }
+      }
     })
   }
 
