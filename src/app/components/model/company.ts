@@ -16,4 +16,5 @@ export interface Company {
   tel: string;
   website: string;
   role: Role;
+  banner:string;
 }

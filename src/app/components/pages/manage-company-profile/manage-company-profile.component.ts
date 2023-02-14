@@ -1,22 +1,20 @@
-import {Component, OnChanges} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { Component } from '@angular/core';
 import {Company} from "../../model/company";
-import {map} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {Job} from "../../model/job";
+import {ActivatedRoute} from "@angular/router";
 import {CompanyService} from "../../service/company.service";
 import {JobService} from "../../service/job.service";
-import {Job} from "../../model/job";
 import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
-  selector: 'app-company-detail',
-  templateUrl: './company-detail.component.html',
-  styleUrls: ['./company-detail.component.css']
+  selector: 'app-manage-company-profile',
+  templateUrl: './manage-company-profile.component.html',
+  styleUrls: ['./manage-company-profile.component.css']
 })
-export class CompanyDetailComponent {
+export class ManageCompanyProfileComponent {
   company!: Company;
   companyId!: number;
-  currentOpeningJobs!:Job[];
+  jobs!:Job[];
   ggMap!:any;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -29,7 +27,7 @@ export class CompanyDetailComponent {
     this.activatedRoute.params.subscribe(params => {
       this.companyId = params['id'];
       this.findCompanyById(this.companyId);
-      this.findCurrentOpeningJobsByCompany(this.companyId);
+      this.findAllJobsByCompany(this.companyId);
     });
   }
 
@@ -37,13 +35,13 @@ export class CompanyDetailComponent {
     this.companyService.findCompany(id).subscribe(res => {
       this.company = res;
       this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
-      this.ggMap.setAttribute("style:width","100%");
+      this.ggMap.setAttribute("style:width","100%")
     })
   }
 
-  findCurrentOpeningJobsByCompany(id:number) {
-    this.jobService.findCurrentOpeningJobsByCompany(id).subscribe(res => {
-      this.currentOpeningJobs = res;
+  findAllJobsByCompany(id:number) {
+    this.jobService.findAllJobsByCompany(id).subscribe(res => {
+      this.jobs = res;
     })
   }
 

@@ -19,4 +19,12 @@ export class JobService {
   countJobsOfCompany(count: number) {
 
   }
+  findCurrentOpeningJobsByCompany(id:number) {
+    return this.http.get<Job[]>(`http://localhost:8080/jobs/current/opening/${id}`)
+  }
+
+  findAllJobsByCompany(id:number) {
+    return this.http.get<Job[]>(`http://localhost:8080/jobs/company/${id}`)
+  }
+
 }
