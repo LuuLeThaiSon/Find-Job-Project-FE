@@ -24,6 +24,9 @@ import {environments} from "../environment/enviroments";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {ToastModule} from "primeng/toast";
+import {ButtonModule} from "primeng/button";
+import {RippleModule} from "primeng/ripple";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import {ToastModule} from "primeng/toast";
     AngularFireModule.initializeApp(environments.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    ToastModule
+    ToastModule,
+    ButtonModule,
+    RippleModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

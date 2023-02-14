@@ -12,6 +12,7 @@ import {
   ManageCompanyProfileComponent
 } from "./components/pages/manage-company-profile/manage-company-profile.component";
 import {JobDetailComponent} from "./components/pages/job-detail/job-detail.component";
+import {HeaderComponent} from "./components/common/header/header.component";
 
 const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -24,7 +25,7 @@ const routes: Routes = [
   {path: "company", component: CompanyListComponent},
   {path: "job-detail/:id", component: JobDetailComponent},
   {path:"company-detail/:id",component:CompanyDetailComponent},
-  {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent}
+  {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
 ];
 
 @NgModule({
