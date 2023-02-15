@@ -19,7 +19,6 @@ export class JobListComponent implements OnInit{
   p: number = 1;
   jobId!: number;
   jobs: Job[] = [];
-  private jobData: any;
 
 
   constructor(private jobService: JobService,

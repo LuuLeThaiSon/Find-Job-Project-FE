@@ -90,7 +90,7 @@
                 <div class="col-lg-3">
                   <div class="border rounded-end p-3">
                     <p class="text-muted fs-13 mb-0">Offer Salary</p>
-                    <p class="fw-medium mb-0">${{job.salaryMin}} - {{job.salaryMax}}/ Month</p>
+                    <p class="fw-medium mb-0">${{job.salaryMin}} - {{job.salaryMax}}/M</p>
                   </div>
                 </div>
               </div>
@@ -266,6 +266,17 @@
                     <div class="ms-3">
                       <h6 class="fs-14 mb-2">Expired date</h6>
                       <p class="text-muted mb-0">{{job.expiredDate}}</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="d-flex mt-4">
+                    <i class="mdi mdi-gender-male-female icon bg-soft-primary"></i>
+                    <div class="ms-3">
+                      <h6 class="fs-14 mb-2">Gender</h6>
+                      <p *ngIf="job.gender == 1" class="text-muted mb-0">Male</p>
+                      <p *ngIf="job.gender == 2" class="text-muted mb-0">Female</p>
+                      <p *ngIf="job.gender == 3" class="text-muted mb-0">Any</p>
                     </div>
                   </div>
                 </li>
