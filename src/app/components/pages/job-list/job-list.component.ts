@@ -56,10 +56,6 @@ export class JobListComponent implements OnInit{
     this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
-    // @ts-ignore
-    this.user = JSON.parse(sessionStorage.getItem("user")) as any;
-    this.role = this.user.role.id;
-    console.log(this.role)
   }
 
   public searchByTitleJobOrCompanyName(key:string): void {

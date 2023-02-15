@@ -228,7 +228,7 @@
 <!--Post job modal-->
 <div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel"
      style="display: none;" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title mt-0 text-center" id="myModalLabel">{{modalTitle}}</h5>
@@ -248,6 +248,10 @@
                   <label for="title" class="form-label">Job title</label>
                   <input type="text" class="form-control" id="title"
                          formControlName="title">
+                  <div *ngIf="jobForm.get('title')?.errors?.['required'] && jobForm.get('title')?.touched"
+                       class="alert  bg-soft-danger mt-1" role="alert">
+                    Required
+                  </div>
                 </div>
               </div>
               <!--end col-->
@@ -255,7 +259,8 @@
                 <div class="mb-3" formGroupName="category">
                   <label for="category"
                          class="form-label">Job Category</label>
-                  <select class="form-select" data-trigger
+                  <select
+                    class="form-select" data-trigger
                           name="choices-single-categories"
                           aria-label="Default select example"
                           id="category"
@@ -268,14 +273,41 @@
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="salaryMin" class="form-label">Salary min (per month)</label>
-                  <input type="text" class="form-control" id="salaryMin" formControlName="salaryMin">
+                  <input type="text" class="form-control" id="salaryMin" formControlName="salaryMin" (input)="getSalaryMin()">
+                  <div *ngIf="jobForm.get('salaryMin')?.errors?.['required'] && jobForm.get('salaryMin')?.touched"
+                       class="alert  bg-soft-danger mt-1" role="alert">
+                    Required
+                  </div>
+                  <div *ngIf="jobForm.get('salaryMin')?.errors?.['pattern'] && jobForm.get('salaryMin')?.touched"
+                       class="alert  bg-soft-danger mt-1" role="alert">
+                    Must be number
+                  </div>
+                  <div *ngIf="jobForm.get('salaryMin')?.errors?.['min'] && jobForm.get('salaryMin')?.touched"
+                       class="alert  bg-soft-danger mt-1" role="alert">
+                    Must be > 1
+                  </div>
                 </div>
               </div>
               <!--end col-->
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="salaryMax" class="form-label">Salary max (per month)</label>
-                  <input type="text" class="form-control" id="salaryMax" formControlName="salaryMax">
+                  <input type="text" class="form-control" id="salaryMax" formControlName="salaryMax" (input)="validateSalary()">
+                </div>
+                <div *ngIf="salary == true" class="alert  bg-soft-danger mt-1" role="alert">
+                  Must be > salary min
+                </div>
+                <div *ngIf="jobForm.get('salaryMax')?.errors?.['required'] && jobForm.get('salaryMax')?.touched"
+                     class="alert  bg-soft-danger mt-1" role="alert">
+                  Required
+                </div>
+                <div *ngIf="jobForm.get('salaryMax')?.errors?.['pattern'] && jobForm.get('salaryMax')?.touched"
+                     class="alert  bg-soft-danger mt-1" role="alert">
+                  Must be number
+                </div>
+                <div *ngIf="jobForm.get('salaryMax')?.errors?.['min'] && jobForm.get('salaryMax')?.touched"
+                     class="alert  bg-soft-danger mt-1" role="alert">
+                  Must be > 1
                 </div>
               </div>
               <!--end col-->
@@ -288,7 +320,7 @@
                           aria-label="Default select example"
                           id="location"
                           formControlName="id">
-                    <option *ngFor="let l of locations" [value]="l.id">{{l.name}}</option>
+                    <option *ngFor="let l of locations" [value]="l.id" >{{l.name}}</option>
                   </select>
                 </div>
               </div>
@@ -298,12 +330,20 @@
                   <label for="position" class="form-label">Position</label>
                   <input type="text" class="form-control" id="position" formControlName="position">
                 </div>
+                <div *ngIf="jobForm.get('position')?.errors?.['required'] && jobForm.get('position')?.touched"
+                     class="alert  bg-soft-danger mt-1" role="alert">
+                  Required
+                </div>
               </div>
               <!--end col-->
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="experience" class="form-label">Experience (years)</label>
                   <input type="text" class="form-control" id="experience" formControlName="expYear">
+                  <div *ngIf="jobForm.get('expYear')?.errors?.['required'] && jobForm.get('expYear')?.touched"
+                       class="alert  bg-soft-danger mt-1" role="alert">
+                    Required
+                  </div>
                 </div>
               </div>
               <!--end col-->
@@ -311,11 +351,10 @@
                 <div class="mb-3">
                   <label for="jobType" class="form-label">Job type</label>
                   <select class="form-select" data-trigger
-                          name="choices-single-categories"
                           aria-label="Default select example"
                           id="jobType" formControlName="type">
-                    <option [value]=true>Full time</option>
-                    <option [value]=false>Pass time</option>
+                    <option value=true>Full time</option>
+                    <option value=false>Pass time</option>
                   </select>
                 </div>
               </div>
@@ -325,6 +364,10 @@
                   <label for="expiredDate" class="form-label">Expired date</label>
                   <input type="date" class="form-control" id="expiredDate" formControlName="expiredDate">
                 </div>
+                <div *ngIf="jobForm.get('expiredDate')?.errors?.['required'] && jobForm.get('expiredDate')?.touched"
+                     class="alert  bg-soft-danger mt-1" role="alert">
+                  Required
+                </div>
               </div>
               <!--end col-->
               <div class="col-lg-6">
@@ -332,18 +375,21 @@
                   <label for="quantity" class="form-label">Quantity</label>
                   <input type="text" class="form-control" id="quantity" formControlName="quantity">
                 </div>
+                <div *ngIf="jobForm.get('quantity')?.errors?.['required'] && jobForm.get('quantity')?.touched"
+                     class="alert  bg-soft-danger mt-1" role="alert">
+                  Required
+                </div>
               </div>
               <!--end col-->
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="gender" class="form-label">Gender</label>
                   <select class="form-select" data-trigger
-                          name="choices-single-categories"
                           aria-label="Default select example"
                           id="gender" formControlName="gender">
-                    <option [value]=3>All</option>
-                    <option [value]=1>Men</option>
-                    <option [value]=2>Women</option>
+                    <option value="1">Men</option>
+                    <option value="2">Women</option>
+                    <option value="3">Any</option>
                   </select>
                 </div>
               </div>
@@ -360,7 +406,12 @@
                          class="form-label">Job description</label>
                   <textarea class="form-control"
                             id="description"
-                            rows="5" formControlName="description"></textarea>
+                            rows="5" formControlName="description" style="height: 50px">
+                  </textarea>
+                  <div *ngIf="jobForm.get('description')?.errors?.['required'] && jobForm.get('description')?.touched"
+                       class="alert  bg-soft-danger mt-1" role="alert">
+                    Required
+                  </div>
                 </div>
               </div>
               <!--end col-->
@@ -375,7 +426,7 @@
         <button type="button" class="btn btn-secondary waves-effect"
                 data-bs-dismiss="modal" #btnModal>Close
         </button>
-        <button type="button"
+        <button type="submit"
                 class="btn btn-primary waves-effect waves-light" (click)="create()">Save
           changes
         </button>

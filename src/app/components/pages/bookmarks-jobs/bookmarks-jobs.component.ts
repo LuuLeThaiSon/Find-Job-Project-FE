@@ -5,7 +5,7 @@ import {Category} from "../../model/category";
 import {CategoryService} from "../../service/category.service";
 import {Locations} from "../../model/locations";
 import {LocationsService} from "../../service/locations.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -14,6 +14,7 @@ import {FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./bookmarks-jobs.component.css']
 })
 export class BookmarksJobsComponent implements OnInit {
+
   user!: any;
   role!: any;
   job: any = "";
@@ -23,7 +24,11 @@ export class BookmarksJobsComponent implements OnInit {
   locations: Locations[] = [];
   p!: number;
   jobForm!: FormGroup;
-  modalTitle: string ='Post new job';
+  modalTitle: string = 'Post new job';
+  salaryMin!: number;
+  salaryMax!: number;
+  salary: boolean = false;
+
 
   ngOnInit(): void {
     // @ts-ignore
@@ -32,24 +37,28 @@ export class BookmarksJobsComponent implements OnInit {
     this.findAll();
     this.findAllCategory();
     this.findAllLocation();
+    this.form();
+  }
+
+  form() {
     this.jobForm = new FormGroup({
       id: new FormControl,
-      title: new FormControl,
+      title: new FormControl('', Validators.required),
       category: new FormGroup({
-        id: new FormControl
-      }),
-      salaryMin: new FormControl,
-      salaryMax: new FormControl,
+        id: new FormControl(1)
+      }, Validators.required),
+      salaryMin: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]\d*$/), Validators.min(1)]),
+      salaryMax: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]\d*$/), Validators.min(1)]),
       location: new FormGroup({
-        id: new FormControl
+        id: new FormControl(1)
       }),
-      position: new FormControl,
-      expYear: new FormControl,
-      type: new FormControl,
-      expiredDate: new FormControl,
-      quantity: new FormControl,
-      gender: new FormControl,
-      description: new FormControl,
+      position: new FormControl('', Validators.required),
+      expYear: new FormControl('', Validators.required),
+      type: new FormControl(true, Validators.required),
+      expiredDate: new FormControl('', Validators.required),
+      quantity: new FormControl('', Validators.required),
+      gender: new FormControl('1', Validators.required),
+      description: new FormControl('', Validators.required),
       company: new FormGroup({
         id: new FormControl
       })
@@ -103,6 +112,9 @@ export class BookmarksJobsComponent implements OnInit {
   create() {
     this.job = this.jobForm.value;
     this.job.company.id = this.user.id;
+    if (+this.job.salaryMax < +this.job.salaryMin) {
+      return
+    }
     console.log(this.job, this.user.id);
     return this.jobService.create(this.job).subscribe(() => {
       this.findAll();
@@ -123,11 +135,26 @@ export class BookmarksJobsComponent implements OnInit {
   @ViewChild('btnModal') btnModal: ElementRef;
 
   formatForm() {
-    this.jobForm.reset();
     this.modalTitle = 'Post new job';
+    this.form()
   }
 
   scroll() {
     window.scrollTo(0, 300);
+  }
+
+  validateSalary() {
+    // @ts-ignore
+    this.salaryMax = +document.getElementById('salaryMax').value
+    if (this.salaryMax < this.salaryMin) {
+      this.salary = true;
+    } else {
+      this.salary = false;
+    }
+  }
+  getSalaryMin() {
+    // @ts-ignore
+    this.salaryMin = +document.getElementById('salaryMin').value;
+    console.log(this.salaryMin);
   }
 }
