@@ -1,7 +1,18 @@
 <app-header></app-header>
 <div class="page-content">
 
-
+  <div id="preloader" [hidden]="loading">
+    <div id="status">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Start home -->
   <section class="page-title-box">
@@ -56,7 +67,7 @@
           <div class="card profile-sidebar me-lg-4">
             <div class="card-body p-4">
               <div class="text-center pb-4 border-bottom">
-                <img src="{{company.avatar}}" alt=""
+                <img src="{{company.avatar?company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" alt=""
                      class="avatar-lg img-thumbnail rounded-circle mb-4"/>
                 <h5 class="mb-0">{{company.name}}</h5>
                 <p class="text-muted">{{company.email}}</p>
@@ -189,6 +200,12 @@
                     <p class="text-muted mt-4">
                       {{company.description}}
                     </p>
+                    <div class="mt-4" *ngIf="categories.length!=0">
+                      <h5 class="fs-18 fw-bold">Categories</h5>
+                      <span class="badge fs-13 bg-soft-blue mt-2"
+                            *ngFor="let c of categories"
+                      > {{c.name}}</span>
+                    </div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -198,11 +215,11 @@
                       <h5 class="fs-17 fw-semibold mb-3 mb-0">Company Account</h5>
                       <div class="text-center">
                         <div class="mb-4 profile-user">
-                          <img [src]="path" class="rounded-circle img-thumbnail profile-img"
-                               id="profile-img" alt="">
+                          <img src="{{path?path:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" class="rounded-circle img-thumbnail profile-img"
+                               id="profile-img" alt="" >
                           <div class="p-0 rounded-circle profile-photo-edit">
                             <input id="profile-img-file-input" type="file" class="profile-img-file-input"
-                                   (change)="previewAvatar($event)">
+                                   (change)="previewAvatar($event)" required>
                             <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
                               <i class="uil uil-edit"></i>
                             </label>

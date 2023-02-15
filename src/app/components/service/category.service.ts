@@ -18,4 +18,8 @@ export class CategoryService {
   findCategoriesByJobId(id:number):Observable<Category[]>{
     return this.http.get<Category[]>(`http://localhost:8080/categories/job/${id}`)
   }
+
+  findCategoriesByCompanyId(id:number):Observable<Category[]>{
+    return this.http.get<Category[]>(`http://localhost:8080/categories/company/${id}`)
+  }
 }
