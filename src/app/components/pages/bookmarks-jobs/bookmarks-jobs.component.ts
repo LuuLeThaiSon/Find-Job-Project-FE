@@ -72,7 +72,7 @@ export class BookmarksJobsComponent implements OnInit {
   }
 
   findAll() {
-    return this.jobService.findAll().subscribe((data) => {
+    return this.jobService.findAllJobsByCompany(this.user.id).subscribe((data) => {
       this.jobs = data;
     })
   }
