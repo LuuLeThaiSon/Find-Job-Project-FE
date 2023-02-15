@@ -273,7 +273,7 @@
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="salaryMin" class="form-label">Salary min (per month)</label>
-                  <input type="text" class="form-control" id="salaryMin" formControlName="salaryMin">
+                  <input type="text" class="form-control" id="salaryMin" formControlName="salaryMin" (input)="getSalaryMin()">
                   <div *ngIf="jobForm.get('salaryMin')?.errors?.['required'] && jobForm.get('salaryMin')?.touched"
                        class="alert  bg-soft-danger mt-1" role="alert">
                     Required
@@ -292,7 +292,10 @@
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="salaryMax" class="form-label">Salary max (per month)</label>
-                  <input type="text" class="form-control" id="salaryMax" formControlName="salaryMax">
+                  <input type="text" class="form-control" id="salaryMax" formControlName="salaryMax" (input)="validateSalary()">
+                </div>
+                <div *ngIf="salary == true" class="alert  bg-soft-danger mt-1" role="alert">
+                  Must be > salary min
                 </div>
                 <div *ngIf="jobForm.get('salaryMax')?.errors?.['required'] && jobForm.get('salaryMax')?.touched"
                      class="alert  bg-soft-danger mt-1" role="alert">
@@ -353,10 +356,6 @@
                     <option value=true>Full time</option>
                     <option value=false>Pass time</option>
                   </select>
-<!--                  <div *ngIf="jobForm.get('type')?.errors?.['required'] && jobForm.get('type')?.touched"-->
-<!--                       class="alert  bg-soft-danger mt-1" role="alert">-->
-<!--                    Required-->
-<!--                  </div>-->
                 </div>
               </div>
               <!--end col-->
@@ -392,15 +391,6 @@
                     <option value="2">Women</option>
                     <option value="3">Any</option>
                   </select>
-<!--                  <select class="form-select" data-trigger-->
-<!--                          name="choices-single-filter-orderby"-->
-<!--                          id="choices-single-filter-orderby"-->
-<!--                          aria-label="Default select example">-->
-<!--                    <option value="df">Default</option>-->
-<!--                    <option value="ne">Newest</option>-->
-<!--                    <option value="od">Oldest</option>-->
-<!--                    <option value="rd">Random</option>-->
-<!--                  </select>-->
                 </div>
               </div>
               <!--end col-->

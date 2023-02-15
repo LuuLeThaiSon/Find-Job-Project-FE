@@ -25,6 +25,10 @@ export class BookmarksJobsComponent implements OnInit {
   p!: number;
   jobForm!: FormGroup;
   modalTitle: string = 'Post new job';
+  salaryMin!: number;
+  salaryMax!: number;
+  salary: boolean = false;
+
 
   ngOnInit(): void {
     // @ts-ignore
@@ -137,5 +141,20 @@ export class BookmarksJobsComponent implements OnInit {
 
   scroll() {
     window.scrollTo(0, 300);
+  }
+
+  validateSalary() {
+    // @ts-ignore
+    this.salaryMax = +document.getElementById('salaryMax').value
+    if (this.salaryMax < this.salaryMin) {
+      this.salary = true;
+    } else {
+      this.salary = false;
+    }
+  }
+  getSalaryMin() {
+    // @ts-ignore
+    this.salaryMin = +document.getElementById('salaryMin').value;
+    console.log(this.salaryMin);
   }
 }
