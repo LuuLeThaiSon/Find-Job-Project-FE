@@ -318,7 +318,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" href="manage-jobs.html">Post New Jobs</a></li>
-              <li><a class="dropdown-item" href="bookmark-jobs.html">Manage Jobs</a></li>
+              <li><a class="dropdown-item" href="bookmark-jobs.html" [routerLink]="['/manage-jobs', user.id]">Manage Jobs</a></li>
               <li><a class="dropdown-item" href="" [routerLink]="['/manage-company-profile', user.id]">Company Profile</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>

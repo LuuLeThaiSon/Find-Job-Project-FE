@@ -15,4 +15,7 @@ export class CategoryService {
   findOne(id: number): Observable<Category> {
     return this.http.get<Category>("http://localhost:8080/categories/" + id);
   }
+  findCategoriesByJobId(id:number):Observable<Category[]>{
+    return this.http.get<Category[]>(`http://localhost:8080/categories/job/${id}`)
+  }
 }

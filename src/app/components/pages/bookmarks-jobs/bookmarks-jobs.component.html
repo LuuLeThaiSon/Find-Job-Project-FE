@@ -1,0 +1,214 @@
+<app-header></app-header>
+<!-- Start home -->
+<section class="page-title-box">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="text-center text-white">
+          <h3 class="mb-4">Bookmarks Jobs</h3>
+          <div class="page-next">
+            <nav class="d-inline-block" aria-label="breadcrumb text-center">
+              <ol class="breadcrumb justify-content-center">
+                <li class="breadcrumb-item"><a href="" routerLink="">Home</a></li>
+                <li class="breadcrumb-item"><a href="" [routerLink]="['/manage-company-profile', user.id]">Profile</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page"> Bookmarks Jobs</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>
+  <!--end container-->
+</section>
+<!-- end home -->
+
+<!-- START SHAPE -->
+<div class="position-relative" style="z-index: 1">
+  <div class="shape">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+      <path fill="#FFFFFF" fill-opacity="1"
+            d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+    </svg>
+  </div>
+</div>
+<!-- END SHAPE -->
+
+
+<!-- START BOOKMARKS -->
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div>
+          <h6 class="fs-16 mb-0"> Bookmarks Jobs </h6>
+        </div>
+      </div><!--end col-->
+      <div class="col-lg-6">
+        <div class="candidate-list-widgets">
+          <div class="row">
+
+            <div class="col-lg-3">
+              <button type="button" class="btn btn-primary">Post Job</button>
+            </div>
+            <div class="col-lg-4">
+              <div class="selection-widget mt-3 mt-lg-0">
+                <select class="form-select" data-trigger
+                        name="choices-single-filter-orderby"
+                        id="choices-single-filter-orderby"
+                        aria-label="Default select example">
+                  <option value="df">Default</option>
+                  <option value="ne">Newest</option>
+                  <option value="od">Oldest</option>
+                  <option value="rd">Random</option>
+                </select>
+              </div>
+            </div><!--end col-->
+            <div class="col-lg-4">
+              <div class="selection-widget mt-3 mt-lg-0">
+                <select class="form-select" data-trigger name="choices-candidate-page"
+                        id="choices-candidate-page" aria-label="Default select example">
+                  <option value="df">All</option>
+                  <option value="ne">Last 2 Month</option>
+                  <option value="ne">Last 6 Month</option>
+                  <option value="ne">Last 12 Month</option>
+                  <option value="ne">Last 2 Year</option>
+                </select>
+              </div>
+            </div><!--end col-->
+
+          </div><!--end row-->
+        </div><!--end candidate-list-widgets-->
+      </div><!--end col-->
+    </div><!--end row-->
+    <div class="row">
+      <div class="col-lg-12" *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }">
+        <div class="{{j.status ? 'job-box bookmark-post card mt-4' : 'job-box card mt-4'}}">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="bookmark-label text-center">
+                <a href="javascript:void(0)" class="text-white align-middle"><i
+                  class="{{j.status ? 'mdi mdi-lock-open-variant' : 'mdi mdi-lock'}}"
+                  data-bs-target="#blockModal"
+                  data-bs-toggle="modal"
+                  (click)="getJob(j)"></i></a>
+              </div>
+              <div class="col-lg-2 text-lg-center">
+                <a href="company-details.html"><img
+                  src="{{j.company.avatar}}" alt=""
+                  class="img-fluid rounded-3"></a>
+              </div><!--end col-->
+              <div class="col-lg-7">
+                <div class="mt-3 mt-lg-0">
+                  <h5 class="fs-17 mb-1"><a href="" [routerLink]="['/job-detail', j.id]"
+                                            class="text-dark">{{j.title}}</a> <small
+                    class="text-muted fw-normal"> ({{j.expYear}}+ Yrs
+                    Exp.)</small></h5>
+                  <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                      <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
+                    </li>
+                    <li class="list-inline-item">
+                      <p class="text-muted fs-14 mb-0"><i
+                        class="mdi mdi-map-marker"></i>{{j.location.name}}</p>
+                    </li>
+                    <li class="list-inline-item">
+                      <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i>
+                        ${{j.salaryMin}} - ${{j.salaryMax}} / month</p>
+                    </li>
+                  </ul>
+                  <div class="mt-2">
+                    <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
+                    <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
+                  </div>
+                </div>
+              </div><!--end col-->
+              <div class="col-lg-3 text-lg-end align-self-center">
+                <ul class="list-inline mt-3 mb-0">
+                  <li class="list-inline-item" data-bs-toggle="tooltip"
+                      data-bs-placement="top" title="View More">
+                    <a href="" [routerLink]="['/job-detail', j.id]"
+                       class="avatar-sm bg-soft-success d-inline-block text-center rounded-circle fs-18">
+                      <i class="mdi mdi-eye"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item" data-bs-toggle="tooltip"
+                      data-bs-placement="top" title="Delete">
+                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                       data-bs-target="#deleteModal"
+                       class="avatar-sm bg-soft-danger d-inline-block text-center rounded-circle fs-18"
+                       (click)="getJobId(j.id)">
+                      <i class="uil uil-trash-alt"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div><!--end row-->
+          </div>
+        </div><!--end job-box-->
+      </div><!--end col-->
+    </div><!--end row-->
+
+    <div class="row">
+      <pagination-controls class="text-center mt-5" (pageChange)="p = $event"></pagination-controls>
+    </div><!--end row-->
+  </div><!--end container-->
+</section>
+<!-- START BOOKMARKS -->
+
+<!-- DELETE Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabell">Delete Jobs ?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h6 class="text-danger"><i class="uil uil-exclamation-triangle"></i>Warning: Are you
+            sure you want to delete job Post ?</h6>
+          <p class="text-muted"> Your jobs post will be permenently removed and you won't be able
+            to see them again, including the once you're shared with your friends.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Cancel</button>
+
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal" pButton (click)="delete(jobId)">Yes,
+          delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END DELETE MODAL -->
+
+<!-- Block Job Modal -->
+<div class="modal fade" id="blockModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{job.status ? 'Block Jobs ?' : 'Open Jobs ?'}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h6 class="text-danger"><i class="uil uil-exclamation-triangle"></i> {{job.status ? 'Warning: Are you sure want to block job Post ? ' : 'Warning: Are you sure want to block job Post ?'}}</h6>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Cancel</button>
+
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal" (click)="blockJob(job)">Yes,
+          {{job.status ? 'block' : 'open'}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Block Job MODAL -->
+<app-footer></app-footer>

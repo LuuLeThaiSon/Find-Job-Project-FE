@@ -2,7 +2,7 @@ import {Role} from "./role";
 import {JobCount} from "./jobCount";
 
 export interface Company {
-  id: number;
+  id?: number;
   name: string;
   shortName: string;
   code: string;
@@ -17,4 +17,5 @@ export interface Company {
   website: string;
   role: Role;
   banner:string;
+  status:boolean;
 }

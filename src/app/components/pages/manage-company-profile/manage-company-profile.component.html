@@ -1,6 +1,8 @@
 <app-header></app-header>
 <div class="page-content">
 
+
+
   <!-- Start home -->
   <section class="page-title-box">
     <div class="container">
@@ -12,7 +14,7 @@
               <nav class="d-inline-block" aria-label="breadcrumb text-center">
                 <ol class="breadcrumb justify-content-center">
                   <li class="breadcrumb-item"><a href="" routerLink="">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">company details</li>
+                  <li class="breadcrumb-item"><a href="javascript:void(0)">Company Profile</a></li>
                 </ol>
               </nav>
             </div>
@@ -38,234 +40,312 @@
   <!-- END SHAPE -->
 
 
-  <!-- START CANDIDATE-DETAILS -->
+  <!-- START PROFILE -->
   <section class="section">
+
+    <div class="container">
+      <div class="alert bg-soft-primary alert-dismissible fade show" role="alert" [hidden]="edited">
+        Profile Update Successfully !
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        </button>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
-          <div class="card side-bar">
+          <div class="card profile-sidebar me-lg-4">
             <div class="card-body p-4">
-              <div class="candidate-profile text-center">
-                <img src="{{company.avatar? company.avatar: 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" alt="" class="avatar-lg rounded-circle">
-                <h6 class="fs-18 mb-1 mt-4">{{company.name}}</h6>
-                <p class="text-muted mb-4">{{company.email}}</p>
+              <div class="text-center pb-4 border-bottom">
+                <img src="{{company.avatar}}" alt=""
+                     class="avatar-lg img-thumbnail rounded-circle mb-4"/>
+                <h5 class="mb-0">{{company.name}}</h5>
+                <p class="text-muted">{{company.email}}</p>
                 <ul class="candidate-detail-social-menu list-inline mb-0">
                   <li class="list-inline-item">
-                    <a href="javascript:void(0)" class="social-link"><i class="uil uil-twitter-alt"></i></a>
+                    <a href="" class="social-link rounded-3 btn-soft-primary"><i
+                      class="uil uil-facebook-f"></i></a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="javascript:void(0)" class="social-link"><i class="uil uil-whatsapp"></i></a>
+                    <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-info"><i
+                      class="uil uil-twitter-alt"></i></a>
                   </li>
                   <li class="list-inline-item">
-                    <a href="javascript:void(0)" class="social-link"><i class="uil uil-phone-alt"></i></a>
+                    <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-success"><i
+                      class="uil uil-whatsapp"></i></a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-danger"><i
+                      class="uil uil-phone-alt"></i></a>
                   </li>
                 </ul>
               </div>
-            </div><!--end candidate-profile-->
-
-            <div class="candidate-profile-overview  card-body border-top p-4">
-              <h6 class="fs-17 fw-medium mb-3">Profile Overview</h6>
-              <ul class="list-unstyled mb-0">
-                <li *ngIf="company.shortName" >
-                  <div class="d-flex">
-                    <label class="text-dark">Short Name</label>
-                    <div>
-                      <p class="text-muted mb-0">{{company.shortName}}</p>
-                    </div>
-                  </div>
-                </li>
-                <li *ngIf="company.code">
-                  <div class="d-flex">
-                    <label class="text-dark">Code</label>
-                    <div>
-                      <p class="text-muted mb-0">{{company.code}}</p>
-                    </div>
-                  </div>
-                </li>
-                <li *ngIf="company.numberOfEmployees" >
-                  <div class="d-flex">
-                    <label class="text-dark">Employees</label>
-                    <div>
-                      <p class="text-muted mb-0">{{company.numberOfEmployees}}</p>
-                    </div>
-                  </div>
-                </li>
-                <li *ngIf="company.address" >
-                  <div class="d-flex">
-                    <label class="text-dark">Address</label>
-                    <div>
-                      <p class="text-muted mb-0">{{company.address}}</p>
-                    </div>
-                  </div>
-                </li>
-                <li *ngIf="company.website" >
-                  <div class="d-flex">
-                    <label class="text-dark">Website</label>
-                    <div>
-                      <p class="text-muted text-break mb-0">{{company.website}}</p>
-                    </div>
-                  </div>
-                </li>
-                <li *ngIf="company.tel" >
-                  <div class="d-flex">
-                    <label class="text-dark">Tel</label>
-                    <div>
-                      <p class="text-muted text-break mb-0">{{company.tel}}</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-              <div class="mt-3">
-                <a href="" class="btn btn-primary btn-hover w-100"><i class="mdi mdi-account-edit"></i>
-                  Update Profile</a>
+              <!--end profile-->
+              <div class="mt-4 border-bottom pb-4">
+                <h5 class="fs-17 fw-bold mb-3">Information</h5>
+                <div class="profile-contact">
+                  <ul class="list-unstyled mb-0">
+                    <li *ngIf="company.shortName">
+                      <div class="d-flex">
+                        <label>Short Name</label>
+                        <div>
+                          <p class="text-muted text-break mb-0">
+                            {{company.shortName}}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                    <li *ngIf="company.code" }}>
+                      <div class="d-flex">
+                        <label>Code</label>
+                        <div>
+                          <p class="text-muted mb-0">{{company.code}}</p>
+                        </div>
+                      </div>
+                    </li>
+                    <li *ngIf="company.numberOfEmployees">
+                      <div class="d-flex">
+                        <label>Size</label>
+                        <div>
+                          <p class="text-muted mb-0">{{company.numberOfEmployees}} <i
+                            class="mdi mdi-human-male-male"></i></p>
+                        </div>
+                      </div>
+                    </li>
+                    <li *ngIf="company.tel">
+                      <div class="d-flex">
+                        <label>Tel</label>
+                        <div>
+                          <p class="text-muted mb-0">{{company.tel}}</p>
+                        </div>
+                      </div>
+                    </li>
+                    <li *ngIf="company.website">
+                      <div class="d-flex">
+                        <label>Webiste</label>
+                        <div>
+                          <p class="text-muted mb-0">{{company.website}}</p>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div><!--candidate-profile-overview-->
-            <div *ngIf="company.googleMap" class="card-body p-4 border-top">
-              <h6 class="fs-17 fw-medium mb-4">Company Location</h6>
-              <div [innerHTML]="ggMap"></div>
+              <!--end document-->
+              <div class="mt-4" *ngIf="company.googleMap">
+                <h5 class="fs-17 fw-bold mb-3">Location</h5>
+                <div [innerHTML]="ggMap"></div>
+              </div>
+              <!--end contact-details-->
             </div>
-          </div><!--end card-->
-        </div><!--end col-->
-
+            <!--end card-body-->
+          </div>
+          <!--end profile-sidebar-->
+        </div>
+        <!--end col-->
         <div class="col-lg-8">
-          <div class="card ms-lg-4 mt-4 mt-lg-0">
+          <div class="card profile-content-page mt-4 mt-lg-0">
+            <ul class="profile-content-nav nav nav-pills border-bottom mb-4" id="pills-tab"
+                role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="overview-tab" data-bs-toggle="pill"
+                        data-bs-target="#overview" type="button" role="tab" aria-controls="overview"
+                        aria-selected="true">
+                  Overview
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="settings-tab" data-bs-toggle="pill"
+                        data-bs-target="#settings" type="button" role="tab" aria-controls="settings"
+                        aria-selected="false">
+                  Settings
+                </button>
+              </li>
+            </ul>
+            <!--end profile-content-nav-->
             <div class="card-body p-4">
-
-              <div class="candidate-portfolio mb-5">
-                <div class="row g-3">
-                  <div class="col-lg-12">
-                    <div class="candidate-portfolio-box card border-0">
-                      <img
-                        src="{{company.banner? company.banner: 'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}"
-                        class="img-fluid" height="450" width="800">
-                      <div class="bg-overlay"></div>
-                      <div class="zoom-icon">
-                        <a href="assets/images/blog/img-12.jpg" class="image-popup text-white"
-                           data-title="Project Leader"
-                           data-description="There are many variations of passages of available, but the majority alteration in some form."><i
-                          class="uil uil-search-alt"></i></a>
-                      </div>
-                    </div>
-                  </div><!-- end col -->
-                </div><!-- end row -->
-              </div><!-- end portfolio -->
-
-              <div class="mb-5">
-                <h6 class="fs-17 fw-medium mb-4">About Company</h6>
-                <p class="text-muted">{{company.description}}</p>
-              </div>
-              <div *ngIf="jobs.length == 0">
-                <a href="">Post New Job</a>
-              </div>
-
-              <div id="currentOpeningJobs" *ngIf="jobs.length != 0">
-                <h6 class="fs-17 fw-medium mb-4">Manage Jobs</h6>
-                <div class="job-box card mt-4" *ngFor="let j of jobs">
-                  <div class="p-4">
-                    <div class="row">
-                      <div class="col-lg-2">
-                        <img src="{{j.company.avatar}}" alt="" class="img-fluid rounded-3">
-                      </div>
-                      <div class="col-lg-10">
-                        <div class="mt-3 mt-lg-0">
-                          <h5 class="fs-16 fw-medium mb-1"><a href="" [routerLink]="['/job-detail',j.id]"
-                                                              class="text-dark">
-                            {{j.title}}
-                          </a> <small class="text-muted fw-normal">({{j.expYear}}+ years)</small></h5>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item" [ngSwitch]="j.gender">
-                              <p *ngSwitchCase="1" class="text-muted fs-14 mb-0"><i class="mdi mdi-gender-male"></i>
-                                Male</p>
-                              <p *ngSwitchCase="2" class="text-muted fs-14 mb-0"><i class="mdi mdi-gender-female"></i>
-                                Female</p>
-                              <p *ngSwitchCase="3" class="text-muted fs-14 mb-0"><i
-                                class="mdi mdi-gender-male-female"></i> Any</p>
-                            </li>
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> {{j.location.name}}
-                              </p>
-                            </li>
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-human-male-male"></i> {{j.quantity}}
-                                Vacancy</p>
-                            </li>
-                          </ul>
-                          <div class="mt-2">
-                            <span
-                              class="{{j.type? 'badge bg-soft-success mt-1' : 'badge bg-soft-info mt-1'}}">{{j.type ? 'Full Time' : 'Part Time'}}</span>
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="overview" role="tabpanel"
+                     aria-labelledby="overview-tab">
+                  <div class="candidate-portfolio mb-5">
+                    <div class="row g-3">
+                      <div class="col-lg-12">
+                        <div class="candidate-portfolio-box card border-0">
+                          <img
+                            src="{{company.banner? company.banner: 'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}"
+                            class="img-fluid" height="450" width="800">
+                          <div class="bg-overlay"></div>
+                          <div class="zoom-icon">
+                            <a href="assets/images/blog/img-12.jpg" class="image-popup text-white"
+                               data-title="Project Leader"
+                               data-description="There are many variations of passages of available, but the majority alteration in some form."><i
+                              class="uil uil-search-alt"></i></a>
                           </div>
                         </div>
-                      </div><!--end col-->
-                    </div><!--end row-->
+                      </div><!-- end col -->
+                    </div><!-- end row -->
+                  </div><!-- end portfolio -->
+                  <div>
+                    <h5 class="fs-18 fw-bold">Description</h5>
+                    <p class="text-muted mt-4">
+                      {{company.description}}
+                    </p>
                   </div>
-                  <div class="p-3 bg-light">
-                    <div class="row justify-content-between">
-                      <div class="col-md-8">
-                        <div>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item fw-medium">Expired Date :</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)"
-                                                            class="primary-link text-muted">{{j.expiredDate}}</a>
-                            </li>
-                          </ul>
+                </div>
+                <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                  <form [formGroup]="formCompany" (ngSubmit)="onSubmit()">
+                    <input type="text" class="form-control" formControlName="id" hidden/>
+                    <div>
+                      <h5 class="fs-17 fw-semibold mb-3 mb-0">Company Account</h5>
+                      <div class="text-center">
+                        <div class="mb-4 profile-user">
+                          <img [src]="path" class="rounded-circle img-thumbnail profile-img"
+                               id="profile-img" alt="">
+                          <div class="p-0 rounded-circle profile-photo-edit">
+                            <input id="profile-img-file-input" type="file" class="profile-img-file-input"
+                                   (change)="previewAvatar($event)">
+                            <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                              <i class="uil uil-edit"></i>
+                            </label>
+                          </div>
                         </div>
                       </div>
-                      <!--end col-->
-                      <!--end col-->
-                      <div class="col-md-4">
-                        <div class="text-md-end">
-                          <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i
-                            class="mdi mdi-chevron-double-right"></i></a>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="Name" class="form-label">Name*</label>
+                            <input type="text" class="form-control" id="Name" formControlName="name"/>
+                          </div>
+                          <div *ngIf="formCompany.get('name')?.errors?.['required'] && formCompany.get('name')?.touched" class="alert  bg-soft-danger" role="alert">
+                            Required!
+                          </div>
                         </div>
+                        <input type="text" class="form-control" formControlName="code" hidden/>
+                        <!--end col-->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="shortName" class="form-label">Short Name</label>
+                            <input type="text" class="form-control" id="shortName" formControlName="shortName"/>
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-12">
+                          <div class="mb-3">
+                            <div class="mb-3">
+                              <label for="email" class="form-label">Email</label>
+                              <input type="text" class="form-control" id="email" formControlName="email" readonly/>
+                            </div>
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <input type="password" class="form-control" id="password" formControlName="password" hidden/>
+                          </div>
+                        </div>
+                        <!--end col-->
                       </div>
-                      <!--end col-->
+                      <!--end row-->
                     </div>
-                    <!--end row-->
-                  </div>
-                </div><!--end job-box-->
+                    <!--end account-->
+                    <div class="mt-4">
+                      <h5 class="fs-17 fw-semibold mb-3">Description</h5>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="mb-3">
+                            <label for="description"
+                                   class="form-label">Introduce Your Company</label>
+                            <textarea class="form-control" id="description"
+                                      rows="5"
+                                      formControlName="description"
+                            ></textarea>
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address"
+                                   formControlName="address"
+                            />
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="numberOfEmployees" class="form-label">Company Size</label>
+                            <input type="number" class="form-control" id="numberOfEmployees"
+                                   formControlName="numberOfEmployees"
+                            />
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-12">
+                          <div class="mb-3">
+                            <label for="googleMap" class="form-label">Google Map Link</label>
+                            <input type="text" class="form-control" id="googleMap"
+                                   formControlName="googleMap"
+                            />
+                          </div>
+                        </div>
+                        <!--end col-->
+                      </div>
+                      <!--end row-->
+                    </div>
+                    <!--end profile-->
+                    <div class="mt-4">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="tel" class="form-label">Tel</label>
+                            <input type="text" class="form-control" id="tel"
+                                   formControlName="tel"
+                                   />
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="website" class="form-label">Website</label>
+                            <input type="text" class="form-control" id="website"
+                                   formControlName="website"
+                            />
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="mb-3" formGroupName="role">
+                        <input type="text" class="form-control"
+                               formControlName="id" hidden/>
+                        </div>
+                        <input type="text" class="form-control"
+                               formControlName="status" hidden/>
+                        <input type="text" class="form-control"
+                               formControlName="banner" hidden/>
+                      </div>
+                      <!--end row-->
+                    </div>
+                    <div class="mt-4 text-end">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </form>
+                  <!--end form-->
+                </div>
+                <!--end tab-pane-->
               </div>
-            </div><!-- card body end -->
-          </div><!--end card-->
-        </div><!--end col-->
-      </div><!--end row-->
-    </div><!--end container-->
-  </section>
-  <!-- END CANDIDATE-DETAILS -->
-
-  <!-- START APPLY MODAL -->
-  <div class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body p-5">
-          <div class="text-center mb-4">
-            <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
+              <!--end tab-content-->
+            </div>
+            <!--end card-body-->
           </div>
-          <div class="position-absolute end-0 top-0 p-3">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="mb-3">
-            <label for="nameFormControlInput" class="form-label">Name</label>
-            <input type="text" class="form-control" id="nameFormControlInput" placeholder="Enter your name">
-          </div>
-          <div class="mb-3">
-            <label for="emailFormControlInput" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="emailFormControlInput" placeholder="Enter your email">
-          </div>
-          <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
-                      placeholder="Enter your message"></textarea>
-          </div>
-          <div class="mb-4">
-            <label class="form-label" for="inputGroupFile01">Resume Upload</label>
-            <input type="file" class="form-control" id="inputGroupFile01">
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Send Application</button>
+          <!--end profile-content-page-->
         </div>
+        <!--end col-->
       </div>
+      <!--end row-->
     </div>
-  </div><!-- END APPLY MODAL -->
+    <!--end container-->
+  </section>
+  <!-- END PROFILE -->
 
 </div>
 <!-- End Page-content -->
 <app-footer></app-footer>
+
