@@ -3,6 +3,7 @@ import {Job} from "../../model/job";
 import {ActivatedRoute} from "@angular/router";
 import {map} from "rxjs";
 import {JobService} from "../../service/job.service";
+import {CommonService} from "../../service/common.service";
 
 @Component({
   selector: 'app-job-detail',
@@ -16,7 +17,8 @@ export class JobDetailComponent {
   role!:number;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private jobService: JobService) {
+              private jobService: JobService,
+              private commonService: CommonService) {
     this.activatedRoute.params.subscribe(params => {
       this.jobId = params['id'];
       this.findOne(this.jobId);
@@ -25,6 +27,7 @@ export class JobDetailComponent {
   }
 
   ngOnInit() {
+    this.commonService.scrollTopWindow(0,300)
     if(sessionStorage.getItem("user") == null) {
       this.role = 0;
     }else {

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {Company} from "../../model/company";
 import {Job} from "../../model/job";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -9,6 +9,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {MessageService} from "primeng/api";
 import {finalize, Subject} from "rxjs";
+import {HeaderComponent} from "../../common/header/header.component";
 
 
 @Component({
@@ -109,12 +110,9 @@ export class ManageCompanyProfileComponent {
             this.company.avatar = url;
             this.companyService.update(this.company, this.companyId).subscribe(() => {
               sessionStorage.setItem("user", JSON.stringify(this.company));
-              // window.scroll(0,0)
-              // this.edited = false;
-              // setTimeout(function(){
-              //   window.location.reload();
-              // }, 5000);
-              this.router.navigate(['']).finally()
+              window.scroll(0,0)
+              this.edited = false;
+              this.header?.ngOnInit();
             })
           });
         })
@@ -130,6 +128,7 @@ export class ManageCompanyProfileComponent {
         const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
         const fileRef = this.storage.ref(imagePath);
         this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+
           finalize(() => {
             fileRef.getDownloadURL().subscribe(url => {
               this.path = url;
@@ -145,4 +144,5 @@ export class ManageCompanyProfileComponent {
     this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
   }
 
+  @ViewChild(HeaderComponent) header: HeaderComponent | undefined;
 }
