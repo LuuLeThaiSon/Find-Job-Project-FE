@@ -33,6 +33,12 @@ export class JobListComponent implements OnInit{
     })
   }
 
+  findAllByStatusIsTrueAndAndExpiredDate() {
+    return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
+      this.jobs = data;
+    })
+  }
+
   findAllLocations() {
     return this.locationsService.findAll().subscribe((data) => {
       this.locations = data;
@@ -47,7 +53,7 @@ export class JobListComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.findAll();
+    this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
     // @ts-ignore
@@ -55,4 +61,18 @@ export class JobListComponent implements OnInit{
     this.role = this.user.role.id;
     console.log(this.role)
   }
+
+  public searchByTitleJobOrCompanyName(key:string): void {
+    const results: Job[] = [];
+    for (const job of this.jobs) {
+      if (job.title.toLowerCase().indexOf(key.toLowerCase()) !== -1 || job.company.name.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        results.push(job)
+      }
+    }
+    this.jobs = results;
+    if (!key) {
+      this.ngOnInit()
+    }
+  }
+
 }
