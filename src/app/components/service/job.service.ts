@@ -13,6 +13,10 @@ export class JobService {
   findAll(): Observable<Job[]> {
     return this.http.get<Job[]>("http://localhost:8080/jobs")
   }
+  findAllByStatusIsTrueAndAndExpiredDate(): Observable<Job[]> {
+    return this.http.get<Job[]>("http://localhost:8080/jobs/status")
+  }
+
   findOne(id: number): Observable<Job> {
     return this.http.get<Job>("http://localhost:8080/jobs/" + id)
   }
