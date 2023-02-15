@@ -317,7 +317,7 @@
                   <div class="row align-items-center">
                     <div class="col-md-2">
                       <div class="text-center mb-4 mb-md-0">
-                        <a href="company-details.html"><img
+                        <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
                           src="{{j.company.avatar}}" alt=""
                           class="img-fluid rounded-3"></a>
                       </div>
@@ -325,7 +325,7 @@
                     <!--end col-->
                     <div class="col-md-3">
                       <div class="mb-2 mb-md-0">
-                        <h5 class="fs-18 mb-1"><a href="job-details.html"
+                        <h5 class="fs-18 mb-1"><a href="" [routerLink]="['/job-detail/',j.id]"
                                                   class="text-dark">{{j.title}}</a>
                         </h5>
                         <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
@@ -342,9 +342,11 @@
                     </div>
                     <!--end col-->
                     <div class="col-md-2">
-                      <div>
-                        <p class="text-muted mb-2"><span class="text-primary">$</span>{{j.salaryMin}}-{{j.salaryMax}}/m
-                        </p>
+                      <div class="d-flex mb-2">
+                        <div class="flex-shrink-0">
+                          <i class="mdi mdi-clock-outline text-primary me-1"></i>
+                        </div>
+                        <p class="text-muted mb-0">{{j.expiredDate}}</p>
                       </div>
                     </div>
                     <!--end col-->
@@ -377,8 +379,7 @@
                     <!--end col-->
                     <div class="col-lg-2 col-md-3">
                       <div class="text-start text-md-end">
-                        <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply
-                          Now <i
+                        <a href="" [routerLink]="['/job-detail/',j.id]" data-bs-toggle="modal" class="primary-link">Details <i
                             class="mdi mdi-chevron-double-right"></i></a>
                       </div>
                     </div>
@@ -581,7 +582,7 @@
                   <div class="row align-items-center">
                     <div class="col-md-2">
                       <div class="text-center mb-4 mb-md-0">
-                        <a href="company-details.html"><img
+                        <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
                           src="{{j.company.avatar}}" alt=""
                           class="img-fluid rounded-3"></a>
                       </div>
@@ -589,7 +590,7 @@
                     <!--end col-->
                     <div class="col-md-3">
                       <div class="mb-2 mb-md-0">
-                        <h5 class="fs-18 mb-1"><a href="job-details.html"
+                        <h5 class="fs-18 mb-1"><a href="" [routerLink]="['/job-detail/',j.id]"
                                                   class="text-dark">{{j.title}}</a>
                         </h5>
                         <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
@@ -606,9 +607,11 @@
                     </div>
                     <!--end col-->
                     <div class="col-md-2">
-                      <div>
-                        <p class="text-muted mb-2"><span class="text-primary">$</span>{{j.salaryMin}}-{{j.salaryMax}}/m
-                        </p>
+                      <div class="d-flex mb-2">
+                        <div class="flex-shrink-0">
+                          <i class="mdi mdi-clock-outline text-primary me-1"></i>
+                        </div>
+                        <p class="text-muted mb-0">{{j.expiredDate}}</p>
                       </div>
                     </div>
                     <!--end col-->
@@ -641,8 +644,7 @@
                     <!--end col-->
                     <div class="col-lg-2 col-md-3">
                       <div class="text-start text-md-end">
-                        <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply
-                          Now <i
+                        <a href="" [routerLink]="['/job-detail/',j.id]" data-bs-toggle="modal" class="primary-link">Details<i
                             class="mdi mdi-chevron-double-right"></i></a>
                       </div>
                     </div>
@@ -666,7 +668,7 @@
                   <div class="row align-items-center">
                     <div class="col-md-2">
                       <div class="text-center mb-4 mb-md-0">
-                        <a href="company-details.html"><img
+                        <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
                           src="{{j.company.avatar}}" alt=""
                           class="img-fluid rounded-3"></a>
                       </div>
@@ -674,7 +676,7 @@
                     <!--end col-->
                     <div class="col-md-3">
                       <div class="mb-2 mb-md-0">
-                        <h5 class="fs-18 mb-1"><a href="job-details.html"
+                        <h5 class="fs-18 mb-1"><a href="" [routerLink]="['/job-detail/', j.id]"
                                                   class="text-dark">{{j.title}}</a>
                         </h5>
                         <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
@@ -691,9 +693,11 @@
                     </div>
                     <!--end col-->
                     <div class="col-md-2">
-                      <div>
-                        <p class="text-muted mb-2"><span class="text-primary">$</span>{{j.salaryMin}}-{{j.salaryMax}}/m
-                        </p>
+                      <div class="d-flex mb-2">
+                        <div class="flex-shrink-0">
+                          <i class="mdi mdi-clock-outline text-primary me-1"></i>
+                        </div>
+                        <p class="text-muted mb-0">{{j.expiredDate}}</p>
                       </div>
                     </div>
                     <!--end col-->
@@ -726,8 +730,7 @@
                     <!--end col-->
                     <div class="col-lg-2 col-md-3">
                       <div class="text-start text-md-end">
-                        <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply
-                          Now <i
+                        <a href="" [routerLink]="['/job-detail/',j.id]" data-bs-toggle="modal" class="primary-link">Details<i
                             class="mdi mdi-chevron-double-right"></i></a>
                       </div>
                     </div>
@@ -738,7 +741,7 @@
               </div>
               <!--end job-box-->
               <div class="text-center mt-4 pt-2">
-                <a href="job-list.html" class="btn btn-primary">View More <i
+                <a href="" routerLink="/job" class="btn btn-primary">View More <i
                   class="uil uil-arrow-right"></i></a>
               </div>
             </div>

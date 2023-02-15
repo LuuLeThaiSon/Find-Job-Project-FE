@@ -13,6 +13,8 @@ export class JobDetailComponent {
   job!: Job;
   jobId!: number;
   jobs: Job[] = [];
+  role!:number;
+
   constructor(private activatedRoute: ActivatedRoute,
               private jobService: JobService) {
     this.activatedRoute.params.subscribe(params => {
@@ -20,6 +22,17 @@ export class JobDetailComponent {
       this.findOne(this.jobId);
     })
     this.findALl()
+  }
+
+  ngOnInit() {
+    if(sessionStorage.getItem("user") == null) {
+      this.role = 0;
+    }else {
+      // @ts-ignore
+      this.role = JSON.parse(sessionStorage.getItem("user")).role.id;
+      console.log(this.role)
+    }
+    console.log(this.role)
   }
 
   findALl() {

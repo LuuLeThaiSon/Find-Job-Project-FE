@@ -87,7 +87,7 @@
                     <p class="fw-medium mb-0">{{job.position}}</p>
                   </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3" *ngIf="role !== 0">
                   <div class="border rounded-end p-3">
                     <p class="text-muted fs-13 mb-0">Offer Salary</p>
                     <p class="fw-medium mb-0">${{job.salaryMin}} - {{job.salaryMax}}/ Month</p>
@@ -252,7 +252,7 @@
                   </div>
                 </li>
                 <li>
-                  <div class="d-flex mt-4">
+                  <div class="d-flex mt-4" *ngIf="role != 0">
                     <i class="uil uil-usd-circle icon bg-soft-primary"></i>
                     <div class="ms-3">
                       <h6 class="fs-14 mb-2">Offered Salary</h6>
@@ -270,9 +270,14 @@
                   </div>
                 </li>
               </ul>
-              <div class="mt-3">
+              <div class="mt-3" *ngIf="role == 3">
                 <a href="#applyNow" data-bs-toggle="modal"
                    class="btn btn-primary btn-hover w-100 mt-2">Apply Now <i
+                  class="uil uil-arrow-right"></i></a>
+              </div>
+              <div class="mt-3" *ngIf="role == 0">
+                <a href="" routerLink="/register" data-bs-toggle="modal"
+                   class="btn btn-primary btn-hover w-100 mt-2">Register/Login To Apply <i
                   class="uil uil-arrow-right"></i></a>
               </div>
             </div><!--end card-body-->
