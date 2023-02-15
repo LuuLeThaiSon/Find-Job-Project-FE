@@ -126,4 +126,8 @@ export class BookmarksJobsComponent implements OnInit {
     this.jobForm.reset();
     this.modalTitle = 'Post new job';
   }
+
+  scroll() {
+    window.scrollTo(0, 300);
+  }
 }
