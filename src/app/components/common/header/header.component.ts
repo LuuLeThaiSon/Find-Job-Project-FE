@@ -84,5 +84,9 @@ export class HeaderComponent implements AfterViewInit{
   signOut() {
     sessionStorage.clear()
   }
+
+  reload() {
+    this.ngOnInit();
+  }
 }
 

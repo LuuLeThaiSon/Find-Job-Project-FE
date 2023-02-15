@@ -19,6 +19,9 @@ export class JobListComponent implements OnInit{
   p: number = 1;
   jobId!: number;
   jobs: Job[] = [];
+  user!:any;
+  role!:number;
+
   constructor(private jobService: JobService,
               private locationsService: LocationsService,
               private categoryService: CategoryService) {
@@ -47,5 +50,9 @@ export class JobListComponent implements OnInit{
     this.findAll();
     this.findAllLocations();
     this.findAllCategories();
+    // @ts-ignore
+    this.user = JSON.parse(sessionStorage.getItem("user")) as any;
+    this.role = this.user.role.id;
+    console.log(this.role)
   }
 }
