@@ -34,6 +34,8 @@ import {NgSelectModule} from "@ng-select/ng-select";
 import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { TopCompaniesComponent } from './top-companies/top-companies.component';
 import { ManageCandidateProfileComponent } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -83,7 +85,8 @@ import { ManageCandidateProfileComponent } from './components/pages/manage-candi
     DropdownModule,
     MultiSelectModule,
     NgSelectModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    MatProgressBarModule
   ],
 
   providers: [],

@@ -33,6 +33,7 @@ export class JobListComponent implements OnInit {
   alertApply: boolean = true;
   checkApplyJob: Boolean[] = [];
   message!: string;
+  checkUpload: boolean = false;
 
 
   ngOnInit(): void {
@@ -105,6 +106,7 @@ export class JobListComponent implements OnInit {
   }
 
   apply() {
+    this.checkUpload = true;
     this.applyJob.candidate = this.user;
     this.applyJob.job = this.jobApply;
     this.applyJob.message = this.message;
@@ -116,21 +118,24 @@ export class JobListComponent implements OnInit {
           this.applyJob.cv = url;
           this.applyJobService.save(this.applyJob).subscribe(() => {
             this.findAllByStatusIsTrueAndAndExpiredDate();
+            this.btnModal.nativeElement.click();
+            this.applyForm.reset();
+            this.applyForm.reset();
+
+            this.alertApply = false;
+            setTimeout(() => {
+              this.alertApply = true;
+            }, 3000)
           })
+          this.checkUpload = false;
         });
       })
     ).subscribe(() => {
       window.scrollTo(0, 300);
-      this.applyForm.reset();
-      this.btnModal.nativeElement.click();
-      this.applyForm.reset()
+
     })
     // @ts-ignore
     document.getElementById('cv').value = ''
-    this.alertApply = false;
-    setTimeout(() => {
-      this.alertApply = true;
-    }, 3000)
   }
 
   submitCV(event: any) {
@@ -138,6 +143,8 @@ export class JobListComponent implements OnInit {
       this.cvFileName = event.target.files[0]
     }
   }
+
   // @ts-ignore
   @ViewChild('btnModal') btnModal: ElementRef;
+  decline: any;
 }
