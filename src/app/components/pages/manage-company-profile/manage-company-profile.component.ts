@@ -144,7 +144,7 @@ export class ManageCompanyProfileComponent {
     setTimeout(() => {
       this.loading = true;
     }, 1000);
-    this.showSuccess()
+    // this.showSuccess()
   }
 
   previewAvatar(event: any) {
@@ -162,7 +162,7 @@ export class ManageCompanyProfileComponent {
               setTimeout(() => {
                 this.loading = true;
               }, 1000)
-              this.showSuccess();
+              // this.showSuccess();
               console.log(this.path)
             });
           })

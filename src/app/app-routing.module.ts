@@ -15,6 +15,7 @@ import {JobDetailComponent} from "./components/pages/job-detail/job-detail.compo
 import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
 import {HeaderComponent} from "./components/common/header/header.component";
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
+import {CandidateDetailComponent} from "./components/pages/candidate-detail/candidate-detail.component";
 
 const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: "job-detail/:id", component: JobDetailComponent},
   {path: "job-detail/:id", component: JobDetailComponent},
   {path:"company-detail/:id",component:CompanyDetailComponent},
+  {path:"candidate-detail/:id", component: CandidateDetailComponent},
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
   {path:"manage-jobs/:id",component:BookmarksJobsComponent}
 ];

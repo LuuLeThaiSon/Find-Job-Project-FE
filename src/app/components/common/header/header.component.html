@@ -407,7 +407,7 @@
               <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name}}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
-              <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/candidate-detail', user.id]">My Profile</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
             </li>
