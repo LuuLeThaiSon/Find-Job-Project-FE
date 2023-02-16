@@ -53,4 +53,8 @@ export class CompanyService {
     return this.httpClient.get<Job[]>(`${apiUrl}/jobs/current/opening/${idCompany}`)
   }
 
+  findTopCompanies():Observable<Company[]> {
+    return this.httpClient.get<Company[]>(`${apiUrl}/companies/quantity-desc`)
+  }
+
 }

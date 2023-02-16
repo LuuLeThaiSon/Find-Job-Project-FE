@@ -1,11 +1,11 @@
-import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
 import {Company} from "../../model/company";
 import {Job} from "../../model/job";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CompanyService} from "../../service/company.service";
 import {JobService} from "../../service/job.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {MessageService} from "primeng/api";
 import {finalize, Subject} from "rxjs";
@@ -21,7 +21,7 @@ import {CommonService} from "../../service/common.service";
   styleUrls: ['./manage-company-profile.component.css'],
   providers: [MessageService]
 })
-export class ManageCompanyProfileComponent {
+export class ManageCompanyProfileComponent implements AfterViewInit {
   company!: Company;
   companyId!: number;
   jobs!: Job[];
@@ -31,7 +31,12 @@ export class ManageCompanyProfileComponent {
   path!: string;
   pathName!: string;
   edited!: boolean;
-  categories!: Category[];
+  categories: Category[] = [];
+  allCategories: Category[] = [];
+
+
+  public myModelProperty!: Array<any>;
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -41,14 +46,89 @@ export class ManageCompanyProfileComponent {
               private storage: AngularFireStorage,
               private categoryService: CategoryService,
               private commonService: CommonService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private elementRef: ElementRef) {
+  }
+
+  ngAfterViewInit(): void {
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "../../assets/libs/choices.js/public/assets/scripts/choices.min.js";
+    this.elementRef.nativeElement.appendChild(s);
+
+    var s1 = document.createElement("script");
+    s1.type = "text/javascript";
+    s1.src = "../../assets/libs/swiper/swiper-bundle.min.js";
+    this.elementRef.nativeElement.appendChild(s1);
+
+    var s2 = document.createElement("script");
+    s2.type = "text/javascript";
+    s2.src = "../../assets/js/pages/job-list.init.js";
+    this.elementRef.nativeElement.appendChild(s2);
+
+    var s3 = document.createElement("script");
+    s3.type = "text/javascript";
+    s3.src = "../../assets/js/pages/index.init.js";
+    this.elementRef.nativeElement.appendChild(s3);
+
+    var s4 = document.createElement("script");
+    s4.type = "text/javascript";
+    s4.src = "../../assets/js/app.js";
+    this.elementRef.nativeElement.appendChild(s4);
+
+    var s5 = document.createElement("script");
+    s5.type = "text/javascript";
+    s5.src = "../../assets/js/pages/switcher.init.js";
+    this.elementRef.nativeElement.appendChild(s5);
+
+    var s7 = document.createElement("script");
+    s7.type = "text/javascript";
+    s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
+    this.elementRef.nativeElement.appendChild(s7);
+  }
+
+  ngOnChanges() {
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "../../assets/libs/choices.js/public/assets/scripts/choices.min.js";
+    this.elementRef.nativeElement.appendChild(s);
+
+    var s1 = document.createElement("script");
+    s1.type = "text/javascript";
+    s1.src = "../../assets/libs/swiper/swiper-bundle.min.js";
+    this.elementRef.nativeElement.appendChild(s1);
+
+    var s2 = document.createElement("script");
+    s2.type = "text/javascript";
+    s2.src = "../../assets/js/pages/job-list.init.js";
+    this.elementRef.nativeElement.appendChild(s2);
+
+    var s3 = document.createElement("script");
+    s3.type = "text/javascript";
+    s3.src = "../../assets/js/pages/index.init.js";
+    this.elementRef.nativeElement.appendChild(s3);
+
+    var s4 = document.createElement("script");
+    s4.type = "text/javascript";
+    s4.src = "../../assets/js/app.js";
+    this.elementRef.nativeElement.appendChild(s4);
+
+    var s5 = document.createElement("script");
+    s5.type = "text/javascript";
+    s5.src = "../../assets/js/pages/switcher.init.js";
+    this.elementRef.nativeElement.appendChild(s5);
+
+    var s7 = document.createElement("script");
+    s7.type = "text/javascript";
+    s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
+    this.elementRef.nativeElement.appendChild(s7);
   }
 
   ngOnInit() {
+
     this.commonService.scrollTopWindow(0, 300);
     this.edited = true;
     this.loading = true;
-
     this.activatedRoute.params.subscribe(params => {
       this.companyId = params['id'];
     });
@@ -74,9 +154,14 @@ export class ManageCompanyProfileComponent {
     })
 
     this.categoryService.findCategoriesByCompanyId(this.companyId).subscribe(res => {
-      console.log(res)
       this.categories = res;
     })
+
+    this.categoryService.findAll().subscribe(res => {
+      console.log(res)
+      this.allCategories = res;
+    })
+    console.log('all categories is' + this.allCategories)
 
     this.companyService.findCompany(this.companyId).subscribe(res => {
       this.company = res;
@@ -104,14 +189,12 @@ export class ManageCompanyProfileComponent {
   }
 
   onSubmit() {
+    console.log(this.formCompany.value);
     this.loading = false;
     if (this.imageFile == null) {
       this.company = this.formCompany.value;
       this.company.avatar = this.path;
       this.companyService.update(this.company, this.companyId).subscribe(() => {
-        // setTimeout(() => {
-        //   this.loading = true;
-        // }, 1000)
         this.edited = false;
         sessionStorage.setItem("user", JSON.stringify(this.company));
         this.header?.ngOnInit();
@@ -125,9 +208,6 @@ export class ManageCompanyProfileComponent {
       this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
-            // setTimeout(() => {
-            //   this.loading = true;
-            // }, 1000)
             this.company = this.formCompany.value;
             this.company.avatar = url;
             this.companyService.update(this.company, this.companyId).subscribe(() => {
@@ -146,7 +226,6 @@ export class ManageCompanyProfileComponent {
     setTimeout(() => {
       this.loading = true;
     }, 1000);
-    this.showSuccess()
   }
 
   previewAvatar(event: any) {
@@ -164,8 +243,6 @@ export class ManageCompanyProfileComponent {
               setTimeout(() => {
                 this.loading = true;
               }, 1000)
-              this.showSuccess();
-              console.log(this.path)
             });
           })
         ).subscribe()
@@ -173,11 +250,19 @@ export class ManageCompanyProfileComponent {
     }
   }
 
-  showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Message Content'});
+  findAllCategories() {
+    this.categoryService.findAll().subscribe(res => {
+      this.allCategories = res;
+    })
   }
 
   @ViewChild(HeaderComponent) header: HeaderComponent | undefined;
 
   loading!: boolean;
+
+  selectedCategories: Category[] = [];
+
+  onItemSelect(item: any  ) {
+    console.log('onItemSelect', item);
+  }
 }

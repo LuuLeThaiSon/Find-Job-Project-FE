@@ -29,6 +29,10 @@ import {RippleModule} from "primeng/ripple";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import {MultiSelectModule} from "primeng/multiselect";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
+import { TopCompaniesComponent } from './top-companies/top-companies.component';
+import { ManageCandidateProfileComponent } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 
 @NgModule({
   declarations: [
@@ -48,24 +52,28 @@ import {MultiSelectModule} from "primeng/multiselect";
     RegisterComponent,
     JobDetailComponent,
     BookmarksJobsComponent,
+    TopCompaniesComponent,
+    ManageCandidateProfileComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        NgxPaginationModule,
-        FormsModule,
-        ReactiveFormsModule,
-        AngularFireModule.initializeApp(environments.firebaseConfig),
-        AngularFireDatabaseModule,
-        AngularFireStorageModule,
-        ToastModule,
-        ButtonModule,
-        RippleModule,
-        BrowserAnimationsModule,
-        DropdownModule,
-        MultiSelectModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environments.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    ToastModule,
+    ButtonModule,
+    RippleModule,
+    BrowserAnimationsModule,
+    DropdownModule,
+    MultiSelectModule,
+    NgSelectModule,
+    NgMultiSelectDropDownModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
