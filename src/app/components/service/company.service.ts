@@ -47,12 +47,16 @@ export class CompanyService {
     return this.httpClient.post<Company>(`${apiUrl}/companies`, company)
   }
 
+  update(company:Company,id:number) : Observable<any> {
+    return this.httpClient.put<Company>(`${apiUrl}/companies/${company.id}`,company)
+  }
+
   delete(id: number): Observable<any> {
     return this.httpClient.delete<any>(`${apiUrl}/companies/${id}`)
   }
 
-  countQuantityJob(idCompany: number): Observable<Job[]> {
-    return this.httpClient.get<Job[]>(`${apiUrl}/jobs/quantity/${idCompany}`)
+  countQuantityJob(idCompany?: number): Observable<Job[]> {
+    return this.httpClient.get<Job[]>(`${apiUrl}/jobs/current/opening/${idCompany}`)
   }
 
   getPassword(password: EmailSender):  Observable<EmailSender> {

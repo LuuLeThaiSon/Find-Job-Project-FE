@@ -76,11 +76,11 @@
       <div class="col-lg-4 col-md-6" *ngFor="let c of companies | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
         <div class="card text-center mb-4">
           <div class="card-body px-4 py-5">
-            <img src="{{c.company?.avatar}}" alt="" class="img-fluid rounded-3">
+            <img height="55" width="55" src="{{c.company?.avatar? c.company?.avatar : 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" alt="" class="img-fluid rounded-3">
             <div class="mt-4">
-              <a href="" routerLink="/company-detail" [state]="c.company" class="primary-link"><h6 class="fs-18 mb-2">{{c.company?.name}}</h6></a>
+              <a href="" [routerLink]="['/company-detail/',c.company?.id]" class="primary-link"><h6 class="fs-18 mb-2">{{c.company?.name}}</h6></a>
               <p class="text-muted mb-4">{{c.company?.address}}</p>
-              <a href="" [routerLink]="['/company-detail/',c.company?.id]" class="btn btn-primary">Tổng số lượng job</a>
+              <a href="" [routerLink]="['/company-detail/',c.company?.id]" class="btn btn-primary">{{c.count}} Opening Jobs</a>
             </div>
           </div>
         </div>

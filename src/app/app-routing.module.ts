@@ -8,7 +8,12 @@ import {JobListComponent} from "./components/pages/job-list/job-list.component";
 import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
 import {CompanyDetailComponent} from "./components/pages/company-detail/company-detail.component";
+import {
+  ManageCompanyProfileComponent
+} from "./components/pages/manage-company-profile/manage-company-profile.component";
 import {JobDetailComponent} from "./components/pages/job-detail/job-detail.component";
+import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
+import {HeaderComponent} from "./components/common/header/header.component";
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 
 const routes: Routes = [
@@ -29,6 +34,10 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "registerC", component: RegisterCComponent},
   {path: "job-detail/:id", component: JobDetailComponent}
+  {path: "job-detail/:id", component: JobDetailComponent},
+  {path:"company-detail/:id",component:CompanyDetailComponent},
+  {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
+  {path:"manage-jobs/:id",component:BookmarksJobsComponent}
 ];
 
 @NgModule({

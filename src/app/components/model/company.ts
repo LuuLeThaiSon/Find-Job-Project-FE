@@ -1,5 +1,5 @@
 import {Role} from "./role";
-import {EmailSender} from "./email-sender";
+import {JobCount} from "./jobCount";
 
 export interface Company {
   id: number;
@@ -16,6 +16,6 @@ export interface Company {
   tel: string;
   website: string;
   role: Role;
-  status: boolean;
-
+  banner:string;
+  status:boolean;
 }

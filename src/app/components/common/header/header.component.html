@@ -213,31 +213,32 @@
               <li><a class="dropdown-item" href="manage-jobs.html">To Admin Page</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
-            </li>
-          </div>
-          <div *ngSwitchCase = "3">
-            <li class="list-inline-item dropdown me-4">
-              <a href="javascript:void(0)" class="header-item noti-icon position-relative" id="notification" data-bs-toggle="dropdown"
-                 aria-expanded="false">
-                <i class="mdi mdi-bell fs-22"></i>
-                <div class="count position-absolute">3</div>
-              </a>
-              <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end p-0" aria-labelledby="notification">
-                <div class="notification-header border-bottom bg-light">
-                  <h6 class="mb-1"> Notification </h6>
-                  <p class="text-muted fs-13 mb-0">You have 4 unread Notification</p>
-                </div>
-                <div class="notification-wrapper dropdown-scroll">
-                  <a href="javascript:void(0)" class="text-dark notification-item d-block active">
-                    <div class="d-flex align-items-center">
-                      <div class="flex-shrink-0 me-3">
-                        <div class="avatar-xs bg-primary text-white rounded-circle text-center">
-                          <i class="uil uil-user-check"></i>
-                        </div>
+          </li>
+        </div>
+        <div *ngSwitchCase="2">
+          <li class="list-inline-item dropdown me-4">
+            <a href="javascript:void(0)" class="header-item noti-icon position-relative" id="notification"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+              <i class="mdi mdi-bell fs-22"></i>
+              <div class="count position-absolute">3</div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end p-0" aria-labelledby="notification">
+              <div class="notification-header border-bottom bg-light">
+                <h6 class="mb-1"> Notification </h6>
+                <p class="text-muted fs-13 mb-0">You have 4 unread Notification</p>
+              </div>
+              <div class="notification-wrapper dropdown-scroll">
+                <a href="javascript:void(0)" class="text-dark notification-item d-block active">
+                  <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0 me-3">
+                      <div class="avatar-xs bg-primary text-white rounded-circle text-center">
+                        <i class="uil uil-user-check"></i>
                       </div>
-                      <div class="flex-grow-1">
-                        <h6 class="mt-0 mb-1 fs-14">22 verified registrations</h6>
-                        <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span>3 min
+                    </div>
+                    <div class="flex-grow-1">
+                      <h6 class="mt-0 mb-1 fs-14">22 verified registrations</h6>
+                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span>3 min
                                                     ago</span></p>
                       </div>
                     </div>
@@ -314,7 +315,7 @@
             </ul>
             </li>
           </div>
-          <div *ngSwitchCase = "2">
+          <div *ngSwitchCase = "3">
             <li class="list-inline-item dropdown me-4">
               <a href="javascript:void(0)" class="header-item noti-icon position-relative" id="notification" data-bs-toggle="dropdown"
                  aria-expanded="false">
@@ -418,8 +419,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" href="" routerLink="/login">Login</a></li>
-              <li><a class="dropdown-item" href="" routerLink="/register">Register Company</a></li>
-              <li><a class="dropdown-item" href="" routerLink="/registerC">Register Candidate</a></li>
+              <li><a class="dropdown-item" href="" routerLink="/register">Register</a></li>
             </ul>
           </div>
         </div>

@@ -3,6 +3,7 @@ import {Job} from "../../model/job";
 import {ActivatedRoute} from "@angular/router";
 import {map} from "rxjs";
 import {JobService} from "../../service/job.service";
+import {CommonService} from "../../service/common.service";
 
 @Component({
   selector: 'app-job-detail',
@@ -13,13 +14,28 @@ export class JobDetailComponent {
   job!: Job;
   jobId!: number;
   jobs: Job[] = [];
+  role!:number;
+
   constructor(private activatedRoute: ActivatedRoute,
-              private jobService: JobService) {
+              private jobService: JobService,
+              private commonService: CommonService) {
     this.activatedRoute.params.subscribe(params => {
       this.jobId = params['id'];
       this.findOne(this.jobId);
     })
     this.findALl()
+  }
+
+  ngOnInit() {
+    this.commonService.scrollTopWindow(0,300)
+    if(sessionStorage.getItem("user") == null) {
+      this.role = 0;
+    }else {
+      // @ts-ignore
+      this.role = JSON.parse(sessionStorage.getItem("user")).role.id;
+      console.log(this.role)
+    }
+    console.log(this.role)
   }
 
   findALl() {
@@ -33,7 +49,7 @@ export class JobDetailComponent {
     })
   }
 
-  onTop() {
-    window.scrollTo(0, 600);
+  onTop(x: number, y: number) {
+    window.scrollTo(x, y);
   }
 }

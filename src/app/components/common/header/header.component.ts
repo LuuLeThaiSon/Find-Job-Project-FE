@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Company} from "../../model/company";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -59,8 +60,12 @@ export class HeaderComponent implements AfterViewInit{
     // @ts-ignore
     this.user = JSON.parse(sessionStorage.getItem("user")) as any;
     this.role = this.user.role.id;
-
   }}
+
+  ngOnChanges() {
+    // @ts-ignore
+    this.user = JSON.parse(sessionStorage.getItem("user")) as any;
+  }
 
   getIp() {
     this.http.get("https://api.ipify.org?format=json").subscribe((res:any) => {

@@ -17,11 +17,16 @@ import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
 import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
 import { JobDetailComponent } from './components/pages/job-detail/job-detail.component';
+import {DropdownModule} from "primeng/dropdown";
 import {AngularFireModule} from "@angular/fire/compat";
-import {AngularFireStorageModule} from "@angular/fire/compat/storage";
-import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {environments} from "../environment/enviroments";
-import { RegisterCComponent } from './components/pages/register-c/register-c.component';
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {ToastModule} from "primeng/toast";
+import {ButtonModule} from "primeng/button";
+import {RippleModule} from "primeng/ripple";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +41,10 @@ import { RegisterCComponent } from './components/pages/register-c/register-c.com
     LoginComponent,
     RegisterComponent,
     CompanyDetailComponent,
+    ManageCompanyProfileComponent,
+    CompanyDetailComponent,
     RegisterComponent,
-    JobDetailComponent,
-    RegisterCComponent
+    JobDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -48,8 +54,13 @@ import { RegisterCComponent } from './components/pages/register-c/register-c.com
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environments.firebaseConfig),
-    AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    ToastModule,
+    ButtonModule,
+    RippleModule,
+    BrowserAnimationsModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

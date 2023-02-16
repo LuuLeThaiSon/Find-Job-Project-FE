@@ -46,10 +46,11 @@
           <div class="card side-bar">
             <div class="card-body p-4">
               <div class="candidate-profile text-center">
-                <img src="{{company.avatar}}" alt="" class="avatar-lg rounded-circle">
+                <img
+                  src="{{company.avatar? company.avatar: 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                  alt="" class="avatar-lg rounded-circle">
                 <h6 class="fs-18 mb-1 mt-4">{{company.name}}</h6>
                 <p class="text-muted mb-4">{{company.email}}</p>
-                <p class="text-muted mb-4">{{company.tel}}</p>
                 <ul class="candidate-detail-social-menu list-inline mb-0">
                   <li class="list-inline-item">
                     <a href="javascript:void(0)" class="social-link"><i class="uil uil-twitter-alt"></i></a>
@@ -67,7 +68,7 @@
             <div class="candidate-profile-overview  card-body border-top p-4">
               <h6 class="fs-17 fw-medium mb-3">Profile Overview</h6>
               <ul class="list-unstyled mb-0">
-                <li>
+                <li *ngIf="company.shortName">
                   <div class="d-flex">
                     <label class="text-dark">Short Name</label>
                     <div>
@@ -75,7 +76,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li *ngIf="company.code">
                   <div class="d-flex">
                     <label class="text-dark">Code</label>
                     <div>
@@ -83,7 +84,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li *ngIf="company.numberOfEmployees">
                   <div class="d-flex">
                     <label class="text-dark">Employees</label>
                     <div>
@@ -91,7 +92,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li *ngIf="company.address">
                   <div class="d-flex">
                     <label class="text-dark">Address</label>
                     <div>
@@ -99,7 +100,7 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li *ngIf="company.website">
                   <div class="d-flex">
                     <label class="text-dark">Website</label>
                     <div>
@@ -107,17 +108,18 @@
                     </div>
                   </div>
                 </li>
-                <li>
+                <li *ngIf="company.tel">
                   <div class="d-flex">
-                    <label class="text-dark">Established</label>
+                    <label class="text-dark">Tel</label>
                     <div>
-                      <p class="text-muted mb-0">July 10 2017</p>
+                      <p class="text-muted text-break mb-0">{{company.tel}}</p>
                     </div>
                   </div>
                 </li>
               </ul>
               <div class="mt-3">
-                <a href="javascript:void(0)" class="btn btn-danger btn-hover w-100"><i class="uil uil-phone"></i> Contact</a>
+                <a href="javascript:void(0)" class="btn btn-danger btn-hover w-100"><i class="uil uil-phone"></i>
+                  Contact</a>
               </div>
             </div><!--candidate-profile-overview-->
             <div class="card-body p-4 border-top">
@@ -138,10 +140,9 @@
                 </div>
               </div>
             </div><!--end card-body-->
-            <div class="card-body p-4 border-top">
+            <div *ngIf="company.googleMap" class="card-body p-4 border-top">
               <h6 class="fs-17 fw-medium mb-4">Company Location</h6>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1628067715234!5m2!1sen!2sin"
-                      style="width:100%"  height="250" allowfullscreen="" loading="lazy"></iframe>
+              <div [innerHTML]="ggMap"></div>
             </div>
           </div><!--end card-->
         </div><!--end col-->
@@ -150,257 +151,97 @@
           <div class="card ms-lg-4 mt-4 mt-lg-0">
             <div class="card-body p-4">
 
-              <div class="mb-5">
-                <h6 class="fs-17 fw-medium mb-4">About Company</h6>
-                <p class="text-muted">{{company.description}}</p>
-              </div>
-
               <div class="candidate-portfolio mb-5">
-                <h6 class="fs-17 fw-medium mb-4">Gallery</h6>
                 <div class="row g-3">
-                  <div class="col-lg-6">
-                    <div class="candidate-portfolio-box card border-0">
-                      <img src="assets/images/blog/img-01.jpg" alt="" class="img-fluid">
-                      <div class="bg-overlay"></div>
-                      <div class="zoom-icon">
-                        <a href="assets/images/blog/img-01.jpg" class="image-popup text-white" data-title="Project Leader" data-description="There are many variations of passages of available, but the majority alteration in some form."><i class="uil uil-search-alt"></i></a>
-                      </div>
-                    </div>
-                  </div><!-- end col -->
-                  <div class="col-lg-6">
-                    <div class="candidate-portfolio-box card border-0">
-                      <img src="assets/images/blog/img-03.jpg" alt="" class="img-fluid">
-                      <div class="bg-overlay"></div>
-                      <div class="zoom-icon">
-                        <a href="assets/images/blog/img-03.jpg" class="image-popup text-white" data-title="Project Leader" data-description="There are many variations of passages of available, but the majority alteration in some form."><i class="uil uil-search-alt"></i></a>
-                      </div>
-                    </div>
-                  </div><!-- end col -->
                   <div class="col-lg-12">
                     <div class="candidate-portfolio-box card border-0">
-                      <img src="assets/images/blog/img-12.jpg" alt="" class="img-fluid">
+                      <img
+                        src="{{company.banner? company.banner: 'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}"
+                        class="img-fluid" height="450" width="800">
                       <div class="bg-overlay"></div>
                       <div class="zoom-icon">
-                        <a href="assets/images/blog/img-12.jpg" class="image-popup text-white" data-title="Project Leader" data-description="There are many variations of passages of available, but the majority alteration in some form."><i class="uil uil-search-alt"></i></a>
+                        <a href="{{company.banner? company.banner: 'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}" class="image-popup text-white"
+                           data-title="Project Leader"
+                           data-description="There are many variations of passages of available, but the majority alteration in some form."><i
+                          class="uil uil-search-alt"></i></a>
                       </div>
                     </div>
                   </div><!-- end col -->
                 </div><!-- end row -->
               </div><!-- end portfolio -->
 
-              <div>
+              <div class="mb-5">
+                <h6 class="fs-17 fw-medium mb-4">About Company</h6>
+                <p class="text-muted">{{company.description}}</p>
+              </div>
+
+              <div id="currentOpeningJobs" *ngIf="currentOpeningJobs.length != 0">
                 <h6 class="fs-17 fw-medium mb-4">Current Opening</h6>
-                <div class="job-box bookmark-post card mt-4">
+                <div class="job-box card mt-4" *ngFor="let j of currentOpeningJobs">
                   <div class="p-4">
                     <div class="row">
                       <div class="col-lg-2">
-                        <img src="assets/images/featured-job/img-01.png" alt="" class="img-fluid rounded-3">
+                        <img
+                          src="{{j.company.avatar?j.company.avatar : 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                          alt="" class="img-fluid rounded-3">
                       </div>
                       <div class="col-lg-10">
                         <div class="mt-3 mt-lg-0">
-                          <h5 class="fs-16 fw-medium mb-1"><a href="job-details.html" class="text-dark">Magento Developer</a> <small class="text-muted fw-normal">(0-2 Yrs Exp.)</small></h5>
+                          <h5 class="fs-16 fw-medium mb-1"><a href="" [routerLink]="['/job-detail',j.id]"
+                                                              class="text-dark">
+                            {{j.title}}
+                          </a> <small class="text-muted fw-normal">({{j.expYear}}+ years)</small></h5>
                           <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0">Jobcy Technology Pvt.Ltd</p>
+                            <li class="list-inline-item" [ngSwitch]="j.gender">
+                              <p *ngSwitchCase="1" class="text-muted fs-14 mb-0"><i class="mdi mdi-gender-male"></i>
+                                Male</p>
+                              <p *ngSwitchCase="2" class="text-muted fs-14 mb-0"><i class="mdi mdi-gender-female"></i>
+                                Female</p>
+                              <p *ngSwitchCase="3" class="text-muted fs-14 mb-0"><i
+                                class="mdi mdi-gender-male-female"></i> Any</p>
                             </li>
                             <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> California</p>
+                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> {{j.location.name}}
+                              </p>
                             </li>
                             <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> $250 - $800 / month</p>
+                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-human-male-male"></i> {{j.quantity}}
+                                Vacancy</p>
+                            </li>
+                            <li class="list-inline-item">
+                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-clock-outline"></i> {{j.expiredDate}}
+                              </p>
                             </li>
                           </ul>
                           <div class="mt-2">
-                            <span class="badge bg-soft-success mt-1">Full Time</span>
-                            <span class="badge bg-soft-warning mt-1">Urgent</span>
-                            <span class="badge bg-soft-info mt-1">Private</span>
+                            <span
+                              class="{{j.type? 'badge bg-soft-success mt-1' : 'badge bg-soft-info mt-1'}}">{{j.type ? 'Full Time' : 'Part Time'}}</span>
                           </div>
                         </div>
                       </div><!--end col-->
                     </div><!--end row-->
-                    <div class="favorite-icon">
-                      <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
                   </div>
-                  <div class="p-3 bg-light">
-                    <div class="row justify-content-between">
-                      <div class="col-md-8">
-                        <div>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item fw-medium"><i class="uil uil-tag"></i> Keywords :</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">Ui designer</a>,</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">developer</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <!--end col-->
-                      <!--end col-->
-                      <div class="col-md-4">
-                        <div class="text-md-end">
-                          <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
-                        </div>
-                      </div>
-                      <!--end col-->
-                    </div>
-                    <!--end row-->
-                  </div>
-                </div><!--end job-box-->
-                <div class="job-box card mt-4">
-                  <div class="p-4">
-                    <div class="row">
-                      <div class="col-lg-2">
-                        <img src="assets/images/featured-job/img-02.png" alt="" class="img-fluid rounded-3">
-                      </div><!--end col-->
-                      <div class="col-lg-10">
-                        <div class="mt-3 mt-lg-0">
-                          <h5 class="fs-16 fw-medium mb-1"><a href="job-details.html" class="text-dark">Marketing Director</a> <small class="text-muted fw-normal">(2-4 Yrs Exp.)</small></h5>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0">Jobcy Technology Pvt.Ltd</p>
-                            </li>
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> New York</p>
-                            </li>
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> $250 - $800 / month</p>
-                            </li>
-                          </ul>
-                          <div class="mt-2">
-                            <span class="badge bg-soft-danger mt-1">Part Time</span>
-                            <span class="badge bg-soft-info mt-1">Private</span>
-                          </div>
-                        </div>
-                      </div><!--end col-->
-                    </div><!--end row-->
-                    <div class="favorite-icon">
-                      <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                  </div>
-                  <div class="p-3 bg-light">
-                    <div class="row justify-content-between">
-                      <div class="col-md-8">
-                        <div>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item fw-medium"><i class="uil uil-tag"></i> Keywords :</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">Marketing</a>,</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">business</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <!--end col-->
-                      <div class="col-md-4">
-                        <div class="text-md-end">
-                          <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
-                        </div>
-                      </div>
-                      <!--end col-->
-                    </div>
-                    <!--end row-->
-                  </div>
-                </div><!--end job-box-->
-                <div class="job-box bookmark-post card mt-4">
-                  <div class="p-4">
-                    <div class="row">
-                      <div class="col-lg-2">
-                        <img src="assets/images/featured-job/img-05.png" alt="" class="img-fluid rounded-3">
-                      </div><!--end col-->
-                      <div class="col-lg-10">
-                        <div class="mt-3 mt-lg-0">
-                          <h5 class="fs-16 fw-medium  mb-1"><a href="job-details.html" class="text-dark">Product Designer</a> <small class="text-muted fw-normal">(0-5 Yrs Exp.)</small></h5>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0">Jobcy Technology Pvt.Ltd</p>
-                            </li>
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> California</p>
-                            </li>
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> $250 - $800 / month</p>
-                            </li>
-                          </ul>
-                          <div class="mt-2">
-                            <span class="badge bg-soft-blue mt-1">Internship</span>
-                          </div>
-                        </div>
-                      </div><!--end col-->
-                    </div><!--end row-->
-                    <div class="favorite-icon">
-                      <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                  </div>
-                  <div class="p-3 bg-light">
-                    <div class="row justify-content-between">
-                      <div class="col-md-8">
-                        <div>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item fw-medium"><i class="uil uil-tag"></i> Keywords :</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">Ui designer</a>,</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">developer</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <!--end col-->
-                      <div class="col-md-4">
-                        <div class="text-md-end">
-                          <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
-                        </div>
-                      </div>
-                      <!--end col-->
-                    </div>
-                    <!--end row-->
-                  </div>
-                </div><!--end job-box-->
-                <div class="job-box card mt-4">
-                  <div class="p-4">
-                    <div class="row">
-                      <div class="col-lg-2">
-                        <img src="assets/images/featured-job/img-06.png" alt="" class="img-fluid rounded-3">
-                      </div><!--end col-->
-                      <div class="col-lg-10">
-                        <div class="mt-3 mt-lg-0">
-                          <h5 class="fs-16 fw-medium mb-1"><a href="job-details.html" class="text-dark">Product Designer</a> <small class="text-muted fw-normal">(0-5 Yrs Exp.)</small></h5>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0">Jobcy Technology Pvt.Ltd</p>
-                            </li>
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> California</p>
-                            </li>
-                            <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> $250 - $800 / month</p>
-                            </li>
-                          </ul>
-                          <div class="mt-2">
-                            <span class="badge bg-soft-blue mt-1">Internship</span>
-                          </div>
-                        </div>
-                      </div><!--end col-->
-                    </div><!--end row-->
-                    <div class="favorite-icon">
-                      <a href="javascript:void(0)"><i class="uil uil-heart-alt fs-18"></i></a>
-                    </div>
-                  </div>
-                  <div class="p-3 bg-light">
-                    <div class="row justify-content-between">
-                      <div class="col-md-8">
-                        <div>
-                          <ul class="list-inline mb-0">
-                            <li class="list-inline-item fw-medium"><i class="uil uil-tag"></i> Keywords :</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">Ui designer</a>,</li>
-                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">developer</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                      <!--end col-->
-                      <div class="col-md-4">
-                        <div class="text-md-end">
-                          <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
-                        </div>
-                      </div>
-                      <!--end col-->
-                    </div>
-                    <!--end row-->
-                  </div>
+                  <!--                  <div class="p-3 bg-light">-->
+                  <!--                    <div class="row justify-content-between">-->
+                  <!--                      <div class="col-md-8">-->
+                  <!--                        <div>-->
+                  <!--                          <ul class="list-inline mb-0">-->
+                  <!--                            <li class="list-inline-item fw-medium"><i class="uil uil-tag"></i> Categories :</li>-->
+                  <!--                            <li *ngFor="let c of j.categories" class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">{{c.name}}</a>,</li>-->
+                  <!--                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">developer</a></li>-->
+                  <!--                          </ul>-->
+                  <!--                        </div>-->
+                  <!--                      </div>-->
+                  <!--                      &lt;!&ndash;end col&ndash;&gt;-->
+                  <!--                      <div class="col-md-4">-->
+                  <!--                        <div class="text-md-end">-->
+                  <!--                          <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>-->
+                  <!--                        </div>-->
+                  <!--                      </div>-->
+                  <!--                      &lt;!&ndash;end col&ndash;&gt;-->
+                  <!--                    </div>-->
+                  <!--                    &lt;!&ndash;end row&ndash;&gt;-->
+                  <!--                  </div>-->
                 </div><!--end job-box-->
               </div>
             </div><!-- card body end -->
@@ -432,7 +273,8 @@
           </div>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Enter your message"></textarea>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                      placeholder="Enter your message"></textarea>
           </div>
           <div class="mb-4">
             <label class="form-label" for="inputGroupFile01">Resume Upload</label>

@@ -1,5 +1,6 @@
 import {Company} from "./company";
 import {Locations} from "./locations";
+import {Category} from "./category";
 
 export interface Job {
   id: number;
@@ -17,4 +18,5 @@ export interface Job {
   status: boolean;
   location: Locations;
   company: Company;
+  category:Category;
 }
