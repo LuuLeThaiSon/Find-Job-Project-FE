@@ -157,4 +157,6 @@ export class BookmarksJobsComponent implements OnInit {
     this.salaryMin = +document.getElementById('salaryMin').value;
     console.log(this.salaryMin);
   }
+
+
 }
