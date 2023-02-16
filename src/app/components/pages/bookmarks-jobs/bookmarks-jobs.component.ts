@@ -14,6 +14,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./bookmarks-jobs.component.css']
 })
 export class BookmarksJobsComponent implements OnInit {
+  dateCurrent = new  Date()
+  minDate?: string;
 
   user!: any;
   role!: any;
@@ -38,6 +40,8 @@ export class BookmarksJobsComponent implements OnInit {
     this.findAllCategory();
     this.findAllLocation();
     this.form();
+
+    this.minDate = this.dateCurrent.toISOString().substring(0, 10);
   }
 
   form() {
