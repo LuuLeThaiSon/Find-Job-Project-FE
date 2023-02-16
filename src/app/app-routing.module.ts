@@ -9,6 +9,7 @@ import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
 import {CompanyDetailComponent} from "./components/pages/company-detail/company-detail.component";
 import {JobDetailComponent} from "./components/pages/job-detail/job-detail.component";
+import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 
 const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: "job", component: JobListComponent},
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
+  {path: "registerC", component: RegisterCComponent},
   {path: "job-detail/:id", component: JobDetailComponent}
 ];
 

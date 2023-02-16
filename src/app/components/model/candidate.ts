@@ -8,4 +8,5 @@ export interface Candidate {
   tel: string;
   role: Role;
   avatar:string;
+  status: boolean
 }

@@ -17,6 +17,11 @@ import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
 import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
 import { JobDetailComponent } from './components/pages/job-detail/job-detail.component';
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import {environments} from "../environment/enviroments";
+import { RegisterCComponent } from './components/pages/register-c/register-c.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,8 @@ import { JobDetailComponent } from './components/pages/job-detail/job-detail.com
     RegisterComponent,
     CompanyDetailComponent,
     RegisterComponent,
-    JobDetailComponent
+    JobDetailComponent,
+    RegisterCComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,9 @@ import { JobDetailComponent } from './components/pages/job-detail/job-detail.com
     NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environments.firebaseConfig),
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

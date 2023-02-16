@@ -1,5 +1,5 @@
 import {Role} from "./role";
-import {JobCount} from "./jobCount";
+import {EmailSender} from "./email-sender";
 
 export interface Company {
   id: number;
@@ -7,7 +7,7 @@ export interface Company {
   shortName: string;
   code: string;
   email: string;
-  password: string;
+  password: string | null;
   avatar: string;
   description: string;
   address: string;
@@ -16,4 +16,6 @@ export interface Company {
   tel: string;
   website: string;
   role: Role;
+  status: boolean;
+
 }
