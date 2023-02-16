@@ -28,6 +28,7 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookma
     RegisterComponent,
     JobDetailComponent,
     BookmarksJobsComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

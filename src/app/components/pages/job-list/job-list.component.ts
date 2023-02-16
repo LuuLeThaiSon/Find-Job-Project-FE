@@ -19,7 +19,7 @@ export class JobListComponent implements OnInit{
   p: number = 1;
   jobId!: number;
   jobs: Job[] = [];
-  private jobData: any;
+  searchText = "";
 
 
   constructor(private jobService: JobService,
@@ -56,19 +56,6 @@ export class JobListComponent implements OnInit{
     this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
-  }
-
-  public searchByTitleJobOrCompanyName(key:string): void {
-    const results: Job[] = [];
-    for (const job of this.jobs) {
-      if (job.title.toLowerCase().indexOf(key.toLowerCase()) !== -1 || job.company.name.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(job)
-      }
-    }
-    this.jobs = results;
-    if (!key) {
-      this.ngOnInit()
-    }
   }
 
 }

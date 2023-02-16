@@ -52,7 +52,7 @@
                       <i class="uil uil-briefcase-alt"></i>
                       <input type="search" class="form-control filter-job-input-box border border-primary"
                              id="exampleFormControlInput1" placeholder="Job, company... "
-                      (ngModelChange) = "searchByTitleJobOrCompanyName(key.value)" name="key" #key="ngModel" ngModel>
+                      name="search" [(ngModel)]="searchText" >
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
@@ -136,7 +136,7 @@
             <div>
 
               <div class="job-box bookmark-post card mt-4"
-                   *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }">
+                   *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p } | search: searchText">
                 <div class="p-4">
                   <div class="row align-items-center">
                     <div class="col-md-2">
@@ -227,7 +227,7 @@
                     <div class="side-title">
                       <div class="mb-3">
                         <form class="position-relative">
-                          <input class="form-control" type="search" placeholder="Search...">
+                          <input class="form-control" type="search" placeholder="Search..." >
                           <button class="bg-transparent border-0 position-absolute top-50 end-0 translate-middle-y me-2"
                                   type="submit"><span class="mdi mdi-magnify text-muted"></span></button>
                         </form>
