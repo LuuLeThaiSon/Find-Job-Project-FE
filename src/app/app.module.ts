@@ -27,6 +27,7 @@ import {
   ManageCompanyProfileComponent
 } from "./components/pages/manage-company-profile/manage-company-profile.component";
 import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
+import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmark
     RegisterComponent,
     JobDetailComponent,
     BookmarksJobsComponent,
+    RegisterCComponent
   ],
   imports: [
     BrowserModule,
