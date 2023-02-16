@@ -33,7 +33,7 @@ const routes: Routes = [
   {path: "login", component: LoginComponent},
   {path: "register", component: RegisterComponent},
   {path: "registerC", component: RegisterCComponent},
-  {path: "job-detail/:id", component: JobDetailComponent}
+  {path: "job-detail/:id", component: JobDetailComponent},
   {path: "job-detail/:id", component: JobDetailComponent},
   {path:"company-detail/:id",component:CompanyDetailComponent},
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},

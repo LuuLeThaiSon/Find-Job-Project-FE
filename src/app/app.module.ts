@@ -27,6 +27,9 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
+import {
+  ManageCompanyProfileComponent
+} from "./components/pages/manage-company-profile/manage-company-profile.component";
 
 @NgModule({
   declarations: [
