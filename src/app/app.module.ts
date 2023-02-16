@@ -29,6 +29,7 @@ import {RippleModule} from "primeng/ripple";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import { SearchPipe } from './search.pipe';
+import {MultiSelectModule} from "primeng/multiselect";
 
 @NgModule({
   declarations: [
@@ -50,22 +51,23 @@ import { SearchPipe } from './search.pipe';
     BookmarksJobsComponent,
     SearchPipe,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    NgxPaginationModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environments.firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
-    ToastModule,
-    ButtonModule,
-    RippleModule,
-    BrowserAnimationsModule,
-    DropdownModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        NgxPaginationModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AngularFireModule.initializeApp(environments.firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFireStorageModule,
+        ToastModule,
+        ButtonModule,
+        RippleModule,
+        BrowserAnimationsModule,
+        DropdownModule,
+        MultiSelectModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

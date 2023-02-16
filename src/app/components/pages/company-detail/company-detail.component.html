@@ -46,7 +46,9 @@
           <div class="card side-bar">
             <div class="card-body p-4">
               <div class="candidate-profile text-center">
-                <img src="{{company.avatar? company.avatar: 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" alt="" class="avatar-lg rounded-circle">
+                <img
+                  src="{{company.avatar? company.avatar: 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                  alt="" class="avatar-lg rounded-circle">
                 <h6 class="fs-18 mb-1 mt-4">{{company.name}}</h6>
                 <p class="text-muted mb-4">{{company.email}}</p>
                 <ul class="candidate-detail-social-menu list-inline mb-0">
@@ -66,7 +68,7 @@
             <div class="candidate-profile-overview  card-body border-top p-4">
               <h6 class="fs-17 fw-medium mb-3">Profile Overview</h6>
               <ul class="list-unstyled mb-0">
-                <li *ngIf="company.shortName" >
+                <li *ngIf="company.shortName">
                   <div class="d-flex">
                     <label class="text-dark">Short Name</label>
                     <div>
@@ -82,7 +84,7 @@
                     </div>
                   </div>
                 </li>
-                <li *ngIf="company.numberOfEmployees" >
+                <li *ngIf="company.numberOfEmployees">
                   <div class="d-flex">
                     <label class="text-dark">Employees</label>
                     <div>
@@ -90,7 +92,7 @@
                     </div>
                   </div>
                 </li>
-                <li *ngIf="company.address" >
+                <li *ngIf="company.address">
                   <div class="d-flex">
                     <label class="text-dark">Address</label>
                     <div>
@@ -98,7 +100,7 @@
                     </div>
                   </div>
                 </li>
-                <li *ngIf="company.website" >
+                <li *ngIf="company.website">
                   <div class="d-flex">
                     <label class="text-dark">Website</label>
                     <div>
@@ -106,7 +108,7 @@
                     </div>
                   </div>
                 </li>
-                <li *ngIf="company.tel" >
+                <li *ngIf="company.tel">
                   <div class="d-flex">
                     <label class="text-dark">Tel</label>
                     <div>
@@ -158,7 +160,7 @@
                         class="img-fluid" height="450" width="800">
                       <div class="bg-overlay"></div>
                       <div class="zoom-icon">
-                        <a href="assets/images/blog/img-12.jpg" class="image-popup text-white"
+                        <a href="{{company.banner? company.banner: 'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}" class="image-popup text-white"
                            data-title="Project Leader"
                            data-description="There are many variations of passages of available, but the majority alteration in some form."><i
                           class="uil uil-search-alt"></i></a>
@@ -179,7 +181,9 @@
                   <div class="p-4">
                     <div class="row">
                       <div class="col-lg-2">
-                        <img src="{{j.company.avatar?j.company.avatar : 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" alt="" class="img-fluid rounded-3">
+                        <img
+                          src="{{j.company.avatar?j.company.avatar : 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                          alt="" class="img-fluid rounded-3">
                       </div>
                       <div class="col-lg-10">
                         <div class="mt-3 mt-lg-0">
@@ -205,7 +209,8 @@
                                 Vacancy</p>
                             </li>
                             <li class="list-inline-item">
-                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-clock-outline"></i> {{j.expiredDate}}</p>
+                              <p class="text-muted fs-14 mb-0"><i class="mdi mdi-clock-outline"></i> {{j.expiredDate}}
+                              </p>
                             </li>
                           </ul>
                           <div class="mt-2">
@@ -216,27 +221,27 @@
                       </div><!--end col-->
                     </div><!--end row-->
                   </div>
-<!--                  <div class="p-3 bg-light">-->
-<!--                    <div class="row justify-content-between">-->
-<!--                      <div class="col-md-8">-->
-<!--                        <div>-->
-<!--                          <ul class="list-inline mb-0">-->
-<!--                            <li class="list-inline-item fw-medium"><i class="uil uil-tag"></i> Categories :</li>-->
-<!--                            <li *ngFor="let c of j.categories" class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">{{c.name}}</a>,</li>-->
-<!--                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">developer</a></li>-->
-<!--                          </ul>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      &lt;!&ndash;end col&ndash;&gt;-->
-<!--                      <div class="col-md-4">-->
-<!--                        <div class="text-md-end">-->
-<!--                          <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      &lt;!&ndash;end col&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash;end row&ndash;&gt;-->
-<!--                  </div>-->
+                  <!--                  <div class="p-3 bg-light">-->
+                  <!--                    <div class="row justify-content-between">-->
+                  <!--                      <div class="col-md-8">-->
+                  <!--                        <div>-->
+                  <!--                          <ul class="list-inline mb-0">-->
+                  <!--                            <li class="list-inline-item fw-medium"><i class="uil uil-tag"></i> Categories :</li>-->
+                  <!--                            <li *ngFor="let c of j.categories" class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">{{c.name}}</a>,</li>-->
+                  <!--                            <li class="list-inline-item"><a href="javascript:void(0)" class="primary-link text-muted">developer</a></li>-->
+                  <!--                          </ul>-->
+                  <!--                        </div>-->
+                  <!--                      </div>-->
+                  <!--                      &lt;!&ndash;end col&ndash;&gt;-->
+                  <!--                      <div class="col-md-4">-->
+                  <!--                        <div class="text-md-end">-->
+                  <!--                          <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>-->
+                  <!--                        </div>-->
+                  <!--                      </div>-->
+                  <!--                      &lt;!&ndash;end col&ndash;&gt;-->
+                  <!--                    </div>-->
+                  <!--                    &lt;!&ndash;end row&ndash;&gt;-->
+                  <!--                  </div>-->
                 </div><!--end job-box-->
               </div>
             </div><!-- card body end -->

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {Company} from "../../model/company";
 import {Job} from "../../model/job";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -8,7 +8,11 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {MessageService} from "primeng/api";
-import {finalize} from "rxjs";
+import {finalize, Subject} from "rxjs";
+import {HeaderComponent} from "../../common/header/header.component";
+import {Category} from "../../model/category";
+import {CategoryService} from "../../service/category.service";
+import {CommonService} from "../../service/common.service";
 
 
 @Component({
@@ -27,6 +31,7 @@ export class ManageCompanyProfileComponent {
   path!: string;
   pathName!: string;
   edited!: boolean;
+  categories!: Category[];
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -34,19 +39,23 @@ export class ManageCompanyProfileComponent {
               private jobService: JobService,
               private sanitized: DomSanitizer,
               private storage: AngularFireStorage,
-              private messageService:MessageService) {
-    window.scroll(0,0);
+              private categoryService: CategoryService,
+              private commonService: CommonService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
+    this.commonService.scrollTopWindow(0, 300);
+    this.edited = true;
+    this.loading = true;
+
     this.activatedRoute.params.subscribe(params => {
       this.companyId = params['id'];
-      this.edited = true;
     });
 
     this.formCompany = new FormGroup({
       id: new FormControl(''),
-      name: new FormControl('',[Validators.required]),
+      name: new FormControl('', [Validators.required]),
       shortName: new FormControl(''),
       code: new FormControl(''),
       email: new FormControl(''),
@@ -64,6 +73,11 @@ export class ManageCompanyProfileComponent {
       banner: new FormControl(''),
     })
 
+    this.categoryService.findCategoriesByCompanyId(this.companyId).subscribe(res => {
+      console.log(res)
+      this.categories = res;
+    })
+
     this.companyService.findCompany(this.companyId).subscribe(res => {
       this.company = res;
       this.path = this.company.avatar;
@@ -71,6 +85,7 @@ export class ManageCompanyProfileComponent {
       this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
       this.ggMap.setAttribute("style:width", "100%");
     })
+
   }
 
   findCompanyById(id: number) {
@@ -89,15 +104,20 @@ export class ManageCompanyProfileComponent {
   }
 
   onSubmit() {
-    console.log(this.formCompany.value);
-    if(this.imageFile == null) {
+    this.loading = false;
+    if (this.imageFile == null) {
       this.company = this.formCompany.value;
       this.company.avatar = this.path;
       this.companyService.update(this.company, this.companyId).subscribe(() => {
-        sessionStorage.setItem("user", JSON.stringify(this.company));
-        // window.location.reload();
-        window.scroll(0,0)
+        // setTimeout(() => {
+        //   this.loading = true;
+        // }, 1000)
         this.edited = false;
+        sessionStorage.setItem("user", JSON.stringify(this.company));
+        this.header?.ngOnInit();
+        window.scroll(0, 300);
+        this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
+        this.ggMap.setAttribute("style:width", "100%");
       })
     } else {
       const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
@@ -105,23 +125,32 @@ export class ManageCompanyProfileComponent {
       this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
+            // setTimeout(() => {
+            //   this.loading = true;
+            // }, 1000)
             this.company = this.formCompany.value;
             this.company.avatar = url;
             this.companyService.update(this.company, this.companyId).subscribe(() => {
               sessionStorage.setItem("user", JSON.stringify(this.company));
               this.edited = false;
-              window.scroll(0,0)
-              setTimeout(function(){
-                window.location.reload();
-              }, 5000);
+              this.ggMap = this.company.googleMap;
+              this.commonService.scrollTopWindow(0, 300);
+              this.header?.ngOnInit();
+              this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
+              this.ggMap.setAttribute("style:width", "100%");
             })
           });
         })
       ).subscribe()
     }
+    setTimeout(() => {
+      this.loading = true;
+    }, 1000);
+    this.showSuccess()
   }
 
   previewAvatar(event: any) {
+    this.loading = false;
     if (event.target.files && event.target.files[0]) {
       this.imageFile = event.target.files[0];
       if (this.pathName !== this.imageFile.name) {
@@ -132,6 +161,10 @@ export class ManageCompanyProfileComponent {
           finalize(() => {
             fileRef.getDownloadURL().subscribe(url => {
               this.path = url;
+              setTimeout(() => {
+                this.loading = true;
+              }, 1000)
+              this.showSuccess();
               console.log(this.path)
             });
           })
@@ -141,6 +174,10 @@ export class ManageCompanyProfileComponent {
   }
 
   showSuccess() {
-    this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
+    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Message Content'});
   }
+
+  @ViewChild(HeaderComponent) header: HeaderComponent | undefined;
+
+  loading!: boolean;
 }

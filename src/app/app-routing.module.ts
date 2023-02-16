@@ -27,7 +27,6 @@ const routes: Routes = [
   {path: "job-detail/:id", component: JobDetailComponent},
   {path:"company-detail/:id",component:CompanyDetailComponent},
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
-  {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
   {path:"manage-jobs/:id",component:BookmarksJobsComponent}
 ];
 

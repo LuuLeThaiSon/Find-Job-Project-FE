@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Company} from "../../model/company";
+import {Subject} from "rxjs";
 
 @Component({
   selector: 'app-header',

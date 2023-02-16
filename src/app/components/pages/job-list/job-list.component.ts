@@ -19,6 +19,8 @@ export class JobListComponent implements OnInit{
   p: number = 1;
   jobId!: number;
   jobs: Job[] = [];
+  user!:any;
+  role!:number;
   searchText = "";
 
 

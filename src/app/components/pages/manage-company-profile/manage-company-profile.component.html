@@ -1,7 +1,18 @@
 <app-header></app-header>
 <div class="page-content">
 
-
+  <div id="preloader" [hidden]="loading">
+    <div id="status">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
 
   <!-- Start home -->
   <section class="page-title-box">
@@ -56,8 +67,10 @@
           <div class="card profile-sidebar me-lg-4">
             <div class="card-body p-4">
               <div class="text-center pb-4 border-bottom">
-                <img src="{{company.avatar}}" alt=""
-                     class="avatar-lg img-thumbnail rounded-circle mb-4"/>
+                <img
+                  src="{{company.avatar?company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                  alt=""
+                  class="avatar-lg img-thumbnail rounded-circle mb-4"/>
                 <h5 class="mb-0">{{company.name}}</h5>
                 <p class="text-muted">{{company.email}}</p>
                 <ul class="candidate-detail-social-menu list-inline mb-0">
@@ -175,9 +188,11 @@
                             class="img-fluid" height="450" width="800">
                           <div class="bg-overlay"></div>
                           <div class="zoom-icon">
-                            <a href="assets/images/blog/img-12.jpg" class="image-popup text-white"
-                               data-title="Project Leader"
-                               data-description="There are many variations of passages of available, but the majority alteration in some form."><i
+                            <a
+                              href="{{company.banner? company.banner: 'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}"
+                              class="image-popup text-white"
+                              data-title="Project Leader"
+                              data-description="There are many variations of passages of available, but the majority alteration in some form."><i
                               class="uil uil-search-alt"></i></a>
                           </div>
                         </div>
@@ -189,6 +204,12 @@
                     <p class="text-muted mt-4">
                       {{company.description}}
                     </p>
+                    <div class="mt-4" *ngIf="categories.length!=0">
+                      <h5 class="fs-18 fw-bold">Categories</h5>
+                      <span class="badge fs-13 bg-soft-blue mt-2"
+                            *ngFor="let c of categories"
+                      > {{c.name}}</span>
+                    </div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -198,11 +219,13 @@
                       <h5 class="fs-17 fw-semibold mb-3 mb-0">Company Account</h5>
                       <div class="text-center">
                         <div class="mb-4 profile-user">
-                          <img [src]="path" class="rounded-circle img-thumbnail profile-img"
-                               id="profile-img" alt="">
+                          <img
+                            src="{{path?path:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                            class="rounded-circle img-thumbnail profile-img"
+                            id="profile-img" alt="">
                           <div class="p-0 rounded-circle profile-photo-edit">
                             <input id="profile-img-file-input" type="file" class="profile-img-file-input"
-                                   (change)="previewAvatar($event)">
+                                   (change)="previewAvatar($event)" required>
                             <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
                               <i class="uil uil-edit"></i>
                             </label>
@@ -215,7 +238,8 @@
                             <label for="Name" class="form-label">Name*</label>
                             <input type="text" class="form-control" id="Name" formControlName="name"/>
                           </div>
-                          <div *ngIf="formCompany.get('name')?.errors?.['required'] && formCompany.get('name')?.touched" class="alert  bg-soft-danger" role="alert">
+                          <div *ngIf="formCompany.get('name')?.errors?.['required'] && formCompany.get('name')?.touched"
+                               class="alert  bg-soft-danger" role="alert">
                             Required!
                           </div>
                         </div>
@@ -239,7 +263,8 @@
                         <!--end col-->
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <input type="password" class="form-control" id="password" formControlName="password" hidden/>
+                            <input type="password" class="form-control" id="password" formControlName="password"
+                                   hidden/>
                           </div>
                         </div>
                         <!--end col-->
@@ -299,7 +324,7 @@
                             <label for="tel" class="form-label">Tel</label>
                             <input type="text" class="form-control" id="tel"
                                    formControlName="tel"
-                                   />
+                            />
                           </div>
                         </div>
                         <!--end col-->
@@ -313,8 +338,8 @@
                         </div>
                         <!--end col-->
                         <div class="mb-3" formGroupName="role">
-                        <input type="text" class="form-control"
-                               formControlName="id" hidden/>
+                          <input type="text" class="form-control"
+                                 formControlName="id" hidden/>
                         </div>
                         <input type="text" class="form-control"
                                formControlName="status" hidden/>
@@ -348,4 +373,4 @@
 </div>
 <!-- End Page-content -->
 <app-footer></app-footer>
-
+<p-toast position="top-right"></p-toast>
