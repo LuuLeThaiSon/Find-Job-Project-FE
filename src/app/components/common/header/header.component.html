@@ -308,14 +308,14 @@
               <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">{{user.name}}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
-              <li><a class="dropdown-item" href="manage-jobs.html">Post New Jobs</a></li>
-              <li><a class="dropdown-item" href="bookmark-jobs.html">Manage Jobs</a></li>
-              <li><a class="dropdown-item" href="" [routerLink]="['/company-detail', user.id]">Company Profile</a></li>
+              <li><a class="dropdown-item" href="" [routerLink]="['/manage-jobs', user.id]">Manage Jobs</a></li>
+              <li><a class="dropdown-item" href="" [routerLink]="['/manage-company-profile', user.id]">Company
+                Profile</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
             </li>
           </div>
-          <div *ngSwitchCase = "2">
+          <div *ngSwitchCase = "3">
             <li class="list-inline-item dropdown me-4">
               <a href="javascript:void(0)" class="header-item noti-icon position-relative" id="notification" data-bs-toggle="dropdown"
                  aria-expanded="false">
@@ -408,6 +408,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" [routerLink]="['/candidate-detail', user.id]">My Profile</a></li>
+              <li><a class="dropdown-item" href="" [routerLink]="['/manage-candidate-profile/',user.id]">My Profile</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
             </li>

@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Role} from "../../model/role";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CompanyService} from "../../service/company.service";
+import {CategoryService} from "../../service/category.service";
 import {Admin} from "../../model/admin";
 
 @Component({
@@ -37,7 +38,7 @@ export class LoginComponent {
 
   constructor(private routerActive: ActivatedRoute,
               private router: Router,
-              private companyService: CompanyService,
+              private companyService: CompanyService
   ) {
   }
 
