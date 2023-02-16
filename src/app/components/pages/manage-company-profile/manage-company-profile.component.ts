@@ -230,77 +230,8 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
         this.loading = true;
       }, 1000);
     }
-  onSubmit() {
-    this.loading = false;
-    if (this.imageFile == null) {
-      this.company = this.formCompany.value;
-      this.company.avatar = this.path;
-      this.companyService.update(this.company, this.companyId).subscribe(() => {
-        // setTimeout(() => {
-        //   this.loading = true;
-        // }, 1000)
-        this.edited = false;
-        sessionStorage.setItem("user", JSON.stringify(this.company));
-        this.header?.ngOnInit();
-        window.scroll(0, 300);
-        this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
-        this.ggMap.setAttribute("style:width", "100%");
-      })
-    } else {
-      const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-      const fileRef = this.storage.ref(imagePath);
-      this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe(url => {
-            // setTimeout(() => {
-            //   this.loading = true;
-            // }, 1000)
-            this.company = this.formCompany.value;
-            this.company.avatar = url;
-            this.companyService.update(this.company, this.companyId).subscribe(() => {
-              sessionStorage.setItem("user", JSON.stringify(this.company));
-              this.edited = false;
-              this.ggMap = this.company.googleMap;
-              this.commonService.scrollTopWindow(0, 300);
-              this.header?.ngOnInit();
-              this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
-              this.ggMap.setAttribute("style:width", "100%");
-            })
-          });
-        })
-      ).subscribe()
-    }
-    setTimeout(() => {
-      this.loading = true;
-    }, 1000);
-    // this.showSuccess()
-  }
 
-    previewAvatar(event
-  :
-    any
-  )
-    {
-      this.loading = false;
-      if (event.target.files && event.target.files[0]) {
-        this.imageFile = event.target.files[0];
-        if (this.pathName !== this.imageFile.name) {
-          this.pathName = this.imageFile.name
-          const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-          const fileRef = this.storage.ref(imagePath);
-          this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
-            finalize(() => {
-              fileRef.getDownloadURL().subscribe(url => {
-                this.path = url;
-                setTimeout(() => {
-                  this.loading = true;
-                }, 1000)
-              });
-            })
-          ).subscribe()
-        }
-      }
-    }
+
   previewAvatar(event: any) {
     this.loading = false;
     if (event.target.files && event.target.files[0]) {

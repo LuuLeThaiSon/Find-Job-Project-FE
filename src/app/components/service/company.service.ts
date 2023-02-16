@@ -43,6 +43,10 @@ export class CompanyService {
     return this.httpClient.get<Company>(`${apiUrl}/companies/${id}`)
   }
 
+  findCandidate(id: number): Observable<Candidate> {
+    return this.httpClient.get<Candidate>(`${apiUrl}/candidates/${id}`)
+  }
+
   saveCompany(company: Company): Observable<any> {
     return this.httpClient.post<Company>(`${apiUrl}/companies`, company)
   }
