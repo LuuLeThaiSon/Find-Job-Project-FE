@@ -2,12 +2,12 @@ import {Role} from "./role";
 import {JobCount} from "./jobCount";
 
 export interface Company {
-  id?: number;
+  id: number;
   name: string;
   shortName: string;
   code: string;
   email: string;
-  password: string;
+  password: string | null;
   avatar: string;
   description: string;
   address: string;

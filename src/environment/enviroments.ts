@@ -1,12 +1,12 @@
 export const environments = {
   apiUrl: 'http://localhost:8080',
-  production: false,
-  firebaseConfig: {
-    apiKey: "AIzaSyAUmYH6iWIwcfUV85s7i0E93hD7Wb-X3YU",
-    authDomain: "findjobspringbootangular.firebaseapp.com",
-    projectId: "findjobspringbootangular",
-    storageBucket: "findjobspringbootangular.appspot.com",
-    messagingSenderId: "681592963283",
-    appId: "1:681592963283:web:15783898346b2be5a0d426"
+  firebaseConfig : {
+    apiKey: "AIzaSyBMMwKElsFautwgN4ZX77YIL04xvpo8heo",
+    authDomain: "demo1-a363b.firebaseapp.com",
+    projectId: "demo1-a363b",
+    storageBucket: "demo1-a363b.appspot.com",
+    messagingSenderId: "391898475221",
+    appId: "1:391898475221:web:155f4135e1ab105bccd05c",
+    measurementId: "G-ELBE8P30HK"
   }
 }

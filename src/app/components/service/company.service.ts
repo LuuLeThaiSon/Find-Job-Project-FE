@@ -6,6 +6,8 @@ import {environments} from "../../../environment/enviroments";
 import {Role} from "../model/role";
 import {Candidate} from "../model/candidate";
 import {Job} from "../model/job";
+import {Admin} from "../model/admin";
+import {EmailSender} from "../model/email-sender";
 
 const apiUrl = environments.apiUrl
 
@@ -33,11 +35,15 @@ export class CompanyService {
     return this.httpClient.get<Candidate[]>(`${apiUrl}/candidates`)
   }
 
+  findAllAdmin(): Observable<Admin[]> {
+    return this.httpClient.get<Admin[]>(`${apiUrl}/companies/admin`)
+  }
+
   findCompany(id: number): Observable<Company> {
     return this.httpClient.get<Company>(`${apiUrl}/companies/${id}`)
   }
 
-  save(company: Company): Observable<any> {
+  saveCompany(company: Company): Observable<any> {
     return this.httpClient.post<Company>(`${apiUrl}/companies`, company)
   }
 
@@ -51,6 +57,18 @@ export class CompanyService {
 
   countQuantityJob(idCompany?: number): Observable<Job[]> {
     return this.httpClient.get<Job[]>(`${apiUrl}/jobs/current/opening/${idCompany}`)
+  }
+
+  getPassword(password: EmailSender):  Observable<EmailSender> {
+    return this.httpClient.post<EmailSender>(`${apiUrl}/send-email`, password)
+  }
+
+  getNotificationCandidate(message: EmailSender):  Observable<EmailSender> {
+    return this.httpClient.post<EmailSender>(`${apiUrl}/send-emailCandidate`, message)
+  }
+
+  saveCandidate(candidate: Candidate): Observable<any> {
+    return this.httpClient.post<Candidate>(`${apiUrl}/candidates`, candidate)
   }
 
   findTopCompanies():Observable<Company[]> {
