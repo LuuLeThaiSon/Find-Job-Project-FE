@@ -7,7 +7,6 @@ import {JobService} from "../../service/job.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {MessageService} from "primeng/api";
 import {finalize, Subject} from "rxjs";
 import {HeaderComponent} from "../../common/header/header.component";
 import {Category} from "../../model/category";
@@ -19,7 +18,6 @@ import {CommonService} from "../../service/common.service";
   selector: 'app-manage-company-profile',
   templateUrl: './manage-company-profile.component.html',
   styleUrls: ['./manage-company-profile.component.css'],
-  providers: [MessageService]
 })
 export class ManageCompanyProfileComponent {
   company!: Company;
@@ -41,7 +39,7 @@ export class ManageCompanyProfileComponent {
               private storage: AngularFireStorage,
               private categoryService: CategoryService,
               private commonService: CommonService,
-              private messageService: MessageService) {
+  ) {
   }
 
   ngOnInit() {
@@ -168,9 +166,6 @@ export class ManageCompanyProfileComponent {
     }
   }
 
-  showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Message Content'});
-  }
 
   @ViewChild(HeaderComponent) header: HeaderComponent | undefined;
 

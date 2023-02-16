@@ -63,6 +63,10 @@ export class CompanyService {
     return this.httpClient.post<EmailSender>(`${apiUrl}/send-email`, password)
   }
 
+  getNotificationCandidate(message: EmailSender):  Observable<EmailSender> {
+    return this.httpClient.post<EmailSender>(`${apiUrl}/send-emailCandidate`, message)
+  }
+
   saveCandidate(candidate: Candidate): Observable<any> {
     return this.httpClient.post<Candidate>(`${apiUrl}/candidates`, candidate)
   }

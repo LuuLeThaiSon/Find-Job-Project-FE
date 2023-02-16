@@ -60,32 +60,31 @@
                           <div class="mb-3">
                             <label for="emailInput" class="form-label">Email</label>
                             <input type="email" class="form-control" required id="emailInput"
-                                   placeholder="Enter your email" formControlName="email" ngModel>
+                                   placeholder="Enter your email" formControlName="email" ngModel (change)="checkEmail(mail.value)" #mail>
                             <p
-                              *ngIf="formRegisterCandidate.get('name')?.errors?.['required'] && formRegisterCandidate.get('name')?.touched"
+                              *ngIf="formRegisterCandidate.get('email')?.errors?.['required'] && formRegisterCandidate.get('email')?.touched"
                               style="color: orange; margin-top: 10px">Require</p>
                           </div>
                           <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password" ngModel>
-                            <p
-                              *ngIf="formRegisterCandidate.get('name')?.errors?.['required'] && formRegisterCandidate.get('name')?.touched"
-                              style="color: orange; margin-top: 10px">Require</p>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password">
+                            <p *ngIf="formRegisterCandidate.get('password')?.errors?.['required'] && formRegisterCandidate.get('password')?.touched"
+                              style="color: orange; margin-top: 10px" #a >Require</p>
                           </div>
-<!--                          <div class="mb-3">-->
-<!--                            <label for="confirmPassword" class="form-label">Confirm Password</label>-->
-<!--                            <input type="password" class="form-control" id="confirmPassword"-->
-<!--                                   placeholder="Enter your password">-->
-<!--                            <p-->
-<!--                              *ngIf="formRegisterCandidate.get('name')?.errors?.['required'] && formRegisterCandidate.get('name')?.touched"-->
-<!--                              style="color: orange; margin-top: 10px">Require</p>-->
-<!--                          </div>-->
+                          <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword"
+                                   placeholder="Enter your password" formControlName="confirmPassword" >
+                            <p *ngIf="formRegisterCandidate.get('confirmPassword')?.errors?.['required'] && formRegisterCandidate.get('confirmPassword')?.touched"
+                              style="color: orange; margin-top: 10px">Require</p>
+                            <p *ngIf="formRegisterCandidate.errors?.['passwordmatcherror']" style="color: pink">Password does not match</p>
+
+                          </div>
                           <div class="mb-3">
                             <label for="tel" class="form-label">Tel</label>
                             <input type="text" class="form-control" id="tel"
                                    placeholder="Enter your tel" formControlName="tel" ngModel>
-                            <p
-                              *ngIf="formRegisterCandidate.get('name')?.errors?.['required'] && formRegisterCandidate.get('name')?.touched"
+                            <p *ngIf="formRegisterCandidate.get('tel')?.errors?.['required'] && formRegisterCandidate.get('tel')?.touched"
                               style="color: orange; margin-top: 10px">Require</p>
                           </div>
                           <label for="role" class="form-label" hidden>Role</label>
