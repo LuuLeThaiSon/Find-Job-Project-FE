@@ -17,14 +17,10 @@ import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
 import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
 import { JobDetailComponent } from './components/pages/job-detail/job-detail.component';
-import {DropdownModule} from "primeng/dropdown";
 import {AngularFireModule} from "@angular/fire/compat";
 import {environments} from "../environment/enviroments";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
-import {ToastModule} from "primeng/toast";
-import {ButtonModule} from "primeng/button";
-import {RippleModule} from "primeng/ripple";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import {
@@ -59,11 +55,7 @@ import {
     AngularFireModule.initializeApp(environments.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    ToastModule,
-    ButtonModule,
-    RippleModule,
     BrowserAnimationsModule,
-    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
