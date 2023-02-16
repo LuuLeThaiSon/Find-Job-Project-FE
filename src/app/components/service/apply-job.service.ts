@@ -12,7 +12,7 @@ import {JobService} from "./job.service";
 })
 export class ApplyJobService {
 
-  constructor(private http:HttpClient,
+  constructor(private http: HttpClient,
               private storage: AngularFireStorage,
               private jobService: JobService) {
   }
@@ -20,27 +20,9 @@ export class ApplyJobService {
   save(applyJob: ApplyJob): Observable<ApplyJob> {
     return this.http.post<ApplyJob>("http://localhost:8080/apply", applyJob);
   }
-  applySave(cvFileName: any, applyJob: ApplyJob, applyForm: FormGroup, user: any, jobApply: Job) {
-    const cvPath = `cv/${cvFileName.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-    const fileRef = this.storage.ref(cvPath);
-    this.storage.upload(cvPath, cvFileName).snapshotChanges().pipe(
-      finalize(() => {
-        fileRef.getDownloadURL().subscribe(url => {
-          applyJob = applyForm.value;
-          applyJob.candidate = user;
-          applyJob.job = jobApply;
-          applyJob.cv = url;
-          this.save(applyJob).subscribe(() => {
-            this.jobService.findAll();
-          })
-        });
-      })
-    ).subscribe(() => {
-      window.scrollTo(0, 300);
-      applyForm.reset();
-    })
+
+  checkApplyJob(id: number, jobs: Job[]): Observable<boolean[]> {
+    return this.http.post<boolean[]>("http://localhost:8080/apply/test/" + id, jobs);
   }
-
-
 
 }

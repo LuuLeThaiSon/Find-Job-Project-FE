@@ -143,7 +143,7 @@
             <div>
 
               <div class="job-box bookmark-post card mt-4"
-                   *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }">
+                   *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }, index as i">
                 <div class="p-4">
                   <div class="row align-items-center">
                     <div class="col-md-2">
@@ -200,8 +200,9 @@
                     <!--end col-->
                     <div class="col-lg-2 col-md-3">
                       <div>
-                        <a href="#applyNow" data-bs-toggle="modal" class="primary-link" (click)="applyJobId(j)">Apply Now <i
+                        <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link" (click)="applyJobId(j)">Apply Now <i
                           class="mdi mdi-chevron-double-right"></i></a>
+                        <span *ngIf="checkApplyJob[i]" class="badge bg-soft-danger fs-13 mt-1">Waiting</span>
                       </div>
                     </div>
                     <!--end col-->
@@ -430,7 +431,7 @@
             <div class="mb-3">
               <label for="message" class="form-label">Message</label>
               <textarea class="form-control" id="message" rows="4"
-                        placeholder="Enter your message" formControlName="message"></textarea>
+                        placeholder="Enter your message" formControlName="message" [(ngModel)]="message"></textarea>
             </div>
             <div class="mb-4">
               <label class="form-label" for="cv">Resume Upload</label>

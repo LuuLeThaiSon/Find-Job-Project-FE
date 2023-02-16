@@ -8,8 +8,8 @@ import {Category} from "../../model/category";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ApplyJob} from "../../model/apply-job";
-import {finalize} from "rxjs";
 import {ApplyJobService} from "../../service/apply-job.service";
+import {finalize} from "rxjs";
 
 @Component({
   selector: 'app-job-list',
@@ -27,21 +27,23 @@ export class JobListComponent implements OnInit {
   user!: any;
   role!: number;
   applyForm!: FormGroup;
-  applyJob!: ApplyJob;
+  applyJob: ApplyJob = new ApplyJob();
   jobApply!: Job;
   cvFileName: any;
   alertApply: boolean = true;
-
+  checkApplyJob: Boolean[] = [];
+  message!: string;
 
 
   ngOnInit(): void {
-    this.findAllByStatusIsTrueAndAndExpiredDate();
-    this.findAllLocations();
-    this.findAllCategories();
+
     // @ts-ignore
     this.user = JSON.parse(sessionStorage.getItem("user")) as any;
-    console.log(this.user.tel)
     this.role = this.user.role.id;
+
+    this.applyForm = new FormGroup({
+      message: new FormControl('')
+    });
   }
 
   constructor(private jobService: JobService,
@@ -49,21 +51,27 @@ export class JobListComponent implements OnInit {
               private categoryService: CategoryService,
               private storage: AngularFireStorage,
               private applyJobService: ApplyJobService) {
-    this.applyForm = new FormGroup({
-      message: new FormControl
-    })
+
+    this.findAllByStatusIsTrueAndAndExpiredDate();
+    this.findAllLocations();
+    this.findAllCategories();
 
   }
 
   findAll() {
-    return this.jobService.findAll().subscribe((data) => {
+    this.jobService.findAll().subscribe((data) => {
       this.jobs = data;
+      console.log(this.jobs)
+
     })
   }
 
   findAllByStatusIsTrueAndAndExpiredDate() {
     return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
+      this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
+        this.checkApplyJob = data1;
+      })
     })
   }
 
@@ -97,9 +105,26 @@ export class JobListComponent implements OnInit {
   }
 
   apply() {
-    this.applyJobService.applySave(this.cvFileName, this.applyJob, this.applyForm, this.user, this.jobApply);
-    this.btnModal.nativeElement.click();
-    this.applyForm.reset()
+    this.applyJob.candidate = this.user;
+    this.applyJob.job = this.jobApply;
+    this.applyJob.message = this.message;
+    const cvPath = `cv/${this.cvFileName.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+    const fileRef = this.storage.ref(cvPath);
+    this.storage.upload(cvPath, this.cvFileName).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe(url => {
+          this.applyJob.cv = url;
+          this.applyJobService.save(this.applyJob).subscribe(() => {
+            this.findAllByStatusIsTrueAndAndExpiredDate();
+          })
+        });
+      })
+    ).subscribe(() => {
+      window.scrollTo(0, 300);
+      this.applyForm.reset();
+      this.btnModal.nativeElement.click();
+      this.applyForm.reset()
+    })
     // @ts-ignore
     document.getElementById('cv').value = ''
     this.alertApply = false;
