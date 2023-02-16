@@ -41,6 +41,12 @@
   <!-- START JOB-LIST -->
   <section class="section">
     <div class="container">
+      <div class="alert bg-soft-success alert-dismissible fade show" role="alert" [hidden]="alertApply">
+        A simple success alert—check it out!
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+      </div>
       <div class="row">
         <div class="col-lg-9">
           <div class="me-lg-5">
@@ -52,7 +58,8 @@
                       <i class="uil uil-briefcase-alt"></i>
                       <input type="search" class="form-control filter-job-input-box border border-primary"
                              id="exampleFormControlInput1" placeholder="Job, company... "
-                      (ngModelChange) = "searchByTitleJobOrCompanyName(key.value)" name="key" #key="ngModel" ngModel>
+                             (ngModelChange)="searchByTitleJobOrCompanyName(key.value)" name="key" #key="ngModel"
+                             ngModel>
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
@@ -141,8 +148,10 @@
                   <div class="row align-items-center">
                     <div class="col-md-2">
                       <div class="text-center mb-4 mb-md-0">
-                        <a href="" [routerLink]="['/company-detail/',j.company.id]"><img src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" alt=""
-                                                            class="img-fluid rounded-3"></a>
+                        <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
+                          src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                          alt=""
+                          class="img-fluid rounded-3"></a>
                       </div>
                     </div>
                     <!--end col-->
@@ -191,7 +200,7 @@
                     <!--end col-->
                     <div class="col-lg-2 col-md-3">
                       <div>
-                        <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i
+                        <a href="#applyNow" data-bs-toggle="modal" class="primary-link" (click)="applyJobId(j)">Apply Now <i
                           class="mdi mdi-chevron-double-right"></i></a>
                       </div>
                     </div>
@@ -398,32 +407,41 @@
   <div class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-body p-5">
-          <div class="text-center mb-4">
-            <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
+        <form [formGroup]="applyForm">
+          <div class="modal-body p-5">
+            <div class="text-center mb-4">
+              <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
+            </div>
+            <div class="position-absolute end-0 top-0 p-3">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="mb-3">
+              <label for="nameControlInput" class="form-label">Name</label>
+              <input type="text" class="form-control" id="nameControlInput" readonly [value]="user.name">
+            </div>
+            <div class="mb-3">
+              <label for="emailControlInput2" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="emailControlInput2" readonly [value]="user.email">
+            </div>
+            <div class="mb-3">
+              <label for="tel" class="form-label">Phone number</label>
+              <input type="email" class="form-control" id="tel" readonly [value]="user.tel">
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="4"
+                        placeholder="Enter your message" formControlName="message"></textarea>
+            </div>
+            <div class="mb-4">
+              <label class="form-label" for="cv">Resume Upload</label>
+              <input type="file" class="form-control" id="cv" (change)="submitCV($event)">
+            </div>
+            <button class="btn btn-primary w-100" (click)="apply()">Send Application</button>
+            <button type="button" class="btn btn-secondary waves-effect"
+                    data-bs-dismiss="modal" #btnModal hidden>Close
+            </button>
           </div>
-          <div class="position-absolute end-0 top-0 p-3">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="mb-3">
-            <label for="nameControlInput" class="form-label">Name</label>
-            <input type="text" class="form-control" id="nameControlInput" placeholder="Enter your name">
-          </div>
-          <div class="mb-3">
-            <label for="emailControlInput2" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="emailControlInput2" placeholder="Enter your email">
-          </div>
-          <div class="mb-3">
-            <label for="messageControlTextarea" class="form-label">Message</label>
-            <textarea class="form-control" id="messageControlTextarea" rows="4"
-                      placeholder="Enter your message"></textarea>
-          </div>
-          <div class="mb-4">
-            <label class="form-label" for="inputGroupFile01">Resume Upload</label>
-            <input type="file" class="form-control" id="inputGroupFile01">
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Send Application</button>
-        </div>
+        </form>
       </div>
     </div>
   </div><!-- END APPLY MODAL -->
