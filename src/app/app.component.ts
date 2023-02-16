@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import {CategoryService} from "./components/service/category.service";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -44,6 +45,55 @@ export class AppComponent implements AfterViewInit{
     s7.type = "text/javascript";
     s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
     this.elementRef.nativeElement.appendChild(s7);
-  }
 
+    var s8 = document.createElement("script");
+    s8.type = "text/javascript";
+    s8.src = "../../assets/js/pages/area-filter-range.init.js";
+    this.elementRef.nativeElement.appendChild(s8);
+
+    var s9 = document.createElement("script");
+    s9.type = "text/javascript";
+    s9.src = "../../assets/js/pages/blog-details.init.js";
+    this.elementRef.nativeElement.appendChild(s9);
+
+    var s10 = document.createElement("script");
+    s10.type = "text/javascript";
+    s10.src = "../../assets/js/pages/candidate.init.js";
+    this.elementRef.nativeElement.appendChild(s10);
+
+    var s11 = document.createElement("script");
+    s11.type = "text/javascript";
+    s11.src = "../../assets/js/pages/checkbox.init.js";
+    this.elementRef.nativeElement.appendChild(s11);
+
+    var s12 = document.createElement("script");
+    s12.type = "text/javascript";
+    s12.src = "../../assets/js/pages/coming-soon.init.js";
+    this.elementRef.nativeElement.appendChild(s12);
+
+    var s13 = document.createElement("script");
+    s13.type = "text/javascript";
+    s13.src = "../../assets/js/pages/componets.init.js";
+    this.elementRef.nativeElement.appendChild(s13);
+
+    var s14 = document.createElement("script");
+    s14.type = "text/javascript";
+    s14.src = "../../assets/js/pages/contact.js";
+    this.elementRef.nativeElement.appendChild(s14);
+
+    var s15 = document.createElement("script");
+    s15.type = "text/javascript";
+    s15.src = "../../assets/js/pages/index.js";
+    this.elementRef.nativeElement.appendChild(s15);
+
+    var s16 = document.createElement("script");
+    s16.type = "text/javascript";
+    s16.src = "../../assets/js/pages/job-grid.init.js";
+    this.elementRef.nativeElement.appendChild(s16);
+
+    var s17 = document.createElement("script");
+    s17.type = "text/javascript";
+    s17.src = "../../assets/js/pages/lightbox.init.js";
+    this.elementRef.nativeElement.appendChild(s17);
+  }
 }

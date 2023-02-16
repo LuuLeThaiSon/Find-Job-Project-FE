@@ -14,6 +14,10 @@ import {
 import {JobDetailComponent} from "./components/pages/job-detail/job-detail.component";
 import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
 import {HeaderComponent} from "./components/common/header/header.component";
+import {TopCompaniesComponent} from "./top-companies/top-companies.component";
+import {
+  ManageCandidateProfileComponent
+} from "./components/pages/manage-candidate-profile/manage-candidate-profile.component";
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 
 const routes: Routes = [
@@ -37,7 +41,9 @@ const routes: Routes = [
   {path: "job-detail/:id", component: JobDetailComponent},
   {path:"company-detail/:id",component:CompanyDetailComponent},
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
-  {path:"manage-jobs/:id",component:BookmarksJobsComponent}
+  {path:"manage-candidate-profile/:id",component:ManageCandidateProfileComponent},
+  {path:"manage-jobs/:id",component:BookmarksJobsComponent},
+  {path:"top-companies",component:TopCompaniesComponent}
 ];
 
 @NgModule({

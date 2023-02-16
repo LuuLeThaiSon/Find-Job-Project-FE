@@ -71,4 +71,8 @@ export class CompanyService {
     return this.httpClient.post<Candidate>(`${apiUrl}/candidates`, candidate)
   }
 
+  findTopCompanies():Observable<Company[]> {
+    return this.httpClient.get<Company[]>(`${apiUrl}/companies/quantity-desc`)
+  }
+
 }
