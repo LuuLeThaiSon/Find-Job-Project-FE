@@ -21,11 +21,11 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environments} from "../environment/enviroments";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
   ManageCompanyProfileComponent
 } from "./components/pages/manage-company-profile/manage-company-profile.component";
-import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
 
 @NgModule({
@@ -45,8 +45,7 @@ import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmark
     CompanyDetailComponent,
     RegisterComponent,
     JobDetailComponent,
-    RegisterCComponent,
-    BookmarksJobsComponent
+    BookmarksJobsComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,8 +57,8 @@ import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmark
     AngularFireModule.initializeApp(environments.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    BrowserAnimationsModule,
-  ],
+      BrowserAnimationsModule,
+   ],
   providers: [],
   bootstrap: [AppComponent]
 })

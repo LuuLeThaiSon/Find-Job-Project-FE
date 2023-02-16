@@ -103,16 +103,16 @@ export class ManageCompanyProfileComponent {
 
   onSubmit() {
     this.loading = false;
-    console.log(this.formCompany.value);
     if (this.imageFile == null) {
       this.company = this.formCompany.value;
       this.company.avatar = this.path;
       this.companyService.update(this.company, this.companyId).subscribe(() => {
-        setTimeout(() => {
-          this.loading = true;
-        }, 1000)
+        // setTimeout(() => {
+        //   this.loading = true;
+        // }, 1000)
         this.edited = false;
         sessionStorage.setItem("user", JSON.stringify(this.company));
+        this.header?.ngOnInit();
         window.scroll(0, 300);
         this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
         this.ggMap.setAttribute("style:width", "100%");
@@ -123,9 +123,9 @@ export class ManageCompanyProfileComponent {
       this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe(url => {
-            setTimeout(() => {
-              this.loading = true;
-            }, 1000)
+            // setTimeout(() => {
+            //   this.loading = true;
+            // }, 1000)
             this.company = this.formCompany.value;
             this.company.avatar = url;
             this.companyService.update(this.company, this.companyId).subscribe(() => {
@@ -141,6 +141,10 @@ export class ManageCompanyProfileComponent {
         })
       ).subscribe()
     }
+    setTimeout(() => {
+      this.loading = true;
+    }, 1000);
+    this.showSuccess()
   }
 
   previewAvatar(event: any) {
@@ -153,11 +157,12 @@ export class ManageCompanyProfileComponent {
         const fileRef = this.storage.ref(imagePath);
         this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
           finalize(() => {
-            setTimeout(() => {
-              this.loading = true;
-            }, 1000)
             fileRef.getDownloadURL().subscribe(url => {
               this.path = url;
+              setTimeout(() => {
+                this.loading = true;
+              }, 1000)
+              this.showSuccess();
               console.log(this.path)
             });
           })
