@@ -362,7 +362,7 @@
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="expiredDate" class="form-label">Expired date</label>
-                  <input type="date" class="form-control" id="expiredDate" formControlName="expiredDate">
+                  <input type="date" class="form-control" id="expiredDate" formControlName="expiredDate" min ="{{minDate}}">
                 </div>
                 <div *ngIf="jobForm.get('expiredDate')?.errors?.['required'] && jobForm.get('expiredDate')?.touched"
                      class="alert  bg-soft-danger mt-1" role="alert">
