@@ -30,6 +30,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { BookmarksJobsComponent } from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import { SearchPipe } from './search.pipe';
 import {MultiSelectModule} from "primeng/multiselect";
+import { TopCompaniesComponent } from './top-companies/top-companies.component';
+import { ManageCandidateProfileComponent } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
+import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
+
 
 @NgModule({
   declarations: [
@@ -50,6 +54,9 @@ import {MultiSelectModule} from "primeng/multiselect";
     JobDetailComponent,
     BookmarksJobsComponent,
     SearchPipe,
+    TopCompaniesComponent,
+    ManageCandidateProfileComponent,
+    RegisterCComponent
   ],
     imports: [
         BrowserModule,

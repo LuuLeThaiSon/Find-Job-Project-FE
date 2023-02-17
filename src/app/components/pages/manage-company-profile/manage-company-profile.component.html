@@ -234,143 +234,159 @@
                       </div>
                       <div class="row">
                         <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="Name" class="form-label">Name*</label>
-                            <input type="text" class="form-control" id="Name" formControlName="name"/>
-                          </div>
-                          <div *ngIf="formCompany.get('name')?.errors?.['required'] && formCompany.get('name')?.touched"
-                               class="alert  bg-soft-danger" role="alert">
-                            Required!
-                          </div>
+                        <div class="mb-3">
+                          <label for="Name" class="form-label">Name*</label>
+                          <input type="text" class="form-control" id="Name" formControlName="name"/>
                         </div>
-                        <input type="text" class="form-control" formControlName="code" hidden/>
-                        <!--end col-->
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="shortName" class="form-label">Short Name</label>
-                            <input type="text" class="form-control" id="shortName" formControlName="shortName"/>
-                          </div>
+                        <div *ngIf="formCompany.get('name')?.errors?.['required'] && formCompany.get('name')?.touched"
+                             class="alert  bg-soft-danger" role="alert">
+                          Required!
                         </div>
-                        <!--end col-->
-                        <div class="col-lg-12">
-                          <div class="mb-3">
-                            <div class="mb-3">
-                              <label for="email" class="form-label">Email</label>
-                              <input type="text" class="form-control" id="email" formControlName="email" readonly/>
-                            </div>
-                          </div>
-                        </div>
-                        <!--end col-->
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <input type="password" class="form-control" id="password" formControlName="password"
-                                   hidden/>
-                          </div>
-                        </div>
-                        <!--end col-->
                       </div>
-                      <!--end row-->
-                    </div>
-                    <!--end account-->
-                    <div class="mt-4">
-                      <h5 class="fs-17 fw-semibold mb-3">Description</h5>
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <div class="mb-3">
-                            <label for="description"
-                                   class="form-label">Introduce Your Company</label>
-                            <textarea class="form-control" id="description"
-                                      rows="5"
-                                      formControlName="description"
-                            ></textarea>
-                          </div>
+                      <input type="text" class="form-control" formControlName="code" hidden/>
+                      <!--end col-->
+                      <div class="col-lg-6">
+                        <div class="mb-3">
+                          <label for="shortName" class="form-label">Short Name</label>
+                          <input type="text" class="form-control" id="shortName" formControlName="shortName"/>
                         </div>
-                        <!--end col-->
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address"
-                                   formControlName="address"
-                            />
-                          </div>
-                        </div>
-                        <!--end col-->
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="numberOfEmployees" class="form-label">Company Size</label>
-                            <input type="number" class="form-control" id="numberOfEmployees"
-                                   formControlName="numberOfEmployees"
-                            />
-                          </div>
-                        </div>
-                        <!--end col-->
-                        <div class="col-lg-12">
-                          <div class="mb-3">
-                            <label for="googleMap" class="form-label">Google Map Link</label>
-                            <input type="text" class="form-control" id="googleMap"
-                                   formControlName="googleMap"
-                            />
-                          </div>
-                        </div>
-                        <!--end col-->
                       </div>
-                      <!--end row-->
-                    </div>
-                    <!--end profile-->
-                    <div class="mt-4">
-                      <div class="row">
-                        <div class="col-lg-6">
+                      <!--end col-->
+                      <div class="col-lg-12">
+                        <div class="mb-3">
                           <div class="mb-3">
-                            <label for="tel" class="form-label">Tel</label>
-                            <input type="text" class="form-control" id="tel"
-                                   formControlName="tel"
-                            />
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" formControlName="email" readonly/>
                           </div>
                         </div>
-                        <!--end col-->
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="website" class="form-label">Website</label>
-                            <input type="text" class="form-control" id="website"
-                                   formControlName="website"
-                            />
-                          </div>
-                        </div>
-                        <!--end col-->
-                        <div class="mb-3" formGroupName="role">
-                          <input type="text" class="form-control"
-                                 formControlName="id" hidden/>
-                        </div>
-                        <input type="text" class="form-control"
-                               formControlName="status" hidden/>
-                        <input type="text" class="form-control"
-                               formControlName="banner" hidden/>
                       </div>
-                      <!--end row-->
+                      <!--end col-->
+<!--                        <div class="col-lg-12">-->
+<!--                          <div class="mb-3">-->
+<!--                            <label for="choices-single-location" class="form-label">Account Type</label>-->
+<!--                            <select class="form-select"-->
+<!--                                    data-trigger-->
+<!--                                    name="choices-single-location"-->
+<!--                                    id="choices-single-location"-->
+<!--                                    aria-label="Default select example" aria-multiselectable="true"-->
+<!--                                    multiple-->
+<!--                            >-->
+<!--                              <option *ngFor="let cc of allCategories" value="{{cc.id}}">{{cc.name}} </option>-->
+<!--                              <option>demo</option>-->
+<!--                              <option>demo</option>-->
+<!--                              <option>demo</option>-->
+<!--                            </select>-->
+<!--                          </div>-->
+<!--                        </div>-->
+                      <div class="col-lg-6">
+                        <div class="mb-3">
+                          <input type="password" class="form-control" id="password" formControlName="password"
+                                 hidden/>
+                        </div>
+                      </div>
+                      <!--end col-->
                     </div>
-                    <div class="mt-4 text-end">
-                      <button type="submit" class="btn btn-primary">Update</button>
-                    </div>
-                  </form>
-                  <!--end form-->
+                    <!--end row-->
                 </div>
-                <!--end tab-pane-->
+                <!--end account-->
+                <div class="mt-4">
+                  <h5 class="fs-17 fw-semibold mb-3">Description</h5>
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="mb-3">
+                        <label for="description"
+                               class="form-label">Introduce Your Company</label>
+                        <textarea class="form-control" id="description"
+                                  rows="5"
+                                  formControlName="description"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address"
+                               formControlName="address"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="numberOfEmployees" class="form-label">Company Size</label>
+                        <input type="number" class="form-control" id="numberOfEmployees"
+                               formControlName="numberOfEmployees"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-12">
+                      <div class="mb-3">
+                        <label for="googleMap" class="form-label">Google Map Link</label>
+                        <input type="text" class="form-control" id="googleMap"
+                               formControlName="googleMap"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </div>
+                <!--end profile-->
+                <div class="mt-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="tel" class="form-label">Tel</label>
+                        <input type="text" class="form-control" id="tel"
+                               formControlName="tel"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-6">
+                      <div class="mb-3">
+                        <label for="website" class="form-label">Website</label>
+                        <input type="text" class="form-control" id="website"
+                               formControlName="website"
+                        />
+                      </div>
+                    </div>
+                    <!--end col-->
+                    <div class="mb-3" formGroupName="role">
+                      <input type="text" class="form-control"
+                             formControlName="id" hidden/>
+                    </div>
+                    <input type="text" class="form-control"
+                           formControlName="status" hidden/>
+                    <input type="text" class="form-control"
+                           formControlName="banner" hidden/>
+                  </div>
+                  <!--end row-->
+                </div>
+                <div class="mt-4 text-end">
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                </form>
+                <!--end form-->
               </div>
-              <!--end tab-content-->
+              <!--end tab-pane-->
             </div>
-            <!--end card-body-->
+            <!--end tab-content-->
           </div>
-          <!--end profile-content-page-->
+          <!--end card-body-->
         </div>
-        <!--end col-->
+        <!--end profile-content-page-->
       </div>
-      <!--end row-->
+      <!--end col-->
     </div>
-    <!--end container-->
-  </section>
-  <!-- END PROFILE -->
+    <!--end row-->
+</div>
+<!--end container-->
+</section>
+<!-- END PROFILE -->
 
 </div>
 <!-- End Page-content -->
 <app-footer></app-footer>
-<p-toast position="top-right"></p-toast>

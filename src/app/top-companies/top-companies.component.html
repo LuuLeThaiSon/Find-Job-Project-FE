@@ -1,0 +1,109 @@
+<app-header></app-header>
+<div class="page-content">
+
+  <!-- Start home -->
+  <section class="page-title-box">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="text-center text-white">
+            <h3 class="mb-4">Top Companies</h3>
+            <div class="page-next">
+              <nav class="d-inline-block" aria-label="breadcrumb text-center">
+                <ol class="breadcrumb justify-content-center">
+                  <li class="breadcrumb-item"><a href="" routerLink="">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"> Top 6 Companies</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+    <!--end container-->
+  </section>
+  <!-- end home -->
+
+  <!-- START SHAPE -->
+  <div class="position-relative" style="z-index: 1">
+    <div class="shape">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 250">
+        <path fill="#FFFFFF" fill-opacity="1"
+              d="M0,192L120,202.7C240,213,480,235,720,234.7C960,235,1200,213,1320,202.7L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
+      </svg>
+    </div>
+  </div>
+  <!-- END SHAPE -->
+
+
+  <!-- START CANDIDATE-GRID -->
+  <section class="section">
+    <div class="container">
+      <div class="candidate-list">
+        <div class="row">
+          <div class="col-lg-4 col-md-6" *ngFor="let c of companies|slice:0:6">
+            <div class="candidate-grid-box bookmark-post card mt-4">
+              <div class="card-body p-4">
+                <div class="candidate-portfolio mb-2">
+                  <div class="row g-3">
+                    <div class="candidate-portfolio-box card border-0">
+                      <img
+                        src="{{c.banner?c.banner:'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}"
+                        class="img-fluid" height="450" width="800">
+                      <div class="bg-overlay"></div>
+                      <div class="zoom-icon">
+                        <a
+                          href="{{c.banner?c.banner:'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}"
+                          class="image-popup text-white"
+                          data-title="Project Leader"
+                          data-description="There are many variations of passages of available, but the majority alteration in some form."><i
+                          class="uil uil-search-alt"></i></a>
+                      </div>
+                    </div>
+                  </div><!-- end row -->
+                </div><!-- end portfolio -->
+                <div class="featured-label">
+                  <span class="featured">TOP</span>
+                </div>
+                <div class="d-flex mb-4">
+                  <div class="flex-shrink-0 position-relative">
+                    <img src="{{c.avatar?c.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" alt="" class="avatar-md rounded-circle">
+                  </div>
+                  <div class="ms-3">
+                    <a href="" [routerLink]="['/company-detail/',c.id]" class="primary-link"><h5 class="fs-17">{{c.name}}</h5></a>
+                    <span class="badge bg-soft-info fs-13">{{c.email}}</span>
+                  </div>
+                </div>
+                <div class="border rounded mb-4">
+                  <div class="row g-0">
+                    <div class="col-lg-6">
+                      <div class="border-end px-3 py-2">
+                        <p class="text-muted mb-0">{{c.website}}</p>
+                      </div>
+                    </div><!--end col-->
+                    <div class="col-lg-6">
+                      <div class="px-3 py-2">
+                        <p class="text-muted mb-0">{{c.tel}}</p>
+                      </div>
+                    </div><!--end col-->
+                  </div><!--end row-->
+                </div>
+                <p class="text-muted">{{c.description.substring(0,100)}}...</p>
+                <div class="mt-3">
+                  <a href="" [routerLink]="['/company-detail/',c.id]" class="btn btn-soft-primary btn-hover w-100 mt-2"><i
+                    class="mdi mdi-eye"></i> View Profile</a>
+                </div>
+              </div>
+            </div> <!--end card-->
+          </div><!--end col-->
+        </div><!--end row-->
+      </div><!--end candidate-list-->
+    </div><!--end container-->
+  </section>
+  <!-- END CANDIDATE-GRID -->
+
+</div>
+
+<app-footer></app-footer>
