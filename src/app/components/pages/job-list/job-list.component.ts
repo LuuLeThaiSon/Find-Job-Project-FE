@@ -146,4 +146,8 @@ export class JobListComponent implements OnInit {
   // @ts-ignore
   @ViewChild('btnModal') btnModal: ElementRef;
   decline: any;
+
+  scrollTop() {
+    window.scrollTo(0, 300)
+  }
 }
