@@ -37,14 +37,24 @@ export class JobListComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     // @ts-ignore
-    this.user = JSON.parse(sessionStorage.getItem("user")) as any;
-    this.role = this.user.role.id;
+    if (sessionStorage.getItem("user")==null) {
+      this.user = null;
+      this.role = 0;
+    } else {
+      // @ts-ignore
+      this.user = JSON.parse(sessionStorage.getItem("user")) as any;
+      this.role = this.user.role.id;
+    }
+    console.log(this.role);
 
     this.applyForm = new FormGroup({
       message: new FormControl('')
     });
+
+    this.findAllByStatusIsTrueAndAndExpiredDate();
+    this.findAllLocations();
+    this.findAllCategories();
   }
 
   constructor(private jobService: JobService,
@@ -53,26 +63,29 @@ export class JobListComponent implements OnInit {
               private storage: AngularFireStorage,
               private applyJobService: ApplyJobService) {
 
-    this.findAllByStatusIsTrueAndAndExpiredDate();
-    this.findAllLocations();
-    this.findAllCategories();
-
+    // this.findAllByStatusIsTrueAndAndExpiredDate();
+    // this.findAllLocations();
+    // this.findAllCategories();
   }
 
   findAll() {
     this.jobService.findAll().subscribe((data) => {
       this.jobs = data;
       console.log(this.jobs)
-
     })
   }
 
   findAllByStatusIsTrueAndAndExpiredDate() {
     return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
-      this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
-        this.checkApplyJob = data1;
-      })
+      console.log(this.jobs)
+      if(this.role == 0) {
+        return;
+      } else {
+        this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
+          this.checkApplyJob = data1;
+        })
+      }
     })
   }
 
