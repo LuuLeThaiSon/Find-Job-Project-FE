@@ -26,8 +26,9 @@ export class RegisterComponent {
   selectedOption: any;
 
 
-  ngOnInit(): void {
 
+
+  ngOnInit(): void {
     this.formRegister = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),

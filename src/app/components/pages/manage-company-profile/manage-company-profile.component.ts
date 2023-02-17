@@ -31,6 +31,8 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   edited!: boolean;
   categories: Category[] = [];
   allCategories: Category[] = [];
+  imageBannerFile: any;
+  pathBannerName!: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -40,135 +42,133 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
               private storage: AngularFireStorage,
               private categoryService: CategoryService,
               private commonService: CommonService,
-              private elementRef: ElementRef) {}
+              private elementRef: ElementRef) {
+  }
 
-    ngAfterViewInit(): void {
-      var s = document.createElement("script");
-      s.type = "text/javascript";
-      s.src = "../../assets/libs/choices.js/public/assets/scripts/choices.min.js";
-      this.elementRef.nativeElement.appendChild(s);
+  ngAfterViewInit(): void {
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "../../assets/libs/choices.js/public/assets/scripts/choices.min.js";
+    this.elementRef.nativeElement.appendChild(s);
 
-      var s1 = document.createElement("script");
-      s1.type = "text/javascript";
-      s1.src = "../../assets/libs/swiper/swiper-bundle.min.js";
-      this.elementRef.nativeElement.appendChild(s1);
+    var s1 = document.createElement("script");
+    s1.type = "text/javascript";
+    s1.src = "../../assets/libs/swiper/swiper-bundle.min.js";
+    this.elementRef.nativeElement.appendChild(s1);
 
-      var s2 = document.createElement("script");
-      s2.type = "text/javascript";
-      s2.src = "../../assets/js/pages/job-list.init.js";
-      this.elementRef.nativeElement.appendChild(s2);
+    var s2 = document.createElement("script");
+    s2.type = "text/javascript";
+    s2.src = "../../assets/js/pages/job-list.init.js";
+    this.elementRef.nativeElement.appendChild(s2);
 
-      var s3 = document.createElement("script");
-      s3.type = "text/javascript";
-      s3.src = "../../assets/js/pages/index.init.js";
-      this.elementRef.nativeElement.appendChild(s3);
+    var s3 = document.createElement("script");
+    s3.type = "text/javascript";
+    s3.src = "../../assets/js/pages/index.init.js";
+    this.elementRef.nativeElement.appendChild(s3);
 
-      var s4 = document.createElement("script");
-      s4.type = "text/javascript";
-      s4.src = "../../assets/js/app.js";
-      this.elementRef.nativeElement.appendChild(s4);
+    var s4 = document.createElement("script");
+    s4.type = "text/javascript";
+    s4.src = "../../assets/js/app.js";
+    this.elementRef.nativeElement.appendChild(s4);
 
-      var s5 = document.createElement("script");
-      s5.type = "text/javascript";
-      s5.src = "../../assets/js/pages/switcher.init.js";
-      this.elementRef.nativeElement.appendChild(s5);
+    var s5 = document.createElement("script");
+    s5.type = "text/javascript";
+    s5.src = "../../assets/js/pages/switcher.init.js";
+    this.elementRef.nativeElement.appendChild(s5);
 
-      var s7 = document.createElement("script");
-      s7.type = "text/javascript";
-      s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
-      this.elementRef.nativeElement.appendChild(s7);
-    }
+    var s7 = document.createElement("script");
+    s7.type = "text/javascript";
+    s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
+    this.elementRef.nativeElement.appendChild(s7);
+  }
 
-    ngOnChanges()
-    {
-      var s = document.createElement("script");
-      s.type = "text/javascript";
-      s.src = "../../assets/libs/choices.js/public/assets/scripts/choices.min.js";
-      this.elementRef.nativeElement.appendChild(s);
+  ngOnChanges() {
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "../../assets/libs/choices.js/public/assets/scripts/choices.min.js";
+    this.elementRef.nativeElement.appendChild(s);
 
-      var s1 = document.createElement("script");
-      s1.type = "text/javascript";
-      s1.src = "../../assets/libs/swiper/swiper-bundle.min.js";
-      this.elementRef.nativeElement.appendChild(s1);
+    var s1 = document.createElement("script");
+    s1.type = "text/javascript";
+    s1.src = "../../assets/libs/swiper/swiper-bundle.min.js";
+    this.elementRef.nativeElement.appendChild(s1);
 
-      var s2 = document.createElement("script");
-      s2.type = "text/javascript";
-      s2.src = "../../assets/js/pages/job-list.init.js";
-      this.elementRef.nativeElement.appendChild(s2);
+    var s2 = document.createElement("script");
+    s2.type = "text/javascript";
+    s2.src = "../../assets/js/pages/job-list.init.js";
+    this.elementRef.nativeElement.appendChild(s2);
 
-      var s3 = document.createElement("script");
-      s3.type = "text/javascript";
-      s3.src = "../../assets/js/pages/index.init.js";
-      this.elementRef.nativeElement.appendChild(s3);
+    var s3 = document.createElement("script");
+    s3.type = "text/javascript";
+    s3.src = "../../assets/js/pages/index.init.js";
+    this.elementRef.nativeElement.appendChild(s3);
 
-      var s4 = document.createElement("script");
-      s4.type = "text/javascript";
-      s4.src = "../../assets/js/app.js";
-      this.elementRef.nativeElement.appendChild(s4);
+    var s4 = document.createElement("script");
+    s4.type = "text/javascript";
+    s4.src = "../../assets/js/app.js";
+    this.elementRef.nativeElement.appendChild(s4);
 
-      var s5 = document.createElement("script");
-      s5.type = "text/javascript";
-      s5.src = "../../assets/js/pages/switcher.init.js";
-      this.elementRef.nativeElement.appendChild(s5);
+    var s5 = document.createElement("script");
+    s5.type = "text/javascript";
+    s5.src = "../../assets/js/pages/switcher.init.js";
+    this.elementRef.nativeElement.appendChild(s5);
 
-      var s7 = document.createElement("script");
-      s7.type = "text/javascript";
-      s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
-      this.elementRef.nativeElement.appendChild(s7);
-    }
+    var s7 = document.createElement("script");
+    s7.type = "text/javascript";
+    s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
+    this.elementRef.nativeElement.appendChild(s7);
+  }
 
-    ngOnInit()
-    {
+  ngOnInit() {
 
-      this.commonService.scrollTopWindow(0, 300);
-      this.edited = true;
-      this.loading = true;
-      this.activatedRoute.params.subscribe(params => {
-        this.companyId = params['id'];
-      });
+    this.commonService.scrollTopWindow(0, 300);
+    this.edited = true;
+    this.loading = true;
+    this.activatedRoute.params.subscribe(params => {
+      this.companyId = params['id'];
+    });
 
-      this.formCompany = new FormGroup({
-        id: new FormControl(''),
-        name: new FormControl('', [Validators.required]),
-        shortName: new FormControl(''),
-        code: new FormControl(''),
-        email: new FormControl(''),
-        password: new FormControl(''),
-        description: new FormControl(''),
-        address: new FormControl(''),
-        numberOfEmployees: new FormControl(''),
-        googleMap: new FormControl(''),
-        tel: new FormControl(''),
-        website: new FormControl(''),
-        role: new FormGroup({
-          id: new FormControl('')
-        }),
-        status: new FormControl(''),
-        banner: new FormControl(''),
-      })
+    this.formCompany = new FormGroup({
+      id: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      shortName: new FormControl(''),
+      code: new FormControl(''),
+      email: new FormControl(''),
+      password: new FormControl(''),
+      description: new FormControl(''),
+      address: new FormControl(''),
+      numberOfEmployees: new FormControl(''),
+      googleMap: new FormControl(''),
+      tel: new FormControl(''),
+      website: new FormControl(''),
+      role: new FormGroup({
+        id: new FormControl('')
+      }),
+      status: new FormControl(''),
+      banner: new FormControl(''),
+    })
 
-      this.categoryService.findCategoriesByCompanyId(this.companyId).subscribe(res => {
-        this.categories = res;
-      })
+    this.categoryService.findCategoriesByCompanyId(this.companyId).subscribe(res => {
+      this.categories = res;
+    })
 
-      this.categoryService.findAll().subscribe(res => {
-        console.log(res)
-        this.allCategories = res;
-      })
-      console.log('all categories is' + this.allCategories)
+    this.categoryService.findAll().subscribe(res => {
+      console.log(res)
+      this.allCategories = res;
+    })
+    console.log('all categories is' + this.allCategories)
 
-      this.companyService.findCompany(this.companyId).subscribe(res => {
-        this.company = res;
-        this.path = this.company.avatar;
-        this.formCompany.patchValue(res)
-        this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
-        this.ggMap.setAttribute("style:width", "100%");
-      })
+    this.companyService.findCompany(this.companyId).subscribe(res => {
+      this.company = res;
+      this.path = this.company.avatar;
+      this.formCompany.patchValue(res)
+      this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
+      this.ggMap.setAttribute("style:width", "100%");
+    })
 
-    }
+  }
 
-    findCompanyById(id: number)
-    {
+    findCompanyById(id: number) {
       this.companyService.findCompany(id).subscribe(res => {
         this.company = res;
         this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
@@ -183,49 +183,47 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       })
     }
 
-    onSubmit()
-    {
-      console.log(this.formCompany.value);
-      this.loading = false;
-      if (this.imageFile == null) {
-        this.company = this.formCompany.value;
-        this.company.avatar = this.path;
-        this.companyService.update(this.company, this.companyId).subscribe(() => {
-          this.edited = false;
-          sessionStorage.setItem("user", JSON.stringify(this.company));
-          this.header?.ngOnInit();
-          window.scroll(0, 300);
-          this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
-          this.ggMap.setAttribute("style:width", "100%");
+  onSubmit() {
+    console.log(this.formCompany.value);
+    this.loading = false;
+    if (this.imageFile == null) {
+      this.company = this.formCompany.value;
+      this.company.avatar = this.path;
+      this.companyService.update(this.company, this.companyId).subscribe(() => {
+        this.edited = false;
+        sessionStorage.setItem("user", JSON.stringify(this.company));
+        this.header?.ngOnInit();
+        window.scroll(0, 300);
+        this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
+        this.ggMap.setAttribute("style:width", "100%");
+      })
+    } else {
+      const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+      const fileRef = this.storage.ref(imagePath);
+      this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            this.company = this.formCompany.value;
+            this.company.avatar = url;
+            this.companyService.update(this.company, this.companyId).subscribe(() => {
+              sessionStorage.setItem("user", JSON.stringify(this.company));
+              this.edited = false;
+              this.ggMap = this.company.googleMap;
+              this.commonService.scrollTopWindow(0, 300);
+              this.header?.ngOnInit();
+              this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
+              this.ggMap.setAttribute("style:width", "100%");
+            })
+          });
         })
-      } else {
-        const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(imagePath);
-        this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe(url => {
-              this.company = this.formCompany.value;
-              this.company.avatar = url;
-              this.companyService.update(this.company, this.companyId).subscribe(() => {
-                sessionStorage.setItem("user", JSON.stringify(this.company));
-                this.edited = false;
-                this.ggMap = this.company.googleMap;
-                this.commonService.scrollTopWindow(0, 300);
-                this.header?.ngOnInit();
-                this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
-                this.ggMap.setAttribute("style:width", "100%");
-              })
-            });
-          })
-        ).subscribe()
-      }
-      setTimeout(() => {
-        this.loading = true;
-      }, 1000);
+      ).subscribe()
     }
+    setTimeout(() => {
+      this.loading = true;
+    }, 1000);
+  }
 
-    previewAvatar(event: any)
-    {
+    previewAvatar(event: any) {
       this.loading = false;
       if (event.target.files && event.target.files[0]) {
         this.imageFile = event.target.files[0];
@@ -247,18 +245,18 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       }
     }
 
-    findAllCategories()
-    {
-      this.categoryService.findAll().subscribe(res => {
-        this.allCategories = res;
-      })
-    }
+  findAllCategories() {
+    this.categoryService.findAll().subscribe(res => {
+      this.allCategories = res;
+    })
+  }
 
   @ViewChild(HeaderComponent)
-    header: HeaderComponent | undefined;
+  header: HeaderComponent | undefined;
 
-    loading!: boolean;
+  loading!: boolean;
 
-    selectedCategories: Category[] = [];
+  selectedCategories: Category[] = [];
 
-  }
+
+}

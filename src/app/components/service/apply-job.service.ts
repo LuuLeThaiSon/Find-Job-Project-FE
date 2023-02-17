@@ -12,9 +12,7 @@ import {JobService} from "./job.service";
 })
 export class ApplyJobService {
 
-  constructor(private http: HttpClient,
-              private storage: AngularFireStorage,
-              private jobService: JobService) {
+  constructor(private http: HttpClient) {
   }
 
   save(applyJob: ApplyJob): Observable<ApplyJob> {
@@ -23,6 +21,14 @@ export class ApplyJobService {
 
   checkApplyJob(id: number, jobs: Job[]): Observable<boolean[]> {
     return this.http.post<boolean[]>("http://localhost:8080/apply/test/" + id, jobs);
+  }
+
+  findAllApplyJobByCandidateId(id: number): Observable<ApplyJob[]> {
+    return this.http.get<ApplyJob[]>("http://localhost:8080/apply/candidate/" + id)
+  }
+
+  removeApplyJob(id: number) {
+    return this.http.delete("http://localhost:8080/apply/" + id)
   }
 
 }

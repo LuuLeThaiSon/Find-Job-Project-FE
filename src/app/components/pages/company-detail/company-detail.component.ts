@@ -9,6 +9,7 @@ import {Job} from "../../model/job";
 import {DomSanitizer} from "@angular/platform-browser";
 import {Category} from "../../model/category";
 import {CategoryService} from "../../service/category.service";
+import {CommonService} from "../../service/common.service";
 
 
 @Component({
@@ -27,10 +28,12 @@ export class CompanyDetailComponent {
               private companyService: CompanyService,
               private jobService: JobService,
               private categoryService: CategoryService,
-              private sanitized: DomSanitizer) {
+              private sanitized: DomSanitizer,
+              private commonService: CommonService) {
   }
 
   ngOnInit() {
+    this.commonService.scrollTopWindow(0,300);
     this.activatedRoute.params.subscribe(params => {
       this.companyId = params['id'];
       this.findCompanyById(this.companyId);

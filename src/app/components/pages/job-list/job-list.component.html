@@ -58,8 +58,7 @@
                       <i class="uil uil-briefcase-alt"></i>
                       <input type="search" class="form-control filter-job-input-box border border-primary"
                              id="exampleFormControlInput1" placeholder="Job, company... "
-                             (ngModelChange)="searchByTitleJobOrCompanyName(key.value)" name="key" #key="ngModel"
-                             ngModel>
+                             name="search" [(ngModel)]="searchText">
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
@@ -141,81 +140,164 @@
             </div><!--end wedget-popular-title-->
             <!-- Job-list -->
             <div>
-
-              <div class="job-box bookmark-post card mt-4"
-                   *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }, index as i">
-                <div class="p-4">
-                  <div class="row align-items-center">
-                    <div class="col-md-2">
-                      <div class="text-center mb-4 mb-md-0">
-                        <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
-                          src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
-                          alt=""
-                          class="img-fluid rounded-3"></a>
-                      </div>
-                    </div>
-                    <!--end col-->
-                    <div class="col-md-3">
-                      <div class="mb-2 mb-md-0">
-                        <h5 class="fs-18 mb-0"><a [routerLink]="['/job-detail', j.id]" class="text-dark">{{j.title}}</a>
-                        </h5>
-                        <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
-                      </div>
-                    </div>
-                    <!--end col-->
-                    <div class="col-md-3">
-                      <div class="d-flex mb-2">
-                        <div class="flex-shrink-0">
-                          <i class="mdi mdi-map-marker text-primary me-1"></i>
+              <div *ngIf="role == 3">
+                <div class="job-box bookmark-post card mt-4"
+                     *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
+                  <div class="p-4">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="text-center mb-4 mb-md-0">
+                          <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
+                            src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                            alt=""
+                            class="img-fluid rounded-3"></a>
                         </div>
-                        <p class="text-muted mb-0">{{j.location.name}}</p>
                       </div>
-                    </div>
-                    <!--end col-->
-                    <div class="col-md-2">
-                      <div *ngIf="role == 1||role == 2||role == 3">
-                        <p class="text-muted mb-2"><span class="text-primary">$</span>{{j.salaryMin}}-{{j.salaryMax}}/m
-                        </p>
+                      <!--end col-->
+                      <div class="col-md-3">
+                        <div class="mb-2 mb-md-0">
+                          <h5 class="fs-18 mb-0"><a [routerLink]="['/job-detail', j.id]"
+                                                    class="text-dark">{{j.title}}</a>
+                          </h5>
+                          <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
+                        </div>
                       </div>
+                      <!--end col-->
+                      <div class="col-md-3">
+                        <div class="d-flex mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="mdi mdi-map-marker text-primary me-1"></i>
+                          </div>
+                          <p class="text-muted mb-0">{{j.location.name}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2">
+                        <div>
+                          <p class="text-muted mb-2"><span class="text-primary">$</span>{{j.salaryMin}}-{{j.salaryMax}}
+                            /m
+                          </p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2">
+                        <div>
+                          <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
+                        </div>
+                      </div>
+                      <!--end col-->
                     </div>
-                    <!--end col-->
-                    <div class="col-md-2">
-                      <div>
+                    <!--end row-->
+                  </div>
+                  <div class="p-3 bg-light">
+                    <div class="row justify-content-between">
+                      <div class="col-md-4">
+                        <div>
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Experience :</span> {{j.expYear}}+ years</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-lg-2 col-md-3">
+                        <div *ngIf="role == 3">
+                          <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"
+                             (click)="applyJobId(j)">Apply Now <i
+                            class="mdi mdi-chevron-double-right"></i></a>
+                          <span *ngIf="checkApplyJob[i]" class="badge bg-soft-danger fs-13 mt-1">Waiting</span>
+                        </div>
+                      </div>
+                      <!--end col-->
+                    </div>
+                    <!--end row-->
+                  </div>
+                </div>
+                <!--end job-box-->
+              </div>
+              <div *ngIf="role == 0||role == 2||role == 1">
+                <div class="job-box bookmark-post card mt-4"
+                     *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }|search: searchText,index as i">
+                  <div class="p-4">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="text-center mb-4 mb-md-0">
+                          <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
+                            src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                            alt=""
+                            class="img-fluid rounded-3"></a>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-3">
+                        <div class="mb-2 mb-md-0">
+                          <h5 class="fs-18 mb-0"><a [routerLink]="['/job-detail', j.id]"
+                                                    class="text-dark">{{j.title}}</a>
+                          </h5>
+                          <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2 ps-5">
+                        <div class="d-flex mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="mdi mdi-map-marker text-primary me-1"></i>
+                          </div>
+                          <p class="text-muted mb-0">{{j.location.name}}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 ps-5" *ngIf="role != 0">
+                        <div class="d-flex mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="mdi mdi-currency-usd text-primary me-1"></i>
+                          </div>
+                          <p class="text-muted mb-0">{{j.salaryMin}} - {{j.salaryMax}}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 ps-5" *ngIf="role == 0">
+                        <div class="d-flex mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="mdi mdi-human-male-male text-primary me-1"></i>
+                          </div>
+                          <p class="text-muted mb-0">{{j.quantity}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2">
+                        <div class="d-flex mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="mdi mdi-clock-outline text-primary me-1"></i>
+                          </div>
+                          <p class="text-muted mb-0">{{j.expiredDate}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                    </div>
+                    <!--end row-->
+                  </div>
+                  <div class="p-3 bg-light">
+                    <div class="row justify-content-between">
+                      <div class="col-md-8">
+                        <div>
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Experience :</span> {{j.expYear}}+ years</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2">
                         <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
                         <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
                       </div>
+                      <!--end col-->
                     </div>
-                    <!--end col-->
+                    <!--end row-->
                   </div>
-                  <!--end row-->
                 </div>
-                <div class="p-3 bg-light">
-                  <div class="row justify-content-between">
-                    <div class="col-md-4">
-                      <div>
-                        <p class="text-muted mb-0"><span
-                          class="text-dark">Experience :</span> {{j.expYear}}+ years</p>
-                      </div>
-                    </div>
-                    <!--end col-->
-                    <div class="col-lg-2 col-md-3">
-                      <div>
-                        <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link" (click)="applyJobId(j)">Apply Now <i
-                          class="mdi mdi-chevron-double-right"></i></a>
-                        <span *ngIf="checkApplyJob[i]" class="badge bg-soft-danger fs-13 mt-1">Waiting</span>
-                      </div>
-                    </div>
-                    <!--end col-->
-                  </div>
-                  <!--end row-->
-                </div>
+                <!--end job-box-->
               </div>
-              <!--end job-box-->
-
             </div>
             <!-- End Job-list -->
             <div class="row">
-              <pagination-controls class="text-center mt-5" (pageChange)="p = $event">
+              <pagination-controls class="text-center mt-5" (pageChange)="p = $event" (click)="scrollTop()">
               </pagination-controls>
             </div><!-- end row -->
           </div>
@@ -405,7 +487,7 @@
   <!-- END JOB-LIST -->
 
   <!-- START APPLY MODAL -->
-  <div class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
+  <div *ngIf="role != 0" class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <form [formGroup]="applyForm">
@@ -442,6 +524,7 @@
                     data-bs-dismiss="modal" #btnModal hidden>Close
             </button>
           </div>
+          <mat-progress-bar mode="indeterminate" class="example-margin" *ngIf="checkUpload"></mat-progress-bar>
         </form>
       </div>
     </div>

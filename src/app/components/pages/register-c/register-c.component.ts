@@ -69,6 +69,7 @@ export class RegisterCComponent {
     this.candidate.avatar = null
     // @ts-ignore
     this.candidate.role = {id: '3', name: "CANDIDATE"}
+    // this.candidate.role = {id: 3}
     this.companyService.saveCandidate(this.candidate).subscribe(() => {
       setTimeout(() => {
         this.loading = true;
