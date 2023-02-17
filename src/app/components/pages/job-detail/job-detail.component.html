@@ -392,7 +392,6 @@
 <div class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <form>
         <div class="modal-body p-5">
           <div class="text-center mb-4">
             <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
@@ -415,7 +414,7 @@
           <div class="mb-3">
             <label for="message" class="form-label">Message</label>
             <textarea class="form-control" id="message" rows="4"
-                      placeholder="Enter your message" formControlName="message" [(ngModel)]="message"></textarea>
+                      placeholder="Enter your message" [(ngModel)]="message"></textarea>
           </div>
           <div class="mb-4">
             <label class="form-label" for="cv">Resume Upload</label>
@@ -427,7 +426,6 @@
           </button>
         </div>
         <mat-progress-bar mode="indeterminate" class="example-margin" *ngIf="checkUpload"></mat-progress-bar>
-      </form>
     </div>
   </div>
 </div><!-- END APPLY MODAL -->
