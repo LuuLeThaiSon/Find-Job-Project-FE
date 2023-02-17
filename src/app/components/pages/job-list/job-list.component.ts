@@ -24,8 +24,9 @@ export class JobListComponent implements OnInit {
   p: number = 1;
   jobId!: number;
   jobs: Job[] = [];
-  user!: any;
-  role!: number;
+  user!:any;
+  role!:number;
+  searchText = "";
   applyForm!: FormGroup;
   applyJob: ApplyJob = new ApplyJob();
   jobApply!: Job;
@@ -37,6 +38,7 @@ export class JobListComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     // @ts-ignore
     if (sessionStorage.getItem("user")==null) {
       this.user = null;
@@ -63,15 +65,11 @@ export class JobListComponent implements OnInit {
               private storage: AngularFireStorage,
               private applyJobService: ApplyJobService) {
 
-    // this.findAllByStatusIsTrueAndAndExpiredDate();
-    // this.findAllLocations();
-    // this.findAllCategories();
   }
 
   findAll() {
     this.jobService.findAll().subscribe((data) => {
       this.jobs = data;
-      console.log(this.jobs)
     })
   }
 
@@ -101,18 +99,6 @@ export class JobListComponent implements OnInit {
     })
   }
 
-  public searchByTitleJobOrCompanyName(key: string): void {
-    const results: Job[] = [];
-    for (const job of this.jobs) {
-      if (job.title.toLowerCase().indexOf(key.toLowerCase()) !== -1 || job.company.name.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
-        results.push(job)
-      }
-    }
-    this.jobs = results;
-    if (!key) {
-      this.ngOnInit()
-    }
-  }
 
   applyJobId(job: Job) {
     this.jobApply = job;
