@@ -1,302 +1,3 @@
-<!--<div class="page-content">-->
-
-<!--  &lt;!&ndash; START SIGN-UP &ndash;&gt;-->
-<!--  <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">-->
-<!--    <section class="bg-auth">-->
-<!--      <div class="container">-->
-<!--        <div class="row justify-content-center">-->
-<!--          <div class="col-xl-10 col-lg-12">-->
-<!--            <div class="card auth-box">-->
-<!--              <div class="row align-items-center">-->
-<!--                <div class="col-lg-6 text-center">-->
-<!--                  <div class="card-body p-4">-->
-<!--                    <a href="index.html">-->
-<!--                      <img src="assets/images/logo-light.png" alt="" class="logo-light">-->
-<!--                      <img src="assets/images/logo-dark.png" alt="" class="logo-dark" style="margin-top: 100px">-->
-<!--                    </a>-->
-<!--                    <div>-->
-<!--                    </div>-->
-<!--                        </div>-->
-<!--                      </div>&lt;!&ndash;end col&ndash;&gt;-->
-<!--                      <div class="col-lg-6">-->
-<!--                        <div class="auth-content card-body p-5 text-white">-->
-<!--                          <div class="w-100">-->
-<!--                            <div class="text-center">-->
-<!--                              <h5>Let's Get Started</h5>-->
-<!--                              <p class="text-white-70">Sign Up and get access to all the features of Jobcy</p>-->
-<!--                            </div>-->
-<!--                            <div class="mb-3">-->
-<!--                              <label for="name" class="form-label">Username</label>-->
-<!--                              <input type="text" class="form-control" id="name" placeholder="Enter your username"-->
-<!--                                     formControlName="name" ngModel>-->
-<!--                            </div>-->
-<!--                            <p-->
-<!--                              *ngIf="formRegister.get('name')?.errors?.['required'] && formRegister.get('name')?.touched"-->
-<!--                              style="color: red">Required</p>-->
-<!--                            <div class="mb-3">-->
-<!--                              <label for="email" class="form-label">Email</label>-->
-<!--                              <input type="text" class="form-control" id="email" placeholder="Enter your email"-->
-<!--                                     formControlName="email" ngModel>-->
-<!--                            </div>-->
-<!--                            <p-->
-<!--                              *ngIf="formRegister.get('email')?.errors?.['required'] && formRegister.get('email')?.touched"-->
-<!--                              style="color: red">Required</p>-->
-<!--                            <p-->
-<!--                              *ngIf="formRegister.get('email')?.errors?.['pattern'] && formRegister.get('email')?.touched"-->
-<!--                              style="color: red">Must have pattern email</p>-->
-<!--                            <div class="mb-3">-->
-<!--                              <label for="avatar" class="form-label">Avatar</label>-->
-<!--                              <input type="file" class="form-control" id="avatar" placeholder="Enter your email"-->
-<!--                                     formControlName="avatar" ngModel>-->
-<!--                              <img src="{{path}}" alt="">-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <label for="role" class="form-label">Role</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div class="mb-3" formGroupName="role" id="role">&ndash;&gt;-->
-<!--&lt;!&ndash;                              <select class="form-control" formControlName="id">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option *ngFor="let r of role" [value]="r.id" style="color: blue"&ndash;&gt;-->
-<!--&lt;!&ndash;                                        [selected]="selectedOption">{{r.name}}</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                              </select>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--                            <div class="mb-4">-->
-<!--                              <div class="form-check"><input class="form-check-input" type="checkbox"-->
-<!--                                                             id="flexCheckDefault">-->
-<!--                                <label class="form-check-label" for="flexCheckDefault">I agree to the <a-->
-<!--                                  href="javascript:void(0)" class="text-white text-decoration-underline">Terms and-->
-<!--                                  conditions</a></label>-->
-<!--                              </div>-->
-<!--                            </div>-->
-<!--                            <div class="text-center">-->
-<!--                              <button type="submit" class="btn btn-white btn-hover w-100">Sign Up</button>-->
-<!--                            </div>-->
-<!--                            <div class="mt-3 text-center">-->
-<!--                              <p class="mb-0">Already a member ? <a [routerLink]="['/login']"-->
-<!--                                                                    class="fw-medium text-white text-decoration-underline">-->
-<!--                                Sign In </a></p>-->
-<!--                            </div>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                      </div>&lt;!&ndash;end col&ndash;&gt;-->
-<!--                    </div>&lt;!&ndash;end row&ndash;&gt;-->
-<!--                  </div>&lt;!&ndash;end auth-box&ndash;&gt;-->
-<!--                </div>&lt;!&ndash;end col&ndash;&gt;-->
-<!--              </div>&lt;!&ndash;end row&ndash;&gt;-->
-<!--            </div>-->
-<!--      &lt;!&ndash;end container&ndash;&gt;-->
-<!--      </div>-->
-<!--    </section>-->
-<!--  </form>-->
-<!--  &lt;!&ndash; END SIGN-UP &ndash;&gt;-->
-
-<!--</div>-->
-<!--&lt;!&ndash; End Page-content &ndash;&gt;-->
-
-
-<!--<div class="page-title-area">-->
-<!--  <div class="d-table">-->
-<!--    <div class="d-table-cell">-->
-<!--      <div class="container">-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="create-account-area pt-100 pb-100">-->
-<!--  <div class="container">-->
-<!--    <div class="create-photo">-->
-
-
-<!--      <div class="create-information">-->
-<!--        <form [formGroup]="formRegister" (ngSubmit)="onSubmit()">-->
-<!--          <h3 style="margin-left: 450px; margin-bottom: 50px; margin-top:50px">Basic Information</h3>-->
-
-
-<!--          <div class="row">-->
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="name">Your Name</label>-->
-<!--                <input type="text" class="form-control" id="name" placeholder="Enter your company name"-->
-<!--                       formControlName="name" ngModel (change)="checkName(name.value)" #name>-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('name')?.errors?.['required'] && formRegister.get('name')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--            </div>-->
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="email">Your Email</label>-->
-<!--                <input type="email" class="form-control" id="email" placeholder="Enter your email"-->
-<!--                       formControlName="email" ngModel (change)="checkEmail(mail.value)" #mail>-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('email')?.errors?.['required'] && formRegister.get('email')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--              <p *ngIf="formRegister.get('email')?.errors?.['pattern'] && formRegister.get('email')?.touched"-->
-<!--                style="color: red">Must have pattern email</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="shortName">Short Name</label>-->
-<!--                <input type="text" class="form-control" id="shortName" placeholder="Enter your short name" formControlName="shortName" ngModel >-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('shortName')?.errors?.['required'] && formRegister.get('shortName')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--              <p *ngIf="formRegister.get('shortName')?.errors?.['pattern'] && formRegister.get('shortName')?.touched"-->
-<!--                 style="color: red">Must have pattern email</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="tel">Your Phone</label>-->
-<!--                <input type="text" class="form-control" placeholder="Enter your phone" id="tel" formControlName="tel" ngModel>-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('tel')?.errors?.['required'] && formRegister.get('tel')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--              <p *ngIf="formRegister.get('tel')?.errors?.['pattern'] && formRegister.get('tel')?.touched"-->
-<!--                 style="color: red">Must have pattern email</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="code">Code</label>-->
-<!--                <input type="text" class="form-control" placeholder="Enter your code" id="code" formControlName="code" ngModel>-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('code')?.errors?.['required'] && formRegister.get('code')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="address">Address:</label>-->
-<!--                <input type="text" class="form-control" placeholder="Enter your address" id="address" formControlName="address" ngModel>-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('address')?.errors?.['required'] && formRegister.get('address')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--            </div>-->
-
-<!--<div class="col-lg-6" hidden>-->
-<!--            <label for="role" class="form-label">Role</label>-->
-<!--            <div class="mb-3" formGroupName="role" id="role">-->
-<!--              <select class="form-control" formControlName="id">-->
-<!--                <option *ngFor="let r of role" [value]="r.id" style="color: blue"-->
-<!--                        [selected]="selectedOption">{{r.name}}</option>-->
-<!--              </select>-->
-<!--            </div>-->
-<!--</div>-->
-<!--&lt;!&ndash;            <div class="col-lg-12">&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                <div class="gender-area">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <span>Gender</span>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <input type="radio" name="gender" id="male" value="male" checked>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <label for="male">Male</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                  <input type="radio" name="gender" id="female" value="female">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <label for="female">Female</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-
-<!--            <div class="col-lg-12">-->
-<!--              <div class="form-group">-->
-<!--                <label for="description">Description</label>-->
-<!--                <textarea class="form-control" rows="2" id="description" placeholder="Type something here" formControlName="description" ngModel></textarea>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-
-<!--&lt;!&ndash;      <div class="create-education">&ndash;&gt;-->
-<!--&lt;!&ndash;        <div class="create-education-wrap">&ndash;&gt;-->
-<!--&lt;!&ndash;          <div class="create-education-left">&ndash;&gt;-->
-<!--&lt;!&ndash;            <h3>Education</h3>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <div class="create-education-right">&ndash;&gt;-->
-<!--&lt;!&ndash;            <a routerLink="/">Add Education</a>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-
-
-<!--          <div class="row">-->
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="numberOfEmployees">Number of Employees</label>-->
-<!--                <input type="text" class="form-control" placeholder="Enter your number" id="numberOfEmployees" formControlName="numberOfEmployees" ngModel >-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('numberOfEmployees')?.errors?.['required'] && formRegister.get('numberOfEmployees')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="googleMap">Google Map Link</label>-->
-<!--                <input id="googleMap" class="form-control" placeholder="Enter link" formControlName="googleMap" ngModel >-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('googleMap')?.errors?.['required'] && formRegister.get('googleMap')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-6">-->
-<!--              <div class="form-group">-->
-<!--                <label for="website">Website</label>-->
-<!--                <input type="text" class="form-control" id="website" placeholder="Enter your website" formControlName="website" ngModel>-->
-<!--              </div>-->
-<!--              <p *ngIf="formRegister.get('website')?.errors?.['required'] && formRegister.get('website')?.touched"-->
-<!--                 style="color: red">Required</p>-->
-<!--            </div>-->
-
-<!--            <div class="col-lg-12">-->
-<!--              <div class="form-group">-->
-<!--                <label for="avatar">Avatar</label>-->
-<!--                <input type="file" class="form-control" id="avatar" placeholder="Enter your avatar" formControlName="avatar" ngModel (change)="submitAvatar($event)">-->
-<!--&lt;!&ndash;                <img src="{{path}}" alt="" width="100px" height="100px">&ndash;&gt;-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--&lt;!&ndash;      <div class="create-skills">&ndash;&gt;-->
-<!--&lt;!&ndash;        <div class="create-skills-wrap">&ndash;&gt;-->
-<!--&lt;!&ndash;          <div class="create-skills-left">&ndash;&gt;-->
-<!--&lt;!&ndash;            <h3>Skill</h3>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <div class="create-skills-right">&ndash;&gt;-->
-<!--&lt;!&ndash;            <a routerLink="/">Edit</a>&ndash;&gt;-->
-<!--&lt;!&ndash;            <a routerLink="/">Add Skill</a>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <div class="row">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-lg-6">&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Title</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="text" class="form-control">&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--&lt;!&ndash;      </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;          <div class="row">&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="col-lg-6">&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Facebook</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="text" class="form-control">&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;            <div class="col-lg-6">&ndash;&gt;-->
-<!--&lt;!&ndash;              <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Instagram</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="text" class="form-control">&ndash;&gt;-->
-<!--&lt;!&ndash;              </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;          </div>&ndash;&gt;-->
-<!--      <div class="text-left">-->
-<!--        <button type="submit" class="btn btn-primary">Save</button>-->
-<!--      </div>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
 
 <!doctype html>
 <html lang="en">
@@ -314,21 +15,18 @@
 </head>
 
 <body>
-<!--<div id="preloader">-->
-<!--  <div id="status">-->
-<!--    <ul>-->
-<!--      <li></li>-->
-<!--      <li></li>-->
-<!--      <li></li>-->
-<!--      <li></li>-->
-<!--      <li></li>-->
-<!--      <li></li>-->
-<!--    </ul>-->
-<!--  </div>-->
-<!--</div>-->
-<!--end page Loader -->
-
-<!-- Begin page -->
+<div id="preloader" [hidden]="loading">
+  <div id="status">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+</div>
 <div>
 
 
@@ -384,6 +82,11 @@
                                    formControlName="address" ngModel>
                           </div>
                           <div class="mb-3">
+                            <label for="shortName" class="form-label">Short Name</label>
+                            <input type="text" class="form-control" id="shortName" placeholder="Enter your address"
+                                   formControlName="shortName" ngModel>
+                          </div>
+                          <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <textarea type="text" class="form-control" id="description" placeholder="Enter your description"
                                    formControlName="description" ngModel>
@@ -418,7 +121,7 @@
 <!--                            </div>-->
 <!--                          </div>-->
                           <div class="text-center">
-                            <button type="submit" class="btn btn-white btn-hover w-100">Sign Up</button>
+                            <button type="submit" class="btn btn-white btn-hover w-100">Accept</button>
                           </div>
                           </div>
                           </div>

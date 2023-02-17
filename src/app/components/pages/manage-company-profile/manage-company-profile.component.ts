@@ -167,10 +167,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
 
     }
 
-    findCompanyById(id
-  :
-    number
-  )
+    findCompanyById(id: number)
     {
       this.companyService.findCompany(id).subscribe(res => {
         this.company = res;
@@ -180,11 +177,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       })
     }
 
-    findAllJobsByCompany(id
-  :
-    number
-  )
-    {
+    findAllJobsByCompany(id: number) {
       this.jobService.findAllJobsByCompany(id).subscribe(res => {
         this.jobs = res;
       })
@@ -231,10 +224,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       }, 1000);
     }
 
-    previewAvatar(event
-  :
-    any
-  )
+    previewAvatar(event: any)
     {
       this.loading = false;
       if (event.target.files && event.target.files[0]) {

@@ -15,7 +15,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {JobListComponent} from './components/pages/job-list/job-list.component';
 import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
-import {DropdownModule} from "primeng/dropdown";
 import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
 import { JobDetailComponent } from './components/pages/job-detail/job-detail.component';
 import {AngularFireModule} from "@angular/fire/compat";
@@ -29,9 +28,6 @@ import {
 } from "./components/pages/manage-company-profile/manage-company-profile.component";
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 import {BookmarksJobsComponent} from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
-import {MultiSelectModule} from "primeng/multiselect";
-import {NgSelectModule} from "@ng-select/ng-select";
-import {NgMultiSelectDropDownModule} from "ng-multiselect-dropdown";
 import { TopCompaniesComponent } from './top-companies/top-companies.component';
 import { ManageCandidateProfileComponent } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 
@@ -68,8 +64,6 @@ import { ManageCandidateProfileComponent } from './components/pages/manage-candi
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    DropdownModule,
-    MultiSelectModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -80,10 +74,6 @@ import { ManageCandidateProfileComponent } from './components/pages/manage-candi
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    DropdownModule,
-    MultiSelectModule,
-    NgSelectModule,
-    NgMultiSelectDropDownModule
   ],
 
   providers: [],

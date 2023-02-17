@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Candidate} from "../../model/candidate";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Role} from "../../model/role";
@@ -7,6 +7,7 @@ import {CompanyService} from "../../service/company.service";
 import {matchpassword} from "./matchpassword.validator";
 import firebase from "firebase/compat";
 import messaging = firebase.messaging;
+import {HeaderComponent} from "../../common/header/header.component";
 
 
 @Component({
@@ -27,6 +28,7 @@ export class RegisterCComponent {
 
 
   ngOnInit(): void {
+    this.loading = true
     this.formRegisterCandidate = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
@@ -53,6 +55,7 @@ export class RegisterCComponent {
 
 
   onSubmit() {
+    this.loading = false;
     console.log(this.formRegisterCandidate.value)
     this.candidate = this.formRegisterCandidate.value
     this.passwordSend.to = this.formRegisterCandidate.get('email')?.value
@@ -65,8 +68,11 @@ export class RegisterCComponent {
     // @ts-ignore
     this.candidate.avatar = null
     // @ts-ignore
-    this.candidate.role = {id: '2', name: "CANDIDATE"}
+    this.candidate.role = {id: '3', name: "CANDIDATE"}
     this.companyService.saveCandidate(this.candidate).subscribe(() => {
+      setTimeout(() => {
+        this.loading = true;
+      }, 1000)
       alert("Create Successfully!")
       this.router.navigate(['']).finally()
     })
@@ -76,11 +82,16 @@ export class RegisterCComponent {
   checkEmail(mail : string) :void {
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let a of data) {
-        if (a.email === mail) {
+        if (a.email.toLowerCase() === mail) {
           alert("Email exist!")
         }
       }
     })
   }
+
+  @ViewChild(HeaderComponent)
+  header: HeaderComponent | undefined;
+
+  loading!: boolean;
 
 }
