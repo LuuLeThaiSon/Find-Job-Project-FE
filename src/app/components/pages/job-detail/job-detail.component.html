@@ -147,10 +147,6 @@
         <div class="mt-4">
           <h5>Recent Jobs</h5>
           <div class="job-box card mt-4" *ngFor="let j of jobs.reverse() | slice:0:4">
-            <div class="bookmark-label text-center">
-              <a href="javascript:void(0)" class="text-white align-middle"><i
-                class="mdi mdi-star"></i></a>
-            </div>
             <div class="p-4">
               <div class="row align-items-center">
                 <div class="col-md-2">
@@ -170,7 +166,7 @@
                   </div>
                 </div>
                 <!--end col-->
-                <div class="col-md-3">
+                <div class="col-md-2">
                   <div class="d-flex mb-2">
                     <div class="flex-shrink-0">
                       <i class="mdi mdi-map-marker text-primary me-1"></i>
@@ -179,10 +175,19 @@
                   </div>
                 </div>
                 <!--end col-->
-                <div class="col-md-2">
+                <div class="col-md-2" *ngIf="role != 0">
                   <div>
                     <p class="text-muted mb-2"><span class="text-primary">$</span>{{j.salaryMin}}-{{j.salaryMax}}/m
                     </p>
+                  </div>
+                </div>
+                <!--end col-->
+                <div class="col-md-2" *ngIf="role == 0">
+                  <div>
+                    <div class="flex-shrink-0">
+                      <i class="mdi mdi-human-male-male text-primary me-1"></i>
+                    </div>
+                    {{j.quantity}}
                   </div>
                 </div>
                 <!--end col-->
@@ -208,12 +213,12 @@
                 <div class="col-lg-6 col-md-5">
                   <div>
                     <p class="text-muted mb-0"><span
-                      class="text-dark">Notes :</span>
-                      languages only differ in their grammar. </p>
+                      class="text-dark">Expired Date :</span>
+                      {{j.expiredDate}} </p>
                   </div>
                 </div>
                 <!--end col-->
-                <div class="col-lg-2 col-md-3">
+                <div class="col-lg-2 col-md-3" *ngIf="role == 3">
                   <div class="text-start text-md-end">
                     <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply
                       Now <i
@@ -389,7 +394,7 @@
 <!-- START JOB-DEATILS -->
 
 <!-- START APPLY MODAL -->
-<div class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
+<div *ngIf="role == 3" class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-body p-5">

@@ -76,7 +76,6 @@ export class JobListComponent implements OnInit {
   findAllByStatusIsTrueAndAndExpiredDate() {
     return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
-      console.log(this.jobs)
       if(this.role == 0) {
         return;
       } else {

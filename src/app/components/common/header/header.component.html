@@ -314,7 +314,7 @@
             <li class="list-inline-item dropdown">
             <a href="javascript:void(0)" class="header-item" id="userdropdown" data-bs-toggle="dropdown"
                aria-expanded="false">
-              <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">{{user.name}}</span>
+              <img src="{{user.avatar?user.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">{{user.name}}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" href="" [routerLink]="['/manage-jobs', user.id]">Manage Jobs</a></li>
@@ -413,7 +413,7 @@
             <li class="list-inline-item dropdown">
             <a href="javascript:void(0)" class="header-item" id="userdropdown" data-bs-toggle="dropdown"
                aria-expanded="false">
-              <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name}}</span>
+              <img src="{{user.avatar?user.avatar:'https://api-private.atlassian.com/users/d533a32ca5379ef2482c4f6a780e3b20/avatar'}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name}}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" href="" [routerLink]="['/manage-candidate-profile/',user.id]">My Profile</a></li>

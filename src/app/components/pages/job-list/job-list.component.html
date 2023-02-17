@@ -58,7 +58,7 @@
                       <i class="uil uil-briefcase-alt"></i>
                       <input type="search" class="form-control filter-job-input-box border border-primary"
                              id="exampleFormControlInput1" placeholder="Job, company... "
-                      name="search" [(ngModel)]="searchText" >
+                             name="search" [(ngModel)]="searchText">
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
@@ -200,7 +200,7 @@
                       </div>
                       <!--end col-->
                       <div class="col-lg-2 col-md-3">
-                        <div>
+                        <div *ngIf="role == 3">
                           <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"
                              (click)="applyJobId(j)">Apply Now <i
                             class="mdi mdi-chevron-double-right"></i></a>
@@ -237,12 +237,28 @@
                         </div>
                       </div>
                       <!--end col-->
-                      <div class="col-md-5 ps-5">
+                      <div class="col-md-2 ps-5">
                         <div class="d-flex mb-2">
                           <div class="flex-shrink-0">
                             <i class="mdi mdi-map-marker text-primary me-1"></i>
                           </div>
                           <p class="text-muted mb-0">{{j.location.name}}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 ps-5" *ngIf="role != 0">
+                        <div class="d-flex mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="mdi mdi-currency-usd text-primary me-1"></i>
+                          </div>
+                          <p class="text-muted mb-0">{{j.salaryMin}} - {{j.salaryMax}}</p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 ps-5" *ngIf="role == 0">
+                        <div class="d-flex mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="mdi mdi-human-male-male text-primary me-1"></i>
+                          </div>
+                          <p class="text-muted mb-0">{{j.quantity}}</p>
                         </div>
                       </div>
                       <!--end col-->
@@ -268,10 +284,8 @@
                       </div>
                       <!--end col-->
                       <div class="col-md-2">
-
                         <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
                         <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
-
                       </div>
                       <!--end col-->
                     </div>

@@ -62,16 +62,20 @@ export class JobDetailComponent {
   findOne(id: number) {
     return this.jobService.findOne(id).subscribe((data) => {
       this.job = data;
-      this.applyJobService.findAllApplyJobByCandidateId(this.user.id).subscribe((data1) => {
-        for (let i = 0; i < data1.length; i++) {
-          // @ts-ignore
-          if (data1[i].job.id === this.job.id) {
-            this.flag = true;
+      if(this.role == 0) {
+        return
+      } else {
+        this.applyJobService.findAllApplyJobByCandidateId(this.user.id).subscribe((data1) => {
+          for (let i = 0; i < data1.length; i++) {
             // @ts-ignore
-            this.applyJobId = data1[i].id;
+            if (data1[i].job.id === this.job.id) {
+              this.flag = true;
+              // @ts-ignore
+              this.applyJobId = data1[i].id;
+            }
           }
-        }
-      })
+        })
+      }
     })
   }
 

@@ -65,7 +65,7 @@ export class RegisterCComponent {
     // @ts-ignore
     this.candidate.avatar = null
     // @ts-ignore
-    this.candidate.role = {id: '2', name: "CANDIDATE"}
+    this.candidate.role = {id: 3}
     this.companyService.saveCandidate(this.candidate).subscribe(() => {
       alert("Create Successfully!")
       this.router.navigate(['']).finally()

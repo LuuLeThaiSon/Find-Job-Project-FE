@@ -48,7 +48,7 @@ export class LoginComponent {
     this.admin = this.formLogin.value
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
-        if (this.candidate.email == data[i].email && this.candidate.password == data[i].password) {
+        if (this.candidate.email.toLowerCase() == data[i].email.toLowerCase() && this.candidate.password == data[i].password) {
           sessionStorage.setItem("user", JSON.stringify(data[i]));
           alert("Login successfully!");
           this.router.navigate(['']).finally();
@@ -57,7 +57,7 @@ export class LoginComponent {
       }
       this.companyService.findAllCompany().subscribe((data) => {
         for (let j = 0; j < data.length; j++) {
-          if (this.company.email == data[j].email && this.company.password == data[j].password) {
+          if (this.company.email.toLowerCase() == data[j].email.toLowerCase() && this.company.password == data[j].password) {
             sessionStorage.setItem("user", JSON.stringify(data[j]));
             alert("Login successfully!");
             this.router.navigate(['']).finally();

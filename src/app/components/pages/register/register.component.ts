@@ -98,7 +98,7 @@ export class RegisterComponent {
           this.company.status = true
           this.company.avatar = url
           this.company.password = null
-          this.company.role = {id: 3, name : 'COMPANY'}
+          this.company.role = {id: 2}
           this.company.numberOfEmployees = 0
           this.companyService.getPassword(this.passwordSend).subscribe((data) => {
             this.company.password = data.message
