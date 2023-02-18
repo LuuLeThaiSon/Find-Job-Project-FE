@@ -182,7 +182,7 @@
                       <!--end col-->
                       <div class="col-md-2">
                         <div>
-                          <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full time</span>
                           <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
                         </div>
                       </div>
@@ -204,7 +204,8 @@
                           <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"
                              (click)="applyJobId(j)">Apply Now <i
                             class="mdi mdi-chevron-double-right"></i></a>
-                          <span *ngIf="checkApplyJob[i]" class="badge bg-soft-danger fs-13 mt-1">Waiting</span>
+                          <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]" class="badge bg-soft-danger fs-13 mt-1">Waiting</span>
+                          <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]" class="badge bg-soft-success fs-13 mt-1">Accepted</span>
                         </div>
                       </div>
                       <!--end col-->
