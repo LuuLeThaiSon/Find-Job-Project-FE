@@ -6,7 +6,7 @@ import {LocationsService} from "../../service/locations.service";
 import {CategoryService} from "../../service/category.service";
 import {Category} from "../../model/category";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApplyJob} from "../../model/apply-job";
 import {ApplyJobService} from "../../service/apply-job.service";
 import {finalize} from "rxjs";
@@ -24,8 +24,8 @@ export class JobListComponent implements OnInit {
   p: number = 1;
   jobId!: number;
   jobs: Job[] = [];
-  user!:any;
-  role!:number;
+  user!: any;
+  role!: number;
   searchText = "";
   applyForm!: FormGroup;
   applyJob: ApplyJob = new ApplyJob();
@@ -40,7 +40,7 @@ export class JobListComponent implements OnInit {
   ngOnInit(): void {
 
     // @ts-ignore
-    if (sessionStorage.getItem("user")==null) {
+    if (sessionStorage.getItem("user") == null) {
       this.user = null;
       this.role = 0;
     } else {
@@ -48,7 +48,6 @@ export class JobListComponent implements OnInit {
       this.user = JSON.parse(sessionStorage.getItem("user")) as any;
       this.role = this.user.role.id;
     }
-    console.log(this.role);
 
     this.applyForm = new FormGroup({
       message: new FormControl('')
@@ -57,6 +56,11 @@ export class JobListComponent implements OnInit {
     this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
+
+    this.workSalary = new FormGroup({
+      years: new FormControl('allsalary', Validators.required)
+    })
+
   }
 
   constructor(private jobService: JobService,
@@ -76,7 +80,8 @@ export class JobListComponent implements OnInit {
   findAllByStatusIsTrueAndAndExpiredDate() {
     return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
-      if(this.role == 0) {
+      this.filteredResult =data;
+      if (this.role == 0) {
         return;
       } else {
         this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
@@ -146,7 +151,52 @@ export class JobListComponent implements OnInit {
   @ViewChild('btnModal') btnModal: ElementRef;
   decline: any;
 
+  // filterOnMultipleConditions
+  filteredResult: Job[] = [];
+
+  workSalary!: FormGroup;
+
   scrollTop() {
     window.scrollTo(0, 300)
   }
+
+  changeWorkSalary(event: any) {
+    this.myFormJobSalary?.nativeElement.submit();
+    let result = this.workSalary.value.years;
+    if (result == "allsalary") {
+     this.filteredResult = this.jobs;
+    }
+    if (result == "less200") {
+      this.filteredResult = this.jobs.filter((obj)=>{
+        return obj.salaryMin <= 200;
+      })
+    }
+    if (result == "200-500") {
+      this.filteredResult = this.jobs.filter((obj)=>{
+        let input = this.jobs
+        return obj.salaryMin > 200 && obj.salaryMin <= 500;
+      })
+    }
+    if (result == "500-800") {
+      this.filteredResult = this.jobs.filter((obj)=>{
+        return obj.salaryMin > 500 && obj.salaryMin <= 800;
+      })
+    }
+    if (result == "500-800") {
+      let input = this.jobs
+      this.filteredResult = this.jobs.filter((obj)=>{
+        return obj.salaryMin > 500 && obj.salaryMin <= 800;
+      })
+    }
+    if (result == "more800") {
+      this.filteredResult = this.jobs.filter((obj)=>{
+        return obj.salaryMin > 800;
+      })
+    }
+    console.log(this.filteredResult)
+  }
+
+  @ViewChild('formJobSalary') myFormJobSalary: ElementRef | undefined;
+
+
 }

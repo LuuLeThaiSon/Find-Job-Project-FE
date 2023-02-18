@@ -226,6 +226,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   updateBanner(event: any) {
     // @ts-ignore
     console.log(event.target.files[0])
+    console.log(event.target.files)
     this.loading = false;
     if (event.target.files && event.target.files[0]) {
       this.imageBannerFile = event.target.files[0];

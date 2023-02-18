@@ -140,9 +140,9 @@
             </div><!--end wedget-popular-title-->
             <!-- Job-list -->
             <div>
-              <div *ngIf="role == 3">
+              <div *ngIf="role == 3||role == 2">
                 <div class="job-box bookmark-post card mt-4"
-                     *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
+                     *ngFor="let j of filteredResult | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
                   <div class="p-4">
                     <div class="row align-items-center">
                       <div class="col-md-2">
@@ -306,55 +306,108 @@
         <!-- START SIDE-BAR -->
         <div class="col-lg-3">
           <div class="side-bar mt-5 mt-lg-0">
-            <div class="accordion" id="accordionExample">
+            <div class="accordion" id="accordionExample" *ngIf="role != 0">
+
               <div class="accordion-item">
-                <h2 class="accordion-header" id="locationOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#location"
-                          aria-expanded="true" aria-controls="location">
-                    Location
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jobsalary"
+                          aria-expanded="false" aria-controls="jobsalary">
+                    Offered Salary
                   </button>
                 </h2>
-                <div id="location" class="accordion-collapse collapse show" aria-labelledby="locationOne">
+                <form [formGroup]="workSalary"  id="formJobSalary">
+                <div id="jobsalary" class="accordion-collapse collapse show" aria-labelledby="jobSalary">
                   <div class="accordion-body">
                     <div class="side-title">
-                      <div class="mb-3">
-                        <form class="position-relative">
-                          <input class="form-control" type="search" placeholder="Search...">
-                          <button class="bg-transparent border-0 position-absolute top-50 end-0 translate-middle-y me-2"
-                                  type="submit"><span class="mdi mdi-magnify text-muted"></span></button>
-                        </form>
+                      <div class="form-check mt-2">
+                        <input (change)="changeWorkSalary($event)"
+                               value="allsalary"
+                               formControlName="years"
+                               class="form-check-input" type="radio" name="JobSalary" id="JobSalaryAll" checked>
+                        <label class="form-check-label ms-2 text-muted" for="JobSalaryAll">
+                          All
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (change)="changeWorkSalary($event)"
+                               value="less200"
+                               formControlName="years"
+                          class="form-check-input" type="radio" name="JobSalary" id="JobSalary1">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalary1">
+                          Less than $200
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (change)="changeWorkSalary($event)"
+                               value="200-500"
+                               formControlName="years"
+                          class="form-check-input" type="radio" name="JobSalary" id="JobSalary2">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalary2">
+                          $200 - $500
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (change)="changeWorkSalary($event)"
+                               value="500-800"
+                               formControlName="years"
+                          class="form-check-input" type="radio" name="JobSalary" id="JobSalary3">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalary3">
+                          $500 - $800
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (change)="changeWorkSalary($event)"
+                               value="more800"
+                               formControlName="years"
+                          class="form-check-input" type="radio" name="JobSalary" id="JobSalary4">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalary4">
+                          More than $800
+                        </label>
                       </div>
                     </div>
                   </div>
                 </div>
+                </form>
               </div><!-- end accordion-item -->
-
-              <div class="accordion-item mt-4">
-                <h2 class="accordion-header" id="experienceOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#experience"
-                          aria-expanded="true" aria-controls="experience">
-                    Work experience
+              <div class="accordion-item mt-3">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jobexp"
+                          aria-expanded="false" aria-controls="jobexp">
+                    Work Experience
                   </button>
                 </h2>
-                <div id="experience" class="accordion-collapse collapse show" aria-labelledby="experienceOne">
+                <div id="jobexp" class="accordion-collapse collapse show" aria-labelledby="jobExp">
                   <div class="accordion-body">
                     <div class="side-title">
                       <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked1"/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked1">No experience</label>
+                        <input class="form-check-input" type="radio" name="JobExp" id="JobExpAll" checked>
+                        <label class="form-check-label ms-2 text-muted" for="JobExpAll">
+                          All
+                        </label>
                       </div>
                       <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked2" checked/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked2">0-3 years</label>
+                        <input class="form-check-input" type="radio" name="JobExp" id="JobExp1" >
+                        <label class="form-check-label ms-2 text-muted" for="JobExp1">
+                          No Experience
+                        </label>
                       </div>
                       <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked3"/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked3">3-6 years</label>
+                        <input class="form-check-input" type="radio" name="JobExp" id="JobExp2">
+                        <label class="form-check-label ms-2 text-muted" for="JobExp2">
+                          0 - 3 years
+                        </label>
                       </div>
                       <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked4"/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked4">More than 6
-                          years</label>
+                        <input class="form-check-input" type="radio" name="JobExp" id="JobExp3">
+                        <label class="form-check-label ms-2 text-muted" for="JobExp3">
+                          3 -  6 years
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input class="form-check-input" type="radio" name="JobExp" id="JobExp4">
+                        <label class="form-check-label ms-2 text-muted" for="JobExp4">
+                          More than 6 years
+                        </label>
                       </div>
                     </div>
                   </div>
@@ -362,9 +415,9 @@
               </div><!-- end accordion-item -->
 
               <div class="accordion-item mt-3">
-                <h2 class="accordion-header" id="jobType">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jobtype"
-                          aria-expanded="false" aria-controls="jobtype">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#jobtype" aria-expanded="false" aria-controls="jobtype">
                     Type of employment
                   </button>
                 </h2>
@@ -372,27 +425,22 @@
                   <div class="accordion-body">
                     <div class="side-title">
                       <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault6"
-                               checked>
-                        <label class="form-check-label ms-2 text-muted" for="flexRadioDefault6">
-                          Freelance
+                        <input value="all"
+                               class="form-check-input" type="radio" name="JobType" id="JobTypeAll" checked>
+                        <label class="form-check-label ms-2 text-muted" for="JobTypeAll">
+                          Any
                         </label>
                       </div>
                       <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                        <label class="form-check-label ms-2 text-muted" for="flexRadioDefault2">
+                        <input class="form-check-input" type="radio" name="JobType" id="JobType2">
+                        <label class="form-check-label ms-2 text-muted" for="JobType2">
                           Full Time
                         </label>
                       </div>
                       <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3">
-                        <label class="form-check-label ms-2 text-muted" for="flexRadioDefault3">
-                          Internship
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4">
-                        <label class="form-check-label ms-2 text-muted" for="flexRadioDefault4">
+                        <input value="partTime"
+                               class="form-check-input" type="radio" name="JobType" id="JobType3">
+                        <label class="form-check-label ms-2 text-muted" for="JobType3">
                           Part Time
                         </label>
                       </div>
@@ -401,84 +449,58 @@
                 </div>
               </div><!-- end accordion-item -->
 
-              <div class="accordion-item mt-3">
-                <h2 class="accordion-header" id="datePosted">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dateposted"
-                          aria-expanded="false" aria-controls="dateposted">
-                    Date Posted
-                  </button>
-                </h2>
-                <div id="dateposted" class="accordion-collapse collapse show" aria-labelledby="datePosted">
-                  <div class="accordion-body">
-                    <div class="side-title form-check-all">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="checkAll" value=""/>
-                        <label class="form-check-label ms-2 text-muted" for="checkAll">
-                          All
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" name="datePosted" value="last"
-                               id="flexCheckChecked5" checked/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked5">
-                          Last Hour
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" name="datePosted" value="last"
-                               id="flexCheckChecked6"/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked6">
-                          Last 24 hours
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" name="datePosted" value="last"
-                               id="flexCheckChecked7"/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked7">
-                          Last 7 days
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" name="datePosted" value="last"
-                               id="flexCheckChecked8"/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked8">
-                          Last 14 days
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" name="datePosted" value="last"
-                               id="flexCheckChecked9"/>
-                        <label class="form-check-label ms-2 text-muted" for="flexCheckChecked9">
-                          Last 30 days
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- end accordion-item -->
-
-              <div class="accordion-item mt-3">
-                <h2 class="accordion-header" id="tagCloud">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tagcloud"
-                          aria-expanded="false" aria-controls="tagcloud">
-                    Tags Cloud
-                  </button>
-                </h2>
-                <div id="tagcloud" class="accordion-collapse collapse show" aria-labelledby="tagCloud">
-                  <div class="accordion-body">
-                    <div class="side-title">
-                      <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">design</a>
-                      <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">marketing</a>
-                      <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">business</a>
-                      <a href="javascript:void(0)" class="badge tag-cloud fs-13 mt-2">developer</a>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- end accordion-item -->
 
             </div><!--end accordion-->
 
+            <div class="col-lg-12 col-md-6">
+              <a href="javascript:void(0)" class="btn btn-primary w-100"><i
+                class="uil uil-filter"></i> Filter</a>
+            </div><!--end col-->
+
           </div><!--end side-bar-->
+
+          <div *ngIf="role == 0" class="side-bar ms-lg-1">
+            <div class="mt-4">
+              <div class="text-center">
+                <img src="assets/images/contact.png" alt="" class="img-fluid">
+              </div>
+              <div class="mt-4 pt-3">
+
+                <div class="d-flex text-muted align-items-center mt-2">
+                  <div class="flex-shrink-0 fs-22 text-primary">
+                    <i class="uil uil-map-marker"></i>
+                  </div>
+                  <div class="flex-grow-1 ms-2">
+                    <p class="mb-0">CodeGym C0822I1, HdMon, My Dinh, Hanoi, Vietnam</p>
+                  </div>
+                </div>
+                <div class="d-flex text-muted align-items-center mt-2">
+                  <div class="flex-shrink-0 fs-22 text-primary">
+                    <i class="uil uil-envelope"></i>
+                  </div>
+                  <div class="flex-grow-1 ms-2">
+                    <p class="mb-0">contactus@404team.com</p>
+                  </div>
+                </div>
+                <div class="d-flex text-muted align-items-center mt-2">
+                  <div class="flex-shrink-0 fs-22 text-primary">
+                    <i class="uil uil-phone-alt"></i>
+                  </div>
+                  <div class="flex-grow-1 ms-2">
+                    <p class="mb-0">(+123) 456 789</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-4">
+              <h6 class="fs-17 fw-medium mb-4">Location</h6>
+
+              <div class="text-center"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.9242911494603!2d105.76602881479187!3d21.035715092917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b9444c676b%3A0xe713200541b7456d!2sCodeGym!5e0!3m2!1sen!2s!4v1676621226422!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>
+          <!--end side-bar-->
+
         </div><!--end col-->
         <!-- END SIDE-BAR -->
       </div><!--end row-->
