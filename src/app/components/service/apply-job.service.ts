@@ -12,7 +12,8 @@ import {JobService} from "./job.service";
 })
 export class ApplyJobService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private jobService: JobService) {
   }
 
   save(applyJob: ApplyJob): Observable<ApplyJob> {
@@ -20,7 +21,10 @@ export class ApplyJobService {
   }
 
   checkApplyJob(id: number, jobs: Job[]): Observable<boolean[]> {
-    return this.http.post<boolean[]>("http://localhost:8080/apply/test/" + id, jobs);
+    return this.http.post<boolean[]>("http://localhost:8080/apply/checkApply/" + id, jobs);
+  }
+  checkApplyAccept(id: number, jobs: Job[]): Observable<boolean[]> {
+    return this.http.post<boolean[]>("http://localhost:8080/apply/checkApplyAccept/" + id, jobs);
   }
 
   findAllApplyJobByCandidateId(id: number): Observable<ApplyJob[]> {
@@ -29,6 +33,18 @@ export class ApplyJobService {
 
   removeApplyJob(id: number) {
     return this.http.delete("http://localhost:8080/apply/" + id)
+  }
+
+  findAllApplyJobByJob(id: number): Observable<ApplyJob[]> {
+    return this.http.get<ApplyJob[]>("http://localhost:8080/apply/candidate/job/" + id)
+  }
+
+  rejectApplyJob(id: number) {
+    return this.http.delete("http://localhost:8080/apply/" + id)
+  }
+
+  acceptJob(applyJob: ApplyJob): Observable<ApplyJob> {
+    return this.http.put<ApplyJob>("http://localhost:8080/apply/" + applyJob.id, applyJob);
   }
 
 }

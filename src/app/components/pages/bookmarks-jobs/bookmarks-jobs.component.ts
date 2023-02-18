@@ -6,6 +6,9 @@ import {CategoryService} from "../../service/category.service";
 import {Locations} from "../../model/locations";
 import {LocationsService} from "../../service/locations.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ApplyJob} from "../../model/apply-job";
+import {ApplyJobService} from "../../service/apply-job.service";
+import {doc} from "@angular/fire/firestore";
 
 
 @Component({
@@ -14,7 +17,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./bookmarks-jobs.component.css']
 })
 export class BookmarksJobsComponent implements OnInit {
-  dateCurrent = new  Date()
+  dateCurrent = new Date()
   minDate?: string;
 
   user!: any;
@@ -30,7 +33,9 @@ export class BookmarksJobsComponent implements OnInit {
   salaryMin!: number;
   salaryMax!: number;
   salary: boolean = false;
-
+  applyJobs: ApplyJob[] = [];
+  applyJob!: ApplyJob;
+  applyJobId!: number;
 
   ngOnInit(): void {
     // @ts-ignore
@@ -72,7 +77,8 @@ export class BookmarksJobsComponent implements OnInit {
 
   constructor(private jobService: JobService,
               private categoryService: CategoryService,
-              private locationService: LocationsService) {
+              private locationService: LocationsService,
+              private applyjobService: ApplyJobService) {
   }
 
   findAll() {
@@ -156,11 +162,42 @@ export class BookmarksJobsComponent implements OnInit {
       this.salary = false;
     }
   }
+
   getSalaryMin() {
     // @ts-ignore
     this.salaryMin = +document.getElementById('salaryMin').value;
     console.log(this.salaryMin);
   }
 
+  findAllApplyJobByJob(id: number) {
+    return this.applyjobService.findAllApplyJobByJob(id).subscribe((data) => {
+      this.applyJobs = data;
+    })
+  }
 
+  rejectApply(id: any) {
+    this.applyjobService.removeApplyJob(id).subscribe(() => {
+      this.findAllApplyJobByJob(id);
+      // @ts-ignore
+      document.getElementById(id).setAttribute("hidden", 'true');
+    })
+  }
+
+  getApplyJobId(id: any) {
+    this.applyJobId = +id;
+  }
+
+  acceptJob(applyJob: ApplyJob) {
+    return this.applyjobService.acceptJob(applyJob).subscribe(() => {
+      // @ts-ignore
+      document.getElementById('accept'+applyJob.id).setAttribute("disabled", 'true');
+      // @ts-ignore
+      document.getElementById('reject'+applyJob.id).setAttribute("disabled", 'true');
+
+    })
+  }
+
+  getApplyJob(aj: ApplyJob) {
+    this.applyJob = aj;
+  }
 }
