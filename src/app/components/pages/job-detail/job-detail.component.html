@@ -304,10 +304,12 @@
                 <a *ngIf="!flag" href="#applyNow" data-bs-toggle="modal"
                    class="btn btn-primary btn-hover w-100 mt-2">Apply Now <i
                   class="uil uil-arrow-right"></i></a>
-                <p *ngIf="flag"
-                   class="alert bg-soft-success text-center w-100 mt-2">Waiting</p>
-                <p *ngIf="flag"
+                <button *ngIf="flag && !checkAccepted"
+                   class="alert bg-soft-success text-center w-100 mt-2" disabled>Waiting</button>
+                <p *ngIf="flag && !checkAccepted"
                    class="btn btn-danger btn-hover w-100 mt-2" (click)="removeApplyJob()">Decline</p>
+                <button *ngIf="flag && checkAccepted"
+                   class="btn btn-success w-100 mt-2" disabled="">Accepted</button>
               </div>
               <div class="mt-3" *ngIf="role == 0">
                 <a href="" routerLink="/register" data-bs-toggle="modal"

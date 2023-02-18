@@ -20,6 +20,7 @@ export class JobDetailComponent {
   user!: any;
   role!: number;
   flag: boolean = false;
+  checkAccepted: boolean = false;
   applyJobId!: number;
   applyJob: ApplyJob = new ApplyJob();
   jobApply!: Job;
@@ -69,6 +70,9 @@ export class JobDetailComponent {
             this.flag = true;
             // @ts-ignore
             this.applyJobId = data1[i].id;
+            // @ts-ignore
+            this.checkAccepted = data1[i].status;
+            console.log(this.checkAccepted)
           }
         }
       })

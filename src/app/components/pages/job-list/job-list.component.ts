@@ -33,6 +33,7 @@ export class JobListComponent implements OnInit {
   cvFileName: any;
   alertApply: boolean = true;
   checkApplyJob: Boolean[] = [];
+  checkApplyAccept: Boolean[] = [];
   message!: string;
   checkUpload: boolean = false;
 
@@ -82,6 +83,11 @@ export class JobListComponent implements OnInit {
       } else {
         this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
           this.checkApplyJob = data1;
+          console.log(this.checkApplyJob, 'data1')
+        })
+        this.applyJobService.checkApplyAccept(this.user.id, data).subscribe((data2) => {
+          this.checkApplyAccept = data2;
+          console.log(this.checkApplyAccept, 'data2')
         })
       }
     })
