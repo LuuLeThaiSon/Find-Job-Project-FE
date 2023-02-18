@@ -35,7 +35,7 @@
                           <p *ngIf="formLogin.get('email')?.errors?.['pattern'] && formLogin.get('email')?.touched" style="color: red">Must have pattern email</p>
                           <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password" ngModel>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password" ngModel><span><i class="fas fa-eye"></i></span>
                           </div>
                           <p *ngIf="formLogin.get('password')?.errors?.['required'] && formLogin.get('password')?.touched" style="color: red">Required</p>
                           <div class="mb-4">

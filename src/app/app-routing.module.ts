@@ -19,6 +19,7 @@ import {
   ManageCandidateProfileComponent
 } from "./components/pages/manage-candidate-profile/manage-candidate-profile.component";
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
+import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
 
 const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path:"company-detail/:id",component:CompanyDetailComponent},
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
   {path:"manage-candidate-profile/:id",component:ManageCandidateProfileComponent},
+  {path: "job-list-apply/:id", component: JobListApplyComponent},
   {path:"manage-jobs/:id",component:BookmarksJobsComponent},
   {path:"top-companies",component:TopCompaniesComponent}
 ];

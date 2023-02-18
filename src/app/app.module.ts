@@ -30,6 +30,8 @@ import {RegisterCComponent} from "./components/pages/register-c/register-c.compo
 import {BookmarksJobsComponent} from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import { TopCompaniesComponent } from './top-companies/top-companies.component';
 import { ManageCandidateProfileComponent } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
+import {SearchPipe} from "./search.pipe";
+import { JobListApplyComponent } from './components/pages/job-list-apply/job-list-apply.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { ManageCandidateProfileComponent } from './components/pages/manage-candi
     BookmarksJobsComponent,
     TopCompaniesComponent,
     ManageCandidateProfileComponent,
-    RegisterCComponent
+    RegisterCComponent,
+    SearchPipe,
+    JobListApplyComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,7 @@ import { ManageCandidateProfileComponent } from './components/pages/manage-candi
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
+
   ],
 
   providers: [],

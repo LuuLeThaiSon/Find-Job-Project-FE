@@ -251,6 +251,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     })
   }
 
+
   @ViewChild(HeaderComponent)
   header: HeaderComponent | undefined;
 
@@ -259,4 +260,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   selectedCategories: Category[] = [];
 
 
+  updateBanner($event: Event) {
+
+  }
 }
