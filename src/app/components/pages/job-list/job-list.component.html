@@ -140,9 +140,9 @@
             </div><!--end wedget-popular-title-->
             <!-- Job-list -->
             <div>
-              <div *ngIf="role == 3||role == 2">
+              <div *ngIf="role == 3">
                 <div class="job-box bookmark-post card mt-4"
-                     *ngFor="let j of filteredResult | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
+                     *ngFor="let j of displayJobs | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
                   <div class="p-4">
                     <div class="row align-items-center">
                       <div class="col-md-2">
@@ -199,13 +199,30 @@
                         </div>
                       </div>
                       <!--end col-->
+                      <div class="col-md-4" [ngSwitch]="j.gender">
+                        <div *ngSwitchCase="1">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender :</span> Male</p>
+                        </div>
+                        <div *ngSwitchCase="2">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender :</span> Female</p>
+                        </div>
+                        <div *ngSwitchCase="3">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender :</span> Any</p>
+                        </div>
+                      </div>
+                      <!--end col-->
                       <div class="col-lg-2 col-md-3">
                         <div *ngIf="role == 3">
                           <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"
                              (click)="applyJobId(j)">Apply Now <i
                             class="mdi mdi-chevron-double-right"></i></a>
-                          <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]" class="badge bg-soft-danger fs-13 mt-1">Waiting</span>
-                          <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]" class="badge bg-soft-success fs-13 mt-1">Accepted</span>
+                          <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]"
+                                class="badge bg-soft-danger fs-13 mt-1">Waiting</span>
+                          <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]"
+                                class="badge bg-soft-success fs-13 mt-1">Accepted</span>
                         </div>
                       </div>
                       <!--end col-->
@@ -215,7 +232,99 @@
                 </div>
                 <!--end job-box-->
               </div>
-              <div *ngIf="role == 0||role == 2||role == 1">
+              <div *ngIf="role == 2||role == 1">
+                <div class="job-box bookmark-post card mt-4"
+                     *ngFor="let j of displayJobs | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
+                  <div class="p-4">
+                    <div class="row align-items-center">
+                      <div class="col-md-2">
+                        <div class="text-center mb-4 mb-md-0">
+                          <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
+                            src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
+                            alt=""
+                            class="img-fluid rounded-3"></a>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-3">
+                        <div class="mb-2 mb-md-0">
+                          <h5 class="fs-18 mb-0"><a [routerLink]="['/job-detail', j.id]"
+                                                    class="text-dark">{{j.title}}</a>
+                          </h5>
+                          <p class="text-muted fs-14 mb-0">{{j.company.name}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-3">
+                        <div class="d-flex mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="mdi mdi-map-marker text-primary me-1"></i>
+                          </div>
+                          <p class="text-muted mb-0">{{j.location.name}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2">
+                        <div>
+                          <p class="text-muted mb-2"><span class="text-primary">$</span>{{j.salaryMin}}-{{j.salaryMax}}
+                            /m
+                          </p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2">
+                        <div>
+                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
+                        </div>
+                      </div>
+                      <!--end col-->
+                    </div>
+                    <!--end row-->
+                  </div>
+                  <div class="p-3 bg-light">
+                    <div class="row justify-content-between">
+                      <div class="col-md-4">
+                        <div>
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Experience :</span> {{j.expYear}}+ years</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-4" [ngSwitch]="j.gender">
+                        <div *ngSwitchCase="1">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender :</span> Male</p>
+                        </div>
+                        <div *ngSwitchCase="2">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender :</span> Female</p>
+                        </div>
+                        <div *ngSwitchCase="3">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender :</span> Any</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+<!--                      <div class="col-lg-2 col-md-3">-->
+<!--                        <div *ngIf="role == 3">-->
+<!--                          <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"-->
+<!--                             (click)="applyJobId(j)">Apply Now <i-->
+<!--                            class="mdi mdi-chevron-double-right"></i></a>-->
+<!--                          <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]"-->
+<!--                                class="badge bg-soft-danger fs-13 mt-1">Waiting</span>-->
+<!--                          <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]"-->
+<!--                                class="badge bg-soft-success fs-13 mt-1">Accepted</span>-->
+<!--                        </div>-->
+<!--                      </div>-->
+                      <!--end col-->
+                    </div>
+                    <!--end row-->
+                  </div>
+                </div>
+                <!--end job-box-->
+              </div>
+              <div *ngIf="role == 0">
                 <div class="job-box bookmark-post card mt-4"
                      *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }|search: searchText,index as i">
                   <div class="p-4">
@@ -308,155 +417,234 @@
         <div class="col-lg-3">
           <div class="side-bar mt-5 mt-lg-0">
             <div class="accordion" id="accordionExample" *ngIf="role != 0">
-
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jobsalary"
-                          aria-expanded="false" aria-controls="jobsalary">
-                    Offered Salary
-                  </button>
-                </h2>
-                <form [formGroup]="workSalary"  id="formJobSalary">
-                <div id="jobsalary" class="accordion-collapse collapse show" aria-labelledby="jobSalary">
-                  <div class="accordion-body">
-                    <div class="side-title">
-                      <div class="form-check mt-2">
-                        <input (change)="changeWorkSalary($event)"
-                               value="allsalary"
-                               formControlName="years"
-                               class="form-check-input" type="radio" name="JobSalary" id="JobSalaryAll" checked>
-                        <label class="form-check-label ms-2 text-muted" for="JobSalaryAll">
-                          All
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input (change)="changeWorkSalary($event)"
-                               value="less200"
-                               formControlName="years"
-                          class="form-check-input" type="radio" name="JobSalary" id="JobSalary1">
-                        <label class="form-check-label ms-2 text-muted" for="JobSalary1">
-                          Less than $200
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input (change)="changeWorkSalary($event)"
-                               value="200-500"
-                               formControlName="years"
-                          class="form-check-input" type="radio" name="JobSalary" id="JobSalary2">
-                        <label class="form-check-label ms-2 text-muted" for="JobSalary2">
-                          $200 - $500
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input (change)="changeWorkSalary($event)"
-                               value="500-800"
-                               formControlName="years"
-                          class="form-check-input" type="radio" name="JobSalary" id="JobSalary3">
-                        <label class="form-check-label ms-2 text-muted" for="JobSalary3">
-                          $500 - $800
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input (change)="changeWorkSalary($event)"
-                               value="more800"
-                               formControlName="years"
-                          class="form-check-input" type="radio" name="JobSalary" id="JobSalary4">
-                        <label class="form-check-label ms-2 text-muted" for="JobSalary4">
-                          More than $800
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </form>
-              </div><!-- end accordion-item -->
-              <div class="accordion-item mt-3">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jobexp"
-                          aria-expanded="false" aria-controls="jobexp">
-                    Work Experience
-                  </button>
-                </h2>
-                <div id="jobexp" class="accordion-collapse collapse show" aria-labelledby="jobExp">
-                  <div class="accordion-body">
-                    <div class="side-title">
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="JobExp" id="JobExpAll" checked>
-                        <label class="form-check-label ms-2 text-muted" for="JobExpAll">
-                          All
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="JobExp" id="JobExp1" >
-                        <label class="form-check-label ms-2 text-muted" for="JobExp1">
-                          No Experience
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="JobExp" id="JobExp2">
-                        <label class="form-check-label ms-2 text-muted" for="JobExp2">
-                          0 - 3 years
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="JobExp" id="JobExp3">
-                        <label class="form-check-label ms-2 text-muted" for="JobExp3">
-                          3 -  6 years
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="JobExp" id="JobExp4">
-                        <label class="form-check-label ms-2 text-muted" for="JobExp4">
-                          More than 6 years
-                        </label>
+              <form [formGroup]="filterJobs" id="formFilterJob">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jobsalary"
+                            aria-expanded="false" aria-controls="jobsalary">
+                      Offered Salary
+                    </button>
+                  </h2>
+                  <div id="jobsalary" class="accordion-collapse collapse show" aria-labelledby="jobSalary">
+                    <div class="accordion-body">
+                      <div class="side-title">
+                        <div class="form-check mt-2">
+                          <input (change)="filterJobsMethod($event)"
+                                 value="allsalary"
+                                 formControlName="salary"
+                                 name="salary"
+                                 class="form-check-input" type="radio" id="JobSalaryAll" checked>
+                          <label class="form-check-label ms-2 text-muted" for="JobSalaryAll">
+                            All
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input (change)="filterJobsMethod($event)"
+                                 value="less200"
+                                 formControlName="salary"
+                                 name="salary"
+                                 class="form-check-input" type="radio" id="JobSalary1">
+                          <label class="form-check-label ms-2 text-muted" for="JobSalary1">
+                            Less than $200
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input (change)="filterJobsMethod($event)"
+                                 value="200-500"
+                                 formControlName="salary"
+                                 class="form-check-input" type="radio"
+                                 name="salary" id="JobSalary2">
+                          <label class="form-check-label ms-2 text-muted" for="JobSalary2">
+                            $200 - $500
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input (change)="filterJobsMethod($event)"
+                                 value="500-800"
+                                 formControlName="salary"
+                                 class="form-check-input" type="radio"
+                                 name="salary" id="JobSalary3">
+                          <label class="form-check-label ms-2 text-muted" for="JobSalary3">
+                            $500 - $800
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input (change)="filterJobsMethod($event)"
+                                 value="more800"
+                                 formControlName="salary"
+                                 name="salary"
+                                 class="form-check-input" type="radio"
+                                 id="JobSalary4">
+                          <label class="form-check-label ms-2 text-muted" for="JobSalary4">
+                            More than $800
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div><!-- end accordion-item -->
-
-              <div class="accordion-item mt-3">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#jobtype" aria-expanded="false" aria-controls="jobtype">
-                    Type of employment
-                  </button>
-                </h2>
-                <div id="jobtype" class="accordion-collapse collapse show" aria-labelledby="jobType">
-                  <div class="accordion-body">
-                    <div class="side-title">
-                      <div class="form-check mt-2">
-                        <input value="all"
-                               class="form-check-input" type="radio" name="JobType" id="JobTypeAll" checked>
-                        <label class="form-check-label ms-2 text-muted" for="JobTypeAll">
-                          Any
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input class="form-check-input" type="radio" name="JobType" id="JobType2">
-                        <label class="form-check-label ms-2 text-muted" for="JobType2">
-                          Full Time
-                        </label>
-                      </div>
-                      <div class="form-check mt-2">
-                        <input value="partTime"
-                               class="form-check-input" type="radio" name="JobType" id="JobType3">
-                        <label class="form-check-label ms-2 text-muted" for="JobType3">
-                          Part Time
-                        </label>
+                </div><!-- end accordion-item -->
+                <div class="accordion-item mt-3">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#jobexp"
+                            aria-expanded="false" aria-controls="jobexp">
+                      Work Experience
+                    </button>
+                  </h2>
+                  <div id="jobexp" class="accordion-collapse collapse show" aria-labelledby="jobExp">
+                    <div class="accordion-body">
+                      <div class="side-title">
+                        <div class="form-check mt-2">
+                          <input class="form-check-input"
+                                 (change)="filterJobsMethod($event)"
+                                 formControlName="years"
+                                 name="years"
+                                 value="allyears"
+                                 type="radio"
+                                 id="JobExpAll" checked>
+                          <label class="form-check-label ms-2 text-muted" for="JobExpAll">
+                            All
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input class="form-check-input"
+                                 (change)="filterJobsMethod($event)"
+                                 formControlName="years"
+                                 value="0"
+                                 type="radio"
+                                 name="years"
+                                 id="JobExp1">
+                          <label class="form-check-label ms-2 text-muted" for="JobExp1">
+                            No Experience
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input class="form-check-input"
+                                 (change)="filterJobsMethod($event)"
+                                 formControlName="years"
+                                 value="0-3"
+                                 type="radio"
+                                 name="years"
+                                 id="JobExp2">
+                          <label class="form-check-label ms-2 text-muted" for="JobExp2">
+                            0 - 3 years
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input class="form-check-input"
+                                 (change)="filterJobsMethod($event)"
+                                 formControlName="years"
+                                 value="3-6"
+                                 type="radio"
+                                 name="years"
+                                 id="JobExp3">
+                          <label class="form-check-label ms-2 text-muted" for="JobExp3">
+                            3 - 6 years
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input class="form-check-input"
+                                 (change)="filterJobsMethod($event)"
+                                 formControlName="years"
+                                 value="more6"
+                                 type="radio"
+                                 name="years"
+                                 id="JobExp4">
+                          <label class="form-check-label ms-2 text-muted" for="JobExp4">
+                            More than 6 years
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div><!-- end accordion-item -->
+                </div><!-- end accordion-item -->
+                <div class="accordion-item mt-3">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#jobtype" aria-expanded="false" aria-controls="jobtype">
+                      Type of employment
+                    </button>
+                  </h2>
+                  <div id="jobtype" class="accordion-collapse collapse show" aria-labelledby="jobType">
+                    <div class="accordion-body">
+                      <div class="side-title">
+                        <div class="form-check mt-2">
+                          <input formControlName="types"
+                                 (change)="filterJobsMethod($event)"
+                                 value="alltypes"
+                                 class="form-check-input" type="radio" name="types" id="JobTypeAll" checked>
+                          <label class="form-check-label ms-2 text-muted" for="JobTypeAll">
+                            Any
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input class="form-check-input"
+                                 (change)="filterJobsMethod($event)"
+                                 formControlName="types"
+                                 value="full"
+                                 type="radio"
+                                 name="types" id="JobType2">
+                          <label class="form-check-label ms-2 text-muted" for="JobType2">
+                            Full Time
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input formControlName="types"
+                                 (change)="filterJobsMethod($event)"
+                                 value="part"
+                                 class="form-check-input" type="radio"
+                                 name="types" id="JobType3">
+                          <label class="form-check-label ms-2 text-muted" for="JobType3">
+                            Part Time
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- end accordion-item -->
+                <div class="accordion-item mt-3">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#jobgender" aria-expanded="false" aria-controls="jobgender">
+                      Gender
+                    </button>
+                  </h2>
+                  <div id="jobgender" class="accordion-collapse collapse show" aria-labelledby="jobGender">
+                    <div class="accordion-body">
+                      <div class="side-title">
+                        <div class="form-check mt-2">
+                          <input formControlName="gender"
+                                 (change)="filterJobsMethod($event)"
+                                 value="any"
+                                 class="form-check-input" type="radio" name="gender" id="JobGender1" checked>
+                          <label class="form-check-label ms-2 text-muted" for="JobGender1">
+                            Any
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input formControlName="gender"
+                                 (change)="filterJobsMethod($event)"
+                                 value="male"
+                                 class="form-check-input" type="radio" name="gender" id="JobGender2" >
+                          <label class="form-check-label ms-2 text-muted" for="JobGender2">
+                            Male
+                          </label>
+                        </div>
+                        <div class="form-check mt-2">
+                          <input formControlName="gender"
+                                 (change)="filterJobsMethod($event)"
+                                 value="female"
+                                 class="form-check-input" type="radio" name="gender" id="JobGender3" >
+                          <label class="form-check-label ms-2 text-muted" for="JobGender3">
+                            Female
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div><!-- end accordion-item -->
 
-
+              </form>
             </div><!--end accordion-->
-
-            <div class="col-lg-12 col-md-6">
-              <a href="javascript:void(0)" class="btn btn-primary w-100"><i
-                class="uil uil-filter"></i> Filter</a>
-            </div><!--end col-->
 
           </div><!--end side-bar-->
 
@@ -472,7 +660,7 @@
                     <i class="uil uil-map-marker"></i>
                   </div>
                   <div class="flex-grow-1 ms-2">
-                    <p class="mb-0">CodeGym C0822I1, HdMon, My Dinh, Hanoi, Vietnam</p>
+                    <p class="mb-0">C0822I1, CodeGym My Dinh, Hanoi, Vietnam</p>
                   </div>
                 </div>
                 <div class="d-flex text-muted align-items-center mt-2">
@@ -496,7 +684,11 @@
             <div class="mt-4">
               <h6 class="fs-17 fw-medium mb-4">Location</h6>
 
-              <div class="text-center"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.9242911494603!2d105.76602881479187!3d21.035715092917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b9444c676b%3A0xe713200541b7456d!2sCodeGym!5e0!3m2!1sen!2s!4v1676621226422!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <div class="text-center">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.9242911494603!2d105.76602881479187!3d21.035715092917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b9444c676b%3A0xe713200541b7456d!2sCodeGym!5e0!3m2!1sen!2s!4v1676621226422!5m2!1sen!2s"
+                  width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
           </div>

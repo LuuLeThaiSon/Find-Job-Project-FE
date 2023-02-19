@@ -58,8 +58,11 @@ export class JobListComponent implements OnInit {
     this.findAllLocations();
     this.findAllCategories();
 
-    this.workSalary = new FormGroup({
-      years: new FormControl('allsalary', Validators.required)
+    this.filterJobs = new FormGroup({
+      salary: new FormControl('allsalary'),
+      years: new FormControl('allyears'),
+      types: new FormControl('alltypes'),
+      gender: new FormControl('any'),
     })
 
   }
@@ -81,7 +84,7 @@ export class JobListComponent implements OnInit {
   findAllByStatusIsTrueAndAndExpiredDate() {
     return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
-      this.filteredResult =data;
+      this.displayJobs = data;
       if (this.role == 0) {
         return;
       } else {
@@ -158,51 +161,121 @@ export class JobListComponent implements OnInit {
   decline: any;
 
   // filterOnMultipleConditions
-  filteredResult: Job[] = [];
+  displayJobs: Job[] = [];
 
-  workSalary!: FormGroup;
+  filterJobs!: FormGroup;
 
   scrollTop() {
     window.scrollTo(0, 300)
   }
 
-  changeWorkSalary(event: any) {
-    this.myFormJobSalary?.nativeElement.submit();
-    let result = this.workSalary.value.years;
-    if (result == "allsalary") {
-     this.filteredResult = this.jobs;
-    }
-    if (result == "less200") {
-      this.filteredResult = this.jobs.filter((obj)=>{
-        return obj.salaryMin <= 200;
-      })
-    }
-    if (result == "200-500") {
-      this.filteredResult = this.jobs.filter((obj)=>{
-        let input = this.jobs
-        return obj.salaryMin > 200 && obj.salaryMin <= 500;
-      })
-    }
-    if (result == "500-800") {
-      this.filteredResult = this.jobs.filter((obj)=>{
-        return obj.salaryMin > 500 && obj.salaryMin <= 800;
-      })
-    }
-    if (result == "500-800") {
-      let input = this.jobs
-      this.filteredResult = this.jobs.filter((obj)=>{
-        return obj.salaryMin > 500 && obj.salaryMin <= 800;
-      })
-    }
-    if (result == "more800") {
-      this.filteredResult = this.jobs.filter((obj)=>{
-        return obj.salaryMin > 800;
-      })
-    }
-    console.log(this.filteredResult)
+  filterJobsMethod(event: any) {
+    this.formFilterJob?.nativeElement.submit();
+    let salary = this.filterJobs.get('salary')?.value;
+    let years = this.filterJobs.get('years')?.value;
+    let types = this.filterJobs.get('types')?.value;
+    let gender = this.filterJobs.get('gender')?.value;
+    this.displayJobs = this.jobs;
+
+    this.filterSalary(salary);
+    this.filterExpYears(years);
+    this.filterJobTypes(types);
+    this.filterJobGender(gender);
+
+    console.log(this.displayJobs)
   }
 
-  @ViewChild('formJobSalary') myFormJobSalary: ElementRef | undefined;
+  filterSalary(salary:string){
+    if (salary == "allsalary") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax >= 0;
+      })
+    }
+    if (salary == "less200") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax < 200;
+      })
+    }
+    if (salary == "200-500") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax >= 200 && obj.salaryMax<= 500;
+      })
+    }
+    if (salary == "500-800") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax >= 500 && obj.salaryMax <= 800;
+      })
+    }
+    if (salary == "more800") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax > 800;
+      })
+    }
+  }
+  filterExpYears(years : string) {
+    if (years == "allyears") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear >= 0;
+      })
+    }
+    if (years == "0") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear == 0;
+      })
+    }
+    if (years == "0-3") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear >= 0 && obj.expYear <= 3;
+      })
+    }
+    if (years == "3-6") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear >= 3 && obj.expYear <= 6;
+
+      })
+    }
+    if (years == "more6") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear > 6;
+      })
+    }
+  }
+  filterJobTypes(types:string) {
+    if (types == "alltypes") {
+      this.displayJobs = this.displayJobs.filter((obj)=>{
+        return obj.type == true || obj.type == false
+      })
+    }
+    if(types == "full"){
+      this.displayJobs = this.displayJobs.filter((obj)=>{
+        return obj.type == true
+      })
+    }
+    if(types == "part") {
+      this.displayJobs = this.displayJobs.filter((obj)=>{
+        return !obj.type
+      })
+    }
+  }
+  filterJobGender(gender:string){
+    if(gender == "any") {
+      this.displayJobs = this.displayJobs.filter((obj)=> {
+        return obj.gender == 3||obj.gender == 2||obj.gender == 1
+      })
+    }
+    if(gender == "male") {
+      this.displayJobs = this.displayJobs.filter((obj)=> {
+        return obj.gender == 1
+      })
+    }
+    if(gender == "female") {
+      this.displayJobs = this.displayJobs.filter((obj)=> {
+        return obj.gender == 2
+      })
+    }
+  }
+
+  @ViewChild('formJobSalary') formFilterJob: ElementRef | undefined;
 
 
 }
