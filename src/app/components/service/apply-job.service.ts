@@ -31,11 +31,11 @@ export class ApplyJobService {
     return this.http.get<ApplyJob[]>("http://localhost:8080/apply/candidate/" + id)
   }
 
-  removeApplyJob(id: number) {
+  removeApplyJob(id: number | undefined) {
     return this.http.delete("http://localhost:8080/apply/" + id)
   }
 
-  findAllApplyJobByJob(id: number): Observable<ApplyJob[]> {
+  findAllApplyJobByJob(id: number | undefined): Observable<ApplyJob[]> {
     return this.http.get<ApplyJob[]>("http://localhost:8080/apply/candidate/job/" + id)
   }
 
@@ -47,4 +47,7 @@ export class ApplyJobService {
     return this.http.put<ApplyJob>("http://localhost:8080/apply/" + applyJob.id, applyJob);
   }
 
+  findOne(id: number): Observable<ApplyJob> {
+    return this.http.get<ApplyJob>("http://localhost:8080/apply/" + id);
+  }
 }

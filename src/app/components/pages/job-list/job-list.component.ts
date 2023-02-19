@@ -10,6 +10,9 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ApplyJob} from "../../model/apply-job";
 import {ApplyJobService} from "../../service/apply-job.service";
 import {finalize} from "rxjs";
+import {NotifyService} from "../../service/notify.service";
+import {Notify} from "../../model/notify";
+import {NotifyType} from "../../model/notify-type";
 
 @Component({
   selector: 'app-job-list',
@@ -36,7 +39,8 @@ export class JobListComponent implements OnInit {
   checkApplyAccept: Boolean[] = [];
   message!: string;
   checkUpload: boolean = false;
-
+  notify = new Notify();
+  notifyType: NotifyType[] = [];
 
   ngOnInit(): void {
 
@@ -49,7 +53,6 @@ export class JobListComponent implements OnInit {
       this.user = JSON.parse(sessionStorage.getItem("user")) as any;
       this.role = this.user.role.id;
     }
-    console.log(this.role);
 
     this.applyForm = new FormGroup({
       message: new FormControl('')
@@ -58,13 +61,17 @@ export class JobListComponent implements OnInit {
     this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
+    this.notifyService.findAllTye().subscribe(data => {
+      this.notifyType = data;
+    })
   }
 
   constructor(private jobService: JobService,
               private locationsService: LocationsService,
               private categoryService: CategoryService,
               private storage: AngularFireStorage,
-              private applyJobService: ApplyJobService) {
+              private applyJobService: ApplyJobService,
+              private notifyService: NotifyService) {
 
   }
 
@@ -81,11 +88,11 @@ export class JobListComponent implements OnInit {
         return;
       } else {
         this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
-          this.checkApplyJob = data1;
+          this.checkApplyJob = data1.reverse();
           console.log(this.checkApplyJob, 'data1')
         })
         this.applyJobService.checkApplyAccept(this.user.id, data).subscribe((data2) => {
-          this.checkApplyAccept = data2;
+          this.checkApplyAccept = data2.reverse();
           console.log(this.checkApplyAccept, 'data2')
         })
       }
@@ -125,11 +132,11 @@ export class JobListComponent implements OnInit {
             this.btnModal.nativeElement.click();
             this.applyForm.reset();
             this.applyForm.reset();
-
             this.alertApply = false;
             setTimeout(() => {
               this.alertApply = true;
             }, 3000)
+            this.sendNotify(1,this.jobApply)
           })
           this.checkUpload = false;
         });
@@ -154,5 +161,19 @@ export class JobListComponent implements OnInit {
 
   scrollTop() {
     window.scrollTo(0, 300)
+  }
+
+  sendNotify(nt: number, job: Job) {
+    for (let i = 0; i < this.notifyType.length; i++) {
+      if (this.notifyType[i].id == nt) {
+        this.notify.notifyType = this.notifyType[i];
+        this.notify.job = job;
+        this.notify.company = job.company;
+        this.notify.candidate= this.user;
+        this.notifyService.sendNotify(this.notify).subscribe(() => {
+          this.ngOnInit()
+        });
+      }
+    }
   }
 }
