@@ -40,6 +40,7 @@ import {ManageCandidateProfileComponent} from './components/pages/manage-candida
 import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
 import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
 import {MomentModule} from "ngx-moment";
+import {ConfirmationService, MessageService} from "primeng/api";
 // import { MomentModule } from 'ngx-moment';
 
 
@@ -105,7 +106,9 @@ import {MomentModule} from "ngx-moment";
     })
   ],
 
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
