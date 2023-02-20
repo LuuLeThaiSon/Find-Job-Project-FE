@@ -1,17 +1,19 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Company} from "../../model/company";
 import {Candidate} from "../../model/candidate";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Role} from "../../model/role";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CompanyService} from "../../service/company.service";
-import {CategoryService} from "../../service/category.service";
 import {Admin} from "../../model/admin";
+import {MessageService} from "primeng/api";
+import {HeaderComponent} from "../../common/header/header.component";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [MessageService]
 })
 export class LoginComponent {
   companies: Company[] = []
@@ -26,6 +28,9 @@ export class LoginComponent {
   pathName!: string
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.showInfo()
+    },100)
     this.formLogin = new FormGroup({
       id: new FormControl(''),
       email: new FormControl(''.toLowerCase(), [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
@@ -38,7 +43,8 @@ export class LoginComponent {
 
   constructor(private routerActive: ActivatedRoute,
               private router: Router,
-              private companyService: CompanyService
+              private companyService: CompanyService,
+              private messageService: MessageService
   ) {
   }
 
@@ -50,17 +56,26 @@ export class LoginComponent {
       for (let i = 0; i < data.length; i++) {
         if (this.candidate.email.toLowerCase() == data[i].email.toLowerCase() && this.candidate.password == data[i].password) {
           sessionStorage.setItem("user", JSON.stringify(data[i]));
-          alert("Login successfully!");
-          this.router.navigate(['']).finally();
-          return
+          setTimeout(() => {
+            this.loading = false
+          }, 200)
+          setTimeout(() => {
+            this.loading = true
+            this.router.navigate(['']).finally()
+          },1000)
         }
       }
       this.companyService.findAllCompany().subscribe((data) => {
         for (let j = 0; j < data.length; j++) {
           if (this.company.email.toLowerCase() == data[j].email.toLowerCase() && this.company.password == data[j].password) {
             sessionStorage.setItem("user", JSON.stringify(data[j]));
-            alert("Login successfully!");
-            this.router.navigate(['']).finally();
+            setTimeout(() => {
+              this.loading = false
+            }, 200)
+            setTimeout(() => {
+              this.loading = true
+              this.router.navigate(['']).finally()
+            },1000)
             return
           }
         }
@@ -68,14 +83,49 @@ export class LoginComponent {
           for (let j = 0; j < data.length; j++) {
             if (this.admin.email == data[j].email && this.admin.password == data[j].password) {
               sessionStorage.setItem("user", JSON.stringify(data[j]));
-              alert("Login successfully!");
-              this.router.navigate(['']).finally();
+              setTimeout(() => {
+                this.loading = false
+              }, 200)
+              setTimeout(() => {
+                this.loading = true
+                this.router.navigate(['']).finally()
+              },1000)
               return
             }
           }
-        alert("Login failed! You can try again!")
+          setTimeout(() => {
+            this.loading = true
+            this.showError()
+          }, 100)
+        })
       })
     })
-  })
-}
+  }
+
+
+  showSuccess() {
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Login successfully!'})
+  }
+
+  showInfo() {
+    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Please check your email to get password!', key: 'ab'});
+  }
+
+  showWarn() {
+    this.messageService.add({severity: 'warn', summary: 'Warn', detail: 'Message Content'});
+  }
+
+  showError() {
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Login fail! You can try again!'});
+  }
+
+
+  clear() {
+    this.messageService.clear();
+  }
+
+  @ViewChild(HeaderComponent)
+  header: HeaderComponent | undefined;
+
+  loading = true;
 }

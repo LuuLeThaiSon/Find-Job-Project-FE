@@ -1,11 +1,12 @@
 import {ElementRef, Injectable, ViewChild} from '@angular/core';
-import {AngularFireStorage} from "@angular/fire/compat/storage";
+
 import {HttpClient} from "@angular/common/http";
 import {ApplyJob} from "../model/apply-job";
 import {finalize, Observable} from "rxjs";
-import {FormGroup} from "@angular/forms";
+
 import {Job} from "../model/job";
 import {JobService} from "./job.service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,9 @@ export class ApplyJobService {
   }
 
   checkApplyJob(id: number, jobs: Job[]): Observable<boolean[]> {
-    return this.http.post<boolean[]>("http://localhost:8080/apply/checkApply/" + id, jobs);
+    return this.http.post<boolean[]>("http://localhost:8080/apply/test/" + id, jobs);
   }
+
   checkApplyAccept(id: number, jobs: Job[]): Observable<boolean[]> {
     return this.http.post<boolean[]>("http://localhost:8080/apply/checkApplyAccept/" + id, jobs);
   }
@@ -33,6 +35,10 @@ export class ApplyJobService {
 
   removeApplyJob(id: number | undefined) {
     return this.http.delete("http://localhost:8080/apply/" + id)
+  }
+
+  removeApplyJobCandidate(id: number | undefined, id1: number| undefined) {
+    return this.http.delete("http://localhost:8080/apply/delete/" + id + "&" + id1)
   }
 
   findAllApplyJobByJob(id: number | undefined): Observable<ApplyJob[]> {

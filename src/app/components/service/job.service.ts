@@ -41,6 +41,12 @@ export class JobService {
     return this.http.post<Job>("http://localhost:8080/jobs", job)
   }
 
+
+
+  findAllJobsByCandidate(id:number) {
+    return this.http.get<Job[]>(`http://localhost:8080/jobs/candidate/${id}`)
+  }
+
   findJobsByTitleAndLocationAndCompany(text:String, l_id:number, c_id:number): Observable<Job[]> {
     return this.http.get<Job[]>("http://localhost:8080/jobs/search?text=" + text + "&locationId=" + l_id + "&categoryId=" + c_id)
   }

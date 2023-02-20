@@ -20,6 +20,8 @@ import {
 } from "./components/pages/manage-candidate-profile/manage-candidate-profile.component";
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
+import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
+import {CandidateDetailComponent} from "./components/pages/candidate-detail/candidate-detail.component";
 
 const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -39,10 +41,11 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "registerC", component: RegisterCComponent},
   {path: "job-detail/:id", component: JobDetailComponent},
-  {path: "job-detail/:id", component: JobDetailComponent},
   {path:"company-detail/:id",component:CompanyDetailComponent},
+  {path:"candidate-detail/:id", component: CandidateDetailComponent},
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
   {path:"manage-candidate-profile/:id",component:ManageCandidateProfileComponent},
+  {path: "job-list-apply/:id", component: JobListApplyComponent},
   {path:"manage-jobs/:id",component:BookmarksJobsComponent},
   {path:"top-companies",component:TopCompaniesComponent},
   {path:"coming-soon",component:ComingsoonComponent}

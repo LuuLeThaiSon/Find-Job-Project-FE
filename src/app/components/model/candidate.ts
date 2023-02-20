@@ -10,4 +10,5 @@ export interface Candidate {
   avatar:string;
   status: boolean;
   description: string
+  address: string
 }

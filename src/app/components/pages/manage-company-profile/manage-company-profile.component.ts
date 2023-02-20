@@ -80,11 +80,6 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     s7.type = "text/javascript";
     s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
     this.elementRef.nativeElement.appendChild(s7);
-
-    var s8 = document.createElement("script");
-    s8.type = "text/javascript";
-    s8.src = "https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCeg34KPpBjJMu8afc4SwNtZDE_l-ledjE";
-    this.elementRef.nativeElement.appendChild(s8);
   }
 
   ngOnChanges() {
@@ -179,20 +174,20 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
 
   }
 
-  findCompanyById(id: number) {
-    this.companyService.findCompany(id).subscribe(res => {
-      this.company = res;
-      this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
-      this.ggMap.setAttribute("style:width", "100%");
-      this.formCompany.patchValue(res)
-    })
-  }
+    findCompanyById(id: number) {
+      this.companyService.findCompany(id).subscribe(res => {
+        this.company = res;
+        this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
+        this.ggMap.setAttribute("style:width", "100%");
+        this.formCompany.patchValue(res)
+      })
+    }
 
-  findAllJobsByCompany(id: number) {
-    this.jobService.findAllJobsByCompany(id).subscribe(res => {
-      this.jobs = res;
-    })
-  }
+    findAllJobsByCompany(id: number) {
+      this.jobService.findAllJobsByCompany(id).subscribe(res => {
+        this.jobs = res;
+      })
+    }
 
   onSubmit() {
     this.commonService.scrollTopWindow(0,300);
@@ -240,6 +235,30 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     }, 1000);
   }
 
+
+  previewAvatar(event: any) {
+    this.loading = false;
+    if (event.target.files && event.target.files[0]) {
+      this.imageFile = event.target.files[0];
+      if (this.pathName !== this.imageFile.name) {
+        this.pathName = this.imageFile.name
+        const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(imagePath);
+        this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              this.path = url;
+              setTimeout(() => {
+                this.loading = true;
+              }, 1000)
+              // this.showSuccess();
+              console.log(this.path)
+            });
+          })
+        ).subscribe()
+      }
+    }
+  }
   updateBanner(event: any) {
     // @ts-ignore
     console.log(event.target.files[0])
@@ -264,33 +283,35 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     }
   }
 
-  previewAvatar(event: any) {
-    this.loading = false;
-    if (event.target.files && event.target.files[0]) {
-      this.imageFile = event.target.files[0];
-      if (this.pathName !== this.imageFile.name) {
-        this.pathName = this.imageFile.name
-        const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(imagePath);
-        this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe(url => {
-              this.path = url;
-              setTimeout(() => {
-                this.loading = true;
-              }, 1000)
-            });
-          })
-        ).subscribe()
+
+    previewAvatar(event: any) {
+      this.loading = false;
+      if (event.target.files && event.target.files[0]) {
+        this.imageFile = event.target.files[0];
+        if (this.pathName !== this.imageFile.name) {
+          this.pathName = this.imageFile.name
+          const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+          const fileRef = this.storage.ref(imagePath);
+          this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().subscribe(url => {
+                this.path = url;
+                setTimeout(() => {
+                  this.loading = true;
+                }, 1000)
+              });
+            })
+          ).subscribe()
+        }
       }
     }
-  }
 
   findAllCategories() {
     this.categoryService.findAll().subscribe(res => {
       this.allCategories = res;
     })
   }
+
 
   @ViewChild(HeaderComponent)
   header: HeaderComponent | undefined;
@@ -339,7 +360,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
 
         }, 2000)
         setTimeout(()=>{
-          this.router.navigate(['/login'])
+          this.router.navigate(['/login']).finally()
         },6000)
       })
     }
