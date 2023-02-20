@@ -96,10 +96,22 @@
             Home
           </a>
         </li>
+<!--        <li class="nav-item dropdown dropdown-hover">-->
+<!--          <a routerLink="/company" class="nav-link" href="javascript:void(0)" id="jobsdropdown" role="button" data-bs-toggle="dropdown">-->
+<!--            Companies-->
+<!--          </a>-->
+<!--        </li>-->
         <li class="nav-item dropdown dropdown-hover">
-          <a routerLink="/company" class="nav-link" href="javascript:void(0)" id="jobsdropdown" role="button" data-bs-toggle="dropdown">
-            Companies
+          <a class="nav-link" href="javascript:void(0)" id="jobsdropdown" role="button" data-bs-toggle="dropdown">
+            Company
+            <div class="arrow-down"></div>
           </a>
+          <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="jobsdropdown">
+            <li><a routerLink="/company" class="dropdown-item" href="">
+              All Companies
+            </a></li>
+            <li><a routerLink="/top-companies" class="dropdown-item" href="">Top Company</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown dropdown-hover">
           <a routerLink="/job" class="nav-link" href="javascript:void(0)" id="pagesdoropdown" role="button" data-bs-toggle="dropdown">

@@ -28,9 +28,6 @@ export class LoginComponent {
   pathName!: string
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.showInfo()
-    },100)
     this.formLogin = new FormGroup({
       id: new FormControl(''),
       email: new FormControl(''.toLowerCase(), [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
