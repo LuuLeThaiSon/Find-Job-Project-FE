@@ -257,7 +257,7 @@
                     <div class="flex-grow-1">
                       <h6 class="mt-0 mb-1 fs-14">{{n?.candidate?.name}} just {{n?.notifyType?.name}} {{n?.job?.title}}
                         job</h6>
-                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span>{{n.dateTime}}</span>
+                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span> {{n.dateTime | amTimeAgo}}</span>
                       </p>
                     </div>
                   </div>
@@ -270,7 +270,7 @@
                     <div class="flex-grow-1">
                       <h6 class="mt-0 mb-1 fs-14">{{n.candidate?.name}} just {{n.notifyType?.name}} your {{n.job?.title}}
                         job</h6>
-                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span>{{n.dateTime}}</span>
+                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span> {{n.dateTime | amTimeAgo}}</span>
                       </p>
                     </div>
                   </div>
@@ -278,11 +278,7 @@
                 <!--end notification-item-->
 
               </div><!--end notification-wrapper-->
-              <div class="notification-footer border-top text-center">
-                <a class="primary-link fs-13" href="javascript:void(0)">
-                  <i class="mdi mdi-arrow-right-circle me-1"></i> <span>View More..</span>
-                </a>
-              </div>
+
             </div>
           </li>
           <li class="list-inline-item dropdown">
@@ -328,7 +324,7 @@
                     <div class="flex-grow-1">
                       <h6 class="mt-0 mb-1 fs-14">{{n.company?.name}} have just {{n.notifyType?.name}} {{n.job?.title}}
                         job</h6>
-                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span>{{n.dateTime}}</span>
+                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span> {{n.dateTime | amTimeAgo}}</span>
                       </p>
                     </div>
                   </div>
@@ -341,18 +337,13 @@
                     <div class="flex-grow-1">
                       <h6 class="mt-0 mb-1 fs-14">{{n.company?.name}} have just {{n.notifyType?.name}} {{n.job?.title}}
                         job</h6>
-                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span>{{n.dateTime}}</span>
+                      <p class="mb-0 fs-12 text-muted"><i class="mdi mdi-clock-outline"></i> <span> {{n.dateTime | amTimeAgo}}</span>
                       </p>
                     </div>
                   </div>
                 </a>
                 <!--end notification-item-->
               </div><!--end notification-wrapper-->
-              <div class="notification-footer border-top text-center">
-                <a class="primary-link fs-13" href="javascript:void(0)">
-                  <i class="mdi mdi-arrow-right-circle me-1"></i> <span>View More..</span>
-                </a>
-              </div>
             </div>
           </li>
           <li class="list-inline-item dropdown">

@@ -38,6 +38,8 @@ import {
 } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MomentModule} from "ngx-moment";
+// import { MomentModule } from 'ngx-moment';
 
 
 @NgModule({
@@ -80,6 +82,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     DropdownModule,
     MultiSelectModule,
     MatProgressBarModule,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 59
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
