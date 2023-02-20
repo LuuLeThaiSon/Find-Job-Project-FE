@@ -42,7 +42,7 @@
   <section class="section">
     <div class="container">
       <div class="alert bg-soft-success alert-dismissible fade show" role="alert" [hidden]="alertApply">
-        A simple success alert—check it out!
+        Your job application is withheld for processing!
         <button type="button" class="btn-close" data-bs-dismiss="alert"
                 aria-label="Close">
         </button>
@@ -195,7 +195,7 @@
                       <div class="col-md-4">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Experience :</span> {{j.expYear}}+ years</p>
+                            class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
                         </div>
                       </div>
                       <!--end col-->
@@ -287,7 +287,7 @@
                       <div class="col-md-4">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Experience :</span> {{j.expYear}}+ years</p>
+                            class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
                         </div>
                       </div>
                       <!--end col-->
@@ -389,7 +389,7 @@
                       <div class="col-md-8">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Experience :</span> {{j.expYear}}+ years</p>
+                            class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
                         </div>
                       </div>
                       <!--end col-->

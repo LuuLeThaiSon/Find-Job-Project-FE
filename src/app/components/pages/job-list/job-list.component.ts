@@ -10,6 +10,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApplyJob} from "../../model/apply-job";
 import {ApplyJobService} from "../../service/apply-job.service";
 import {finalize} from "rxjs";
+import {CommonService} from "../../service/common.service";
 
 @Component({
   selector: 'app-job-list',
@@ -39,6 +40,7 @@ export class JobListComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.commonService.scrollTopWindow(0,300);
 
     // @ts-ignore
     if (sessionStorage.getItem("user") == null) {
@@ -71,7 +73,8 @@ export class JobListComponent implements OnInit {
               private locationsService: LocationsService,
               private categoryService: CategoryService,
               private storage: AngularFireStorage,
-              private applyJobService: ApplyJobService) {
+              private applyJobService: ApplyJobService,
+              private commonService:CommonService) {
 
   }
 
@@ -225,7 +228,7 @@ export class JobListComponent implements OnInit {
     }
     if (years == "0-3") {
       this.displayJobs = this.displayJobs.filter((obj) => {
-        return obj.expYear >= 0 && obj.expYear <= 3;
+        return obj.expYear > 0 && obj.expYear <= 3;
       })
     }
     if (years == "3-6") {
