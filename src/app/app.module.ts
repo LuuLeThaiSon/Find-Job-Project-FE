@@ -1,18 +1,18 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import {HomePageComponent} from "./components/pages/home-page/home-page.component";
 import {HttpClientModule} from "@angular/common/http";
-import {HeaderComponent} from './components/common/header/header.component';
-import {FooterComponent} from './components/common/footer/footer.component';
-import {ContactComponent} from './components/pages/contact/contact.component';
-import {BlogComponent} from './components/pages/blog/blog.component';
-import {CompanyListComponent} from './components/pages/company-list/company-list.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { HeaderComponent } from './components/common/header/header.component';
+import { FooterComponent } from './components/common/footer/footer.component';
+import { ContactComponent } from './components/pages/contact/contact.component';
+import { BlogComponent } from './components/pages/blog/blog.component';
+import { CompanyListComponent } from './components/pages/company-list/company-list.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {JobListComponent} from './components/pages/job-list/job-list.component';
+import { JobListComponent } from './components/pages/job-list/job-list.component';
 import {LoginComponent} from "./components/pages/login/login.component";
 import {RegisterComponent} from "./components/pages/register/register.component";
 import { CompanyDetailComponent } from './components/pages/company-detail/company-detail.component';
@@ -26,6 +26,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
   ManageCompanyProfileComponent
 } from "./components/pages/manage-company-profile/manage-company-profile.component";
+import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
+import { CandidateDetailComponent } from './components/pages/candidate-detail/candidate-detail.component';
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 import {BookmarksJobsComponent} from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import { TopCompaniesComponent } from './top-companies/top-companies.component';
@@ -60,6 +62,7 @@ import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.comp
     RegisterComponent,
     JobDetailComponent,
     BookmarksJobsComponent,
+    CandidateDetailComponent,
     SearchPipe,
     TopCompaniesComponent,
     ManageCandidateProfileComponent,
@@ -93,8 +96,10 @@ import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.comp
     ButtonModule,
     RippleModule,
     ButtonModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    BrowserAnimationsModule
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

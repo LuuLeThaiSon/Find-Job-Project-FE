@@ -97,16 +97,9 @@
           </a>
         </li>
         <li class="nav-item dropdown dropdown-hover">
-          <a class="nav-link" href="javascript:void(0)" id="jobsdropdown" role="button" data-bs-toggle="dropdown">
-            Company
-            <div class="arrow-down"></div>
+          <a routerLink="/company" class="nav-link" href="javascript:void(0)" id="jobsdropdown" role="button" data-bs-toggle="dropdown">
+            Companies
           </a>
-          <ul class="dropdown-menu dropdown-menu-center" aria-labelledby="jobsdropdown">
-            <li><a routerLink="/company" class="dropdown-item" href="">
-              All Companies
-            </a></li>
-            <li><a routerLink="/top-companies" class="dropdown-item" href="">Top Company</a></li>
-          </ul>
         </li>
         <li class="nav-item dropdown dropdown-hover">
           <a routerLink="/job" class="nav-link" href="javascript:void(0)" id="pagesdoropdown" role="button" data-bs-toggle="dropdown">
@@ -363,6 +356,7 @@
               class="d-none d-md-inline-block fw-medium">Hi, {{user.name}}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
+              <li><a class="dropdown-item" [routerLink]="['/candidate-detail', user.id]">My Profile</a></li>
               <li><a class="dropdown-item" href="" [routerLink]="['/manage-candidate-profile/',user.id]">My Profile</a></li>
               <li><a class="dropdown-item" href="" [routerLink]="['/job-list-apply/',user.id]">My Job List Applied</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>

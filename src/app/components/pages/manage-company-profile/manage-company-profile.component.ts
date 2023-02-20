@@ -235,6 +235,30 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     }, 1000);
   }
 
+
+  previewAvatar(event: any) {
+    this.loading = false;
+    if (event.target.files && event.target.files[0]) {
+      this.imageFile = event.target.files[0];
+      if (this.pathName !== this.imageFile.name) {
+        this.pathName = this.imageFile.name
+        const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(imagePath);
+        this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              this.path = url;
+              setTimeout(() => {
+                this.loading = true;
+              }, 1000)
+              // this.showSuccess();
+              console.log(this.path)
+            });
+          })
+        ).subscribe()
+      }
+    }
+  }
   updateBanner(event: any) {
     // @ts-ignore
     console.log(event.target.files[0])
