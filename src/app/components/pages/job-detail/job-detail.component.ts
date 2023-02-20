@@ -116,6 +116,7 @@ export class JobDetailComponent {
 
 
   apply() {
+    this.loading = false;
     this.checkUpload = true;
     this.applyJob.candidate = this.user;
     this.applyJob.job = this.job;
@@ -135,6 +136,7 @@ export class JobDetailComponent {
             }, 3000);
             this.sendNotify(1, this.job);
           })
+          this.loading = true;
           this.checkUpload = false;
         });
       })
@@ -161,4 +163,7 @@ export class JobDetailComponent {
       }
     }
   }
+
+  //loading screen
+  loading = true;
 }

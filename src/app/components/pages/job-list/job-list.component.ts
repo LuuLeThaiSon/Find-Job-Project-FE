@@ -39,12 +39,11 @@ export class JobListComponent implements OnInit {
   checkApplyJob: Boolean[] = [];
   checkApplyAccept: Boolean[] = [];
   message!: string;
-  checkUpload: boolean = false;
   notify = new Notify();
   notifyType: NotifyType[] = [];
 
   ngOnInit(): void {
-    this.commonService.scrollTopWindow(0,300);
+    this.commonService.scrollTopWindow(0, 300);
 
     // @ts-ignore
     if (sessionStorage.getItem("user") == null) {
@@ -83,7 +82,7 @@ export class JobListComponent implements OnInit {
               private storage: AngularFireStorage,
               private applyJobService: ApplyJobService,
               private notifyService: NotifyService,
-              private commonService:CommonService) {
+              private commonService: CommonService) {
 
   }
 
@@ -130,7 +129,7 @@ export class JobListComponent implements OnInit {
   }
 
   apply() {
-    this.checkUpload = true;
+    this.loading = false;
     this.applyJob.candidate = this.user;
     this.applyJob.job = this.jobApply;
     this.applyJob.message = this.message;
@@ -149,9 +148,9 @@ export class JobListComponent implements OnInit {
             setTimeout(() => {
               this.alertApply = true;
             }, 3000)
-            this.sendNotify(1,this.jobApply)
+            this.sendNotify(1, this.jobApply)
           })
-          this.checkUpload = false;
+          this.loading = true;
         });
       })
     ).subscribe(() => {
@@ -182,6 +181,7 @@ export class JobListComponent implements OnInit {
   }
 
   filterJobsMethod(event: any) {
+    window.scrollTo(0, 300)
     this.formFilterJob?.nativeElement.submit();
     let salary = this.filterJobs.get('salary')?.value;
     let years = this.filterJobs.get('years')?.value;
@@ -197,7 +197,7 @@ export class JobListComponent implements OnInit {
     console.log(this.displayJobs)
   }
 
-  filterSalary(salary:string){
+  filterSalary(salary: string) {
     if (salary == "allsalary") {
       this.displayJobs = this.jobs.filter((obj) => {
         return obj.salaryMax >= 0;
@@ -210,7 +210,7 @@ export class JobListComponent implements OnInit {
     }
     if (salary == "200-500") {
       this.displayJobs = this.jobs.filter((obj) => {
-        return obj.salaryMax >= 200 && obj.salaryMax<= 500;
+        return obj.salaryMax >= 200 && obj.salaryMax <= 500;
       })
     }
     if (salary == "500-800") {
@@ -224,7 +224,8 @@ export class JobListComponent implements OnInit {
       })
     }
   }
-  filterExpYears(years : string) {
+
+  filterExpYears(years: string) {
     if (years == "allyears") {
       this.displayJobs = this.displayJobs.filter((obj) => {
         return obj.expYear >= 0;
@@ -252,36 +253,38 @@ export class JobListComponent implements OnInit {
       })
     }
   }
-  filterJobTypes(types:string) {
+
+  filterJobTypes(types: string) {
     if (types == "alltypes") {
-      this.displayJobs = this.displayJobs.filter((obj)=>{
+      this.displayJobs = this.displayJobs.filter((obj) => {
         return obj.type == true || obj.type == false
       })
     }
-    if(types == "full"){
-      this.displayJobs = this.displayJobs.filter((obj)=>{
+    if (types == "full") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
         return obj.type == true
       })
     }
-    if(types == "part") {
-      this.displayJobs = this.displayJobs.filter((obj)=>{
+    if (types == "part") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
         return !obj.type
       })
     }
   }
-  filterJobGender(gender:string){
-    if(gender == "any") {
-      this.displayJobs = this.displayJobs.filter((obj)=> {
-        return obj.gender == 3||obj.gender == 2||obj.gender == 1
+
+  filterJobGender(gender: string) {
+    if (gender == "any") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.gender == 3 || obj.gender == 2 || obj.gender == 1
       })
     }
-    if(gender == "male") {
-      this.displayJobs = this.displayJobs.filter((obj)=> {
+    if (gender == "male") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
         return obj.gender == 1
       })
     }
-    if(gender == "female") {
-      this.displayJobs = this.displayJobs.filter((obj)=> {
+    if (gender == "female") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
         return obj.gender == 2
       })
     }
@@ -296,11 +299,14 @@ export class JobListComponent implements OnInit {
         this.notify.notifyType = this.notifyType[i];
         this.notify.job = job;
         this.notify.company = job.company;
-        this.notify.candidate= this.user;
+        this.notify.candidate = this.user;
         this.notifyService.sendNotify(this.notify).subscribe(() => {
           this.ngOnInit()
         });
       }
     }
   }
+
+  //loading screen
+  loading = true;
 }

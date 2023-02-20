@@ -1,6 +1,20 @@
 <app-header></app-header>
 <div class="page-content">
 
+  <!--  loading screen-->
+  <div id="preloader" [hidden]="loading" style="backdrop-filter: blur(5px); background: none">
+    <div id="status">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+
   <!-- Start home -->
   <section class="page-title-box">
     <div class="container">
@@ -142,7 +156,7 @@
             <div>
               <div *ngIf="role == 3">
                 <div class="job-box bookmark-post card mt-4"
-                     *ngFor="let j of displayJobs | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
+                     *ngFor="let j of displayJobs.reverse() | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
                   <div class="p-4">
                     <div class="row align-items-center">
                       <div class="col-md-2">
@@ -234,7 +248,7 @@
               </div>
               <div *ngIf="role == 2||role == 1">
                 <div class="job-box bookmark-post card mt-4"
-                     *ngFor="let j of displayJobs | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
+                     *ngFor="let j of displayJobs.reverse() | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
                   <div class="p-4">
                     <div class="row align-items-center">
                       <div class="col-md-2">
@@ -739,7 +753,6 @@
                     data-bs-dismiss="modal" #btnModal hidden>Close
             </button>
           </div>
-          <mat-progress-bar mode="indeterminate" class="example-margin" *ngIf="checkUpload"></mat-progress-bar>
         </form>
       </div>
     </div>
