@@ -8,12 +8,14 @@ import {matchpassword} from "./matchpassword.validator";
 import firebase from "firebase/compat";
 import messaging = firebase.messaging;
 import {HeaderComponent} from "../../common/header/header.component";
+import {MessageService} from "primeng/api";
 
 
 @Component({
   selector: 'app-register-c',
   templateUrl: './register-c.component.html',
-  styleUrls: ['./register-c.component.css']
+  styleUrls: ['./register-c.component.css'],
+  providers:[MessageService]
 })
 export class RegisterCComponent {
   candidate!: Candidate
@@ -51,7 +53,8 @@ export class RegisterCComponent {
 
   constructor(private routerActive: ActivatedRoute,
               private router: Router,
-              private companyService: CompanyService) {}
+              private companyService: CompanyService,
+              private messageService: MessageService) {}
 
 
   onSubmit() {
@@ -72,11 +75,13 @@ export class RegisterCComponent {
     // this.candidate.role = {id: 3}
     this.companyService.saveCandidate(this.candidate).subscribe(() => {
       setTimeout(() => {
-        this.loading = true;
-      }, 1000)
-      alert("Create Successfully!")
-      this.router.navigate(['']).finally()
+        this.loading = false
+      }, 50)
     })
+      setTimeout(() => {
+        this.loading = true
+        this.router.navigate(['/login']).finally()
+      },500)
     })
   }
 
@@ -84,7 +89,10 @@ export class RegisterCComponent {
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let a of data) {
         if (a.email.toLowerCase() === mail) {
-          alert("Email exist!")
+          setTimeout(() => {
+            this.showError1()
+            this.formRegisterCandidate.get('email')?.setValue('')
+          },50,1)
         }
       }
     })
@@ -95,4 +103,41 @@ export class RegisterCComponent {
 
   loading!: boolean;
 
+
+  showSuccess() {
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'You can use this name', key:'ab'})
+  }
+
+  showSuccess1() {
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'You can use this email', key: 'ab'})
+  }
+
+  showInfo() {
+    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Wish you have a good day!', key: 'ab'});
+  }
+
+  showWarn() {
+    this.messageService.add({severity: 'warn', summary: 'Warn', detail: 'Message Content'});
+  }
+
+  showError() {
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Username existed. Please choose another name!', key:'ab'});
+  }
+
+  showError1() {
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Email existed. Please choose another email!', key:'ab'});
+  }
+
+  clear() {
+    this.messageService.clear();
+  }
+
+  showConfirm() {
+    this.messageService.clear();
+    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+  }
+
+  showViaService() {
+    this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+  }
 }

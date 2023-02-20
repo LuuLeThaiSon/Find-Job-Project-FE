@@ -15,7 +15,7 @@ import {Company} from "../../model/company";
 import {ApplyJobService} from "../../service/apply-job.service";
 import {ApplyJob} from "../../model/apply-job";
 import {MessageService} from "primeng/api";
-import {ProgressSpinnerModule} from 'primeng/progressspinner';
+
 
 
 @Component({
@@ -162,8 +162,10 @@ export class JobListApplyComponent {
   deleteJob(id: number, id1: number) {
     this.applyJobService.removeApplyJobCandidate(id, id1).subscribe(() => {
     })
-    this.showSuccess()
-    setTimeout(this.showSuccess, 500,1);
+    setTimeout(() => {
+      this.loading = false;
+      this.showSuccess()
+    })
     this.ngOnInit()
   }
 

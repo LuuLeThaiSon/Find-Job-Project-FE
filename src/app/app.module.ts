@@ -29,14 +29,18 @@ import {
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 import {BookmarksJobsComponent} from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import { TopCompaniesComponent } from './top-companies/top-companies.component';
-import { ManageCandidateProfileComponent } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 import {SearchPipe} from "./search.pipe";
-import { JobListApplyComponent } from './components/pages/job-list-apply/job-list-apply.component';
 import {MessageModule} from "primeng/message";
 import {ToastModule} from "primeng/toast";
 import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {
+  ManageCandidateProfileComponent
+} from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
+import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
+import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
+
 
 @NgModule({
   declarations: [
@@ -56,10 +60,11 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     RegisterComponent,
     JobDetailComponent,
     BookmarksJobsComponent,
+    SearchPipe,
     TopCompaniesComponent,
     ManageCandidateProfileComponent,
     RegisterCComponent,
-    SearchPipe,
+    ComingsoonComponent,
     JobListApplyComponent
   ],
   imports: [
@@ -85,12 +90,13 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
     BrowserAnimationsModule,
     MessageModule,
     ToastModule,
+    ButtonModule,
     RippleModule,
     ButtonModule,
     ProgressSpinnerModule
   ],
-
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

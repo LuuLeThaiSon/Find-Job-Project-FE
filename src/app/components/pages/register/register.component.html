@@ -1,33 +1,18 @@
 
-<!doctype html>
-<html lang="en">
 
-<head>
-
-
-  <meta charset="utf-8"/>
-  <title>Sign Up | Jobcy - Job Listing Template | Themesdesign</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content=" "/>
-  <meta name="keywords" content=""/>
-  <meta content="Themesdesign" name="author"/>
-
-</head>
-
-<body>
-<div id="preloader" [hidden]="loading">
-  <div id="status">
-    <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
-    </ul>
-  </div>
-</div>
 <div>
+  <div id="preloader" [hidden]="loading">
+    <div id="status">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
 
 
   <div class="main-content">
@@ -198,7 +183,23 @@
 <!-- Switcher Js -->
 <script src="assets/js/pages/switcher.init.js"></script>
 </div>
-</body>
-</html>
 
+
+<p-toast></p-toast>
+<p-toast position="top-left" key="tc"></p-toast>
+<p-toast position="top-center" key="ab"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+<p-toast>
+  <div class="card">
+    <h5>Severities</h5>
+    <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>
+    <button type="button" pButton pRipple (click)="showInfo()" label="Info" class="p-button-info mb-2"></button>
+    <button type="button" pButton pRipple (click)="showWarn()" label="Warn" class="p-button-warning mb-2"></button>
+    <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button>
+    <h5>Clear</h5>
+    <button type="button" pButton pRipple (click)="clear()" icon="pi pi-times" label="Clear"></button>
+    <h5>Template</h5>
+    <button type="button" pButton pRipple (click)="showConfirm()" label="Confirm" class="ui-button-warning"></button>
+  </div>
+</p-toast>
 

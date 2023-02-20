@@ -25,7 +25,9 @@ export class ApplyJobService {
     return this.http.post<boolean[]>("http://localhost:8080/apply/test/" + id, jobs);
   }
 
-
+  checkApplyAccept(id: number, jobs: Job[]): Observable<boolean[]> {
+    return this.http.post<boolean[]>("http://localhost:8080/apply/checkApplyAccept/" + id, jobs);
+  }
 
   findAllApplyJobByCandidateId(id: number): Observable<ApplyJob[]> {
     return this.http.get<ApplyJob[]>("http://localhost:8080/apply/candidate/" + id)

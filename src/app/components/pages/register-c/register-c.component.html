@@ -1,19 +1,4 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-
-
-  <meta charset="utf-8"/>
-  <title>Sign Up | Jobcy - Job Listing Template | Themesdesign</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content=" "/>
-  <meta name="keywords" content=""/>
-  <meta content="Themesdesign" name="author"/>
-
-</head>
-
-<body>
+<div>
 <div id="preloader" [hidden]="loading">
   <div id="status">
     <ul>
@@ -26,7 +11,6 @@
     </ul>
   </div>
 </div>
-<div>
 <div>
 
 
@@ -73,9 +57,11 @@
                             <label for="emailInput" class="form-label">Email</label>
                             <input type="email" class="form-control" required id="emailInput"
                                    placeholder="Enter your email" formControlName="email" ngModel (change)="checkEmail(mail.value)" #mail>
-                            <p
+                            <p-message severity="error"
                               *ngIf="formRegisterCandidate.get('email')?.errors?.['required'] && formRegisterCandidate.get('email')?.touched"
-                              style="color: orange; margin-top: 10px">Require</p>
+                              style="color: orange; margin-top: 10px" (selectionchange)="showViaService()">Require</p-message>
+                            <p *ngIf="formRegisterCandidate.get('email')?.errors?.['pattern'] && formRegisterCandidate.get('email')?.touched"
+                               style="color: red">Email must exactly pattern</p>
                           </div>
                           <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
@@ -190,6 +176,23 @@
 <!-- Switcher Js -->
 <script src="assets/js/pages/switcher.init.js"></script>
 </div>
-</body>
-</html>
+
+
+<p-toast></p-toast>
+<p-toast position="top-left" key="tc"></p-toast>
+<p-toast position="top-center" key="ab"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+<p-toast>
+  <div class="card">
+    <h5>Severities</h5>
+    <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>
+    <button type="button" pButton pRipple (click)="showInfo()" label="Info" class="p-button-info mb-2"></button>
+    <button type="button" pButton pRipple (click)="showWarn()" label="Warn" class="p-button-warning mb-2"></button>
+    <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button>
+    <h5>Clear</h5>
+    <button type="button" pButton pRipple (click)="clear()" icon="pi pi-times" label="Clear"></button>
+  </div>
+</p-toast>
+
+
 

@@ -259,27 +259,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     }
   }
 
-  previewAvatar(event: any) {
-    this.loading = false;
-    if (event.target.files && event.target.files[0]) {
-      this.imageFile = event.target.files[0];
-      if (this.pathName !== this.imageFile.name) {
-        this.pathName = this.imageFile.name
-        const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(imagePath);
-        this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
-          finalize(() => {
-            fileRef.getDownloadURL().subscribe(url => {
-              this.path = url;
-              setTimeout(() => {
-                this.loading = true;
-              }, 1000)
-            });
-          })
-        ).subscribe()
-      }
-    }
-  }
+
     previewAvatar(event: any) {
       this.loading = false;
       if (event.target.files && event.target.files[0]) {
@@ -356,7 +336,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
 
         }, 2000)
         setTimeout(()=>{
-          this.router.navigate(['/login'])
+          this.router.navigate(['/login']).finally()
         },6000)
       })
     }
