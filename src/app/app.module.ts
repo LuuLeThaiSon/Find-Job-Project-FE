@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,6 +39,9 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {ManageCandidateProfileComponent} from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
 import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MomentModule} from "ngx-moment";
+// import { MomentModule } from 'ngx-moment';
 
 
 @NgModule({
@@ -94,7 +97,14 @@ import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.comp
     RippleModule,
     ButtonModule,
     ProgressSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BrowserAnimationsModule,
+    MatProgressBarModule,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 59
+      }
+    })
   ],
 
   providers: [],

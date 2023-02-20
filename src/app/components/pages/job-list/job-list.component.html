@@ -197,8 +197,7 @@
                       <!--end col-->
                       <div class="col-md-2">
                         <div>
-                          <span class="badge bg-soft-blue fs-13 mt-1" *ngIf="j.type">Full time</span>
-                          <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full time</span>
                           <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
                         </div>
                       </div>
@@ -229,19 +228,6 @@
                             class="text-dark">Gender :</span> Any</p>
                         </div>
                       </div>
-                      <!--end col-->
-                      <div class="col-lg-2 col-md-3">
-                        <div *ngIf="role == 3">
-                          <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"
-                             (click)="applyJobId(j)">Apply Now <i
-                            class="mdi mdi-chevron-double-right"></i></a>
-                          <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]"
-                                class="badge rounded-pill bg-danger fs-13 mt-1">Waiting</span>
-                          <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]"
-                                class="badge rounded-pill bg-success fs-13 mt-1">Accepted</span>
-                        </div>
-                      </div>
-                      <!--end col-->
                     </div>
                     <!--end row-->
                   </div>
@@ -349,7 +335,6 @@
                       <div class="col-md-2">
                         <div class="text-center mb-4 mb-md-0">
                           <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
-                            width="55" height ="55"
                             src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                             alt=""
                             class="img-fluid rounded-3"></a>

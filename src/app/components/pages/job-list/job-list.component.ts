@@ -36,8 +36,6 @@ export class JobListComponent implements OnInit {
   jobApply!: Job;
   cvFileName: any;
   alertApply: boolean = true;
-  checkApplyJob: Boolean[] = [];
-  checkApplyAccept: Boolean[] = [];
   message!: string;
   notify = new Notify();
   notifyType: NotifyType[] = [];
@@ -96,18 +94,6 @@ export class JobListComponent implements OnInit {
     return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
       this.displayJobs = data;
-      if (this.role == 0) {
-        return;
-      } else {
-        this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
-          this.checkApplyJob = data1.reverse();
-          console.log(this.checkApplyJob, 'data1')
-        })
-        this.applyJobService.checkApplyAccept(this.user.id, data).subscribe((data2) => {
-          this.checkApplyAccept = data2.reverse();
-          console.log(this.checkApplyAccept, 'data2')
-        })
-      }
     })
   }
 
@@ -178,6 +164,7 @@ export class JobListComponent implements OnInit {
 
   scrollTop() {
     window.scrollTo(0, 300)
+    console.log(this.p, 'p')
   }
 
   filterJobsMethod(event: any) {
