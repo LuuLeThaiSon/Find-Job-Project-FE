@@ -36,9 +36,7 @@ import {ToastModule} from "primeng/toast";
 import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
-import {
-  ManageCandidateProfileComponent
-} from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
+import {ManageCandidateProfileComponent} from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
 import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
 
