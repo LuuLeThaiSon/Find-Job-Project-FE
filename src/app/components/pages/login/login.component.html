@@ -1,6 +1,19 @@
 
     <div class="page-content">
 
+      <div id="preloader" [hidden]="loading">
+        <div id="status">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+
       <!-- START SIGN-IN -->
       <section class="bg-auth">
         <div class="container">
@@ -35,7 +48,7 @@
                           <p *ngIf="formLogin.get('email')?.errors?.['pattern'] && formLogin.get('email')?.touched" style="color: red">Must have pattern email</p>
                           <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password" ngModel>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password" ngModel><span><i class="fas fa-eye"></i></span>
                           </div>
                           <p *ngIf="formLogin.get('password')?.errors?.['required'] && formLogin.get('password')?.touched" style="color: red">Required</p>
                           <div class="mb-4">
@@ -63,3 +76,19 @@
       <!-- END SIGN-IN -->
 
     </div>
+
+    <p-toast></p-toast>
+    <p-toast position="top-left" key="tc"></p-toast>
+    <p-toast position="top-center" key="ab"></p-toast>
+    <p-toast position="bottom-center" key="bc"></p-toast>
+    <p-toast>
+    <div class="card">
+      <h5>Severities</h5>
+      <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>
+      <button type="button" pButton pRipple (click)="showInfo()" label="Info" class="p-button-info mb-2"></button>
+      <button type="button" pButton pRipple (click)="showWarn()" label="Warn" class="p-button-warning mb-2"></button>
+      <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button>
+      <h5>Clear</h5>
+      <button type="button" pButton pRipple (click)="clear()" icon="pi pi-times" label="Clear"></button>
+    </div>
+    </p-toast>

@@ -29,6 +29,20 @@ import {
 import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
 import { CandidateDetailComponent } from './components/pages/candidate-detail/candidate-detail.component';
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
+import {BookmarksJobsComponent} from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
+import { TopCompaniesComponent } from './top-companies/top-companies.component';
+import {SearchPipe} from "./search.pipe";
+import {MessageModule} from "primeng/message";
+import {ToastModule} from "primeng/toast";
+import {RippleModule} from "primeng/ripple";
+import {ButtonModule} from "primeng/button";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {
+  ManageCandidateProfileComponent
+} from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
+import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
+import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
+
 
 @NgModule({
   declarations: [
@@ -49,7 +63,12 @@ import {RegisterCComponent} from "./components/pages/register-c/register-c.compo
     JobDetailComponent,
     BookmarksJobsComponent,
     CandidateDetailComponent,
-    RegisterCComponent
+    SearchPipe,
+    TopCompaniesComponent,
+    ManageCandidateProfileComponent,
+    RegisterCComponent,
+    ComingsoonComponent,
+    JobListApplyComponent
   ],
   imports: [
     BrowserModule,
@@ -61,9 +80,28 @@ import {RegisterCComponent} from "./components/pages/register-c/register-c.compo
     AngularFireModule.initializeApp(environments.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-      BrowserAnimationsModule,
-   ],
+    BrowserAnimationsModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    NgxPaginationModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environments.firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
+    BrowserAnimationsModule,
+    MessageModule,
+    ToastModule,
+    ButtonModule,
+    RippleModule,
+    ButtonModule,
+    ProgressSpinnerModule,
+    BrowserAnimationsModule
+  ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

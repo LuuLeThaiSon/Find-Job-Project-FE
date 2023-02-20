@@ -126,7 +126,7 @@
               <i class="uim uim-layers-alt"></i>
             </div>
             <div class="popu-category-content mt-4">
-              <a href="job-categories.html" class="text-dark stretched-link">
+              <a href="" class="text-dark stretched-link">
                 <h5 class="fs-18">IT & Software</h5>
               </a>
               <p class="text-muted mb-0">2024 Jobs</p>
@@ -850,7 +850,7 @@
               with
               the right freelancers.</p>
             <div class="mt-4 pt-2">
-              <a href="javascript:void(0)" class="btn btn-primary btn-hover">Started Now <i
+              <a href="" routerLink="/job" class="btn btn-primary btn-hover">Started Now <i
                 class="uil uil-rocket align-middle"></i></a>
             </div>
           </div>
@@ -1173,3 +1173,52 @@
 
 </div>
 <app-footer></app-footer>
+
+
+<p-toast></p-toast>
+<p-toast position="top-left" key="tc"></p-toast>
+<p-toast position="top-center" key="ab"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-column" style="flex: 1">
+      <div class="text-center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+        <h4>{{message.summary}}</h4>
+        <p>{{message.detail}}</p>
+      </div>
+      <div class="grid p-fluid">
+        <div class="col-6">
+          <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+        </div>
+        <div class="col-6">
+          <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+
+<div class="card">
+  <h5>Severities</h5>
+  <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>
+  <button type="button" pButton pRipple (click)="showInfo()" label="Info" class="p-button-info mb-2"></button>
+  <button type="button" pButton pRipple (click)="showWarn()" label="Warn" class="p-button-warning mb-2"></button>
+  <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button>
+
+  <h5>Positions</h5>
+  <button type="button" pButton pRipple (click)="showTopLeft()" label="Top Left"></button>
+  <button type="button" pButton pRipple (click)="showTopCenter()" label="Top Center" class="p-button-warning"></button>
+  <button type="button" pButton pRipple (click)="showBottomCenter()" label="Bottom Center" class="p-button-success"></button>
+
+  <h5>Multiple</h5>
+  <button type="button" pButton pRipple (click)="showMultiple()" label="Multiple" class="p-button-warning"></button>
+  <button type="button" pButton pRipple (click)="showSticky()" label="Sticky"></button>
+
+  <h5>Clear</h5>
+  <button type="button" pButton pRipple (click)="clear()" icon="pi pi-times" label="Clear"></button>
+
+  <h5>Template</h5>
+  <button type="button" pButton pRipple (click)="showConfirm()" label="Confirm" class="ui-button-warning"></button>
+</div>

@@ -1,0 +1,8 @@
+:host ::ng-deep #advertise {
+  width: 100% !important;
+  height: 250px !important;
+}
+:host ::ng-deep iframe {
+  width: 100% !important;
+  height: 250px !important;
+}

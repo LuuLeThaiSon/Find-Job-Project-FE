@@ -6,6 +6,12 @@ import {CategoryService} from "../../service/category.service";
 import {Locations} from "../../model/locations";
 import {LocationsService} from "../../service/locations.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ApplyJob} from "../../model/apply-job";
+import {ApplyJobService} from "../../service/apply-job.service";
+import {doc} from "@angular/fire/firestore";
+import {NotifyType} from "../../model/notify-type";
+import {Notify} from "../../model/notify";
+import {NotifyService} from "../../service/notify.service";
 
 
 @Component({
@@ -14,7 +20,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./bookmarks-jobs.component.css']
 })
 export class BookmarksJobsComponent implements OnInit {
-  dateCurrent = new  Date()
+  dateCurrent = new Date()
   minDate?: string;
 
   user!: any;
@@ -30,7 +36,13 @@ export class BookmarksJobsComponent implements OnInit {
   salaryMin!: number;
   salaryMax!: number;
   salary: boolean = false;
+  applyJobs: ApplyJob[] = [];
+  applyJob!: ApplyJob;
+  applyJobId!: number;
 
+  notifyType: NotifyType[] =[];
+  notify = new Notify();
+  rejectJob!: Job | undefined;
 
   ngOnInit(): void {
     // @ts-ignore
@@ -72,7 +84,12 @@ export class BookmarksJobsComponent implements OnInit {
 
   constructor(private jobService: JobService,
               private categoryService: CategoryService,
-              private locationService: LocationsService) {
+              private locationService: LocationsService,
+              private applyjobService: ApplyJobService,
+              private notifyService: NotifyService) {
+    this.notifyService.findAllTye().subscribe(data => {
+      this.notifyType = data;
+    })
   }
 
   findAll() {
@@ -119,7 +136,6 @@ export class BookmarksJobsComponent implements OnInit {
     if (+this.job.salaryMax < +this.job.salaryMin) {
       return
     }
-    console.log(this.job, this.user.id);
     return this.jobService.create(this.job).subscribe(() => {
       this.findAll();
       this.btnModal.nativeElement.click();
@@ -130,7 +146,6 @@ export class BookmarksJobsComponent implements OnInit {
   openModalEdit(job: Job) {
     this.jobForm.reset();
     this.job = job;
-    console.log(this.job)
     this.jobForm.patchValue(this.job);
     this.modalTitle = 'Edit job';
   }
@@ -156,11 +171,62 @@ export class BookmarksJobsComponent implements OnInit {
       this.salary = false;
     }
   }
+
   getSalaryMin() {
     // @ts-ignore
     this.salaryMin = +document.getElementById('salaryMin').value;
-    console.log(this.salaryMin);
+  }
+
+  findAllApplyJobByJob(id: number) {
+    return this.applyjobService.findAllApplyJobByJob(id).subscribe((data) => {
+      this.applyJobs = data;
+    })
+  }
+
+  rejectApply(id: any) {
+    this.applyjobService.findOne(id).subscribe(data => {
+      this.rejectJob = data.job;
+      this.applyjobService.removeApplyJob(id).subscribe(() => {
+        this.findAllApplyJobByJob(id);
+        // @ts-ignore
+        document.getElementById(id).setAttribute("hidden", 'true');
+        this.sendNotify(4, this.rejectJob)
+      })
+    })
+
   }
 
 
+
+  acceptJob(applyJob: ApplyJob) {
+    return this.applyjobService.acceptJob(applyJob).subscribe(() => {
+      // @ts-ignore
+      document.getElementById('accept'+applyJob.id).setAttribute("disabled", 'true');
+      // @ts-ignore
+      document.getElementById('reject'+applyJob.id).setAttribute("disabled", 'true');
+      this.sendNotify(3, applyJob.job)
+
+    })
+  }
+
+  getApplyJob(aj: ApplyJob) {
+    this.applyJob = aj;
+    // @ts-ignore
+    this.applyJobId = +aj.id;
+  }
+
+  sendNotify(nt: number, job: Job | undefined) {
+    for (let i = 0; i < this.notifyType.length; i++) {
+      if (this.notifyType[i].id == nt) {
+        this.notify.notifyType = this.notifyType[i];
+        this.notify.job = job;
+        // @ts-ignore
+        this.notify.company = job.company;
+        this.notify.candidate= this.applyJob.candidate;
+        this.notifyService.sendNotify(this.notify).subscribe(() => {
+          this.ngOnInit()
+        });
+      }
+    }
+  }
 }

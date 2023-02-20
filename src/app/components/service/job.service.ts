@@ -40,4 +40,10 @@ export class JobService {
   create(job: Job): Observable<Job> {
     return this.http.post<Job>("http://localhost:8080/jobs", job)
   }
+
+
+
+  findAllJobsByCandidate(id:number) {
+    return this.http.get<Job[]>(`http://localhost:8080/jobs/candidate/${id}`)
+  }
 }

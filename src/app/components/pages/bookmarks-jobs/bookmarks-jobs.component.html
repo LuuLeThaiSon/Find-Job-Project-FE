@@ -132,7 +132,7 @@
               <div class="col-lg-3 text-lg-end align-self-center">
                 <ul class="list-inline mt-3 mb-0">
                   <li class="list-inline-item" data-bs-toggle="tooltip"
-                      data-bs-placement="top" title="Delete">
+                      data-bs-placement="top" title="Update">
                     <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#myModal"
                        class="avatar-sm bg-soft-info d-inline-block text-center rounded-circle fs-18"
                        (click)="openModalEdit(j)">
@@ -140,7 +140,7 @@
                     </a>
                   </li>
                   <li class="list-inline-item" data-bs-toggle="tooltip"
-                      data-bs-placement="top" title="View More">
+                      data-bs-placement="top" title="View Job Detail">
                     <a href="" [routerLink]="['/job-detail', j.id]"
                        class="avatar-sm bg-soft-success d-inline-block text-center rounded-circle fs-18">
                       <i class="mdi mdi-eye"></i>
@@ -153,6 +153,15 @@
                        class="avatar-sm bg-soft-danger d-inline-block text-center rounded-circle fs-18"
                        (click)="getJobId(j.id)">
                       <i class="uil uil-trash-alt"></i>
+                    </a>
+                  </li>
+                  <li class="list-inline-item" data-bs-toggle="tooltip"
+                      data-bs-placement="top" title="Candidate">
+                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                       data-bs-target="#candidateModal"
+                       class="avatar-sm bg-soft-primary d-inline-block text-center rounded-circle fs-18"
+                       (click)="findAllApplyJobByJob(j.id)">
+                      <i class="mdi mdi-account"></i>
                     </a>
                   </li>
                 </ul>
@@ -261,10 +270,10 @@
                          class="form-label">Job Category</label>
                   <select
                     class="form-select" data-trigger
-                          name="choices-single-categories"
-                          aria-label="Default select example"
-                          id="category"
-                          formControlName="id">
+                    name="choices-single-categories"
+                    aria-label="Default select example"
+                    id="category"
+                    formControlName="id">
                     <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
                   </select>
                 </div>
@@ -273,7 +282,8 @@
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="salaryMin" class="form-label">Salary min (per month)</label>
-                  <input type="text" class="form-control" id="salaryMin" formControlName="salaryMin" (input)="getSalaryMin()">
+                  <input type="text" class="form-control" id="salaryMin" formControlName="salaryMin"
+                         (input)="getSalaryMin()">
                   <div *ngIf="jobForm.get('salaryMin')?.errors?.['required'] && jobForm.get('salaryMin')?.touched"
                        class="alert  bg-soft-danger mt-1" role="alert">
                     Required
@@ -292,7 +302,8 @@
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="salaryMax" class="form-label">Salary max (per month)</label>
-                  <input type="text" class="form-control" id="salaryMax" formControlName="salaryMax" (input)="validateSalary()">
+                  <input type="text" class="form-control" id="salaryMax" formControlName="salaryMax"
+                         (input)="validateSalary()">
                 </div>
                 <div *ngIf="salary == true" class="alert  bg-soft-danger mt-1" role="alert">
                   Must be > salary min
@@ -320,7 +331,7 @@
                           aria-label="Default select example"
                           id="location"
                           formControlName="id">
-                    <option *ngFor="let l of locations" [value]="l.id" >{{l.name}}</option>
+                    <option *ngFor="let l of locations" [value]="l.id">{{l.name}}</option>
                   </select>
                 </div>
               </div>
@@ -362,7 +373,8 @@
               <div class="col-lg-6">
                 <div class="mb-3">
                   <label for="expiredDate" class="form-label">Expired date</label>
-                  <input type="date" class="form-control" id="expiredDate" formControlName="expiredDate" min ="{{minDate}}">
+                  <input type="date" class="form-control" id="expiredDate" formControlName="expiredDate"
+                         min="{{minDate}}">
                 </div>
                 <div *ngIf="jobForm.get('expiredDate')?.errors?.['required'] && jobForm.get('expiredDate')?.touched"
                      class="alert  bg-soft-danger mt-1" role="alert">
@@ -435,4 +447,146 @@
   </div>
 </div>
 <!--End Post job modal-->
+
+<!-- Candidate Modal -->
+<div class="modal fade" id="candidateModal" tabindex="-1" aria-labelledby="candidateModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="candidateModalTotal">Candidate List</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="candidate-list">
+          <div class="row" *ngIf="applyJobs.length != 0">
+            <div id="{{aj.id}}" class="col-lg-4 col-md-6" *ngFor="let aj of applyJobs">
+              <div class="candidate-grid-box bookmark-post card mt-4">
+                <div class="card-body p-4">
+                  <div class="d-flex mb-4">
+                    <div class="flex-shrink-0 position-relative">
+                      <img src="{{aj.candidate?.avatar}}" alt=""
+                           class="avatar-md rounded">
+                    </div>
+                    <div class="ms-3">
+                      <a href="candidate-details.html" class="primary-link"><h5 class="fs-17">
+                        {{aj.candidate?.name}}</h5></a>
+                      <span class="badge bg-soft-secondary fs-13">Email: {{aj.candidate?.email}}</span> <br>
+                      <span class="badge bg-soft-secondary fs-13">Phone number: {{aj.candidate?.tel}}</span>
+                    </div>
+                  </div>
+
+                  <p class="text-muted mb-0">Message: </p>
+                  <textarea *ngIf="aj.message" class="text-muted mb-0" cols="38" readonly>{{aj.message}}</textarea>
+                  <textarea *ngIf="!aj.message" class="text-muted mb-0" cols="38" readonly>Empty</textarea>
+                  <div class="profile-document-list d-flex align-items-center mt-4 ">
+                    <div class="icon flex-shrink-0">
+                      <i class="uil uil-file"></i>
+                    </div>
+                    <div class="ms-3">
+                      <h6 class="fs-16 mb-0">Download CV</h6>
+                    </div>
+                    <div class="ms-auto">
+                      <a href="{{aj.cv}}" download="" class="fs-20 text-muted"><i class="uil uil-import"></i></a>
+                    </div>
+                  </div>
+
+                  <div *ngIf="!aj.status" class="mt-3">
+                    <button id="accept{{aj.id}}" class="btn btn-primary btn-hover w-100 mt-2 {{aj.id}}" data-bs-toggle="modal"
+                            data-bs-target="#acceptModal" (click)="getApplyJob(aj)">
+                      <i class="mdi mdi-account-check"></i> Accept
+                    </button>
+                    <button id="reject{{aj.id}}" class="btn btn-danger btn-hover w-100 mt-2 {{aj.id}}" data-bs-toggle="modal"
+                            data-bs-target="#rejectModal" (click)="getApplyJob(aj)">
+                      <i class="mdi mdi-account-cancel"></i> Reject
+                    </button>
+                  </div>
+
+                  <div *ngIf="aj.status" class="mt-3">
+                    <button class="btn btn-primary btn-hover w-100 mt-2" data-bs-toggle="modal"
+                            data-bs-target="#acceptModal" disabled>
+                      <i class="mdi mdi-account-check"></i> Accepted
+                    </button>
+                    <button class="btn btn-danger btn-hover w-100 mt-2" data-bs-toggle="modal"
+                            data-bs-target="#rejectModal" disabled>
+                      <i class="mdi mdi-account-cancel"></i> Reject
+                    </button>
+                  </div>
+                  <div class="mt-3">
+                    <a class="btn btn-soft-primary btn-hover w-100 mt-2"><i
+                      class="mdi mdi-eye"></i> View Profile</a>
+                  </div>
+                </div>
+              </div> <!--end card-->
+            </div><!--end col-->
+          </div><!--end row-->
+          <div class="row" *ngIf="applyJobs.length == 0">
+            Empty
+          </div>
+        </div><!--end candidate-list-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Candidate MODAL -->
+
+<!-- Reject Job Modal -->
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Reject candidate</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h6 class="text-danger"><i
+            class="uil uil-exclamation-triangle"></i> Are you sure to reject this candidate?
+          </h6>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                data-bs-target="#candidateModal" data-bs-dismiss="modal">Cancel
+        </button>
+
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal" data-bs-toggle="modal"
+                data-bs-target="#candidateModal" (click)="rejectApply(applyJobId)">Yes, reject it
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Reject Job MODAL -->
+
+<!-- Accept Job Modal -->
+<div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="acceptModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Accept candidate</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h6 class="text-success"><i
+            class="uil uil-exclamation-triangle"></i> Are you sure to accept this candidate?
+          </h6>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                data-bs-target="#candidateModal" data-bs-dismiss="modal">Cancel
+        </button>
+
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal" data-bs-toggle="modal"
+                data-bs-target="#candidateModal" (click)="acceptJob(applyJob)">Yes, accept it
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Accept Job MODAL -->
 <app-footer></app-footer>
