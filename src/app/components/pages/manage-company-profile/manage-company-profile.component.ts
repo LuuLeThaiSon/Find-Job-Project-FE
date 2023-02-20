@@ -12,6 +12,7 @@ import {HeaderComponent} from "../../common/header/header.component";
 import {Category} from "../../model/category";
 import {CategoryService} from "../../service/category.service";
 import {CommonService} from "../../service/common.service";
+import {MessageService} from "primeng/api";
 
 
 @Component({
@@ -28,7 +29,6 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   imageFile: any;
   path!: string;
   pathName!: string;
-  edited!: boolean;
   categories: Category[] = [];
   allCategories: Category[] = [];
   imageBannerFile: any;
@@ -42,7 +42,8 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
               private storage: AngularFireStorage,
               private categoryService: CategoryService,
               private commonService: CommonService,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private messageService: MessageService) {
   }
 
   ngAfterViewInit(): void {
@@ -120,9 +121,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   }
 
   ngOnInit() {
-
     this.commonService.scrollTopWindow(0, 300);
-    this.edited = true;
     this.loading = true;
     this.activatedRoute.params.subscribe(params => {
       this.companyId = params['id'];
@@ -174,35 +173,34 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
 
   }
 
-    findCompanyById(id: number) {
-      this.companyService.findCompany(id).subscribe(res => {
-        this.company = res;
-        this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
-        this.ggMap.setAttribute("style:width", "100%");
-        this.formCompany.patchValue(res)
-      })
-    }
+  findCompanyById(id: number) {
+    this.companyService.findCompany(id).subscribe(res => {
+      this.company = res;
+      this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
+      this.ggMap.setAttribute("style:width", "100%");
+      this.formCompany.patchValue(res)
+    })
+  }
 
-    findAllJobsByCompany(id: number) {
-      this.jobService.findAllJobsByCompany(id).subscribe(res => {
-        this.jobs = res;
-      })
-    }
+  findAllJobsByCompany(id: number) {
+    this.jobService.findAllJobsByCompany(id).subscribe(res => {
+      this.jobs = res;
+    })
+  }
 
   onSubmit() {
-    this.commonService.scrollTopWindow(0,300);
+    this.commonService.scrollTopWindow(0, 300);
     this.loading = false;
     if (this.imageFile == null) {
+      this.commonService.scrollTopWindow(0, 100);
       this.company = this.formCompany.value;
       this.company.avatar = this.path;
       this.companyService.update(this.company, this.companyId).subscribe(() => {
-        setTimeout(() => {
-          this.loading = true;
-        }, 2000);
-        this.edited = false;
+        this.loading = true;
+        window.scroll(0, 100);
+        this.showSuccess();
         sessionStorage.setItem("user", JSON.stringify(this.company));
         this.header?.ngOnInit();
-        window.scroll(0, 300);
         this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
         this.ggMap.setAttribute("style:width", "100%");
       })
@@ -215,14 +213,12 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
             this.company = this.formCompany.value;
             this.company.avatar = url;
             this.companyService.update(this.company, this.companyId).subscribe(() => {
-              setTimeout(() => {
-                this.loading = true;
-              }, 2000);
+              this.commonService.scrollTopWindow(0, 100);
+              this.loading = true;
               sessionStorage.setItem("user", JSON.stringify(this.company));
-              this.edited = false;
               this.ggMap = this.company.googleMap;
-              this.commonService.scrollTopWindow(0, 300);
               this.header?.ngOnInit();
+              this.showSuccess();
               this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
               this.ggMap.setAttribute("style:width", "100%");
             })
@@ -230,12 +226,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
         })
       ).subscribe()
     }
-    setTimeout(() => {
-      this.loading = true;
-    }, 1000);
   }
-
-
 
   updateBanner(event: any) {
     // @ts-ignore
@@ -261,35 +252,32 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     }
   }
 
-
-    previewAvatar(event: any) {
-      this.loading = false;
-      if (event.target.files && event.target.files[0]) {
-        this.imageFile = event.target.files[0];
-        if (this.pathName !== this.imageFile.name) {
-          this.pathName = this.imageFile.name
-          const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-          const fileRef = this.storage.ref(imagePath);
-          this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
-            finalize(() => {
-              fileRef.getDownloadURL().subscribe(url => {
-                this.path = url;
-                setTimeout(() => {
-                  this.loading = true;
-                }, 1000)
-              });
-            })
-          ).subscribe()
-        }
+  previewAvatar(event: any) {
+    this.loading = false;
+    if (event.target.files && event.target.files[0]) {
+      this.imageFile = event.target.files[0];
+      if (this.pathName !== this.imageFile.name) {
+        this.pathName = this.imageFile.name
+        const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(imagePath);
+        this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              this.path = url;
+              this.loading = true;
+            });
+          })
+        ).subscribe()
       }
-
     }
+
+  }
+
   findAllCategories() {
     this.categoryService.findAll().subscribe(res => {
       this.allCategories = res;
     })
   }
-
 
   @ViewChild(HeaderComponent)
   header: HeaderComponent | undefined;
@@ -305,7 +293,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   showPassFields = true;
   showSuccessChangePass = true;
 
-  showPass(){
+  showPass() {
     this.showPassFields = !this.showPassFields;
   }
 
@@ -314,43 +302,53 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     let currentPass = this.formChangePass.get('currentPass')?.value;
     let newPass = this.formChangePass.get('newPass')?.value;
     let confirmPass = this.formChangePass.get('confirmPass')?.value;
-    if(currentPass != this.company.password && newPass != confirmPass){
-      this.passStatus = "Current Password incorrect and New Password not match";
-      this.alertChangePass = false;
-      this.formChangePass.reset();
-    } else if (currentPass != this.company.password) {
-      this.passStatus = "Current Password incorrect";
-      this.alertChangePass = false;
-      this.formChangePass.reset();
-      return
-    } else if (newPass != confirmPass) {
-      this.passStatus = "New Password not match";
-      this.alertChangePass = false;
-      this.formChangePass.reset();
-    } else {
-      this.company.password = newPass;
-      this.loading = false;
-      this.companyService.update(this.company,this.companyId).subscribe(res => {
-        // @ts-ignore
-        setTimeout(() => {
-          this.loading = true;
-          this.showSuccessChangePass = false;
 
-        }, 2000)
-        setTimeout(()=>{
-          this.router.navigate(['/login']).finally()
-        },6000)
-      })
+    if (newPass == null) {
+      this.alertChangePass = false;
+      this.passStatus = "Please enter new Password";
+      this.formChangePass.reset();
+      return;
     }
-  }
+    if (currentPass != this.company.password) {
+      this.alertChangePass = false;
+      this.passStatus = "Current Password incorrect";
+      this.formChangePass.reset();
+      return;
+    }
+    if (confirmPass == null) {
+      this.alertChangePass = false;
+      this.passStatus = "Please confirm new Password";
+      this.formChangePass.reset();
+      return;
+    }
+    if (newPass != confirmPass) {
+      this.alertChangePass = false;
+      this.passStatus = "New Password not match";
+      this.formChangePass.reset();
+      return;
+    }
+    if (newPass.toString().length < 8) {
+      this.alertChangePass = false;
+      this.passStatus = "New Password must be at least 8 characters";
+      this.formChangePass.reset();
+      return;
+    }
 
-  fadein(){
-    let e = document.getElementById("error-company-name"), t = 0, r = setInterval(function () {
+    this.company.password = newPass;
+    this.loading = false;
+    this.companyService.update(this.company, this.companyId).subscribe(res => {
       // @ts-ignore
-      t < 1 ? (t += .5, e.style.opacity = String(t)) : clearInterval(r)
-    }, 200)
+      this.loading = true;
+      this.showSuccessChangePass = false;
+      setTimeout(() => {
+        this.router.navigate(['/login']).finally()
+      }, 4000)
+    })
+
   }
 
-  //google-map
+  showSuccess() {
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Update Successfully'})
+  }
 
 }

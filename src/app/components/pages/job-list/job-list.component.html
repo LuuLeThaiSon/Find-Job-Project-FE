@@ -65,39 +65,81 @@
         <div class="col-lg-9">
           <div class="me-lg-5">
             <div class="job-list-header">
-              <form action="#">
+<!--              <form action="#">-->
+<!--                <div class="row g-2">-->
+<!--                  <div class="col-lg-3 col-md-6">-->
+<!--                    <div class="filler-job-form">-->
+<!--                      <i class="uil uil-briefcase-alt"></i>-->
+<!--                      <input type="search" class="form-control filter-job-input-box border border-primary"-->
+<!--                             id="exampleFormControlInput1" placeholder="Job, company... "-->
+<!--                             name="search" [(ngModel)]="searchText">-->
+<!--                    </div>-->
+<!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
+<!--                  <div class="col-lg-3 col-md-6">-->
+<!--                    <div class="filler-job-form">-->
+<!--                      <select class="form-select" data-trigger-->
+<!--                              name="choices-single-location"-->
+<!--                              aria-label="Default select example">-->
+<!--                        <option [value]="">Chose location</option>-->
+<!--                        <option [value]="l.id" *ngFor="let l of locations">{{l.name}}</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
+<!--                  <div class="col-lg-3 col-md-6">-->
+<!--                    <div class="filler-job-form">-->
+<!--                      <select class="form-select " data-trigger-->
+<!--                              id="choices-single-categories"-->
+<!--                              aria-label="Default select example">-->
+<!--                        <option [value]="">Chose category</option>-->
+<!--                        <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
+<!--                  <div class="col-lg-3 col-md-6">-->
+<!--                    <a href="javascript:void(0)" class="btn btn-primary w-100"><i-->
+<!--                      class="uil uil-filter"></i> Filter</a>-->
+<!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
+<!--                </div>&lt;!&ndash;end row&ndash;&gt;-->
+<!--              </form>-->
+              <form [formGroup]="searchJobs" id="formSearchJobTopBar" (ngSubmit)="searchJobsMethod()">
                 <div class="row g-2">
-                  <div class="col-lg-3 col-md-6">
+                  <div class="col-lg-4 col-md-6">
                     <div class="filler-job-form">
                       <i class="uil uil-briefcase-alt"></i>
                       <input type="search" class="form-control filter-job-input-box border border-primary"
                              id="exampleFormControlInput1" placeholder="Job, company... "
-                             name="search" [(ngModel)]="searchText">
+                             name="search" formControlName="text">
                     </div>
                   </div><!--end col-->
-                  <div class="col-lg-3 col-md-6">
-                    <div class="filler-job-form">
+                  <div class="col-lg-2 col-md-6">
+                    <div class="filler-job-form" formGroupName="location">
                       <select class="form-select" data-trigger
                               name="choices-single-location"
-                              aria-label="Default select example">
-                        <option [value]="">Chose location</option>
-                        <option [value]="l.id" *ngFor="let l of locations">{{l.name}}</option>
+                              aria-label="Default select example"
+                              formControlName="l_id">
+                        <option value="all_l">Location</option>
+                        <option [value]="l.id" *ngFor="let l of locations" >{{l.name}}</option>
                       </select>
                     </div>
                   </div><!--end col-->
-                  <div class="col-lg-3 col-md-6">
-                    <div class="filler-job-form">
+                  <div class="col-lg-2 col-md-6">
+                    <div class="filler-job-form" formGroupName="category">
                       <select class="form-select " data-trigger
                               id="choices-single-categories"
-                              aria-label="Default select example">
-                        <option [value]="">Chose category</option>
-                        <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>
+                              aria-label="Default select example"
+                              formControlName="c_id">
+                        <option value="all_c">Category</option>
+                        <option [value]="c.id" *ngFor="let c of categories" >{{c.name}}</option>
                       </select>
                     </div>
                   </div><!--end col-->
-                  <div class="col-lg-3 col-md-6">
-                    <a href="javascript:void(0)" class="btn btn-primary w-100"><i
-                      class="uil uil-filter"></i> Filter</a>
+                  <div class="col-lg-2 col-md-6">
+                    <button class="btn btn-soft-primary w-100" type="submit" ><i
+                      class="uil uil-filter"></i> Filter</button>
+                  </div><!--end col-->
+                  <div class="col-lg-2 col-md-6">
+                    <a class="btn btn-soft-dark w-100" (click)="reset()" ><i
+                      class="mdi mdi-repeat"></i> Reset</a>
                   </div><!--end col-->
                 </div><!--end row-->
               </form>
@@ -207,14 +249,21 @@
                   </div>
                   <div class="p-3 bg-light">
                     <div class="row justify-content-between">
-                      <div class="col-md-4">
+                      <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
                             class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
                         </div>
                       </div>
                       <!--end col-->
-                      <div class="col-md-4" [ngSwitch]="j.gender">
+                      <div class="col-md-5">
+                        <div>
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Category :</span> {{j.category.name}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2" [ngSwitch]="j.gender">
                         <div *ngSwitchCase="1">
                           <p class="text-muted mb-0"><span
                             class="text-dark">Gender :</span> Male</p>
@@ -228,6 +277,19 @@
                             class="text-dark">Gender :</span> Any</p>
                         </div>
                       </div>
+                      <!--end col-->
+                      <!--                      <div class="col-lg-2 col-md-3">-->
+                      <!--                        <div *ngIf="role == 3">-->
+                      <!--                          <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"-->
+                      <!--                             (click)="applyJobId(j)">Apply Now <i-->
+                      <!--                            class="mdi mdi-chevron-double-right"></i></a>-->
+                      <!--                          <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]"-->
+                      <!--                                class="badge bg-soft-danger fs-13 mt-1">Waiting</span>-->
+                      <!--                          <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]"-->
+                      <!--                                class="badge bg-soft-success fs-13 mt-1">Accepted</span>-->
+                      <!--                        </div>-->
+                      <!--                      </div>-->
+                      <!--end col-->
                     </div>
                     <!--end row-->
                   </div>
@@ -287,14 +349,21 @@
                   </div>
                   <div class="p-3 bg-light">
                     <div class="row justify-content-between">
-                      <div class="col-md-4">
+                      <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
                             class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
                         </div>
                       </div>
                       <!--end col-->
-                      <div class="col-md-4" [ngSwitch]="j.gender">
+                      <div class="col-md-5">
+                        <div>
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Category :</span> {{j.category.name}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2" [ngSwitch]="j.gender">
                         <div *ngSwitchCase="1">
                           <p class="text-muted mb-0"><span
                             class="text-dark">Gender :</span> Male</p>
@@ -329,7 +398,7 @@
               </div>
               <div *ngIf="role == 0">
                 <div class="job-box bookmark-post card mt-4"
-                     *ngFor="let j of jobs.reverse() | paginate: { itemsPerPage: 5, currentPage: p }|search: searchText,index as i">
+                     *ngFor="let j of displayJobs.reverse() | paginate: { itemsPerPage: 5, currentPage: p }|search: searchText,index as i">
                   <div class="p-4">
                     <div class="row align-items-center">
                       <div class="col-md-2">
@@ -389,10 +458,17 @@
                   </div>
                   <div class="p-3 bg-light">
                     <div class="row justify-content-between">
-                      <div class="col-md-8">
+                      <div class="col-md-6">
                         <div>
                           <p class="text-muted mb-0"><span
                             class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-4">
+                        <div>
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Category :</span> {{j.category.name}}</p>
                         </div>
                       </div>
                       <!--end col-->

@@ -41,9 +41,36 @@ export class JobService {
     return this.http.post<Job>("http://localhost:8080/jobs", job)
   }
 
-
-
   findAllJobsByCandidate(id:number) {
     return this.http.get<Job[]>(`http://localhost:8080/jobs/candidate/${id}`)
+  }
+
+  //search on top
+  findJobsByTitleAndLocationAndCompany(text:String, l_id:number, c_id:number): Observable<Job[]> {
+    return this.http.get<Job[]>("http://localhost:8080/jobs/search?text=" + text + "&locationId=" + l_id + "&categoryId=" + c_id)
+  }
+
+  findJobsByTitleContainingOrCompanyName(text:String): Observable<Job[]> {
+    return this.http.get<Job[]>("http://localhost:8080/jobs/search/input?text=" + text)
+  }
+
+  findJobsByLocationId(l_id:number): Observable<Job[]> {
+    return this.http.get<Job[]>("http://localhost:8080/jobs/search/location?locationId=" + l_id)
+  }
+
+  findJobsByCategoryId(c_id:number): Observable<Job[]> {
+    return this.http.get<Job[]>("http://localhost:8080/jobs/search/category?categoryId=" + c_id)
+  }
+
+  findJobsByTitleContainingAndCategoryId(text:String, c_id:number): Observable<Job[]> {
+    return this.http.get<Job[]>("http://localhost:8080/jobs/search/text/category?text=" + text + "&categoryId=" + c_id)
+  }
+
+  findJobsByTitleContainingAndLocationId(text:String, l_id:number): Observable<Job[]> {
+    return this.http.get<Job[]>("http://localhost:8080/jobs/search/text/location?text=" + text + "&locationId=" + l_id)
+  }
+
+  findJobsByLocationIdAndCategoryId(l_id:number,c_id:number): Observable<Job[]> {
+    return this.http.get<Job[]>("http://localhost:8080/jobs/search/location/category?locationId=" + l_id + "&categoryId=" + c_id)
   }
 }

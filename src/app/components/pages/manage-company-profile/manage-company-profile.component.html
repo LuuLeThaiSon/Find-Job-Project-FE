@@ -56,11 +56,6 @@
   <section class="section">
 
     <div class="container">
-      <div class="alert bg-soft-primary alert-dismissible fade show" role="alert" [hidden]="edited">
-        Profile Update Successfully !
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
-      </div>
     </div>
     <div class="container">
       <div class="row">
@@ -231,7 +226,7 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                  <form [formGroup]="formCompany" (ngSubmit)="onSubmit()">
+                  <form [formGroup]="formCompany" >
                     <input type="text" class="form-control" formControlName="id" hidden/>
                     <div>
                       <h5 class="fs-17 fw-semibold mb-3 mb-0">Company Account</h5>
@@ -382,7 +377,10 @@
                       <!--end row-->
                     </div>
                     <div class="mt-4 text-end">
-                      <button type="submit" class="btn btn-primary">Update</button>
+                      <button
+                        data-bs-target="#confirmUpdateModal"
+                        data-bs-toggle="modal"
+                        class="btn btn-primary">Update</button>
                     </div>
                   </form>
                   <!--end form-->
@@ -390,7 +388,7 @@
                 <div class="tab-pane fade" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
                   <form [formGroup]="formChangePass" (ngSubmit)="changePass()">
                     <div class="mt-4">
-                      <div class="alert bg-soft-success alert-dismissible fade show"
+                      <div class="alert bg-soft-primary alert-dismissible fade show"
                            id="change-pass-success"
                            role="alert" [hidden]=showSuccessChangePass>
                         Update Successfully!<br>
@@ -483,3 +481,32 @@
 </div>
 <!-- End Page-content -->
 <app-footer></app-footer>
+<!-- Confirm Update Modal -->
+<div class="modal fade" id="confirmUpdateModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Update Company Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h6 class="text-primary"><i
+            class="mdi mdi-account"></i> Are you sure to update?
+          </h6>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-bs-dismiss="modal">Cancel
+        </button>
+
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                (click)="onSubmit()">Yes, update it
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Confirm Update MODAL -->
+<p-toast position="top-right"></p-toast>

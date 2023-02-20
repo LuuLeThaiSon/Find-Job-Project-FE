@@ -41,6 +41,7 @@ import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-
 import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MomentModule} from "ngx-moment";
+import {ConfirmationService, MessageService} from "primeng/api";
 // import { MomentModule } from 'ngx-moment';
 
 
@@ -107,7 +108,9 @@ import {MomentModule} from "ngx-moment";
     })
   ],
 
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
