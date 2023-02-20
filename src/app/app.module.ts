@@ -38,6 +38,7 @@ import {
 } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ComingsoonComponent } from './components/pages/comingsoon/comingsoon.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     SearchPipe,
     TopCompaniesComponent,
     ManageCandidateProfileComponent,
-    RegisterCComponent
+    RegisterCComponent,
+    ComingsoonComponent
   ],
   imports: [
     BrowserModule,

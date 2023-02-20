@@ -102,56 +102,56 @@
                 </div><!--end row-->
               </form>
             </div><!--end job-list-header-->
-            <div class="wedget-popular-title mt-4">
-              <h6>Popular</h6>
-              <ul class="list-inline">
-                <li class="list-inline-item">
-                  <div class="popular-box d-flex align-items-center">
-                    <div class="number flex-shrink-0 me-2">
-                      20
-                    </div>
-                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">UI/UX
-                      designer</h6></a>
-                  </div>
-                </li>
-                <li class="list-inline-item">
-                  <div class="popular-box d-flex align-items-center">
-                    <div class="number flex-shrink-0 me-2">
-                      18
-                    </div>
-                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">HR
-                      manager</h6></a>
-                  </div>
-                </li>
-                <li class="list-inline-item">
-                  <div class="popular-box d-flex align-items-center">
-                    <div class="number flex-shrink-0 me-2">
-                      10
-                    </div>
-                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">Product
-                      manager</h6></a>
-                  </div>
-                </li>
-                <li class="list-inline-item">
-                  <div class="popular-box d-flex align-items-center">
-                    <div class="number flex-shrink-0 me-2">
-                      15
-                    </div>
-                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">Sales
-                      manager</h6></a>
-                  </div>
-                </li>
-                <li class="list-inline-item">
-                  <div class="popular-box d-flex align-items-center">
-                    <div class="number flex-shrink-0 me-2">
-                      28
-                    </div>
-                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">
-                      Developer</h6></a>
-                  </div>
-                </li>
-              </ul>
-            </div><!--end wedget-popular-title-->
+<!--            <div class="wedget-popular-title mt-4">-->
+<!--              <h6>Popular</h6>-->
+<!--              <ul class="list-inline">-->
+<!--                <li class="list-inline-item">-->
+<!--                  <div class="popular-box d-flex align-items-center">-->
+<!--                    <div class="number flex-shrink-0 me-2">-->
+<!--                      20-->
+<!--                    </div>-->
+<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">UI/UX-->
+<!--                      designer</h6></a>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <div class="popular-box d-flex align-items-center">-->
+<!--                    <div class="number flex-shrink-0 me-2">-->
+<!--                      18-->
+<!--                    </div>-->
+<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">HR-->
+<!--                      manager</h6></a>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <div class="popular-box d-flex align-items-center">-->
+<!--                    <div class="number flex-shrink-0 me-2">-->
+<!--                      10-->
+<!--                    </div>-->
+<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">Product-->
+<!--                      manager</h6></a>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <div class="popular-box d-flex align-items-center">-->
+<!--                    <div class="number flex-shrink-0 me-2">-->
+<!--                      15-->
+<!--                    </div>-->
+<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">Sales-->
+<!--                      manager</h6></a>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--                <li class="list-inline-item">-->
+<!--                  <div class="popular-box d-flex align-items-center">-->
+<!--                    <div class="number flex-shrink-0 me-2">-->
+<!--                      28-->
+<!--                    </div>-->
+<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">-->
+<!--                      Developer</h6></a>-->
+<!--                  </div>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>&lt;!&ndash;end wedget-popular-title&ndash;&gt;-->
             <!-- Job-list -->
             <div>
               <div *ngIf="role == 3">
@@ -162,6 +162,7 @@
                       <div class="col-md-2">
                         <div class="text-center mb-4 mb-md-0">
                           <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
+                            width="55" height ="55"
                             src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                             alt=""
                             class="img-fluid rounded-3"></a>
@@ -196,7 +197,7 @@
                       <!--end col-->
                       <div class="col-md-2">
                         <div>
-                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-blue fs-13 mt-1" *ngIf="j.type">Full time</span>
                           <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
                         </div>
                       </div>
@@ -234,9 +235,9 @@
                              (click)="applyJobId(j)">Apply Now <i
                             class="mdi mdi-chevron-double-right"></i></a>
                           <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]"
-                                class="badge bg-soft-danger fs-13 mt-1">Waiting</span>
+                                class="badge rounded-pill bg-danger fs-13 mt-1">Waiting</span>
                           <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]"
-                                class="badge bg-soft-success fs-13 mt-1">Accepted</span>
+                                class="badge rounded-pill bg-success fs-13 mt-1">Accepted</span>
                         </div>
                       </div>
                       <!--end col-->
@@ -254,6 +255,7 @@
                       <div class="col-md-2">
                         <div class="text-center mb-4 mb-md-0">
                           <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
+                            width="55" height ="55"
                             src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                             alt=""
                             class="img-fluid rounded-3"></a>
@@ -346,6 +348,7 @@
                       <div class="col-md-2">
                         <div class="text-center mb-4 mb-md-0">
                           <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
+                            width="55" height ="55"
                             src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                             alt=""
                             class="img-fluid rounded-3"></a>

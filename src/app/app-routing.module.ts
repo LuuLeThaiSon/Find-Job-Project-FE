@@ -19,6 +19,7 @@ import {
   ManageCandidateProfileComponent
 } from "./components/pages/manage-candidate-profile/manage-candidate-profile.component";
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
+import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
 
 const routes: Routes = [
   {path:"",component:HomePageComponent},
@@ -43,7 +44,8 @@ const routes: Routes = [
   {path:"manage-company-profile/:id",component:ManageCompanyProfileComponent},
   {path:"manage-candidate-profile/:id",component:ManageCandidateProfileComponent},
   {path:"manage-jobs/:id",component:BookmarksJobsComponent},
-  {path:"top-companies",component:TopCompaniesComponent}
+  {path:"top-companies",component:TopCompaniesComponent},
+  {path:"coming-soon",component:ComingsoonComponent}
 ];
 
 @NgModule({
