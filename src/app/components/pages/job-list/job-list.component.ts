@@ -74,6 +74,16 @@ export class JobListComponent implements OnInit {
       gender: new FormControl('any'),
     })
 
+    this.searchJobs = new FormGroup({
+      text: new FormControl(),
+      location: new FormGroup({
+        l_id: new FormControl('all_l')
+      }),
+      category: new FormGroup({
+        c_id: new FormControl('all_c')
+      })
+    })
+
   }
 
   constructor(private jobService: JobService,
@@ -309,4 +319,65 @@ export class JobListComponent implements OnInit {
 
   //loading screen
   loading = true;
+
+
+  searchJobs!: FormGroup
+  // @ts-ignore
+  searchJobsMethod() {
+
+    window.scrollTo(0, 300)
+    this.formSearchJobs?.nativeElement.submit();
+    let text = this.searchJobs.get('text')?.value;
+    let location = this.searchJobs.get('location')?.value;
+    let category = this.searchJobs.get('category')?.value;
+
+
+    if(text != null && location.l_id == "all_l" && category.c_id == "all_c") {
+      return this.jobService.findJobsByTitleContainingOrCompanyName(text).subscribe((data) => {
+        this.displayJobs = data;
+
+      })
+    }
+
+    if(text == null && location.l_id != "all_l" && category.c_id == "all_c") {
+      return this.jobService.findJobsByLocationId(location.l_id).subscribe((data) => {
+        this.displayJobs = data;
+
+      })
+    }
+
+    if(text == null && location.l_id == "all_l" && category.c_id != "all_c") {
+      return this.jobService.findJobsByCategoryId(category.c_id).subscribe((data) => {
+        this.displayJobs = data;
+      })
+    }
+
+    if(text != null && location.l_id != "all_l" && category.c_id == "all_c") {
+      return this.jobService.findJobsByTitleContainingAndLocationId(text, location.l_id).subscribe((data) => {
+        this.displayJobs = data;
+      })
+    }
+
+    if(text != null && location.l_id == "all_l" && category.c_id != "all_c") {
+      return this.jobService.findJobsByTitleContainingAndCategoryId(text, category.c_id).subscribe((data) => {
+        this.displayJobs = data;
+      })
+    }
+
+    if(text == null && location.l_id != "all_l" && category.c_id != "all_c") {
+      return this.jobService.findJobsByLocationIdAndCategoryId(location.l_id, category.c_id).subscribe((data) => {
+        this.displayJobs = data;
+      })
+    }
+
+    if(text != null && location.l_id != "all_l" && category.c_id != "all_c") {
+      return this.jobService.findJobsByTitleAndLocationAndCompany(text,location.l_id,category.c_id).subscribe((data) => {
+        this.displayJobs = data;
+      })
+    }
+    this.displayJobs = this.jobs;
+
+
+  }
+  @ViewChild('formJob') formSearchJobs: ElementRef | undefined;
 }

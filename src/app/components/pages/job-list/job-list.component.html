@@ -65,39 +65,41 @@
         <div class="col-lg-9">
           <div class="me-lg-5">
             <div class="job-list-header">
-              <form action="#">
+              <form [formGroup]="searchJobs" (ngSubmit)="searchJobsMethod()">
                 <div class="row g-2">
                   <div class="col-lg-3 col-md-6">
                     <div class="filler-job-form">
                       <i class="uil uil-briefcase-alt"></i>
                       <input type="search" class="form-control filter-job-input-box border border-primary"
                              id="exampleFormControlInput1" placeholder="Job, company... "
-                             name="search" [(ngModel)]="searchText">
+                             name="search" formControlName="text">
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
-                    <div class="filler-job-form">
+                    <div class="filler-job-form" formGroupName="location">
                       <select class="form-select" data-trigger
                               name="choices-single-location"
-                              aria-label="Default select example">
-                        <option [value]="">Chose location</option>
-                        <option [value]="l.id" *ngFor="let l of locations">{{l.name}}</option>
+                              aria-label="Default select example"
+                              formControlName="l_id">
+                        <option value="all_l">Chose location</option>
+                        <option [value]="l.id" *ngFor="let l of locations" >{{l.name}}</option>
                       </select>
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
-                    <div class="filler-job-form">
+                    <div class="filler-job-form" formGroupName="category">
                       <select class="form-select " data-trigger
                               id="choices-single-categories"
-                              aria-label="Default select example">
-                        <option [value]="">Chose category</option>
-                        <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>
+                              aria-label="Default select example"
+                              formControlName="c_id">
+                        <option value="all_c">Chose category</option>
+                        <option [value]="c.id" *ngFor="let c of categories" >{{c.name}}</option>
                       </select>
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-3 col-md-6">
-                    <a href="javascript:void(0)" class="btn btn-primary w-100"><i
-                      class="uil uil-filter"></i> Filter</a>
+                    <button class="btn btn-primary w-100" type="submit"><i
+                      class="uil uil-filter"></i> Filter</button>
                   </div><!--end col-->
                 </div><!--end row-->
               </form>
