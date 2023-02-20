@@ -109,8 +109,7 @@
           </ul>
         </li>
         <li class="nav-item dropdown dropdown-hover">
-          <a routerLink="/job" class="nav-link" href="javascript:void(0)" id="pagesdoropdown" role="button"
-             data-bs-toggle="dropdown">
+          <a routerLink="/job" class="nav-link" href="javascript:void(0)" id="pagesdoropdown" role="button" data-bs-toggle="dropdown">
             Jobs</a>
         </li><!--end dropdown-->
         <li class="nav-item dropdown dropdown-hover">
@@ -218,6 +217,7 @@
           <li class="list-inline-item dropdown">
             <a href="javascript:void(0)" class="header-item" id="userdropdown" data-bs-toggle="dropdown"
                aria-expanded="false">
+              <img src="{{user.avatar}}" alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span class="d-none d-md-inline-block fw-medium">Hi, {{user.name.split(' ')[0]}}</span>
               <img
                 src="{{user.avatar? user.avatar : 'https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png'}}"
                 alt="mdo" width="35" height="35" class="rounded-circle me-1"> <span
@@ -295,8 +295,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userdropdown">
               <li><a class="dropdown-item" href="" [routerLink]="['/manage-jobs', user.id]">Manage Jobs</a></li>
-              <li><a class="dropdown-item" href="" [routerLink]="['/manage-company-profile', user.id]">Company
-                Profile</a></li>
+              <li><a class="dropdown-item" href="" [routerLink]="['/manage-company-profile', user.id]">Company Profile</a></li>
               <li><a class="dropdown-item" href="" (click)="signOut()">Logout</a></li>
             </ul>
           </li>

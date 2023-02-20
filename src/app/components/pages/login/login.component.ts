@@ -104,11 +104,11 @@ export class LoginComponent {
 
 
   showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'Login successfully!'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Login successfully!', key: 'ab'})
   }
 
   showInfo() {
-    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Please check your email to get password!', key: 'ab'});
+    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Welcome to login page!', key: 'ab'});
   }
 
   showWarn() {
@@ -116,7 +116,7 @@ export class LoginComponent {
   }
 
   showError() {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Login fail! You can try again!'});
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Login fail! You can try again!', key: 'ab'});
   }
 
 
