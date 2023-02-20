@@ -326,7 +326,7 @@
               </div>
               <div *ngIf="role == 0">
                 <div class="job-box bookmark-post card mt-4"
-                     *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }|search: searchText,index as i">
+                     *ngFor="let j of jobs.reverse() | paginate: { itemsPerPage: 5, currentPage: p }|search: searchText,index as i">
                   <div class="p-4">
                     <div class="row align-items-center">
                       <div class="col-md-2">

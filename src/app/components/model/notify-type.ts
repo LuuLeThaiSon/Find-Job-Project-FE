@@ -1,4 +1,7 @@
-export interface NotifyType {
+export class NotifyType {
   id?: number;
-  name: string;
+  name?: string;
+
+  constructor() {
+  }
 }

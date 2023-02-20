@@ -11,6 +11,9 @@ import {ApplyJob} from "../../model/apply-job";
 import {ApplyJobService} from "../../service/apply-job.service";
 import {finalize} from "rxjs";
 import {CommonService} from "../../service/common.service";
+import {NotifyService} from "../../service/notify.service";
+import {Notify} from "../../model/notify";
+import {NotifyType} from "../../model/notify-type";
 
 @Component({
   selector: 'app-job-list',
@@ -37,7 +40,8 @@ export class JobListComponent implements OnInit {
   checkApplyAccept: Boolean[] = [];
   message!: string;
   checkUpload: boolean = false;
-
+  notify = new Notify();
+  notifyType: NotifyType[] = [];
 
   ngOnInit(): void {
     this.commonService.scrollTopWindow(0,300);
@@ -60,6 +64,10 @@ export class JobListComponent implements OnInit {
     this.findAllLocations();
     this.findAllCategories();
 
+    this.notifyService.findAllTye().subscribe(data => {
+      this.notifyType = data;
+    })
+
     this.filterJobs = new FormGroup({
       salary: new FormControl('allsalary'),
       years: new FormControl('allyears'),
@@ -74,6 +82,7 @@ export class JobListComponent implements OnInit {
               private categoryService: CategoryService,
               private storage: AngularFireStorage,
               private applyJobService: ApplyJobService,
+              private notifyService: NotifyService,
               private commonService:CommonService) {
 
   }
@@ -92,11 +101,11 @@ export class JobListComponent implements OnInit {
         return;
       } else {
         this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
-          this.checkApplyJob = data1;
+          this.checkApplyJob = data1.reverse();
           console.log(this.checkApplyJob, 'data1')
         })
         this.applyJobService.checkApplyAccept(this.user.id, data).subscribe((data2) => {
-          this.checkApplyAccept = data2;
+          this.checkApplyAccept = data2.reverse();
           console.log(this.checkApplyAccept, 'data2')
         })
       }
@@ -136,11 +145,11 @@ export class JobListComponent implements OnInit {
             this.btnModal.nativeElement.click();
             this.applyForm.reset();
             this.applyForm.reset();
-
             this.alertApply = false;
             setTimeout(() => {
               this.alertApply = true;
             }, 3000)
+            this.sendNotify(1,this.jobApply)
           })
           this.checkUpload = false;
         });
@@ -280,5 +289,18 @@ export class JobListComponent implements OnInit {
 
   @ViewChild('formJobSalary') formFilterJob: ElementRef | undefined;
 
-
+  //send notifications
+  sendNotify(nt: number, job: Job) {
+    for (let i = 0; i < this.notifyType.length; i++) {
+      if (this.notifyType[i].id == nt) {
+        this.notify.notifyType = this.notifyType[i];
+        this.notify.job = job;
+        this.notify.company = job.company;
+        this.notify.candidate= this.user;
+        this.notifyService.sendNotify(this.notify).subscribe(() => {
+          this.ngOnInit()
+        });
+      }
+    }
+  }
 }

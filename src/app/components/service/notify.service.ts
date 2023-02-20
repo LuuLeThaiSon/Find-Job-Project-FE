@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Notify} from "../model/notify";
+import {NotifyType} from "../model/notify-type";
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,13 @@ export class NotifyService {
 
   readNotify(notify: Notify): Observable<Notify> {
     return this.http.put<Notify>("http://localhost:8080/notify/" + notify.id, notify);
+  }
+
+  sendNotify(notify: Notify): Observable<Notify> {
+    return this.http.post<Notify>("http://localhost:8080/notify", notify);
+  }
+
+  findAllTye(): Observable<NotifyType[]> {
+    return this.http.get<NotifyType[]>("http://localhost:8080/notify/type")
   }
 }
