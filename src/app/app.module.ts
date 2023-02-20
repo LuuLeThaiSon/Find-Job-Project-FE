@@ -29,7 +29,6 @@ import {
 import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
 import { CandidateDetailComponent } from './components/pages/candidate-detail/candidate-detail.component';
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
-import {BookmarksJobsComponent} from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import { TopCompaniesComponent } from './top-companies/top-companies.component';
 import {SearchPipe} from "./search.pipe";
 import {MessageModule} from "primeng/message";
@@ -37,9 +36,7 @@ import {ToastModule} from "primeng/toast";
 import {RippleModule} from "primeng/ripple";
 import {ButtonModule} from "primeng/button";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
-import {
-  ManageCandidateProfileComponent
-} from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
+import {ManageCandidateProfileComponent} from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
 import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
 
