@@ -62,12 +62,15 @@
                               style="color: orange; margin-top: 10px" (selectionchange)="showViaService()">Require</p-message>
                             <p *ngIf="formRegisterCandidate.get('email')?.errors?.['pattern'] && formRegisterCandidate.get('email')?.touched"
                                style="color: red">Email must exactly pattern</p>
+
                           </div>
                           <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password">
                             <p *ngIf="formRegisterCandidate.get('password')?.errors?.['required'] && formRegisterCandidate.get('password')?.touched"
                               style="color: orange; margin-top: 10px" #a >Require</p>
+                            <p *ngIf="formRegisterCandidate.get('password')?.errors?.['min'] && formRegisterCandidate.get('password')?.touched"
+                               style="color: orange; margin-top: 10px" #a >Minimum of 8 characters</p>
                           </div>
                           <div class="mb-3">
                             <label for="confirmPassword" class="form-label">Confirm Password</label>
@@ -76,7 +79,8 @@
                             <p *ngIf="formRegisterCandidate.get('confirmPassword')?.errors?.['required'] && formRegisterCandidate.get('confirmPassword')?.touched"
                               style="color: orange; margin-top: 10px">Require</p>
                             <p *ngIf="formRegisterCandidate.errors?.['passwordmatcherror']" style="color: pink">Password does not match</p>
-
+                            <p *ngIf="formRegisterCandidate.get('confirmPassword')?.errors?.['min'] && formRegisterCandidate.get('confirmPassword')?.touched"
+                               style="color: orange; margin-top: 10px" #a >Minimum of 8 characters</p>
                           </div>
                           <div class="mb-3">
                             <label for="tel" class="form-label">Tel</label>

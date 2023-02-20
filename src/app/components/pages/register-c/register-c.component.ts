@@ -15,7 +15,7 @@ import {MessageService} from "primeng/api";
   selector: 'app-register-c',
   templateUrl: './register-c.component.html',
   styleUrls: ['./register-c.component.css'],
-  providers:[MessageService]
+  providers:[MessageService]//
 })
 export class RegisterCComponent {
   candidate!: Candidate
@@ -35,8 +35,8 @@ export class RegisterCComponent {
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password: new FormControl('', [Validators.required, Validators.min(6)]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.min(6)]),
       tel: new FormControl('', [Validators.required]),
       role: new FormGroup({
         id: new FormControl('', [Validators.required])
@@ -54,7 +54,7 @@ export class RegisterCComponent {
   constructor(private routerActive: ActivatedRoute,
               private router: Router,
               private companyService: CompanyService,
-              private messageService: MessageService) {}
+              private messageService: MessageService) {}//
 
 
   onSubmit() {
