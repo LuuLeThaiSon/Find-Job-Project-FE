@@ -226,9 +226,6 @@
                             <label for="email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" formControlName="email"
                                    value="{{candidate.email}}" readonly/>
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName"
-                                   value="" />
                           </div>
                         </div>
                         <!--end col-->
@@ -512,118 +509,6 @@
       </div>
       <!--end col-->
 
-      <!--end col-->
-      <div class="col-lg-4">
-        <div class="card profile-sidebar me-lg-4">
-          <div class="card-body p-4">
-            <div class="text-center pb-4 border-bottom">
-              <img src="{{candidate.avatar}}" alt=""
-                   class="avatar-lg img-thumbnail rounded-circle mb-4" />
-              <h5 class="mb-0">{{candidate.name}}</h5>
-              <p class="text-muted">Developer</p>
-              <ul class="list-inline d-flex justify-content-center align-items-center ">
-                <li class="list-inline-item text-warning fs-19">
-                  <i class="mdi mdi-star"></i>
-                  <i class="mdi mdi-star"></i>
-                  <i class="mdi mdi-star"></i>
-                  <i class="mdi mdi-star"></i>
-                  <i class="mdi mdi-star-half-full"></i>
-                </li>
-              </ul>
-              <ul class="candidate-detail-social-menu list-inline mb-0">
-                <li class="list-inline-item">
-                  <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-primary"><i
-                    class="uil uil-facebook-f"></i></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-info"><i
-                    class="uil uil-twitter-alt"></i></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-success"><i
-                    class="uil uil-whatsapp"></i></a>
-                </li>
-                <li class="list-inline-item">
-                  <a href="javascript:void(0)" class="social-link rounded-3 btn-soft-danger"><i
-                    class="uil uil-phone-alt"></i></a>
-                </li>
-              </ul>
-            </div>
-            <!--end profile-->
-            <div class="mt-4 border-bottom pb-4">
-              <h5 class="fs-17 fw-bold mb-3">Documents</h5>
-              <ul class="profile-document list-unstyled mb-0">
-                <li>
-                  <div class="profile-document-list d-flex align-items-center mt-4 ">
-                    <div class="icon flex-shrink-0">
-                      <i class="uil uil-file"></i>
-                    </div>
-                    <div class="ms-3">
-                      <h6 class="fs-16 mb-0">Resume.pdf</h6>
-                      <p class="text-muted mb-0">1.25 MB</p>
-                    </div>
-                    <div class="ms-auto">
-                      <a href="assets/images/dark-logo.png" download class="fs-20 text-muted"><i class="uil uil-import"></i></a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="profile-document-list d-flex align-items-center mt-4 ">
-                    <div class="icon flex-shrink-0">
-                      <i class="uil uil-file"></i>
-                    </div>
-                    <div class="ms-3">
-                      <h6 class="fs-16 mb-0">Cover-letter.pdf</h6>
-                      <p class="text-muted mb-0">1.25 MB</p>
-                    </div>
-                    <div class="ms-auto">
-                      <a href="assets/images/dark-logo.png" download="dark-logo" class="fs-20 text-muted"><i class="uil uil-import"></i></a>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <!--end document-->
-            <div class="mt-4">
-              <h5 class="fs-17 fw-bold mb-3">Contacts</h5>
-              <div class="profile-contact">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <div class="d-flex">
-                      <label>Email</label>
-                      <div>
-                        <p class="text-muted text-break mb-0">
-                          {{candidate.email}}
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="d-flex">
-                      <label>Phone Number</label>
-                      <div>
-                        <p class="text-muted mb-0">{{candidate.tel}}</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="d-flex">
-                      <label>Location</label>
-                      <div>
-                        <p class="text-muted mb-0">{{candidate.address}}</p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!--end contact-details-->
-          </div>
-          <!--end card-body-->
-        </div>
-        <!--end profile-sidebar-->
-      </div>
-      <!--end col-->
 
 
 <!-- End Page-content -->
