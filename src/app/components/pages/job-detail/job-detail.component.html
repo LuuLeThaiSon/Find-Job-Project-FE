@@ -326,7 +326,8 @@
                 <button *ngIf="flag && !checkAccepted"
                    class="alert bg-soft-success text-center w-100 mt-2" disabled>Waiting</button>
                 <p *ngIf="flag && !checkAccepted"
-                   class="btn btn-danger btn-hover w-100 mt-2" (click)="removeApplyJob()">Cancel</p>
+                   class="btn btn-danger btn-hover w-100 mt-2" data-bs-toggle="modal"
+                   data-bs-target="#cancelModal">Cancel</p>
                 <button *ngIf="flag && checkAccepted"
                    class="btn btn-success w-100 mt-2" disabled="">Accepted</button>
               </div>
@@ -449,6 +450,35 @@
     </div>
   </div>
 </div><!-- END APPLY MODAL -->
+
+<!-- Cancel Job Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cancel job</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h6 class="text-danger"><i
+            class="uil uil-exclamation-triangle"></i> Are you sure to cancel this job?
+          </h6>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                data-bs-target="#candidateModal" data-bs-dismiss="modal">Cancel
+        </button>
+
+        <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal" data-bs-toggle="modal"
+                data-bs-target="#candidateModal" (click)="removeApplyJob()">Yes, cancel it
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Cancel Job MODAL -->
 <app-footer></app-footer>
 
 
