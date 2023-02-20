@@ -29,6 +29,7 @@ export class RegisterComponent {
 
 
   ngOnInit(): void {
+    this.loading = true
     this.formRegister = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),

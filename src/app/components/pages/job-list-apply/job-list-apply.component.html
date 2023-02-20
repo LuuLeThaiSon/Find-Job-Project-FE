@@ -1,6 +1,7 @@
 <app-header></app-header>
 <div class="page-content">
 
+
   <!-- Start home -->
   <section class="page-title-box">
     <div class="container">
@@ -377,23 +378,23 @@
                       <li class="list-inline-item"><i class="uil uil-tag"></i> Keywords :</li>
                       <li class="list-inline-item"><a href="javascript:void(0)"
                                                       class="primary-link text-muted">{{j.position}}</a></li>
-
                     </ul>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="text-md-end">
-                    <a href="#applyNow" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                    <a *ngIf="checkApplyJob[i]" href="#applyNow" (click)="applyJobId(j)" data-bs-toggle="modal" class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                    <a (click)="deleteJob(this.candidateId,j?.id)" data-bs-toggle="modal" class="primary-link"  href="">Delete This Job <i class="mdi mdi-chevron-double-right"></i></a>
                   </div>
                 </div>
                 <!--end col-->
-                <div class="col-md-4">
-                  <div class="text-md-end" *ngIf="role == 3">
-                    <a *ngIf="checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"
-                       (click)="applyJobId(j)">Apply Now <i
-                      class="mdi mdi-chevron-double-right"></i></a>
-                  </div>
-                </div>
+<!--                <div class="col-md-4">-->
+<!--                  <div class="text-md-end" *ngIf="role == 3">-->
+<!--                    <a *ngIf="checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"-->
+<!--                       (click)="applyJobId(j)">Apply Now <i-->
+<!--                      class="mdi mdi-chevron-double-right"></i></a>-->
+<!--                  </div>-->
+<!--                </div>-->
                 <!--end col-->
               </div>
               <!--end row-->
@@ -414,51 +415,61 @@
   </section>
   <!-- END JOB-LIST -->
 
-  <!-- START APPLY MODAL -->
-  <!-- START APPLY MODAL -->
-  <div *ngIf="role != 0" class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <form [formGroup]="applyForm">
-          <div class="modal-body p-5">
-            <div class="text-center mb-4">
-              <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
-            </div>
-            <div class="position-absolute end-0 top-0 p-3">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="mb-3">
-              <label for="nameControlInput" class="form-label">Name</label>
-              <input type="text" class="form-control" id="nameControlInput" readonly [value]="user.name">
-            </div>
-            <div class="mb-3">
-              <label for="emailControlInput2" class="form-label">Email Address</label>
-              <input type="email" class="form-control" id="emailControlInput2" readonly [value]="user.email">
-            </div>
-            <div class="mb-3">
-              <label for="tel" class="form-label">Phone number</label>
-              <input type="email" class="form-control" id="tel" readonly [value]="user.tel">
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Message</label>
-              <textarea class="form-control" id="message" rows="4"
-                        placeholder="Enter your message" formControlName="message" [(ngModel)]="message"></textarea>
-            </div>
-            <div class="mb-4">
-              <label class="form-label" for="cv">Resume Upload</label>
-              <input type="file" class="form-control" id="cv" (change)="submitCV($event)">
-            </div>
-            <button class="btn btn-primary w-100" (click)="apply()">Send Application</button>
-            <button type="button" class="btn btn-secondary waves-effect"
-                    data-bs-dismiss="modal" #btnModal hidden>Close
-            </button>
-          </div>
-          <!--          <mat-progress-bar mode="indeterminate" class="example-margin" *ngIf="checkUpload"></mat-progress-bar>-->
-        </form>
-      </div>
-    </div>
-  </div><!-- END APPLY MODAL -->
 
 </div>
 <!-- End Page-content -->
 <app-footer></app-footer>
+
+
+<!--show notification-->
+<p-toast></p-toast>
+<p-toast position="top-left" key="tl"></p-toast>
+<p-toast position="top-center" key="tc"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-column" style="flex: 1">
+      <div class="text-center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+        <h4>{{message.summary}}</h4>
+        <p>{{message.detail}}</p>
+      </div>
+      <div class="grid p-fluid">
+        <div class="col-6">
+          <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+        </div>
+        <div class="col-6">
+          <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>
+
+<div class="card">
+  <h5>Severities</h5>
+  <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>
+  <button type="button" pButton pRipple (click)="showInfo()" label="Info" class="p-button-info mb-2"></button>
+  <button type="button" pButton pRipple (click)="showWarn()" label="Warn" class="p-button-warning mb-2"></button>
+  <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button>
+
+  <h5>Positions</h5>
+  <button type="button" pButton pRipple (click)="showTopLeft()" label="Top Left"></button>
+  <button type="button" pButton pRipple (click)="showTopCenter()" label="Top Center" class="p-button-warning"></button>
+  <button type="button" pButton pRipple (click)="showBottomCenter()" label="Bottom Center" class="p-button-success"></button>
+
+  <h5>Multiple</h5>
+  <button type="button" pButton pRipple (click)="showMultiple()" label="Multiple" class="p-button-warning"></button>
+  <button type="button" pButton pRipple (click)="showSticky()" label="Sticky"></button>
+
+  <h5>Clear</h5>
+  <button type="button" pButton pRipple (click)="clear()" icon="pi pi-times" label="Clear"></button>
+
+  <h5>Template</h5>
+  <button type="button" pButton pRipple (click)="showConfirm()" label="Confirm" class="ui-button-warning"></button>
+</div>
+
+<!--loading-->
+<p-progressSpinner strokeWidth="5" fill="#03fc24"
+                   animationDuration="1s"></p-progressSpinner>

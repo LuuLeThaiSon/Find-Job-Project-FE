@@ -32,6 +32,11 @@ import { TopCompaniesComponent } from './top-companies/top-companies.component';
 import { ManageCandidateProfileComponent } from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 import {SearchPipe} from "./search.pipe";
 import { JobListApplyComponent } from './components/pages/job-list-apply/job-list-apply.component';
+import {MessageModule} from "primeng/message";
+import {ToastModule} from "primeng/toast";
+import {RippleModule} from "primeng/ripple";
+import {ButtonModule} from "primeng/button";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @NgModule({
   declarations: [
@@ -78,7 +83,11 @@ import { JobListApplyComponent } from './components/pages/job-list-apply/job-lis
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     BrowserAnimationsModule,
-
+    MessageModule,
+    ToastModule,
+    RippleModule,
+    ButtonModule,
+    ProgressSpinnerModule
   ],
 
   providers: [],
