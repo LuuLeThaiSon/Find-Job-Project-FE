@@ -133,7 +133,7 @@ export class JobListApplyComponent {
   }
 
   ngOnInit() {
-    this.commonService.scrollTopWindow(0, 300);
+    this.commonService.scrollTopWindow(0, 400);
     this.loading = true;
     this.activatedRoute.params.subscribe(params => {
       this.candidateId = params['id'];
@@ -161,12 +161,9 @@ export class JobListApplyComponent {
 
   deleteJob(id: number, id1: number) {
     this.applyJobService.removeApplyJobCandidate(id, id1).subscribe(() => {
-    })
-    setTimeout(() => {
-      this.loading = false;
       this.showSuccess()
+      this.ngOnInit()
     })
-    this.ngOnInit()
   }
 
   showSuccess() {

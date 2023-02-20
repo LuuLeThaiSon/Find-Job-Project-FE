@@ -29,7 +29,6 @@ import {
 import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
 import { CandidateDetailComponent } from './components/pages/candidate-detail/candidate-detail.component';
 import {RegisterCComponent} from "./components/pages/register-c/register-c.component";
-import {BookmarksJobsComponent} from './components/pages/bookmarks-jobs/bookmarks-jobs.component';
 import { TopCompaniesComponent } from './top-companies/top-companies.component';
 import {SearchPipe} from "./search.pipe";
 import {MessageModule} from "primeng/message";
