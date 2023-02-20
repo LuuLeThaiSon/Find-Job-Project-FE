@@ -95,5 +95,6 @@ export class AppComponent implements AfterViewInit{
     s17.type = "text/javascript";
     s17.src = "../../assets/js/pages/lightbox.init.js";
     this.elementRef.nativeElement.appendChild(s17);
+
   }
 }

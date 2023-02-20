@@ -7,6 +7,9 @@ import {ApplyJobService} from "../../service/apply-job.service";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize} from "rxjs";
 import {ApplyJob} from "../../model/apply-job";
+import {NotifyType} from "../../model/notify-type";
+import {NotifyService} from "../../service/notify.service";
+import {Notify} from "../../model/notify";
 
 @Component({
   selector: 'app-job-detail',
@@ -20,6 +23,7 @@ export class JobDetailComponent {
   user!: any;
   role!: number;
   flag: boolean = false;
+  checkAccepted: boolean = false;
   applyJobId!: number;
   applyJob: ApplyJob = new ApplyJob();
   jobApply!: Job;
@@ -29,17 +33,23 @@ export class JobDetailComponent {
   message!: string;
   checkUpload: boolean = false;
   decline: boolean = true;
+  notifyType: NotifyType[] =[];
+  notify = new Notify();
 
   constructor(private activatedRoute: ActivatedRoute,
               private jobService: JobService,
               private commonService: CommonService,
               private applyJobService: ApplyJobService,
-              private storage: AngularFireStorage) {
+              private storage: AngularFireStorage,
+              private notifyService: NotifyService) {
     this.activatedRoute.params.subscribe(params => {
       this.jobId = params['id'];
       this.findOne(this.jobId);
     })
     this.findALl()
+    this.notifyService.findAllTye().subscribe(data => {
+      this.notifyType = data;
+    })
   }
 
   ngOnInit() {
@@ -72,6 +82,8 @@ export class JobDetailComponent {
               this.flag = true;
               // @ts-ignore
               this.applyJobId = data1[i].id;
+              // @ts-ignore
+              this.checkAccepted = data1[i].status;
             }
           }
         })
@@ -91,6 +103,8 @@ export class JobDetailComponent {
       setTimeout(() => {
         this.decline = true;
       }, 3000)
+      console.log(this.job)
+      this.sendNotify(2, this.job)
     });
   }
 
@@ -102,6 +116,7 @@ export class JobDetailComponent {
 
 
   apply() {
+    this.loading = false;
     this.checkUpload = true;
     this.applyJob.candidate = this.user;
     this.applyJob.job = this.job;
@@ -118,8 +133,10 @@ export class JobDetailComponent {
             this.alertApply = false;
             setTimeout(() => {
               this.alertApply = true;
-            }, 3000)
+            }, 3000);
+            this.sendNotify(1, this.job);
           })
+          this.loading = true;
           this.checkUpload = false;
         });
       })
@@ -132,4 +149,21 @@ export class JobDetailComponent {
 
   // @ts-ignore
   @ViewChild('btnModal') btnModal: ElementRef;
+
+  sendNotify(nt: number, job: Job) {
+    for (let i = 0; i < this.notifyType.length; i++) {
+      if (this.notifyType[i].id == nt) {
+        this.notify.notifyType = this.notifyType[i];
+        this.notify.job = job;
+        this.notify.company = job.company;
+        this.notify.candidate= this.user;
+        this.notifyService.sendNotify(this.notify).subscribe(() => {
+          this.ngOnInit()
+        });
+      }
+    }
+  }
+
+  //loading screen
+  loading = true;
 }

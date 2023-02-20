@@ -6,10 +6,14 @@ import {LocationsService} from "../../service/locations.service";
 import {CategoryService} from "../../service/category.service";
 import {Category} from "../../model/category";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApplyJob} from "../../model/apply-job";
 import {ApplyJobService} from "../../service/apply-job.service";
 import {finalize} from "rxjs";
+import {CommonService} from "../../service/common.service";
+import {NotifyService} from "../../service/notify.service";
+import {Notify} from "../../model/notify";
+import {NotifyType} from "../../model/notify-type";
 
 @Component({
   selector: 'app-job-list',
@@ -24,8 +28,8 @@ export class JobListComponent implements OnInit {
   p: number = 1;
   jobId!: number;
   jobs: Job[] = [];
-  user!:any;
-  role!:number;
+  user!: any;
+  role!: number;
   searchText = "";
   applyForm!: FormGroup;
   applyJob: ApplyJob = new ApplyJob();
@@ -33,14 +37,16 @@ export class JobListComponent implements OnInit {
   cvFileName: any;
   alertApply: boolean = true;
   checkApplyJob: Boolean[] = [];
+  checkApplyAccept: Boolean[] = [];
   message!: string;
-  checkUpload: boolean = false;
-
+  notify = new Notify();
+  notifyType: NotifyType[] = [];
 
   ngOnInit(): void {
+    this.commonService.scrollTopWindow(0, 300);
 
     // @ts-ignore
-    if (sessionStorage.getItem("user")==null) {
+    if (sessionStorage.getItem("user") == null) {
       this.user = null;
       this.role = 0;
     } else {
@@ -48,7 +54,6 @@ export class JobListComponent implements OnInit {
       this.user = JSON.parse(sessionStorage.getItem("user")) as any;
       this.role = this.user.role.id;
     }
-    console.log(this.role);
 
     this.applyForm = new FormGroup({
       message: new FormControl('')
@@ -57,13 +62,27 @@ export class JobListComponent implements OnInit {
     this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
+
+    this.notifyService.findAllTye().subscribe(data => {
+      this.notifyType = data;
+    })
+
+    this.filterJobs = new FormGroup({
+      salary: new FormControl('allsalary'),
+      years: new FormControl('allyears'),
+      types: new FormControl('alltypes'),
+      gender: new FormControl('any'),
+    })
+
   }
 
   constructor(private jobService: JobService,
               private locationsService: LocationsService,
               private categoryService: CategoryService,
               private storage: AngularFireStorage,
-              private applyJobService: ApplyJobService) {
+              private applyJobService: ApplyJobService,
+              private notifyService: NotifyService,
+              private commonService: CommonService) {
 
   }
 
@@ -76,11 +95,17 @@ export class JobListComponent implements OnInit {
   findAllByStatusIsTrueAndAndExpiredDate() {
     return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
-      if(this.role == 0) {
+      this.displayJobs = data;
+      if (this.role == 0) {
         return;
       } else {
         this.applyJobService.checkApplyJob(this.user.id, data).subscribe((data1) => {
-          this.checkApplyJob = data1;
+          this.checkApplyJob = data1.reverse();
+          console.log(this.checkApplyJob, 'data1')
+        })
+        this.applyJobService.checkApplyAccept(this.user.id, data).subscribe((data2) => {
+          this.checkApplyAccept = data2.reverse();
+          console.log(this.checkApplyAccept, 'data2')
         })
       }
     })
@@ -104,7 +129,7 @@ export class JobListComponent implements OnInit {
   }
 
   apply() {
-    this.checkUpload = true;
+    this.loading = false;
     this.applyJob.candidate = this.user;
     this.applyJob.job = this.jobApply;
     this.applyJob.message = this.message;
@@ -119,13 +144,13 @@ export class JobListComponent implements OnInit {
             this.btnModal.nativeElement.click();
             this.applyForm.reset();
             this.applyForm.reset();
-
             this.alertApply = false;
             setTimeout(() => {
               this.alertApply = true;
             }, 3000)
+            this.sendNotify(1, this.jobApply)
           })
-          this.checkUpload = false;
+          this.loading = true;
         });
       })
     ).subscribe(() => {
@@ -146,7 +171,142 @@ export class JobListComponent implements OnInit {
   @ViewChild('btnModal') btnModal: ElementRef;
   decline: any;
 
+  // filterOnMultipleConditions
+  displayJobs: Job[] = [];
+
+  filterJobs!: FormGroup;
+
   scrollTop() {
     window.scrollTo(0, 300)
   }
+
+  filterJobsMethod(event: any) {
+    window.scrollTo(0, 300)
+    this.formFilterJob?.nativeElement.submit();
+    let salary = this.filterJobs.get('salary')?.value;
+    let years = this.filterJobs.get('years')?.value;
+    let types = this.filterJobs.get('types')?.value;
+    let gender = this.filterJobs.get('gender')?.value;
+    this.displayJobs = this.jobs;
+
+    this.filterSalary(salary);
+    this.filterExpYears(years);
+    this.filterJobTypes(types);
+    this.filterJobGender(gender);
+
+    console.log(this.displayJobs)
+  }
+
+  filterSalary(salary: string) {
+    if (salary == "allsalary") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax >= 0;
+      })
+    }
+    if (salary == "less200") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax < 200;
+      })
+    }
+    if (salary == "200-500") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax >= 200 && obj.salaryMax <= 500;
+      })
+    }
+    if (salary == "500-800") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax >= 500 && obj.salaryMax <= 800;
+      })
+    }
+    if (salary == "more800") {
+      this.displayJobs = this.jobs.filter((obj) => {
+        return obj.salaryMax > 800;
+      })
+    }
+  }
+
+  filterExpYears(years: string) {
+    if (years == "allyears") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear >= 0;
+      })
+    }
+    if (years == "0") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear == 0;
+      })
+    }
+    if (years == "0-3") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear > 0 && obj.expYear <= 3;
+      })
+    }
+    if (years == "3-6") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear >= 3 && obj.expYear <= 6;
+
+      })
+    }
+    if (years == "more6") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.expYear > 6;
+      })
+    }
+  }
+
+  filterJobTypes(types: string) {
+    if (types == "alltypes") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.type == true || obj.type == false
+      })
+    }
+    if (types == "full") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.type == true
+      })
+    }
+    if (types == "part") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return !obj.type
+      })
+    }
+  }
+
+  filterJobGender(gender: string) {
+    if (gender == "any") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.gender == 3 || obj.gender == 2 || obj.gender == 1
+      })
+    }
+    if (gender == "male") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.gender == 1
+      })
+    }
+    if (gender == "female") {
+      this.displayJobs = this.displayJobs.filter((obj) => {
+        return obj.gender == 2
+      })
+    }
+  }
+
+  @ViewChild('formJobSalary') formFilterJob: ElementRef | undefined;
+
+  //send notifications
+  sendNotify(nt: number, job: Job) {
+    for (let i = 0; i < this.notifyType.length; i++) {
+      if (this.notifyType[i].id == nt) {
+        this.notify.notifyType = this.notifyType[i];
+        this.notify.job = job;
+        this.notify.company = job.company;
+        this.notify.candidate = this.user;
+        this.notifyService.sendNotify(this.notify).subscribe(() => {
+          this.ngOnInit()
+        });
+      }
+    }
+  }
+
+  //loading screen
+  loading = true;
 }

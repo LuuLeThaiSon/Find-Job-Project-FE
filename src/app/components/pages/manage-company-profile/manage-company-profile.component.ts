@@ -148,6 +148,12 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       banner: new FormControl(''),
     })
 
+    this.formChangePass = new FormGroup({
+      currentPass: new FormControl(''),
+      newPass: new FormControl(''),
+      confirmPass: new FormControl(''),
+    })
+
     this.categoryService.findCategoriesByCompanyId(this.companyId).subscribe(res => {
       this.categories = res;
     })
@@ -184,12 +190,15 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     }
 
   onSubmit() {
-    console.log(this.formCompany.value);
+    this.commonService.scrollTopWindow(0,300);
     this.loading = false;
     if (this.imageFile == null) {
       this.company = this.formCompany.value;
       this.company.avatar = this.path;
       this.companyService.update(this.company, this.companyId).subscribe(() => {
+        setTimeout(() => {
+          this.loading = true;
+        }, 2000);
         this.edited = false;
         sessionStorage.setItem("user", JSON.stringify(this.company));
         this.header?.ngOnInit();
@@ -206,6 +215,9 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
             this.company = this.formCompany.value;
             this.company.avatar = url;
             this.companyService.update(this.company, this.companyId).subscribe(() => {
+              setTimeout(() => {
+                this.loading = true;
+              }, 2000);
               sessionStorage.setItem("user", JSON.stringify(this.company));
               this.edited = false;
               this.ggMap = this.company.googleMap;
@@ -223,6 +235,51 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     }, 1000);
   }
 
+  updateBanner(event: any) {
+    // @ts-ignore
+    console.log(event.target.files[0])
+    console.log(event.target.files)
+    this.loading = false;
+    if (event.target.files && event.target.files[0]) {
+      this.imageBannerFile = event.target.files[0];
+      const imagePath = `banner/${this.imageBannerFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+      const fileRef = this.storage.ref(imagePath);
+      this.storage.upload(imagePath, this.imageBannerFile).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            this.company.banner = url;
+            this.companyService.update(this.company, this.companyId).subscribe(res => {
+              setTimeout(() => {
+                this.loading = true;
+              }, 1000)
+            })
+          });
+        })
+      ).subscribe()
+    }
+  }
+
+  previewAvatar(event: any) {
+    this.loading = false;
+    if (event.target.files && event.target.files[0]) {
+      this.imageFile = event.target.files[0];
+      if (this.pathName !== this.imageFile.name) {
+        this.pathName = this.imageFile.name
+        const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(imagePath);
+        this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe(url => {
+              this.path = url;
+              setTimeout(() => {
+                this.loading = true;
+              }, 1000)
+            });
+          })
+        ).subscribe()
+      }
+    }
+  }
     previewAvatar(event: any) {
       this.loading = false;
       if (event.target.files && event.target.files[0]) {
@@ -255,12 +312,63 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   @ViewChild(HeaderComponent)
   header: HeaderComponent | undefined;
 
-  loading!: boolean;
+  loading = true;
 
   selectedCategories: Category[] = [];
 
+  // chang password
+  passStatus!: string;
+  formChangePass!: FormGroup;
+  alertChangePass = true;
+  showPassFields = true;
+  showSuccessChangePass = true;
 
-  updateBanner($event: Event) {
-
+  showPass(){
+    this.showPassFields = !this.showPassFields;
   }
+
+  changePass() {
+    this.alertChangePass = true;
+    let currentPass = this.formChangePass.get('currentPass')?.value;
+    let newPass = this.formChangePass.get('newPass')?.value;
+    let confirmPass = this.formChangePass.get('confirmPass')?.value;
+    if(currentPass != this.company.password && newPass != confirmPass){
+      this.passStatus = "Current Password incorrect and New Password not match";
+      this.alertChangePass = false;
+      this.formChangePass.reset();
+    } else if (currentPass != this.company.password) {
+      this.passStatus = "Current Password incorrect";
+      this.alertChangePass = false;
+      this.formChangePass.reset();
+      return
+    } else if (newPass != confirmPass) {
+      this.passStatus = "New Password not match";
+      this.alertChangePass = false;
+      this.formChangePass.reset();
+    } else {
+      this.company.password = newPass;
+      this.loading = false;
+      this.companyService.update(this.company,this.companyId).subscribe(res => {
+        // @ts-ignore
+        setTimeout(() => {
+          this.loading = true;
+          this.showSuccessChangePass = false;
+
+        }, 2000)
+        setTimeout(()=>{
+          this.router.navigate(['/login'])
+        },6000)
+      })
+    }
+  }
+
+  fadein(){
+    let e = document.getElementById("error-company-name"), t = 0, r = setInterval(function () {
+      // @ts-ignore
+      t < 1 ? (t += .5, e.style.opacity = String(t)) : clearInterval(r)
+    }, 200)
+  }
+
+  //google-map
+
 }

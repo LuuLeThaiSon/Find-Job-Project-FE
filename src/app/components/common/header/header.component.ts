@@ -1,7 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Input} from '@angular/core';
+import {AfterViewInit, Component, ElementRef} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Company} from "../../model/company";
-import {Subject} from "rxjs";
+import {Notify} from "../../model/notify";
+import {NotifyService} from "../../service/notify.service";
 
 @Component({
   selector: 'app-header',
@@ -11,11 +11,17 @@ import {Subject} from "rxjs";
 export class HeaderComponent implements AfterViewInit{
   city!: string;
   constructor(private http: HttpClient,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private notifyService: NotifyService) {
   }
   ip!:string;
   user!:any;
   role!:any;
+
+  notifyCompany: Notify[] = [];
+  notifyCandidate: Notify[] = [];
+  countUnreadCandidate!: number;
+  countUnreadCompany!: number;
 
   ngAfterViewInit() {
     var s = document.createElement("script");
@@ -56,10 +62,26 @@ export class HeaderComponent implements AfterViewInit{
 
 
   ngOnInit() {{
-    // this.getGeoLocationData();
     // @ts-ignore
     this.user = JSON.parse(sessionStorage.getItem("user")) as any;
     this.role = this.user.role.id;
+    console.log(this.role)
+    if (this.role == 2) {
+      this.notifyService.countUnreadCompanyNotify(this.user.id).subscribe((data) => {
+        this.countUnreadCompany = data;
+      })
+      this.notifyService.findAllCompanyNotify(this.user.id).subscribe((data) => {
+        this.notifyCompany = data;
+      })
+    }
+    if (this.role == 3) {
+      this.notifyService.countUnreadCandidateNotify(this.user.id).subscribe((data) => {
+        this.countUnreadCandidate = data;
+      })
+      this.notifyService.findAllCandidateNotify(this.user.id).subscribe((data) => {
+        this.notifyCandidate = data;
+      })
+    }
   }}
 
   ngOnChanges() {
@@ -84,6 +106,12 @@ export class HeaderComponent implements AfterViewInit{
 
   signOut() {
     sessionStorage.clear()
+  }
+
+  readNotify(notify: Notify) {
+    this.notifyService.readNotify(notify).subscribe(() => {
+      this.ngOnInit();
+    });
   }
 }
 
