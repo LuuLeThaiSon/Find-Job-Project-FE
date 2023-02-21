@@ -367,6 +367,10 @@ export class JobListComponent implements OnInit {
       })
     }
 
+    if (text == null && location.l_id == "all_l" && category.c_id == "all_c") {
+      return this.ngOnInit();
+    }
+
 
     console.log(this.displayJobs)
   }

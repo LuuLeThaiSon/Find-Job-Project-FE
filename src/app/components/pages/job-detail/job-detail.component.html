@@ -73,7 +73,8 @@
         <div class="card job-detail overflow-hidden">
           <div>
             <img
-              src="https://static.vecteezy.com/system/resources/previews/001/871/553/original/promotion-to-find-workers-with-the-words-look-and-find-jobs-concept-ilustration-can-use-for-landing-page-template-ui-web-mobile-poster-banner-flyer-background-website-advertisement-free-vector.jpg"
+              width="100%"
+              src="{{job.company.banner?job.company.banner:'https://static.vecteezy.com/system/resources/previews/001/871/553/original/promotion-to-find-workers-with-the-words-look-and-find-jobs-concept-ilustration-can-use-for-landing-page-template-ui-web-mobile-poster-banner-flyer-background-website-advertisement-free-vector.jpg'}}"
               alt="" class="img-fluid">
             <div class="job-details-compnay-profile">
               <img src="" alt=""
@@ -166,6 +167,7 @@
                 <div class="col-md-2">
                   <div class="text-center mb-4 mb-md-0">
                     <a href="company-details.html"><img
+                      height="55" width="55"
                       src="{{j.company.avatar}}" alt=""
                       class="img-fluid rounded-3"></a>
                   </div>
@@ -335,7 +337,9 @@
           <div class="card company-profile mt-4">
             <div class="card-body p-4">
               <div class="text-center">
-                <img src="{{job.company.avatar}}" alt=""
+                <img
+                  height="55" width="55"
+                  src="{{job.company.avatar}}" alt=""
                      class="img-fluid rounded-3">
 
                 <div class="mt-4">
