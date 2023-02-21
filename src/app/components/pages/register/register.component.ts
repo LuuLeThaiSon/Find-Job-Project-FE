@@ -35,7 +35,7 @@ export class RegisterComponent {
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8), (c: AbstractControl) => Validators.required(c)]),
+      password: new FormControl('', [Validators.required, Validators.min(8)]),
       tel: new FormControl('', [Validators.required]),
       shortName: new FormControl('', [Validators.required]),
       code: new FormControl('', [Validators.required]),
@@ -134,8 +134,11 @@ export class RegisterComponent {
         this.company.password = data.message
         this.companyService.saveCompany(this.company).subscribe(() => {
           setTimeout(() => {
+            this.showSuccess2()
+          },500)
+          setTimeout(() => {
             this.loading = false
-          }, 1000)
+          }, 2000)
         })
         setTimeout(() => {
           this.loading = true
@@ -181,6 +184,10 @@ export class RegisterComponent {
 
   showSuccess() {
     this.messageService.add({severity: 'success', summary: 'success', detail: 'You can use this name', key:'ab'})
+  }
+
+  showSuccess2() {
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Register Successfully! Pls check your mail box to get password!', key:'ab'})
   }
 
   showSuccess1() {
