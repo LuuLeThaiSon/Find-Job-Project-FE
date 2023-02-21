@@ -45,6 +45,25 @@
                         </div>
                         <form action="index.html" class="auth-form" [formGroup]="formRegisterCandidate"
                               (ngSubmit)="onSubmit()">
+                          <div class="mt-4">
+                            <div class="alert bg-soft-primary alert-dismissible fade show"
+                                 id="change-pass-success"
+                                 role="alert" [hidden]=showSuccessRegister>
+                              Register Successfully!<br>
+                              Redirecting to login page!
+                              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                              </button>
+                            </div>
+                            <!--end row-->
+                          </div>
+                          <!--end Change-password-->
+<!--                          <div class="alert bg-soft-danger alert-dismissible fade show"-->
+<!--                               id="change-pass-status"-->
+<!--                               role="alert" [hidden]="alertChangePass">-->
+<!--                            {{passStatus}}-->
+<!--                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">-->
+<!--                            </button>-->
+<!--                          </div>-->
                           <div class="mb-3">
                             <label for="usernameInput" class="form-label">Username</label>
                             <input type="text" class="form-control" required id="usernameInput"
@@ -66,16 +85,17 @@
                           </div>
                           <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password">
+                            <input class="form-control" id="password" placeholder="Enter your password" formControlName="password" type="{{showPassFields?'password':'text'}}" minlength="6">
+<!--                            <span class="show-btn"><i class="fas fa-eye"></i></span>-->
                             <p *ngIf="formRegisterCandidate.get('password')?.errors?.['required'] && formRegisterCandidate.get('password')?.touched"
-                              style="color: orange; margin-top: 10px" #a >Require</p>
-                            <p *ngIf="formRegisterCandidate.get('password')?.errors?.['min'] && formRegisterCandidate.get('password')?.touched"
-                               style="color: orange; margin-top: 10px" #a >Minimum of 8 characters</p>
+                              style="color: orange; margin-top: 10px">Require</p>
+                            <p *ngIf="formRegisterCandidate.get('password')?.errors?.['pattern'] && formRegisterCandidate.get('password')?.touched"
+                               style="color: orange; margin-top: 10px" >Minimum of 8 characters</p>
                           </div>
                           <div class="mb-3">
                             <label for="confirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="confirmPassword"
-                                   placeholder="Enter your password" formControlName="confirmPassword" >
+                            <input class="form-control" id="confirmPassword"
+                                   placeholder="Enter your password" formControlName="confirmPassword" type="{{showPassFields?'password':'text'}}">
                             <p *ngIf="formRegisterCandidate.get('confirmPassword')?.errors?.['required'] && formRegisterCandidate.get('confirmPassword')?.touched"
                               style="color: orange; margin-top: 10px">Require</p>
                             <p *ngIf="formRegisterCandidate.errors?.['passwordmatcherror']" style="color: pink">Password does not match</p>
@@ -85,9 +105,11 @@
                           <div class="mb-3">
                             <label for="tel" class="form-label">Tel</label>
                             <input type="text" class="form-control" id="tel"
-                                   placeholder="Enter your tel" formControlName="tel" ngModel>
+                                   placeholder="Enter your tel" formControlName="tel" ngModel (change)="checkTel()">
                             <p *ngIf="formRegisterCandidate.get('tel')?.errors?.['required'] && formRegisterCandidate.get('tel')?.touched"
                               style="color: orange; margin-top: 10px">Require</p>
+                            <p *ngIf="formRegisterCandidate.get('tel')?.errors?.['pattern'] && formRegisterCandidate.get('tel')?.touched"
+                              style="color: orange; margin-top: 10px">Tel need to start from 0 and have about 9 numbers behind</p>
                           </div>
                           <label for="role" class="form-label" hidden>Role</label>
                           <div class="mb-3" formGroupName="role" id="role" hidden>
@@ -96,14 +118,17 @@
                                       [selected]="selectedOption">{{r.name}}</option>
                             </select>
                           </div>
-                          <div class="mb-4">
-<!--                            <div class="form-check"><input class="form-check-input" type="checkbox"-->
-<!--                                                           id="flexCheckDefault">-->
-<!--                              <label class="form-check-label" for="flexCheckDefault">I agree to the <a-->
-<!--                                href="javascript:void(0)" class="text-white text-decoration-underline">Terms and-->
-<!--                                conditions</a></label>-->
-<!--                            </div>-->
+                          <div class="col-lg-12">
+                            <div class="form-check">
+                              <input (click)="showPass()" class="form-check-input" type="checkbox" value=""
+                                     id="verification" />
+                              <label class="form-check-label" for="verification">
+                                Show all your password
+                              </label>
+                            </div>
                           </div>
+                          <br/>
+
                           <div class="text-center">
                             <button type="submit" class="btn btn-white btn-hover w-100">Sign Up</button>
                           </div>
@@ -153,3 +178,16 @@
 
 
 
+<script>
+  const passField = document.querySelector("input");
+  const showBtn = document.querySelector("span i");
+  showBtn.onclick = (()=>{
+    if(passField.type === "password"){
+      passField.type = "text";
+      showBtn.classList.add("hide-btn");
+    }else{
+      passField.type = "password";
+      showBtn.classList.remove("hide-btn");
+    }
+  });
+</script>

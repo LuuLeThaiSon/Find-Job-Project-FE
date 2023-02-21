@@ -44,19 +44,29 @@
                             <label for="email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" placeholder="Enter your email" formControlName="email" ngModel>
                           </div>
-                          <p *ngIf="formLogin.get('email')?.errors?.['required'] && formLogin.get('email')?.touched" style="color: red">Required</p>
-                          <p *ngIf="formLogin.get('email')?.errors?.['pattern'] && formLogin.get('email')?.touched" style="color: red">Must have pattern email</p>
+                          <p *ngIf="formLogin.get('email')?.errors?.['required'] && formLogin.get('email')?.touched" style="color: orange; margin-top: 10px">Required</p>
+                          <p *ngIf="formLogin.get('email')?.errors?.['pattern'] && formLogin.get('email')?.touched" style="color: orange; margin-top: 10px">Must have pattern email</p>
                           <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" formControlName="password" ngModel><span><i class="fas fa-eye"></i></span>
+                            <input type="{{showPassFields?'password':'text'}}" class="form-control" id="password" placeholder="Enter your password" formControlName="password" ngModel><span><i class="fas fa-eye"></i></span>
                           </div>
-                          <p *ngIf="formLogin.get('password')?.errors?.['required'] && formLogin.get('password')?.touched" style="color: red">Required</p>
+                          <p *ngIf="formLogin.get('password')?.errors?.['required'] && formLogin.get('password')?.touched" style="color: orange; margin-top: 10px">Required</p>
 <!--                          <div class="mb-4">-->
 <!--                            <div class="form-check"><input class="form-check-input" type="checkbox" id="flexCheckDefault">-->
 <!--                              <a href="reset-password.html" class="float-end text-white">Forgot Password?</a>-->
 <!--                              <label class="form-check-label" for="flexCheckDefault">Remember me</label>-->
 <!--                            </div>-->
 <!--                          </div>-->
+                          <div class="col-lg-12">
+                            <div class="form-check">
+                              <input (click)="showPass()" class="form-check-input" type="checkbox" value=""
+                                     id="verification" />
+                              <label class="form-check-label" for="verification">
+                                Show password
+                              </label>
+                            </div>
+                          </div>
+                          <br/>
                           <div class="text-center">
                             <button type="submit" class="btn btn-white btn-hover w-100">Sign In</button>
                           </div>
