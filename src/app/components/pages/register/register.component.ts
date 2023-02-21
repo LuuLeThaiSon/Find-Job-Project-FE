@@ -150,7 +150,7 @@ export class RegisterComponent {
   checkName(name: string): void {
     this.companyService.findAllCompany().subscribe((data) => {
       for (let a of data) {
-        if (a.name.toLowerCase() === name) {
+        if (a.name.toLowerCase() === name.toLowerCase()) {
           setTimeout(() => {
             this.showError()
           },50,1)
@@ -163,7 +163,7 @@ export class RegisterComponent {
   checkEmail(mail: string): void {
     this.companyService.findAllCompany().subscribe((data) => {
       for (let a of data) {
-        if (a.email.toLowerCase() === mail) {
+        if (a.email.toLowerCase() === mail.toLowerCase()) {
           setTimeout(() => {
             this.showError1()
             this.formRegister.get('email')?.setValue('')
