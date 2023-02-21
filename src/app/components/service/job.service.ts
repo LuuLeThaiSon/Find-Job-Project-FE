@@ -41,6 +41,10 @@ export class JobService {
     return this.http.post<Job>("http://localhost:8080/jobs", job)
   }
 
+  update(job: Job, id: number): Observable<Job> {
+    return this.http.put<Job>("http://localhost:8080/jobs/" + id, job);
+  }
+
   findAllJobsByCandidate(id:number) {
     return this.http.get<Job[]>(`http://localhost:8080/jobs/candidate/${id}`)
   }
