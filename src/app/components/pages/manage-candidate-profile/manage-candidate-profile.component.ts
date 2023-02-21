@@ -28,6 +28,8 @@ export class ManageCandidateProfileComponent {
   path!: string;
   pathName!: string;
   edited!: boolean;
+  imageBannerFile: any;
+  pathBannerName!: string;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -136,10 +138,16 @@ export class ManageCandidateProfileComponent {
         id: new FormControl('')
       }),
       status: new FormControl(''),
+      banner: new FormControl('')
     })
     this.companyService.findCandidate(this.candidateId).subscribe(res => {
       this.candidate = res;
       this.formCandidate.patchValue(res)
+    })
+    this.formChangePass = new FormGroup({
+      currentPass: new FormControl(''),
+      newPass: new FormControl(''),
+      confirmPass: new FormControl(''),
     })
   }
 
@@ -205,5 +213,82 @@ export class ManageCandidateProfileComponent {
     setTimeout(() => {
       this.loading = true;
     }, 1000);
+  }
+
+  updateBannerCandidate(event: any) {
+    // @ts-ignore
+    console.log(event.target.files[0])
+    console.log(event.target.files)
+    this.loading = false;
+    if (event.target.files && event.target.files[0]) {
+      this.imageBannerFile = event.target.files[0];
+      const imagePath = `banner/${this.imageBannerFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+      const fileRef = this.storage.ref(imagePath);
+      this.storage.upload(imagePath, this.imageBannerFile).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            this.candidate.banner = url;
+            this.candidateService.updateCandidate(this.candidate, this.candidateId).subscribe(res => {
+              setTimeout(() => {
+                this.loading = true;
+              }, 1000)
+            })
+          });
+        })
+      ).subscribe()
+    }
+  }
+
+// chang password
+  passStatus!: string;
+  formChangePass!: FormGroup;
+  alertChangePass = true;
+  showPassFields = true;
+  showSuccessChangePass = true;
+
+  showPass(){
+    this.showPassFields = !this.showPassFields;
+  }
+
+  changePass() {
+    this.alertChangePass = true;
+    let currentPass = this.formChangePass.get('currentPass')?.value;
+    let newPass = this.formChangePass.get('newPass')?.value;
+    let confirmPass = this.formChangePass.get('confirmPass')?.value;
+    if(currentPass != this.candidate.password && newPass != confirmPass){
+      this.passStatus = "Current Password incorrect and New Password not match";
+      this.alertChangePass = false;
+      this.formChangePass.reset();
+    } else if (currentPass != this.candidate.password) {
+      this.passStatus = "Current Password incorrect";
+      this.alertChangePass = false;
+      this.formChangePass.reset();
+      return
+    } else if (newPass != confirmPass) {
+      this.passStatus = "New Password not match";
+      this.alertChangePass = false;
+      this.formChangePass.reset();
+    } else {
+      this.candidate.password = newPass;
+      this.loading = false;
+      this.candidateService.updateCandidate(this.candidate,this.candidateId).subscribe(res => {
+        // @ts-ignore
+        setTimeout(() => {
+          this.loading = true;
+          this.showSuccessChangePass = false;
+
+        }, 2000)
+        setTimeout(()=>{
+          this.router.navigate(['/login']).finally()
+        },6000)
+      })
+    }
+  }
+
+  fadein(){
+    let e = document.getElementById("error-candidate-name"), t = 0, r = setInterval(function () {
+      // @ts-ignore
+      t < 1 ? (t += .5, e.style.opacity = String(t)) : clearInterval(r)
+    }, 200)
   }
 }
