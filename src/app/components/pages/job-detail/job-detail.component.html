@@ -101,13 +101,13 @@
                 <div class="col-lg-3">
                   <div class="border rounded-start p-3">
                     <p class="text-muted mb-0 fs-13">Experience</p>
-                    <p class="fw-medium fs-15 mb-0">{{job.expYear}}+ years</p>
+                    <p class="fw-medium fs-15 mb-0">{{job.expYear}}+ Years</p>
                   </div>
                 </div>
                 <div class="col-lg-3">
                   <div class="border p-3">
                     <p class="text-muted fs-13 mb-0">Employee type</p>
-                    <p class="fw-medium mb-0">{{job.type ? 'Full time' : 'Pass time'}}</p>
+                    <p class="fw-medium mb-0">{{job.type ? 'Full time' : 'Part time'}}</p>
                   </div>
                 </div>
                 <div class="col-lg-3">
@@ -200,14 +200,13 @@
                 <!--end col-->
                 <div class="col-md-2" *ngIf="role == 0">
                   <div>
-                    <div class="flex-shrink-0">
-                      <i class="mdi mdi-human-male-male text-primary me-1"></i>
+                    <div class="flex-shrink-0 text-lg-end">
+                      <i class="mdi mdi-human-male-male text-primary me-1"></i> {{j.quantity}}
                     </div>
-                    {{j.quantity}}
                   </div>
                 </div>
                 <!--end col-->
-                <div class="col-md-2">
+                <div class="col-md-3 text-lg-end">
                   <div>
                     <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
                     <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
@@ -222,14 +221,14 @@
                 <div class="col-md-4">
                   <div>
                     <p class="text-muted mb-0"><span
-                      class="text-dark">Experience :</span> {{j.expYear}}+ years</p>
+                      class="text-dark">Experience:</span> {{j.expYear}}+ Years</p>
                   </div>
                 </div>
                 <!--end col-->
-                <div class="col-lg-6 col-md-5">
+                <div class="col-lg-6 col-md-4 ps-5">
                   <div>
                     <p class="text-muted mb-0"><span
-                      class="text-dark">Expired Date :</span>
+                      class="text-dark">Expired Date:</span>
                       {{j.expiredDate}} </p>
                   </div>
                 </div>
@@ -319,12 +318,14 @@
                    class="btn btn-primary btn-hover w-100 mt-2">Apply Now <i
                   class="uil uil-arrow-right"></i></a>
                 <button *ngIf="flag && !checkAccepted"
-                   class="alert bg-soft-success text-center w-100 mt-2" disabled>Waiting</button>
+                        class="alert bg-soft-success text-center w-100 mt-2" disabled>Waiting
+                </button>
                 <p *ngIf="flag && !checkAccepted"
                    class="btn btn-danger btn-hover w-100 mt-2" data-bs-toggle="modal"
                    data-bs-target="#cancelModal">Cancel</p>
                 <button *ngIf="flag && checkAccepted"
-                   class="btn btn-success w-100 mt-2" disabled="">Accepted</button>
+                        class="btn btn-success w-100 mt-2" disabled="">Accepted
+                </button>
               </div>
               <div class="mt-3" *ngIf="role == 0">
                 <a href="" routerLink="/register" data-bs-toggle="modal"
@@ -340,7 +341,7 @@
                 <img
                   height="55" width="55"
                   src="{{job.company.avatar}}" alt=""
-                     class="img-fluid rounded-3">
+                  class="img-fluid rounded-3">
 
                 <div class="mt-4">
                   <h6 class="fs-17 mb-1">{{job.company.name}}</h6>
@@ -352,7 +353,7 @@
                     <i class="uil uil-phone-volume text-primary fs-4"></i>
                     <div class="ms-3">
                       <h6 class="fs-14 mb-2">Phone</h6>
-                      <p class="text-muted fs-14 mb-0">+{{job.company.tel}}</p>
+                      <p class="text-muted fs-14 mb-0">{{job.company.tel}}</p>
                     </div>
                   </div>
                 </li>
@@ -370,8 +371,8 @@
                     <i class="uil uil-globe text-primary fs-4"></i>
                     <div class="ms-3">
                       <h6 class="fs-14 mb-2">Website</h6>
-                      <p class="text-muted fs-14 text-break mb-0">
-                        {{job.company.website}}</p>
+                      <a href="{{job.company.website}}" class="text-primary fs-14 text-break mb-0">
+                        {{job.company.website}}</a>
                     </div>
                   </div>
                 </li>
@@ -404,40 +405,34 @@
 <div *ngIf="role == 3" class="modal fade" id="applyNow" tabindex="-1" aria-labelledby="applyNow" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-        <div class="modal-body p-5">
-          <div class="text-center mb-4">
-            <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
-          </div>
-          <div class="position-absolute end-0 top-0 p-3">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="mb-3">
-            <label for="nameControlInput" class="form-label">Name</label>
-            <input type="text" class="form-control" id="nameControlInput" readonly [value]="user.name">
-          </div>
-          <div class="mb-3">
-            <label for="emailControlInput2" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="emailControlInput2" readonly [value]="user.email">
-          </div>
-          <div class="mb-3">
-            <label for="tel" class="form-label">Phone number</label>
-            <input type="email" class="form-control" id="tel" readonly [value]="user.tel">
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" rows="4"
-                      placeholder="Enter your message" [(ngModel)]="message"></textarea>
-          </div>
-          <div class="mb-4">
-            <label class="form-label" for="cv">Resume Upload</label>
-            <input type="file" class="form-control" id="cv" (change)="submitCV($event)">
-          </div>
-          <button class="btn btn-primary w-100" (click)="apply()">Send Application</button>
-          <button type="button" class="btn btn-secondary waves-effect"
-                  data-bs-dismiss="modal" #btnModal hidden>Close
-          </button>
+      <div class="modal-body p-5">
+        <div class="text-center mb-4">
+          <h5 class="modal-title" id="staticBackdropLabel">Apply For This Job</h5>
         </div>
-<!--        <mat-progress-bar mode="indeterminate" class="example-margin" *ngIf="checkUpload"></mat-progress-bar>-->
+        <div class="position-absolute end-0 top-0 p-3">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="mb-3">
+          <label for="nameControlInput" class="form-label">Name</label>
+          <input type="text" class="form-control" id="nameControlInput" readonly [value]="user.name">
+        </div>
+        <div class="mb-3">
+          <label for="emailControlInput2" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="emailControlInput2" readonly [value]="user.email">
+        </div>
+        <div class="mb-3">
+          <label for="tel" class="form-label">Phone number</label>
+          <input type="email" class="form-control" id="tel" readonly [value]="user.tel">
+        </div>
+        <div class="mb-4">
+          <label class="form-label" for="cv">Resume Upload</label>
+          <input type="file" class="form-control" id="cv" (change)="submitCV($event)">
+        </div>
+        <button class="btn btn-primary w-100" (click)="apply()">Send Application</button>
+        <button type="button" class="btn btn-secondary waves-effect"
+                data-bs-dismiss="modal" #btnModal hidden>Close
+        </button>
+      </div>
     </div>
   </div>
 </div><!-- END APPLY MODAL -->

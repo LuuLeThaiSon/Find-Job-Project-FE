@@ -1,5 +1,5 @@
 <div>
-<div id="preloader" [hidden]="loading">
+<div id="preloader" [hidden]="loading" style="backdrop-filter: blur(5px); background: none">
   <div id="status">
     <ul>
       <li></li>
@@ -65,7 +65,7 @@
 <!--                            </button>-->
 <!--                          </div>-->
                           <div class="mb-3">
-                            <label for="usernameInput" class="form-label">Username</label>
+                            <label for="usernameInput" class="form-label">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" required id="usernameInput"
                                    placeholder="Enter your username" formControlName="name" ngModel>
                             <p
@@ -73,7 +73,7 @@
                               style="color: orange; margin-top: 10px">Require</p>
                           </div>
                           <div class="mb-3">
-                            <label for="emailInput" class="form-label">Email</label>
+                            <label for="emailInput" class="form-label">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" required id="emailInput"
                                    placeholder="Enter your email" formControlName="email" ngModel (change)="checkEmail(mail.value)" #mail>
                             <p-message severity="error"
@@ -84,7 +84,7 @@
 
                           </div>
                           <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                             <input class="form-control" id="password" placeholder="Enter your password" formControlName="password" type="{{showPassFields?'password':'text'}}" minlength="6">
 <!--                            <span class="show-btn"><i class="fas fa-eye"></i></span>-->
                             <p *ngIf="formRegisterCandidate.get('password')?.errors?.['required'] && formRegisterCandidate.get('password')?.touched"
@@ -93,7 +93,7 @@
                                style="color: orange; margin-top: 10px" >Minimum of 8 characters</p>
                           </div>
                           <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
                             <input class="form-control" id="confirmPassword"
                                    placeholder="Enter your password" formControlName="confirmPassword" type="{{showPassFields?'password':'text'}}">
                             <p *ngIf="formRegisterCandidate.get('confirmPassword')?.errors?.['required'] && formRegisterCandidate.get('confirmPassword')?.touched"
@@ -163,6 +163,7 @@
 <p-toast></p-toast>
 <p-toast position="top-left" key="tc"></p-toast>
 <p-toast position="top-center" key="ab"></p-toast>
+<p-toast position="top-right" key="abc"></p-toast>
 <p-toast position="bottom-center" key="bc"></p-toast>
 <p-toast>
   <div class="card">

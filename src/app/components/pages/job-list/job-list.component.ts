@@ -6,7 +6,7 @@ import {LocationsService} from "../../service/locations.service";
 import {CategoryService} from "../../service/category.service";
 import {Category} from "../../model/category";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {ApplyJob} from "../../model/apply-job";
 import {ApplyJobService} from "../../service/apply-job.service";
 import {finalize} from "rxjs";
@@ -36,7 +36,6 @@ export class JobListComponent implements OnInit {
   jobApply!: Job;
   cvFileName: any;
   alertApply: boolean = true;
-  message!: string;
   notify = new Notify();
   notifyType: NotifyType[] = [];
 
@@ -53,9 +52,7 @@ export class JobListComponent implements OnInit {
       this.role = this.user.role.id;
     }
 
-    this.applyForm = new FormGroup({
-      message: new FormControl('')
-    });
+
 
     this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
@@ -129,7 +126,6 @@ export class JobListComponent implements OnInit {
     this.loading = false;
     this.applyJob.candidate = this.user;
     this.applyJob.job = this.jobApply;
-    this.applyJob.message = this.message;
     const cvPath = `cv/${this.cvFileName.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
     const fileRef = this.storage.ref(cvPath);
     this.storage.upload(cvPath, this.cvFileName).snapshotChanges().pipe(

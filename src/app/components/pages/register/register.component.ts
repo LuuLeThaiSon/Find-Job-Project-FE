@@ -107,19 +107,24 @@ export class RegisterComponent {
             this.companyService.getPassword(this.passwordSend).subscribe((data) => {
               this.company.password = data.message
               this.companyService.saveCompany(this.company).subscribe(() => {
+                this.loading = true
                 setTimeout(() => {
-                  this.loading = false
-                }, 1000)
-                setTimeout(() => {
-                  this.loading = true
-                  this.router.navigate(['/login']).finally()
+                  this.showSuccess2()
                 },2000)
+                setTimeout(() => {
+                  this.showInfo()
+                },5000)
+                setTimeout(() => {
+                  this.router.navigate(['/login']).finally()
+                },7000)
+                return
               })
             })
           });
         })
       ).subscribe()
     } else {
+      this.loading = false;
       this.passwordSend.to = this.formRegister.get('email')?.value
       this.passwordSend.subject = 'Congratulation you become a company!'
       // @ts-ignore
@@ -133,18 +138,18 @@ export class RegisterComponent {
       this.companyService.getPassword(this.passwordSend).subscribe((data) => {
         this.company.password = data.message
         this.companyService.saveCompany(this.company).subscribe(() => {
+          this.loading = true
           setTimeout(() => {
             this.showSuccess2()
-          },500)
-          setTimeout(() => {
-            this.loading = false
           }, 2000)
+          setTimeout(() => {
+            this.showInfo()
+          }, 4000)
+          setTimeout(() => {
+            this.router.navigate(['/login']).finally()
+          }, 6000)
+          return
         })
-        setTimeout(() => {
-          this.loading = true
-          this.router.navigate(['/login']).finally()
-        },2000)
-        return
       })
     }
   }
@@ -195,7 +200,7 @@ export class RegisterComponent {
   }
 
   showInfo() {
-    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Wish you have a good day!', key: 'ab'});
+    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Loading Login Page.....', key: 'abc'});
   }
 
   showWarn() {
