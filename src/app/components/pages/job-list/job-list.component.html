@@ -107,7 +107,7 @@
                     <div class="filler-job-form">
                       <i class="uil uil-briefcase-alt"></i>
                       <input type="search" class="form-control filter-job-input-box border border-primary"
-                             id="exampleFormControlInput1" placeholder="Job, Company... "
+                             id="exampleFormControlInput1" placeholder="Job, company... "
                              name="search" formControlName="text">
                     </div>
                   </div><!--end col-->
@@ -239,8 +239,8 @@
                       <!--end col-->
                       <div class="col-md-2">
                         <div>
-                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full Time</span>
-                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part Time</span>
+                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
                         </div>
                       </div>
                       <!--end col-->
@@ -252,43 +252,31 @@
                       <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
+                            class="text-dark">Experience:</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
                         </div>
                       </div>
                       <!--end col-->
                       <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Category :</span> {{j.category.name}}</p>
+                            class="text-dark">Category:</span> {{j.category.name}}</p>
                         </div>
                       </div>
                       <!--end col-->
                       <div class="col-md-2" [ngSwitch]="j.gender">
                         <div *ngSwitchCase="1">
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Gender :</span> Male</p>
+                            class="text-dark">Gender:</span> Male</p>
                         </div>
                         <div *ngSwitchCase="2">
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Gender :</span> Female</p>
+                            class="text-dark">Gender:</span> Female</p>
                         </div>
                         <div *ngSwitchCase="3">
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Gender :</span> Any</p>
+                            class="text-dark">Gender:</span> Any</p>
                         </div>
                       </div>
-                      <!--end col-->
-                      <!--                      <div class="col-lg-2 col-md-3">-->
-                      <!--                        <div *ngIf="role == 3">-->
-                      <!--                          <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"-->
-                      <!--                             (click)="applyJobId(j)">Apply Now <i-->
-                      <!--                            class="mdi mdi-chevron-double-right"></i></a>-->
-                      <!--                          <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]"-->
-                      <!--                                class="badge bg-soft-danger fs-13 mt-1">Waiting</span>-->
-                      <!--                          <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]"-->
-                      <!--                                class="badge bg-soft-success fs-13 mt-1">Accepted</span>-->
-                      <!--                        </div>-->
-                      <!--                      </div>-->
                       <!--end col-->
                     </div>
                     <!--end row-->
@@ -339,8 +327,8 @@
                       <!--end col-->
                       <div class="col-md-2">
                         <div>
-                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full Time</span>
-                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part Time</span>
+                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
                         </div>
                       </div>
                       <!--end col-->
@@ -352,43 +340,31 @@
                       <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
+                            class="text-dark">Experience:</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
                         </div>
                       </div>
                       <!--end col-->
                       <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Category :</span> {{j.category.name}}</p>
+                            class="text-dark">Category:</span> {{j.category.name}}</p>
                         </div>
                       </div>
                       <!--end col-->
                       <div class="col-md-2" [ngSwitch]="j.gender">
                         <div *ngSwitchCase="1">
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Gender :</span> Male</p>
+                            class="text-dark">Gender:</span> Male</p>
                         </div>
                         <div *ngSwitchCase="2">
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Gender :</span> Female</p>
+                            class="text-dark">Gender:</span> Female</p>
                         </div>
                         <div *ngSwitchCase="3">
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Gender :</span> Any</p>
+                            class="text-dark">Gender:</span> Any</p>
                         </div>
                       </div>
-                      <!--end col-->
-<!--                      <div class="col-lg-2 col-md-3">-->
-<!--                        <div *ngIf="role == 3">-->
-<!--                          <a *ngIf="!checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"-->
-<!--                             (click)="applyJobId(j)">Apply Now <i-->
-<!--                            class="mdi mdi-chevron-double-right"></i></a>-->
-<!--                          <span *ngIf="checkApplyJob[i] && !checkApplyAccept[i]"-->
-<!--                                class="badge bg-soft-danger fs-13 mt-1">Waiting</span>-->
-<!--                          <span *ngIf="checkApplyJob[i] && checkApplyAccept[i]"-->
-<!--                                class="badge bg-soft-success fs-13 mt-1">Accepted</span>-->
-<!--                        </div>-->
-<!--                      </div>-->
                       <!--end col-->
                     </div>
                     <!--end row-->
@@ -458,23 +434,23 @@
                   </div>
                   <div class="p-3 bg-light">
                     <div class="row justify-content-between">
-                      <div class="col-md-6">
-                        <div>
-                          <p class="text-muted mb-0"><span
-                            class="text-dark">Experience :</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
-                        </div>
-                      </div>
-                      <!--end col-->
                       <div class="col-md-4">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Category :</span> {{j.category.name}}</p>
+                            class="text-dark">Experience:</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
                         </div>
                       </div>
                       <!--end col-->
-                      <div class="col-md-2">
-                        <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full Time</span>
-                        <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part Time</span>
+                      <div class="col-md-4 text-center">
+                        <div>
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Category:</span> {{j.category.name}}</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-4 text-lg-end">
+                        <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
+                        <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
                       </div>
                       <!--end col-->
                     </div>
@@ -504,7 +480,7 @@
                       Offered Salary
                     </button>
                   </h2>
-                  <div id="jobsalary" class="accordion-collapse collapse show" aria-labelledby="jobSalary">
+                  <div id="jobsalary" class="accordion-collapse collapse hide" aria-labelledby="jobSalary">
                     <div class="accordion-body">
                       <div class="side-title">
                         <div class="form-check mt-2">
@@ -524,7 +500,7 @@
                                  name="salary"
                                  class="form-check-input" type="radio" id="JobSalary1">
                           <label class="form-check-label ms-2 text-muted" for="JobSalary1">
-                            Less Than $200
+                            Less than $200
                           </label>
                         </div>
                         <div class="form-check mt-2">
@@ -555,7 +531,7 @@
                                  class="form-check-input" type="radio"
                                  id="JobSalary4">
                           <label class="form-check-label ms-2 text-muted" for="JobSalary4">
-                            More Than $800
+                            More than $800
                           </label>
                         </div>
                       </div>
@@ -569,7 +545,7 @@
                       Work Experience
                     </button>
                   </h2>
-                  <div id="jobexp" class="accordion-collapse collapse show" aria-labelledby="jobExp">
+                  <div id="jobexp" class="accordion-collapse collapse hide" aria-labelledby="jobExp">
                     <div class="accordion-body">
                       <div class="side-title">
                         <div class="form-check mt-2">
@@ -605,7 +581,7 @@
                                  name="years"
                                  id="JobExp2">
                           <label class="form-check-label ms-2 text-muted" for="JobExp2">
-                            0 - 3 Years
+                            0 - 3 years
                           </label>
                         </div>
                         <div class="form-check mt-2">
@@ -617,7 +593,7 @@
                                  name="years"
                                  id="JobExp3">
                           <label class="form-check-label ms-2 text-muted" for="JobExp3">
-                            3 - 6 Years
+                            3 - 6 years
                           </label>
                         </div>
                         <div class="form-check mt-2">
@@ -629,7 +605,7 @@
                                  name="years"
                                  id="JobExp4">
                           <label class="form-check-label ms-2 text-muted" for="JobExp4">
-                            More Than 6 Years
+                            More than 6 years
                           </label>
                         </div>
                       </div>
@@ -643,7 +619,7 @@
                       Type of Employment
                     </button>
                   </h2>
-                  <div id="jobtype" class="accordion-collapse collapse show" aria-labelledby="jobType">
+                  <div id="jobtype" class="accordion-collapse collapse hide" aria-labelledby="jobType">
                     <div class="accordion-body">
                       <div class="side-title">
                         <div class="form-check mt-2">
@@ -687,7 +663,7 @@
                       Gender
                     </button>
                   </h2>
-                  <div id="jobgender" class="accordion-collapse collapse show" aria-labelledby="jobGender">
+                  <div id="jobgender" class="accordion-collapse collapse hide" aria-labelledby="jobGender">
                     <div class="accordion-body">
                       <div class="side-title">
                         <div class="form-check mt-2">
@@ -803,11 +779,6 @@
             <div class="mb-3">
               <label for="tel" class="form-label">Phone number</label>
               <input type="email" class="form-control" id="tel" readonly [value]="user.tel">
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Message</label>
-              <textarea class="form-control" id="message" rows="4"
-                        placeholder="Enter your message" formControlName="message" [(ngModel)]="message"></textarea>
             </div>
             <div class="mb-4">
               <label class="form-label" for="cv">Resume Upload</label>
