@@ -78,13 +78,21 @@ export class RegisterCComponent {
       this.candidate.role = {id: '3', name: "CANDIDATE"}
       // this.candidate.role = {id: 3}
       this.companyService.saveCandidate(this.candidate).subscribe(() => {
-        this.showSuccessRegister = false
-        this.loading = false
-      })
-      setTimeout(() => {
         this.loading = true
-        this.router.navigate(['/login']).finally()
-      }, 2000)
+        setTimeout(() => {
+          this.showSuccess3()
+        }, 1000)
+        setTimeout(() => {
+          this.showInfo()
+        }, 2000)
+        setTimeout(() => {
+          this.loading = false
+        }, 6000)
+        setTimeout(() => {
+          this.router.navigate(['/login']).finally()
+        }, 9000)
+        return
+      })
     })
   }
 
@@ -122,7 +130,7 @@ export class RegisterCComponent {
   }
 
   showInfo() {
-    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Wish you have a good day!', key: 'ab'});
+    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Wish you have a good day!', key: 'abc'});
   }
 
   showWarn() {
@@ -147,14 +155,6 @@ export class RegisterCComponent {
     });
   }
 
-  showError2() {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Register Successfully! Pls check mail to get notification!',
-      key: 'ab'
-    });
-  }
 
   clear() {
     this.messageService.clear();
@@ -177,5 +177,14 @@ export class RegisterCComponent {
 
   showPass() {
     this.showPassFields = !this.showPassFields
+  }
+
+  showSuccess3() {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'success',
+      detail: 'Register Successfully! Pls check your mail box to get notification!',
+      key: 'ab'
+    })
   }
 }
