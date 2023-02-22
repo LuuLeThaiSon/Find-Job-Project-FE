@@ -26,6 +26,7 @@ export class LoginComponent {
   imageFile: any
   path!: string
   pathName!: string
+  showPassFields = true;
 
   ngOnInit(): void {
     this.formLogin = new FormGroup({
@@ -125,4 +126,8 @@ export class LoginComponent {
   header: HeaderComponent | undefined;
 
   loading = true;
+
+  showPass() {
+    this.showPassFields = !this.showPassFields
+  }
 }

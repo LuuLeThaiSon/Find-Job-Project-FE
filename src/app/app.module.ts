@@ -39,7 +39,6 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {ManageCandidateProfileComponent} from './components/pages/manage-candidate-profile/manage-candidate-profile.component';
 import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-apply.component";
 import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
-import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MomentModule} from "ngx-moment";
 import {ConfirmationService, MessageService} from "primeng/api";
 // import { MomentModule } from 'ngx-moment';
@@ -100,7 +99,6 @@ import {ConfirmationService, MessageService} from "primeng/api";
     ProgressSpinnerModule,
     BrowserAnimationsModule,
     BrowserAnimationsModule,
-    MatProgressBarModule,
     MomentModule.forRoot({
       relativeTimeThresholdOptions: {
         'm': 59

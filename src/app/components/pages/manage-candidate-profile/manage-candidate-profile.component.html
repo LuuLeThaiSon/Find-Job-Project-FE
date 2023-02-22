@@ -77,129 +77,54 @@
                   Settings
                 </button>
               </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="change-password-tab" data-bs-toggle="pill"
+                        data-bs-target="#change-password" type="button" role="tab" aria-controls="settings"
+                        aria-selected="false">
+                  Change Password
+                </button>
+              </li>
             </ul>
             <!--end profile-content-nav-->
             <div class="card-body p-4">
               <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="overview" role="tabpanel"
                      aria-labelledby="overview-tab">
+                  <div class="candidate-portfolio mb-1">
+                    <div class="row g-3">
+                      <div class="col-lg-12">
+                        <div class="candidate-portfolio-box card border-0">
+                          <img
+                            src="{{candidate.banner? candidate.banner: 'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}"
+                            class="img-fluid" height="450" width="800">
+                          <div class="bg-overlay"></div>
+                          <div class="zoom-icon">
+                            <a
+                              href="{{candidate.banner? candidate.banner: 'https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'}}"
+                              class="image-popup text-white"
+                              data-title="Project Leader"
+                              data-description="There are many variations of passages of available, but the majority alteration in some form."><i
+                              class="uil uil-search-alt"></i></a>
+                          </div>
+                        </div>
+                      </div><!-- end col -->
+                      <div class="mb-4 profile-user">
+                        <p></p>
+                        <div class="p-0 rounded-circle profile-photo-edit">
+                          <input id="banner-img-file-input" type="file" class="profile-img-file-input"
+                                 (change)="updateBannerCandidate($event)">
+                          <label for="banner-img-file-input" class="profile-photo-edit avatar-xs">
+                            <i class="uil uil-edit"></i>
+                          </label>
+                        </div>
+                      </div>
+                    </div><!-- end row -->
+                  </div><!-- end portfolio -->
                   <div>
-                    <h5 class="fs-18 fw-bold">About</h5>
+                    <h5 class="fs-18 fw-bold">Description</h5>
                     <p class="text-muted mt-4">
-                      Developer with over 5 years' experience working in both
-                      the public and private sectors. Diplomatic, personable,
-                      and adept at managing sensitive situations. Highly
-                      organized, self-motivated, and proficient with
-                      computers. Looking to boost students' satisfactions
-                      scores for <b>International University</b>. Bachelor's
-                      degree in communications.
+                      {{candidate.description}}
                     </p>
-                    <p class="text-muted">
-                      It describes the candidate's relevant experience,
-                      skills, and achievements. The purpose of this career
-                      summary is to explain your qualifications for the job in
-                      3-5 sentences and convince the manager to read the whole
-                      resume document.
-                    </p>
-                  </div>
-                  <div class="candidate-education-details mt-4">
-                    <h6 class="fs-18 fw-bold mb-0">Education</h6>
-                    <div class="candidate-education-content mt-4 d-flex">
-                      <div class="circle flex-shrink-0 bg-soft-primary">
-                        B
-                      </div>
-                      <div class="ms-4">
-                        <h6 class="fs-16 mb-1">
-                          BCA - Bachelor of Computer Applications
-                        </h6>
-                        <p class="mb-2 text-muted">
-                          International University - (2004 - 2010)
-                        </p>
-                        <p class="text-muted">
-                          There are many variations of passages of available,
-                          but the majority alteration in some form. As a
-                          highly skilled and successfull product development
-                          and design specialist with more than 4 Years of My
-                          experience.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="candidate-education-content mt-3 d-flex">
-                      <div class="circle flex-shrink-0 bg-soft-primary">
-                        M
-                      </div>
-                      <div class="ms-4">
-                        <h6 class="fs-16 mb-1">
-                          MCA - Master of Computer Application
-                        </h6>
-                        <p class="mb-2 text-muted">
-                          International University - (2010 - 2012)
-                        </p>
-                        <p class="text-muted">
-                          There are many variations of passages of available,
-                          but the majority alteration in some form. As a
-                          highly skilled and successfull product development
-                          and design specialist with more than 4 Years of My
-                          experience.
-                        </p>
-                      </div>
-                    </div>
-                    <div class="candidate-education-content mt-3 d-flex">
-                      <div class="circle flex-shrink-0 bg-soft-primary">
-                        D
-                      </div>
-                      <div class="ms-4">
-                        <h6 class="fs-16 mb-1">Design Communication Visual</h6>
-                        <p class="text-muted mb-2">
-                          International University - (2012-2015)
-                        </p>
-                        <p class="text-muted">
-                          There are many variations of passages of available,
-                          but the majority alteration in some form. As a
-                          highly skilled and successfull product development
-                          and design specialist with more than 4 Years of My
-                          experience.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="candidate-education-details mt-4">
-                    <h6 class="fs-18 fw-bold mb-0">Experiences</h6>
-                    <div class="candidate-education-content mt-4 d-flex">
-                      <div class="circle flex-shrink-0 bg-soft-primary"> W</div>
-                      <div class="ms-4">
-                        <h6 class="fs-16 mb-1">Web Design & Development Team Leader</h6>
-                        <p class="mb-2 text-muted">Creative Agency - (2013 - 2016)</p>
-                        <p class="text-muted">There are many variations of passages of available, but the majority
-                          alteration in some form. As a highly skilled and successfull product development and design
-                          specialist with more than 4 Years of My experience.</p>
-                      </div>
-                    </div>
-                    <div class="candidate-education-content mt-4 d-flex">
-                      <div class="circle flex-shrink-0 bg-soft-primary"> P</div>
-                      <div class="ms-4">
-                        <h6 class="fs-16 mb-1">Project Manager</h6>
-                        <p class="mb-2 text-muted">Jobcy Technology Pvt.Ltd - (Pressent)</p>
-                        <p class="text-muted mb-0">There are many variations of passages of available, but the majority
-                          alteration in some form. As a highly skilled and successfull product development and design
-                          specialist with more than 4 Years of My experience.</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mt-4">
-                    <h5 class="fs-18 fw-bold">Skills</h5>
-                    <span class="badge fs-13 bg-soft-blue mt-2">Cloud Management</span>
-                    <span class="badge fs-13 bg-soft-blue mt-2">Responsive Design</span>
-                    <span class="badge fs-13 bg-soft-blue mt-2">Network Architecture</span>
-                    <span class="badge fs-13 bg-soft-blue mt-2">PHP</span>
-                    <span class="badge fs-13 bg-soft-blue mt-2">Bootstrap</span>
-                    <span class="badge fs-13 bg-soft-blue mt-2">UI & UX Designer</span>
-                  </div>
-                  <div class="mt-4">
-                    <h5 class="fs-18 fw-bold">Spoken languages</h5>
-                    <span class="badge fs-13 bg-soft-success mt-2">English</span>
-                    <span class="badge fs-13 bg-soft-success mt-2">German</span>
-                    <span class="badge fs-13 bg-soft-success mt-2">French</span>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -215,7 +140,7 @@
                             id="profile-img" alt="">
                           <div class="p-0 rounded-circle profile-photo-edit">
                             <input id="profile-img-file-input" type="file" class="profile-img-file-input"
-                                   (change)="previewAvatarCandidate($event)">
+                                   (change)="previewAvatarCandidate($event)" required>
                             <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
                               <i class="uil uil-edit"></i>
                             </label>
@@ -274,115 +199,10 @@
                                       rows="5">{{candidate.description}}.</textarea>
                           </div>
                         </div>
-                        <!--end col-->
-                        <!--                    <div class="col-lg-6">-->
-                        <!--                      <div class="mb-3">-->
-                        <!--                        <label for="languages" class="form-label">Languages</label>-->
-                        <!--                        <input type="text" class="form-control" id="languages"-->
-                        <!--                               value="English, German, French"/>-->
-                        <!--                      </div>-->
-                        <!--                    </div>-->
-                        <!--end col-->
-                        <!--end col-->
-                        <!--                    <div class="col-lg-12">-->
-                        <!--                      <div class="mb-3">-->
-                        <!--                        <label for="attachmentscv" class="form-label">Attachments-->
-                        <!--                          CV</label>-->
-                        <!--                        <input class="form-control" type="file" id="attachmentscv"/>-->
-                        <!--                      </div>-->
-                        <!--                    </div>-->
-                        <!--end col-->
                       </div>
                       <!--end row-->
                     </div>
-                    <!--end profile-->
-                    <!--                <div class="mt-4">-->
-                    <!--                  <h5 class="fs-17 fw-semibold mb-3">Social Media</h5>-->
-                    <!--                  <div class="row">-->
-                    <!--                    <div class="col-lg-6">-->
-                    <!--                      <div class="mb-3">-->
-                    <!--                        <label for="facebook" class="form-label">Facebook</label>-->
-                    <!--                        <input type="text" class="form-control" id="facebook"-->
-                    <!--                               value="https://www.facebook.com"/>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;end col&ndash;&gt;-->
-                    <!--                    <div class="col-lg-6">-->
-                    <!--                      <div class="mb-3">-->
-                    <!--                        <label for="twitter" class="form-label">Twitter</label>-->
-                    <!--                        <input type="text" class="form-control" id="twitter"-->
-                    <!--                               value="https://www.twitter.com"/>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;end col&ndash;&gt;-->
-                    <!--                    <div class="col-lg-6">-->
-                    <!--                      <div class="mb-3">-->
-                    <!--                        <label for="linkedin" class="form-label">Linkedin</label>-->
-                    <!--                        <input type="text" class="form-control" id="linkedin"-->
-                    <!--                               value="https://www.linkedin.com"/>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;end col&ndash;&gt;-->
-                    <!--                    <div class="col-lg-6">-->
-                    <!--                      <div class="mb-3">-->
-                    <!--                        <label for="whatsapp" class="form-label">Whatsapp</label>-->
-                    <!--                        <input type="text" class="form-control" id="whatsapp"-->
-                    <!--                               value="https://www.whatsapp.com"/>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;end col&ndash;&gt;-->
-                    <!--                  </div>-->
-                    <!--                  &lt;!&ndash;end row&ndash;&gt;-->
-                    <!--                </div>-->
-                    <!--end socia-media-->
-                    <!--                <div class="mt-4">-->
-                    <!--                  <h5 class="fs-17 fw-semibold mb-3 mb-3">-->
-                    <!--                    Change Password-->
-                    <!--                  </h5>-->
-                    <!--                  <div class="row">-->
-                    <!--                    <div class="col-lg-12">-->
-                    <!--                      <div class="mb-3">-->
-                    <!--                        <label for="current-password-input" class="form-label">Current-->
-                    <!--                          password</label>-->
-                    <!--                        <input type="password" class="form-control"-->
-                    <!--                               placeholder="Enter Current password"-->
-                    <!--                               id="current-password-input"/>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;end col&ndash;&gt;-->
-                    <!--                    <div class="col-lg-6">-->
-                    <!--                      <div class="mb-3">-->
-                    <!--                        <label for="new-password-input" class="form-label">New-->
-                    <!--                          password</label>-->
-                    <!--                        <input type="password" class="form-control"-->
-                    <!--                               placeholder="Enter new password"-->
-                    <!--                               id="new-password-input"/>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;end col&ndash;&gt;-->
-                    <!--                    <div class="col-lg-6">-->
-                    <!--                      <div class="mb-3">-->
-                    <!--                        <label for="confirm-password-input" class="form-label">Confirm Password</label>-->
-                    <!--                        <input type="password" class="form-control"-->
-                    <!--                               placeholder="Confirm Password"-->
-                    <!--                               id="confirm-password-input"/>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;end col&ndash;&gt;-->
-                    <!--                    <div class="col-lg-12">-->
-                    <!--                      <div class="form-check">-->
-                    <!--                        <input class="form-check-input" type="checkbox" value=""-->
-                    <!--                               id="verification"/>-->
-                    <!--                        <label class="form-check-label" for="verification">-->
-                    <!--                          Enable Two-Step Verification via email-->
-                    <!--                        </label>-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
-                    <!--                    &lt;!&ndash;end col&ndash;&gt;-->
-                    <!--                  </div>-->
-                    <!--                  &lt;!&ndash;end row&ndash;&gt;-->
-                    <!--                </div>-->
-                    <!--end Change-password-->
+
                     <div class="mt-4 text-end">
                       <button type="submit" class="btn btn-primary">Update</button>
                     </div>
@@ -390,6 +210,83 @@
                   <!--end form-->
                 </div>
                 <!--end tab-pane-->
+                <div class="tab-pane fade" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">
+                  <form [formGroup]="formChangePass" (ngSubmit)="changePass()">
+                    <div class="mt-4">
+                      <div class="alert bg-soft-success alert-dismissible fade show"
+                           id="change-pass-success"
+                           role="alert" [hidden]=showSuccessChangePass>
+                        Update Successfully!<br>
+                        Redirecting to login page!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        </button>
+                      </div>
+                      <h5 class="fs-17 fw-semibold mb-3 mb-3">
+                        Change Password
+                      </h5>
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="mb-3">
+                            <label for="current-password-input" class="form-label">Current
+                              password</label>
+                            <input type="{{showPassFields?'password':'text'}}" class="form-control"
+                                   placeholder="Enter Current password"
+                                   formControlName=currentPass
+                                   id="current-password-input"/>
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="new-password-input" class="form-label">New
+                              password</label>
+                            <input class="form-control"
+                                   type="{{showPassFields?'password':'text'}}"
+                                   placeholder="Enter new password"
+                                   formControlName=newPass
+                                   id="new-password-input"/>
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="confirm-password-input" class="form-label">Confirm Password</label>
+                            <input class="form-control"
+                                   type="{{showPassFields?'password':'text'}}"
+                                   placeholder="Confirm Password"
+                                   formControlName=confirmPass
+                                   id="confirm-password-input"/>
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-12">
+                          <div class="form-check">
+                            <input (click)="showPass()" class="form-check-input" type="checkbox" value=""
+                                   id="verification" />
+                            <label class="form-check-label" for="verification">
+                              Show all fields
+                            </label>
+                          </div>
+                        </div>
+                        <!--end col-->
+                      </div>
+                      <!--end row-->
+                    </div>
+                    <!--end Change-password-->
+                    <div class="alert bg-soft-danger alert-dismissible fade show"
+                         id="change-pass-status"
+                         role="alert" [hidden]="alertChangePass">
+                      {{passStatus}}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                      </button>
+                    </div>
+                    <div class="mt-4 text-end">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </form>
+                  <!--end form-->
+                </div>
+
               </div>
               <!--end tab-content-->
             </div>
@@ -427,43 +324,6 @@
                   </li>
                 </ul>
               </div>
-              <!--end profile-->
-<!--              <div class="mt-4 border-bottom pb-4">-->
-<!--                <h5 class="fs-17 fw-bold mb-3">Documents</h5>-->
-<!--                <ul class="profile-document list-unstyled mb-0">-->
-<!--                  <li>-->
-<!--                    <div class="profile-document-list d-flex align-items-center mt-4 ">-->
-<!--                      <div class="icon flex-shrink-0">-->
-<!--                        <i class="uil uil-file"></i>-->
-<!--                      </div>-->
-<!--                      <div class="ms-3">-->
-<!--                        <h6 class="fs-16 mb-0">Resume.pdf</h6>-->
-<!--                        <p class="text-muted mb-0">1.25 MB</p>-->
-<!--                      </div>-->
-<!--                      <div class="ms-auto">-->
-<!--                        <a href="assets/images/dark-logo.png" download class="fs-20 text-muted"><i-->
-<!--                          class="uil uil-import"></i></a>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                  <li>-->
-<!--                    <div class="profile-document-list d-flex align-items-center mt-4 ">-->
-<!--                      <div class="icon flex-shrink-0">-->
-<!--                        <i class="uil uil-file"></i>-->
-<!--                      </div>-->
-<!--                      <div class="ms-3">-->
-<!--                        <h6 class="fs-16 mb-0">Cover-letter.pdf</h6>-->
-<!--                        <p class="text-muted mb-0">1.25 MB</p>-->
-<!--                      </div>-->
-<!--                      <div class="ms-auto">-->
-<!--                        <a href="assets/images/dark-logo.png" download="dark-logo" class="fs-20 text-muted"><i-->
-<!--                          class="uil uil-import"></i></a>-->
-<!--                      </div>-->
-<!--                    </div>-->
-<!--                  </li>-->
-<!--                </ul>-->
-<!--              </div>-->
-              <!--end document-->
               <div class="mt-4">
                 <h5 class="fs-17 fw-bold mb-3">Contacts</h5>
                 <div class="profile-contact">
@@ -512,4 +372,3 @@
   </section>
 </div>
 <app-footer></app-footer>
-

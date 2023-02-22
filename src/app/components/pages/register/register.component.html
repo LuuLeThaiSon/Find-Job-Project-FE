@@ -51,16 +51,16 @@
                                    formControlName="name" ngModel (change)="checkName(name.value)" #name>
                           </div>
                           <p *ngIf="formRegister.get('name')?.errors?.['required'] && formRegister.get('name')?.touched"
-                            style="color: red">Required</p>
+                            style="color: orange; margin-top: 10px">Required</p>
                           <div class="mb-3">
                             <label for="emailInput" class="form-label">Email</label>
                             <input type="email" class="form-control" id="emailInput" placeholder="Enter your email"
                                    formControlName="email" ngModel (change)="checkEmail(mail.value)" #mail>
                           </div>
                           <p *ngIf="formRegister.get('email')?.errors?.['required'] && formRegister.get('email')?.touched"
-                             style="color: red">Required</p>
+                             style="color: orange; margin-top: 10px">Required</p>
                           <p *ngIf="formRegister.get('email')?.errors?.['pattern'] && formRegister.get('email')?.touched"
-                             style="color: red">Email must exactly pattern</p>
+                             style="color: orange; margin-top: 10px">Email must exactly pattern</p>
                           <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
                             <input type="text" class="form-control" id="address" placeholder="Enter your address"

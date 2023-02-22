@@ -40,9 +40,11 @@ export class BookmarksJobsComponent implements OnInit {
   applyJob!: ApplyJob;
   applyJobId!: number;
 
-  notifyType: NotifyType[] =[];
+  notifyType: NotifyType[] = [];
   notify = new Notify();
   rejectJob!: Job | undefined;
+
+  jobStatus!: Boolean;
 
   ngOnInit(): void {
     // @ts-ignore
@@ -136,16 +138,27 @@ export class BookmarksJobsComponent implements OnInit {
     if (+this.job.salaryMax < +this.job.salaryMin) {
       return
     }
-    return this.jobService.create(this.job).subscribe(() => {
-      this.findAll();
-      this.btnModal.nativeElement.click();
-      this.jobForm.reset();
-    });
+    if (this.job.id == null) {
+      this.jobService.create(this.job).subscribe(() => {
+        this.findAll();
+        this.btnModal.nativeElement.click();
+        this.jobForm.reset();
+      });
+    } else {
+      this.job.status = this.jobStatus;
+      this.jobService.update(this.job, this.job.id).subscribe(() => {
+        this.findAll();
+        this.btnModal.nativeElement.click();
+        this.jobForm.reset();
+      });
+    }
+
   }
 
   openModalEdit(job: Job) {
     this.jobForm.reset();
     this.job = job;
+    this.jobStatus = this.job.status;
     this.jobForm.patchValue(this.job);
     this.modalTitle = 'Edit job';
   }
@@ -197,13 +210,12 @@ export class BookmarksJobsComponent implements OnInit {
   }
 
 
-
   acceptJob(applyJob: ApplyJob) {
     return this.applyjobService.acceptJob(applyJob).subscribe(() => {
       // @ts-ignore
-      document.getElementById('accept'+applyJob.id).setAttribute("disabled", 'true');
+      document.getElementById('accept' + applyJob.id).setAttribute("disabled", 'true');
       // @ts-ignore
-      document.getElementById('reject'+applyJob.id).setAttribute("disabled", 'true');
+      document.getElementById('reject' + applyJob.id).setAttribute("disabled", 'true');
       this.sendNotify(3, applyJob.job)
 
     })
@@ -222,7 +234,7 @@ export class BookmarksJobsComponent implements OnInit {
         this.notify.job = job;
         // @ts-ignore
         this.notify.company = job.company;
-        this.notify.candidate= this.applyJob.candidate;
+        this.notify.candidate = this.applyJob.candidate;
         this.notifyService.sendNotify(this.notify).subscribe(() => {
           this.ngOnInit()
         });

@@ -11,4 +11,5 @@ export interface Candidate {
   status: boolean;
   description: string
   address: string
+  banner: string
 }

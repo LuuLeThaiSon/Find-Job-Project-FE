@@ -15,18 +15,21 @@ import {MessageService} from "primeng/api";
   selector: 'app-register-c',
   templateUrl: './register-c.component.html',
   styleUrls: ['./register-c.component.css'],
-  providers:[MessageService]//
+  providers: [MessageService]//
 })
 export class RegisterCComponent {
   candidate!: Candidate
   candidates: Candidate[] = []
   formRegisterCandidate!: FormGroup
-  passwordSend = {to: '', subject: '', messageC : '', message: null}
+  passwordSend = {to: '', subject: '', messageC: '', message: null}
   role: Role[] = []
   imageFile: any
   path!: string
   pathName!: string
   selectedOption: any;
+  showPassFields = true;
+  RegexAlphaNumeric = "^[a-zA-Z0-9]{6,8}|[a-zA-Z0-9]{10,12}$"
+  showSuccessRegister = true
 
 
   ngOnInit(): void {
@@ -35,15 +38,15 @@ export class RegisterCComponent {
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
-      password: new FormControl('', [Validators.required, Validators.min(6)]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.min(6)]),
-      tel: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(this.RegexAlphaNumeric)]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.min(6), Validators.pattern(this.RegexAlphaNumeric)]),
+      tel: new FormControl('', [Validators.required,Validators.pattern(/^0\d{8,9}$/)]),
       role: new FormGroup({
         id: new FormControl('', [Validators.required])
       }),
-    },{
+    }, {
       validators: matchpassword
-      })
+    })
     this.companyService.findAllRole().subscribe((data) => {
       this.role = data
       data.shift()
@@ -54,7 +57,8 @@ export class RegisterCComponent {
   constructor(private routerActive: ActivatedRoute,
               private router: Router,
               private companyService: CompanyService,
-              private messageService: MessageService) {}//
+              private messageService: MessageService) {
+  }//
 
 
   onSubmit() {
@@ -67,35 +71,40 @@ export class RegisterCComponent {
     this.passwordSend.messageC = 'Welcome to 404 team ' + this.formRegisterCandidate.get('name')?.value
     this.companyService.getNotificationCandidate(this.passwordSend).subscribe((data) => {
       // @ts-ignore
-    this.candidate.status = true
-    // @ts-ignore
-    this.candidate.avatar = null
-    // @ts-ignore
-    this.candidate.role = {id: '3', name: "CANDIDATE"}
-    // this.candidate.role = {id: 3}
-    this.companyService.saveCandidate(this.candidate).subscribe(() => {
-      setTimeout(() => {
+      this.candidate.status = true
+      // @ts-ignore
+      this.candidate.avatar = null
+      // @ts-ignore
+      this.candidate.role = {id: '3', name: "CANDIDATE"}
+      // this.candidate.role = {id: 3}
+      this.companyService.saveCandidate(this.candidate).subscribe(() => {
+        this.showSuccessRegister = false
         this.loading = false
-      }, 50)
-    })
+      })
       setTimeout(() => {
         this.loading = true
         this.router.navigate(['/login']).finally()
-      },500)
+      }, 2000)
     })
   }
 
-  checkEmail(mail : string) :void {
+  checkEmail(mail: string): void {
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let a of data) {
         if (a.email.toLowerCase() === mail) {
           setTimeout(() => {
             this.showError1()
             this.formRegisterCandidate.get('email')?.setValue('')
-          },50,1)
+          }, 50, 1)
         }
       }
     })
+  }
+
+  checkTel() {
+    if (this.formRegisterCandidate.get('tel')?.errors?.['pattern'] && this.formRegisterCandidate.get('tel')?.touched ) {
+      this.formRegisterCandidate.get('tel')?.setValue('')
+    }
   }
 
   @ViewChild(HeaderComponent)
@@ -105,7 +114,7 @@ export class RegisterCComponent {
 
 
   showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'You can use this name', key:'ab'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'You can use this name', key: 'ab'})
   }
 
   showSuccess1() {
@@ -121,11 +130,30 @@ export class RegisterCComponent {
   }
 
   showError() {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Username existed. Please choose another name!', key:'ab'});
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Username existed. Please choose another name!',
+      key: 'ab'
+    });
   }
 
   showError1() {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Email existed. Please choose another email!', key:'ab'});
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Email existed. Please choose another email!',
+      key: 'ab'
+    });
+  }
+
+  showError2() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Register Successfully! Pls check mail to get notification!',
+      key: 'ab'
+    });
   }
 
   clear() {
@@ -134,10 +162,20 @@ export class RegisterCComponent {
 
   showConfirm() {
     this.messageService.clear();
-    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+    this.messageService.add({
+      key: 'c',
+      sticky: true,
+      severity: 'warn',
+      summary: 'Are you sure?',
+      detail: 'Confirm to proceed'
+    });
   }
 
   showViaService() {
-    this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+    this.messageService.add({severity: 'success', summary: 'Service Message', detail: 'Via MessageService'});
+  }
+
+  showPass() {
+    this.showPassFields = !this.showPassFields
   }
 }
