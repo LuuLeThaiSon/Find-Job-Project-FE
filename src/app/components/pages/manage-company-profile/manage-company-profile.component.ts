@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {CompanyService} from "../../service/company.service";
 import {JobService} from "../../service/job.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {finalize, Subject} from "rxjs";
 import {HeaderComponent} from "../../common/header/header.component";
@@ -33,6 +33,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   allCategories: Category[] = [];
   imageBannerFile: any;
   pathBannerName!: string;
+  phoneRegex = `^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$`
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -129,16 +130,16 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
 
     this.formCompany = new FormGroup({
       id: new FormControl(''),
-      name: new FormControl('', [Validators.required]),
-      shortName: new FormControl(''),
+      name: new FormControl('', Validators.required),
+      shortName: new FormControl('', Validators.required),
       code: new FormControl(''),
       email: new FormControl(''),
       password: new FormControl(''),
-      description: new FormControl(''),
-      address: new FormControl(''),
+      description: new FormControl('',Validators.required),
+      address: new FormControl('',Validators.required),
       numberOfEmployees: new FormControl(''),
       googleMap: new FormControl(''),
-      tel: new FormControl(''),
+      tel: new FormControl('',Validators.pattern(this.phoneRegex)),
       website: new FormControl(''),
       role: new FormGroup({
         id: new FormControl('')
@@ -148,9 +149,9 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     })
 
     this.formChangePass = new FormGroup({
-      currentPass: new FormControl(''),
-      newPass: new FormControl(''),
-      confirmPass: new FormControl(''),
+      currentPass: new FormControl('', Validators.required),
+      newPass: new FormControl('', Validators.compose([Validators.required,Validators.minLength(8)])),
+      confirmPass: new FormControl('', Validators.required),
     })
 
     this.categoryService.findCategoriesByCompanyId(this.companyId).subscribe(res => {
@@ -303,34 +304,21 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     let newPass = this.formChangePass.get('newPass')?.value;
     let confirmPass = this.formChangePass.get('confirmPass')?.value;
 
-    if (newPass == null) {
+    if(currentPass != this.company.password) {
       this.alertChangePass = false;
-      this.passStatus = "Please enter new Password";
-      this.formChangePass.reset();
+      this.passStatus = "Current pass incorrect ";
+      setTimeout(()=>{
+        this.alertChangePass = true;
+      },1000)
       return;
     }
-    if (currentPass != this.company.password) {
+
+    if(confirmPass != currentPass) {
       this.alertChangePass = false;
-      this.passStatus = "Current Password incorrect";
-      this.formChangePass.reset();
-      return;
-    }
-    if (confirmPass == null) {
-      this.alertChangePass = false;
-      this.passStatus = "Please confirm new Password";
-      this.formChangePass.reset();
-      return;
-    }
-    if (newPass != confirmPass) {
-      this.alertChangePass = false;
-      this.passStatus = "New Password not match";
-      this.formChangePass.reset();
-      return;
-    }
-    if (newPass.toString().length < 8) {
-      this.alertChangePass = false;
-      this.passStatus = "New Password must be at least 8 characters";
-      this.formChangePass.reset();
+      this.passStatus = "New pass not match";
+      setTimeout(()=>{
+        this.alertChangePass = true;
+      },1000)
       return;
     }
 
@@ -344,7 +332,6 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
         this.router.navigate(['/login']).finally()
       }, 4000)
     })
-
   }
 
   showSuccess() {

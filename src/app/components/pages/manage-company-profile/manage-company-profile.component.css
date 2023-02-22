@@ -3,15 +3,13 @@
   height: 250px !important;
 }
 
-:host ::ng-deep {}
+:host ::ng-deep .p-toast-message-custom {
+  border-color: #766df4;
 
-.p-toast-message-custom {
-  background-color: #E1CFE7;
-  border: solid #8A427A;
-  border-width: 0 0 0 6px;
-  color: #2c1e30;
+  background-color: rgba(118,109,244,.15)!important;
+  color: #766df4!important;
 }
 
-.p-toast-icon-close {
+:host ::ng-deep .p-toast-icon-close {
   color: #2c1e30;
 }

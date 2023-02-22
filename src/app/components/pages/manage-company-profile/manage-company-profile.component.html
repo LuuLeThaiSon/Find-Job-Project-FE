@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="page-content">
 
-<!--  loading screen-->
+  <!--  loading screen-->
   <div id="preloader" [hidden]="loading" style="backdrop-filter: blur(5px); background: none">
     <div id="status">
       <ul>
@@ -103,7 +103,7 @@
                         </div>
                       </div>
                     </li>
-                    <li *ngIf="company.code" >
+                    <li *ngIf="company.code">
                       <div class="d-flex">
                         <label>Code</label>
                         <div>
@@ -226,7 +226,7 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                  <form [formGroup]="formCompany" >
+                  <form [formGroup]="formCompany">
                     <input type="text" class="form-control" formControlName="id" hidden/>
                     <div>
                       <h5 class="fs-17 fw-semibold mb-3 mb-0">Company Account</h5>
@@ -248,12 +248,13 @@
                       <div class="row">
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="Name" class="form-label">Name*</label>
+                            <label for="Name" class="form-label">Name
+                            <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="Name" formControlName="name"/>
                           </div>
                           <div *ngIf="formCompany.get('name')?.errors?.['required'] && formCompany.get('name')?.touched"
                                id="error-company-name"
-                               class="alert  bg-soft-danger" role="alert">
+                               class="alert bg-soft-danger" role="alert">
                             Required!
                           </div>
                         </div>
@@ -261,8 +262,13 @@
                         <!--end col-->
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="shortName" class="form-label">Short Name</label>
+                            <label for="shortName" class="form-label">Short Name
+                              <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="shortName" formControlName="shortName"/>
+                          </div>
+                          <div *ngIf="formCompany.get('shortName')?.errors?.['required'] && formCompany.get('shortName')?.touched"
+                               class="alert bg-soft-danger" role="alert">
+                            required
                           </div>
                         </div>
                         <!--end col-->
@@ -275,20 +281,6 @@
                           </div>
                         </div>
                         <!--end col-->
-                        <!--                        <div class="col-lg-12">-->
-                        <!--                          <div class="mb-3">-->
-                        <!--                            <label for="choices-single-location" class="form-label">Account Type</label>-->
-                        <!--                            <select class="form-select"-->
-                        <!--                                    data-trigger-->
-                        <!--                                    name="choices-single-location"-->
-                        <!--                                    id="choices-single-location"-->
-                        <!--                                    aria-label="Default select example" aria-multiselectable="true"-->
-                        <!--                                    multiple-->
-                        <!--                            >-->
-                        <!--                              <option *ngFor="let cc of allCategories" value="{{cc.id}}">{{cc.name}} </option>-->
-                        <!--                            </select>-->
-                        <!--                          </div>-->
-                        <!--                        </div>-->
                         <div class="col-lg-6">
                           <div class="mb-3">
                             <input type="password" class="form-control" id="password" formControlName="password"
@@ -301,7 +293,7 @@
                     </div>
                     <!--end account-->
                     <div class="mt-4">
-                      <h5 class="fs-17 fw-semibold mb-3">Description</h5>
+                      <h5 class="fs-17 fw-semibold mb-3">Description<span class="text-danger"> *</span></h5>
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="mb-3">
@@ -316,7 +308,7 @@
                         <!--end col-->
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
+                            <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="address"
                                    formControlName="address"
                             />
@@ -334,7 +326,7 @@
                         <!--end col-->
                         <div class="col-lg-12">
                           <div class="mb-3">
-                            <label for="googleMap" class="form-label">Google Map Link</label>
+                            <label for="googleMap" class="form-label">Google Map Address</label>
                             <input type="text" class="form-control" id="googleMap"
                                    formControlName="googleMap"
                             />
@@ -349,10 +341,18 @@
                       <div class="row">
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="tel" class="form-label">Tel</label>
+                            <label for="tel" class="form-label">Tel<span class="text-danger"> *</span></label>
                             <input type="text" class="form-control" id="tel"
                                    formControlName="tel"
                             />
+                          </div>
+                          <div *ngIf="formCompany.get('tel')?.errors?.['required'] && formCompany.get('tel')?.touched"
+                               class="alert bg-soft-danger" role="alert">
+                            required
+                          </div>
+                          <div *ngIf="formCompany.get('tel')?.errors?.['pattern'] && formCompany.get('tel')?.touched"
+                               class="alert bg-soft-danger" role="alert">
+                            Invalid phone number
                           </div>
                         </div>
                         <!--end col-->
@@ -380,7 +380,10 @@
                       <button
                         data-bs-target="#confirmUpdateModal"
                         data-bs-toggle="modal"
-                        class="btn btn-primary">Update</button>
+                        class="btn btn-primary"
+                        [disabled]="formCompany.invalid"
+                      >Update
+                      </button>
                     </div>
                   </form>
                   <!--end form-->
@@ -403,7 +406,7 @@
                         <div class="col-lg-12">
                           <div class="mb-3">
                             <label for="current-password-input" class="form-label">Current
-                              password</label>
+                              password <span class="text-danger">*</span></label>
                             <input type="{{showPassFields?'password':'text'}}" class="form-control"
                                    placeholder="Enter Current password"
                                    formControlName=currentPass
@@ -414,10 +417,12 @@
                         <div class="col-lg-6">
                           <div class="mb-3">
                             <label for="new-password-input" class="form-label">New
-                              password</label>
+                              password <span class="text-danger">*</span></label>
                             <input class="form-control"
+                                   data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
+                                   data-bs-original-title="No space allowed"
                                    type="{{showPassFields?'password':'text'}}"
-                                   placeholder="Enter new password"
+                                   placeholder="New password must be at least 8 characters"
                                    formControlName=newPass
                                    id="new-password-input"/>
                           </div>
@@ -425,7 +430,8 @@
                         <!--end col-->
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="confirm-password-input" class="form-label">Confirm Password</label>
+                            <label for="confirm-password-input" class="form-label">
+                              Confirm Password <span class="text-danger">*</span></label>
                             <input class="form-control"
                                    type="{{showPassFields?'password':'text'}}"
                                    placeholder="Confirm Password"
@@ -437,7 +443,7 @@
                         <div class="col-lg-12">
                           <div class="form-check">
                             <input (click)="showPass()" class="form-check-input" type="checkbox" value=""
-                                   id="verification" />
+                                   id="verification"/>
                             <label class="form-check-label" for="verification">
                               Show all fields
                             </label>
@@ -446,17 +452,32 @@
                         <!--end col-->
                       </div>
                       <!--end row-->
+                      <div *ngIf="(formChangePass.get('currentPass')?.errors?.['required']
+                      && formChangePass.valid)||
+                      (formChangePass.get('newPass')?.errors?.['required']
+                      && formChangePass.get('newPass')?.touched)||
+                      (formChangePass.get('confirmPass')?.errors?.['required']
+                      && formChangePass.get('confirmPass')?.touched)"
+                           class="alert bg-soft-danger" role="alert">
+                        All fields required!
+                      </div>
+                      <div
+                        *ngIf="formChangePass.get('newPass')?.errors?.['minlength']"
+                        class="alert bg-soft-danger alert-dismissible" role="alert">
+                        New pass must be at least 8 characters
+                      </div>
                     </div>
-                    <!--end Change-password-->
-                    <div class="alert bg-soft-danger alert-dismissible fade show"
-                         id="change-pass-status"
-                         role="alert" [hidden]="alertChangePass">
+                    <div class="alert bg-soft-danger alert-dismissible fade show" role="alert"
+                         [hidden]="alertChangePass">
                       {{passStatus}}
                       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                       </button>
                     </div>
+                    <!--end Change-password-->
                     <div class="mt-4 text-end">
-                      <button type="submit" class="btn btn-primary">Update</button>
+                      <button type="submit" class="btn btn-primary"
+                              [disabled]="formChangePass.invalid">Update
+                      </button>
                     </div>
                   </form>
                   <!--end form-->
