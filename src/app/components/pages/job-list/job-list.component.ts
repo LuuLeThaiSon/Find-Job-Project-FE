@@ -6,7 +6,7 @@ import {LocationsService} from "../../service/locations.service";
 import {CategoryService} from "../../service/category.service";
 import {Category} from "../../model/category";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {ApplyJob} from "../../model/apply-job";
 import {ApplyJobService} from "../../service/apply-job.service";
 import {finalize} from "rxjs";
