@@ -50,17 +50,25 @@ export class LoginComponent {
     this.candidate = this.formLogin.value
     this.company = this.formLogin.value
     this.admin = this.formLogin.value
+    this.loading = false
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let i = 0; i < data.length; i++) {
         if (this.candidate.email.toLowerCase() == data[i].email.toLowerCase() && this.candidate.password == data[i].password) {
           sessionStorage.setItem("user", JSON.stringify(data[i]));
           setTimeout(() => {
+            this.loading = true
+          },1000)
+          setTimeout(() => {
+            this.showSuccess()
+          },1000)
+          setTimeout(() => {
             this.loading = false
-          }, 200)
+          }, 2000)
           setTimeout(() => {
             this.loading = true
             this.router.navigate(['']).finally()
-          },1000)
+          },4000)
+        return
         }
       }
       this.companyService.findAllCompany().subscribe((data) => {
@@ -68,12 +76,18 @@ export class LoginComponent {
           if (this.company.email.toLowerCase() == data[j].email.toLowerCase() && this.company.password == data[j].password) {
             sessionStorage.setItem("user", JSON.stringify(data[j]));
             setTimeout(() => {
+              this.loading = true
+            },1000)
+            setTimeout(() => {
+              this.showSuccess()
+            },1000)
+            setTimeout(() => {
               this.loading = false
-            }, 200)
+            }, 2000)
             setTimeout(() => {
               this.loading = true
               this.router.navigate(['']).finally()
-            },1000)
+            },4000)
             return
           }
         }
@@ -82,12 +96,18 @@ export class LoginComponent {
             if (this.admin.email == data[j].email && this.admin.password == data[j].password) {
               sessionStorage.setItem("user", JSON.stringify(data[j]));
               setTimeout(() => {
+                this.loading = true
+              },1000)
+              setTimeout(() => {
+                this.showSuccess()
+              },1000)
+              setTimeout(() => {
                 this.loading = false
-              }, 200)
+              }, 2000)
               setTimeout(() => {
                 this.loading = true
                 this.router.navigate(['']).finally()
-              },1000)
+              },4000)
               return
             }
           }
@@ -102,7 +122,7 @@ export class LoginComponent {
 
 
   showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'Login successfully!', key: 'ab'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Login successfully!', key: 'td'})
   }
 
   showInfo() {
