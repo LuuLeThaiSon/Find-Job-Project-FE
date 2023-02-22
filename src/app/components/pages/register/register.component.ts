@@ -13,7 +13,7 @@ import {MessageService} from "primeng/api";
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [MessageService]
+  providers:[MessageService]
 })
 export class RegisterComponent {
   companies: Company[] = []
@@ -25,6 +25,8 @@ export class RegisterComponent {
   path!: string
   pathName!: string
   selectedOption: any;
+
+
 
 
   ngOnInit(): void {
@@ -84,7 +86,8 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    this.loading = false
+    this.loading = false;
+    console.log(this.formRegister.value)
     if (this.imageFile !== undefined) {
       const imagePath = `${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
       const fileRef = this.storage.ref(imagePath);
@@ -104,24 +107,19 @@ export class RegisterComponent {
             this.companyService.getPassword(this.passwordSend).subscribe((data) => {
               this.company.password = data.message
               this.companyService.saveCompany(this.company).subscribe(() => {
-                this.loading = true
                 setTimeout(() => {
-                  this.showSuccess2()
-                },2000)
+                  this.loading = false
+                }, 1000)
                 setTimeout(() => {
-                  this.showInfo()
-                },5000)
-                setTimeout(() => {
+                  this.loading = true
                   this.router.navigate(['/login']).finally()
-                },7000)
-                return
+                },2000)
               })
             })
           });
         })
       ).subscribe()
     } else {
-      this.loading = false
       this.passwordSend.to = this.formRegister.get('email')?.value
       this.passwordSend.subject = 'Congratulation you become a company!'
       // @ts-ignore
@@ -135,21 +133,22 @@ export class RegisterComponent {
       this.companyService.getPassword(this.passwordSend).subscribe((data) => {
         this.company.password = data.message
         this.companyService.saveCompany(this.company).subscribe(() => {
-          this.loading = true
           setTimeout(() => {
             this.showSuccess2()
-          },2000)
+          },500)
           setTimeout(() => {
-            this.showInfo()
-          },5000)
-          setTimeout(() => {
-            this.router.navigate(['/login']).finally()
-          },7000)
-          return
+            this.loading = false
+          }, 2000)
         })
+        setTimeout(() => {
+          this.loading = true
+          this.router.navigate(['/login']).finally()
+        },2000)
+        return
       })
     }
   }
+
 
   checkName(name: string): void {
     this.companyService.findAllCompany().subscribe((data) => {
@@ -157,7 +156,7 @@ export class RegisterComponent {
         if (a.name.toLowerCase() === name.toLowerCase()) {
           setTimeout(() => {
             this.showError()
-          }, 50, 1)
+          },50,1)
           this.formRegister.get('name')?.setValue('')
         }
       }
@@ -171,7 +170,7 @@ export class RegisterComponent {
           setTimeout(() => {
             this.showError1()
             this.formRegister.get('email')?.setValue('')
-          }, 50, 1)
+          },50,1)
         }
       }
     })
@@ -183,18 +182,12 @@ export class RegisterComponent {
 
   loading!: boolean;
 
-
   showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'You can use this name', key: 'ab'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'You can use this name', key:'ab'})
   }
 
   showSuccess2() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'success',
-      detail: 'Register Successfully! Pls check your mail box to get password!',
-      key: 'ab'
-    })
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Register Successfully! Pls check your mail box to get password!', key:'ab'})
   }
 
   showSuccess1() {
@@ -202,7 +195,7 @@ export class RegisterComponent {
   }
 
   showInfo() {
-    this.messageService.add({severity: 'info', summary: 'Info', detail: ' Loading Login Page....... ', key: 'abc'});
+    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Wish you have a good day!', key: 'ab'});
   }
 
   showWarn() {
@@ -210,21 +203,11 @@ export class RegisterComponent {
   }
 
   showError() {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Username existed. Please choose another name!',
-      key: 'ab'
-    });
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Username existed. Please choose another name!', key:'ab'});
   }
 
   showError1() {
-    this.messageService.add({
-      severity: 'error',
-      summary: 'Error',
-      detail: 'Email existed. Please choose another email!',
-      key: 'ab'
-    });
+    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Email existed. Please choose another email!', key:'ab'});
   }
 
   clear() {
@@ -233,13 +216,7 @@ export class RegisterComponent {
 
   showConfirm() {
     this.messageService.clear();
-    this.messageService.add({
-      key: 'c',
-      sticky: true,
-      severity: 'warn',
-      summary: 'Are you sure?',
-      detail: 'Confirm to proceed'
-    });
+    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
   }
 }
 

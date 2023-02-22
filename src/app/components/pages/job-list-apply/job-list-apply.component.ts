@@ -167,7 +167,7 @@ export class JobListApplyComponent {
   }
 
   showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'Delete Successfully!',key: 'td'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Delete Successfully!',key: 'tc'})
   }
 
   showInfo() {

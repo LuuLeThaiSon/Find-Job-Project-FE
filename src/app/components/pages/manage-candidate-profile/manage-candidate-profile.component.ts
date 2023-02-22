@@ -12,12 +12,11 @@ import {Candidate} from "../../model/candidate";
 import {CommonService} from "../../service/common.service";
 import {finalize} from "rxjs";
 import {CandidateService} from "../../service/candidate.service";
-import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-manage-candidate-profile',
   templateUrl: './manage-candidate-profile.component.html',
-  styleUrls: ['./manage-candidate-profile.component.css'],
+  styleUrls: ['./manage-candidate-profile.component.css']
 })
 export class ManageCandidateProfileComponent {
   candidate!: Candidate;
@@ -292,5 +291,4 @@ export class ManageCandidateProfileComponent {
       t < 1 ? (t += .5, e.style.opacity = String(t)) : clearInterval(r)
     }, 200)
   }
-
 }

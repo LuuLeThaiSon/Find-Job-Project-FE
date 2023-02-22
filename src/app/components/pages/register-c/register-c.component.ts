@@ -9,7 +9,6 @@ import firebase from "firebase/compat";
 import messaging = firebase.messaging;
 import {HeaderComponent} from "../../common/header/header.component";
 import {MessageService} from "primeng/api";
-import {getMatIconFailedToSanitizeLiteralError} from "@angular/material/icon";
 
 
 @Component({
@@ -41,7 +40,7 @@ export class RegisterCComponent {
       email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(this.RegexAlphaNumeric)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.min(6), Validators.pattern(this.RegexAlphaNumeric)]),
-      tel: new FormControl('', [Validators.required, Validators.pattern(/^0\d{8,9}$/)]),
+      tel: new FormControl('', [Validators.required,Validators.pattern(/^0\d{8,9}$/)]),
       role: new FormGroup({
         id: new FormControl('', [Validators.required])
       }),
@@ -63,12 +62,13 @@ export class RegisterCComponent {
 
 
   onSubmit() {
+    this.loading = false;
+    console.log(this.formRegisterCandidate.value)
     this.candidate = this.formRegisterCandidate.value
     this.passwordSend.to = this.formRegisterCandidate.get('email')?.value
     this.passwordSend.subject = 'Register Successfully!'
     // @ts-ignore
-    this.passwordSend.messageC = 'Welcome to 404 team! Hello '  + this.formRegisterCandidate.get('name')?.value
-    this.loading = false
+    this.passwordSend.messageC = 'Welcome to 404 team ' + this.formRegisterCandidate.get('name')?.value
     this.companyService.getNotificationCandidate(this.passwordSend).subscribe((data) => {
       // @ts-ignore
       this.candidate.status = true
@@ -78,28 +78,20 @@ export class RegisterCComponent {
       this.candidate.role = {id: '3', name: "CANDIDATE"}
       // this.candidate.role = {id: 3}
       this.companyService.saveCandidate(this.candidate).subscribe(() => {
-        this.loading = true
-        setTimeout(() => {
-          this.showSuccess3()
-        }, 1000)
-        setTimeout(() => {
-          this.showInfo()
-        }, 2000)
-        setTimeout(() => {
-          this.loading = false
-        },6000)
-        setTimeout(() => {
-          this.router.navigate(['/login']).finally()
-        }, 9000)
-        return
+        this.showSuccessRegister = false
+        this.loading = false
       })
+      setTimeout(() => {
+        this.loading = true
+        this.router.navigate(['/login']).finally()
+      }, 2000)
     })
   }
 
   checkEmail(mail: string): void {
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let a of data) {
-        if (a.email.toLowerCase() === mail.toLowerCase()) {
+        if (a.email.toLowerCase() === mail) {
           setTimeout(() => {
             this.showError1()
             this.formRegisterCandidate.get('email')?.setValue('')
@@ -110,19 +102,15 @@ export class RegisterCComponent {
   }
 
   checkTel() {
-    if (this.formRegisterCandidate.get('tel')?.errors?.['pattern'] && this.formRegisterCandidate.get('tel')?.touched) {
+    if (this.formRegisterCandidate.get('tel')?.errors?.['pattern'] && this.formRegisterCandidate.get('tel')?.touched ) {
       this.formRegisterCandidate.get('tel')?.setValue('')
     }
   }
 
   @ViewChild(HeaderComponent)
-  header
-    :
-    HeaderComponent | undefined;
+  header: HeaderComponent | undefined;
 
-  loading!
-    :
-    boolean;
+  loading!: boolean;
 
 
   showSuccess() {
@@ -133,17 +121,8 @@ export class RegisterCComponent {
     this.messageService.add({severity: 'success', summary: 'success', detail: 'You can use this email', key: 'ab'})
   }
 
-  showSuccess3() {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'success',
-      detail: 'Register Successfully! Pls check your mail box to get notification!',
-      key: 'ab'
-    })
-  }
-
   showInfo() {
-    this.messageService.add({severity: 'info', summary: 'Info', detail: ' Loading Login Page....... ', key: 'abc'});
+    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Wish you have a good day!', key: 'ab'});
   }
 
   showWarn() {
