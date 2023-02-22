@@ -13,7 +13,6 @@ import {
 } from "./components/pages/manage-company-profile/manage-company-profile.component";
 import {JobDetailComponent} from "./components/pages/job-detail/job-detail.component";
 import {BookmarksJobsComponent} from "./components/pages/bookmarks-jobs/bookmarks-jobs.component";
-import {HeaderComponent} from "./components/common/header/header.component";
 import {TopCompaniesComponent} from "./top-companies/top-companies.component";
 import {
   ManageCandidateProfileComponent

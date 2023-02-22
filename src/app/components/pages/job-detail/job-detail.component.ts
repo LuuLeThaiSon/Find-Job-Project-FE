@@ -30,7 +30,6 @@ export class JobDetailComponent {
   cvFileName: any;
   alertApply: boolean = true;
   checkApplyJob: Boolean[] = [];
-  message!: string;
   checkUpload: boolean = false;
   decline: boolean = true;
   notifyType: NotifyType[] =[];
@@ -120,7 +119,6 @@ export class JobDetailComponent {
     this.checkUpload = true;
     this.applyJob.candidate = this.user;
     this.applyJob.job = this.job;
-    this.applyJob.message = this.message;
     const cvPath = `cv/${this.cvFileName.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
     const fileRef = this.storage.ref(cvPath);
     this.storage.upload(cvPath, this.cvFileName).snapshotChanges().pipe(

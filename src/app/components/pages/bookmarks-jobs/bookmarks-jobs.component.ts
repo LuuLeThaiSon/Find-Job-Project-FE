@@ -8,10 +8,10 @@ import {LocationsService} from "../../service/locations.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApplyJob} from "../../model/apply-job";
 import {ApplyJobService} from "../../service/apply-job.service";
-import {doc} from "@angular/fire/firestore";
 import {NotifyType} from "../../model/notify-type";
 import {Notify} from "../../model/notify";
 import {NotifyService} from "../../service/notify.service";
+import {MessageService} from "primeng/api";
 
 
 @Component({
@@ -88,7 +88,8 @@ export class BookmarksJobsComponent implements OnInit {
               private categoryService: CategoryService,
               private locationService: LocationsService,
               private applyjobService: ApplyJobService,
-              private notifyService: NotifyService) {
+              private notifyService: NotifyService,
+              private messageService: MessageService) {
     this.notifyService.findAllTye().subscribe(data => {
       this.notifyType = data;
     })
@@ -102,7 +103,8 @@ export class BookmarksJobsComponent implements OnInit {
 
   delete(id: number) {
     return this.jobService.deleteJob(id).subscribe(() => {
-      this.findAll();
+      this.messageService.add({severity:'success', summary: 'Delete', detail: 'Successfully!'});
+      this.ngOnInit();
     })
   }
 
@@ -112,7 +114,13 @@ export class BookmarksJobsComponent implements OnInit {
 
   blockJob(job: Job) {
     return this.jobService.blockJob(job.id, job).subscribe(() => {
+      if (job.status) {
+        this.messageService.add({severity:'success', summary: 'Block', detail: 'Successfully!'});
+      } else {
+        this.messageService.add({severity:'success', summary: 'UnBlock', detail: 'Successfully!'});
+      }
       this.findAll();
+
     })
   }
 
@@ -143,6 +151,7 @@ export class BookmarksJobsComponent implements OnInit {
         this.findAll();
         this.btnModal.nativeElement.click();
         this.jobForm.reset();
+        this.messageService.add({severity:'success', summary: 'Create', detail: 'Successfully!'});
       });
     } else {
       this.job.status = this.jobStatus;
@@ -150,6 +159,7 @@ export class BookmarksJobsComponent implements OnInit {
         this.findAll();
         this.btnModal.nativeElement.click();
         this.jobForm.reset();
+        this.messageService.add({severity:'success', summary: 'Update', detail: 'Successfully!'});
       });
     }
 
@@ -204,6 +214,7 @@ export class BookmarksJobsComponent implements OnInit {
         // @ts-ignore
         document.getElementById(id).setAttribute("hidden", 'true');
         this.sendNotify(4, this.rejectJob)
+        this.messageService.add({severity:'success', summary: 'Reject', detail: 'Successfully!'});
       })
     })
 
@@ -217,6 +228,7 @@ export class BookmarksJobsComponent implements OnInit {
       // @ts-ignore
       document.getElementById('reject' + applyJob.id).setAttribute("disabled", 'true');
       this.sendNotify(3, applyJob.job)
+      this.messageService.add({severity:'success', summary: 'Accept', detail: 'Successfully!'});
 
     })
   }
@@ -240,5 +252,16 @@ export class BookmarksJobsComponent implements OnInit {
         });
       }
     }
+  }
+
+  candidateProfile() {
+    this.profile.nativeElement.click();
+  }
+
+  // @ts-ignore
+  @ViewChild('profile') profile: ElementRef;
+
+  showInfo() {
+    this.messageService.add({severity:'success', summary: 'Info', detail: 'Message Content'});
   }
 }

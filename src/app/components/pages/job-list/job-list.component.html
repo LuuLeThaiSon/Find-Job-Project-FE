@@ -804,11 +804,6 @@
               <label for="tel" class="form-label">Phone number</label>
               <input type="email" class="form-control" id="tel" readonly [value]="user.tel">
             </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">Message</label>
-              <textarea class="form-control" id="message" rows="4"
-                        placeholder="Enter your message" formControlName="message" [(ngModel)]="message"></textarea>
-            </div>
             <div class="mb-4">
               <label class="form-label" for="cv">Resume Upload</label>
               <input type="file" class="form-control" id="cv" (change)="submitCV($event)">
