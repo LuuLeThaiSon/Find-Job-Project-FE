@@ -65,7 +65,7 @@
 <!--                            </button>-->
 <!--                          </div>-->
                           <div class="mb-3">
-                            <label for="usernameInput" class="form-label">Username</label>
+                            <label for="usernameInput" class="form-label">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" required id="usernameInput"
                                    placeholder="Enter your username" formControlName="name" ngModel>
                             <p
@@ -73,7 +73,7 @@
                               style="color: orange; margin-top: 10px">Require</p>
                           </div>
                           <div class="mb-3">
-                            <label for="emailInput" class="form-label">Email</label>
+                            <label for="emailInput" class="form-label">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" required id="emailInput"
                                    placeholder="Enter your email" formControlName="email" ngModel (change)="checkEmail(mail.value)" #mail>
                             <p-message severity="error"
@@ -84,7 +84,7 @@
 
                           </div>
                           <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                             <input class="form-control" id="password" placeholder="Enter your password" formControlName="password" type="{{showPassFields?'password':'text'}}" minlength="6">
 <!--                            <span class="show-btn"><i class="fas fa-eye"></i></span>-->
                             <p *ngIf="formRegisterCandidate.get('password')?.errors?.['required'] && formRegisterCandidate.get('password')?.touched"
@@ -93,7 +93,7 @@
                                style="color: orange; margin-top: 10px" >Minimum of 8 characters</p>
                           </div>
                           <div class="mb-3">
-                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
                             <input class="form-control" id="confirmPassword"
                                    placeholder="Enter your password" formControlName="confirmPassword" type="{{showPassFields?'password':'text'}}">
                             <p *ngIf="formRegisterCandidate.get('confirmPassword')?.errors?.['required'] && formRegisterCandidate.get('confirmPassword')?.touched"
