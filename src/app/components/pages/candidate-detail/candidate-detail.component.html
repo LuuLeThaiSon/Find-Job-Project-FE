@@ -98,178 +98,21 @@
                         <p></p>
                         <div class="p-0 rounded-circle profile-photo-edit">
                           <input id="banner-img-file-input" type="file" class="profile-img-file-input">
-<!--                          <label for="banner-img-file-input" class="profile-photo-edit avatar-xs">-->
-<!--                            <i class="uil uil-edit"></i>-->
-<!--                          </label>-->
+                          <!--                          <label for="banner-img-file-input" class="profile-photo-edit avatar-xs">-->
+                          <!--                            <i class="uil uil-edit"></i>-->
+                          <!--                          </label>-->
                         </div>
                       </div>
                     </div><!-- end row -->
                   </div><!-- end portfolio -->
-                  <div>
+                  <div *ngIf="candidate.description">
                     <h5 class="fs-18 fw-bold">Description</h5>
                     <p class="text-muted mt-4">
                       {{candidate.description}}
                     </p>
                   </div>
                 </div>
-<!--                <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">-->
-<!--                  <form [formGroup]="formCandidate" (ngSubmit)="onSubmit()">-->
-<!--                    <input type="text" class="form-control" formControlName="id" hidden/>-->
-<!--                    <div>-->
-<!--                      <h5 class="fs-17 fw-semibold mb-3 mb-0">My Account</h5>-->
-<!--                      <div class="text-center">-->
-<!--                        <div class="mb-4 profile-user">-->
-<!--                          <img-->
-<!--                            src="{{candidate.avatar ? candidate.avatar : 'https://avatar-management&#45;&#45;avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png'}}"-->
-<!--                            class="rounded-circle img-thumbnail profile-img"-->
-<!--                            id="profile-img" alt="">-->
-<!--                          <div class="p-0 rounded-circle profile-photo-edit">-->
-<!--                            <input id="profile-img-file-input" type="file" class="profile-img-file-input" readonly>-->
-<!--                            <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">-->
-<!--                              <i class="uil uil-edit"></i>-->
-<!--                            </label>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="row">-->
-<!--                        <div class="col-lg-6">-->
-<!--                          <div class="mb-3">-->
-<!--                            <label for="email" class="form-label">Email</label>-->
-<!--                            <input type="text" class="form-control" id="email" formControlName="email"-->
-<!--                                   value="{{candidate.email}}" readonly/>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;end col&ndash;&gt;-->
-<!--                        <div class="col-lg-6">-->
-<!--                          <div class="mb-3">-->
-<!--                            <label for="lastName" class="form-label">Name</label>-->
-<!--                            <input type="text" class="form-control" id="lastName"-->
-<!--                                   value="{{candidate.name}}" formControlName="name"/>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;end col&ndash;&gt;-->
-<!--                        <div class="col-lg-6">-->
-<!--                          <div class="mb-3">-->
-<!--                            <label for="address" class="form-label">Address</label>-->
-<!--                            <input type="text" class="form-control" id="address" formControlName="address"-->
-<!--                                   value="{{candidate.address}}"/>-->
-<!--                          </div>-->
-<!--                        </div>-->
 
-<!--                        <div class="col-lg-6">-->
-<!--                          <div class="mb-3">-->
-<!--                            <label for="tel" class="form-label">Phone Number</label>-->
-<!--                            <input type="text" class="form-control" id="tel" formControlName="tel"-->
-<!--                                   value="{{candidate.tel}}"/>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      &lt;!&ndash;end col&ndash;&gt;-->
-
-<!--                    </div>-->
-<!--                    &lt;!&ndash;end row&ndash;&gt;-->
-
-
-<!--                    &lt;!&ndash;end account&ndash;&gt;-->
-<!--                    <div class="mt-4">-->
-<!--                      <h5 class="fs-17 fw-semibold mb-3">Profile</h5>-->
-<!--                      <div class="row">-->
-<!--                        <div class="col-lg-12">-->
-<!--                          <div class="mb-3">-->
-<!--                            <label for="exampleFormControlTextarea1"-->
-<!--                                   class="form-label">Introduce Yourself</label>-->
-<!--                            <textarea class="form-control" id="exampleFormControlTextarea1"-->
-<!--                                      formControlName="description"-->
-<!--                                      rows="5">{{candidate.description}}.</textarea>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      &lt;!&ndash;end row&ndash;&gt;-->
-<!--                    </div>-->
-
-<!--                    <div class="mt-4 text-end">-->
-<!--                      <button type="submit" class="btn btn-primary">Update</button>-->
-<!--                    </div>-->
-<!--                  </form>-->
-<!--                  &lt;!&ndash;end form&ndash;&gt;-->
-<!--                </div>-->
-                <!--end tab-pane-->
-<!--                <div class="tab-pane fade" id="change-password" role="tabpanel" aria-labelledby="change-password-tab">-->
-<!--                  <form [formGroup]="formChangePass" (ngSubmit)="changePass()">-->
-<!--                    <div class="mt-4">-->
-<!--                      <div class="alert bg-soft-success alert-dismissible fade show"-->
-<!--                           id="change-pass-success"-->
-<!--                           role="alert" [hidden]=showSuccessChangePass>-->
-<!--                        Update Successfully!<br>-->
-<!--                        Redirecting to login page!-->
-<!--                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">-->
-<!--                        </button>-->
-<!--                      </div>-->
-<!--                      <h5 class="fs-17 fw-semibold mb-3 mb-3">-->
-<!--                        Change Password-->
-<!--                      </h5>-->
-<!--                      <div class="row">-->
-<!--                        <div class="col-lg-12">-->
-<!--                          <div class="mb-3">-->
-<!--                            <label for="current-password-input" class="form-label">Current-->
-<!--                              password</label>-->
-<!--                            <input type="{{showPassFields?'password':'text'}}" class="form-control"-->
-<!--                                   placeholder="Enter Current password"-->
-<!--                                   formControlName=currentPass-->
-<!--                                   id="current-password-input"/>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;end col&ndash;&gt;-->
-<!--                        <div class="col-lg-6">-->
-<!--                          <div class="mb-3">-->
-<!--                            <label for="new-password-input" class="form-label">New-->
-<!--                              password</label>-->
-<!--                            <input class="form-control"-->
-<!--                                   type="{{showPassFields?'password':'text'}}"-->
-<!--                                   placeholder="Enter new password"-->
-<!--                                   formControlName=newPass-->
-<!--                                   id="new-password-input"/>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;end col&ndash;&gt;-->
-<!--                        <div class="col-lg-6">-->
-<!--                          <div class="mb-3">-->
-<!--                            <label for="confirm-password-input" class="form-label">Confirm Password</label>-->
-<!--                            <input class="form-control"-->
-<!--                                   type="{{showPassFields?'password':'text'}}"-->
-<!--                                   placeholder="Confirm Password"-->
-<!--                                   formControlName=confirmPass-->
-<!--                                   id="confirm-password-input"/>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;end col&ndash;&gt;-->
-<!--                        <div class="col-lg-12">-->
-<!--                          <div class="form-check">-->
-<!--                            <input (click)="showPass()" class="form-check-input" type="checkbox" value=""-->
-<!--                                   id="verification" />-->
-<!--                            <label class="form-check-label" for="verification">-->
-<!--                              Show all fields-->
-<!--                            </label>-->
-<!--                          </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;end col&ndash;&gt;-->
-<!--                      </div>-->
-<!--                      &lt;!&ndash;end row&ndash;&gt;-->
-<!--                    </div>-->
-<!--                    &lt;!&ndash;end Change-password&ndash;&gt;-->
-<!--                    <div class="alert bg-soft-danger alert-dismissible fade show"-->
-<!--                         id="change-pass-status"-->
-<!--                         role="alert" [hidden]="alertChangePass">-->
-<!--                      {{passStatus}}-->
-<!--                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">-->
-<!--                      </button>-->
-<!--                    </div>-->
-<!--                    <div class="mt-4 text-end">-->
-<!--                      <button type="submit" class="btn btn-primary">Update</button>-->
-<!--                    </div>-->
-<!--                  </form>-->
-<!--                  &lt;!&ndash;end form&ndash;&gt;-->
-<!--                </div>-->
 
               </div>
               <!--end tab-content-->
