@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environments} from "../../../environment/enviroments";
 import {HttpClient} from "@angular/common/http";
 import {Candidate} from "../model/candidate";
+import {Job} from "../model/job";
 
 const apiUrl = environments.apiUrl
 
@@ -21,5 +22,9 @@ export class CandidateService {
 
   updateCandidate(candidate:Candidate,id:number) : Observable<any> {
     return this.httpClient.put<Candidate>(`${apiUrl}/candidates/${candidate.id}`,candidate)
+  }
+
+  findOneCandidate(id: number): Observable<Candidate> {
+    return this.httpClient.get<Candidate>("http://localhost:8080/candidates/" + id)
   }
 }
