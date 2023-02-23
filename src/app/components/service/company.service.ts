@@ -8,6 +8,7 @@ import {Candidate} from "../model/candidate";
 import {Job} from "../model/job";
 import {Admin} from "../model/admin";
 import {EmailSender} from "../model/email-sender";
+import {GmailSender} from "../model/gmail-sender";
 
 const apiUrl = environments.apiUrl
 
@@ -67,8 +68,16 @@ export class CompanyService {
     return this.httpClient.post<EmailSender>(`${apiUrl}/send-email`, password)
   }
 
-  getNotificationCandidate(message: EmailSender):  Observable<EmailSender> {
-    return this.httpClient.post<EmailSender>(`${apiUrl}/send-emailCandidate`, message)
+  getPasswordGmail(password: GmailSender):  Observable<GmailSender> {
+    return this.httpClient.post<GmailSender>(`${apiUrl}/sendPasswordHtmlEmail`, password)
+  }
+
+  // getNotificationCandidate(message: EmailSender):  Observable<EmailSender> {
+  //   return this.httpClient.post<EmailSender>(`${apiUrl}/send-emailCandidate`, message)
+  // }
+
+  getNotificationCandidateGmail(message: GmailSender):  Observable<GmailSender> {
+    return this.httpClient.post<GmailSender>(`${apiUrl}/sendHtmlEmail`, message)
   }
 
   saveCandidate(candidate: Candidate): Observable<any> {

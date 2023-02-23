@@ -20,11 +20,13 @@ export class RegisterComponent {
   company!: Company
   formRegister!: FormGroup
   passwordSend = {to: '', subject: '', message: null, messageC: ''}
+  passwordSender = {to: '', subject: '', htmlContent: ''}
   role: Role[] = []
   imageFile?: any
   path!: string
   pathName!: string
   selectedOption: any;
+  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 
   ngOnInit(): void {
@@ -83,73 +85,73 @@ export class RegisterComponent {
     }
   }
 
-  onSubmit() {
-    this.loading = false
-    if (this.imageFile !== undefined) {
-      const imagePath = `${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-      const fileRef = this.storage.ref(imagePath);
-      this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe(url => {
-            this.passwordSend.to = this.formRegister.get('email')?.value
-            this.passwordSend.subject = 'Congratulation you become a company!'
-            // @ts-ignore
-            this.passwordSend.message = this.formRegister.get('password')?.value
-            this.company = this.formRegister.value
-            this.company.status = true
-            this.company.avatar = url
-            this.company.password = null
-            this.company.role = {id: 2, name: 'COMPANY'}
-            this.company.numberOfEmployees = 0
-            this.companyService.getPassword(this.passwordSend).subscribe((data) => {
-              this.company.password = data.message
-              this.companyService.saveCompany(this.company).subscribe(() => {
-                this.loading = true
-                setTimeout(() => {
-                  this.showSuccess2()
-                },2000)
-                setTimeout(() => {
-                  this.showInfo()
-                },5000)
-                setTimeout(() => {
-                  this.router.navigate(['/login']).finally()
-                },7000)
-                return
-              })
-            })
-          });
-        })
-      ).subscribe()
-    } else {
-      this.loading = false
-      this.passwordSend.to = this.formRegister.get('email')?.value
-      this.passwordSend.subject = 'Congratulation you become a company!'
-      // @ts-ignore
-      this.passwordSend.message = this.formRegister.get('password')?.value
-      this.company = this.formRegister.value
-      this.company.status = true
-      this.company.avatar = ""
-      this.company.password = null
-      this.company.role = {id: 2, name: 'COMPANY'}
-      this.company.numberOfEmployees = 0
-      this.companyService.getPassword(this.passwordSend).subscribe((data) => {
-        this.company.password = data.message
-        this.companyService.saveCompany(this.company).subscribe(() => {
-          this.loading = true
-          setTimeout(() => {
-            this.showSuccess2()
-          },2000)
-          setTimeout(() => {
-            this.showInfo()
-          },5000)
-          setTimeout(() => {
-            this.router.navigate(['/login']).finally()
-          },7000)
-          return
-        })
-      })
-    }
-  }
+  // onSubmit() {
+  //   this.loading = false
+  //   if (this.imageFile !== undefined) {
+  //     const imagePath = `${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+  //     const fileRef = this.storage.ref(imagePath);
+  //     this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+  //       finalize(() => {
+  //         fileRef.getDownloadURL().subscribe(url => {
+  //           this.passwordSend.to = this.formRegister.get('email')?.value
+  //           this.passwordSend.subject = 'Congratulation you become a company!'
+  //           // @ts-ignore
+  //           this.passwordSend.message = this.formRegister.get('password')?.value
+  //           this.company = this.formRegister.value
+  //           this.company.status = true
+  //           this.company.avatar = url
+  //           this.company.password = null
+  //           this.company.role = {id: 2, name: 'COMPANY'}
+  //           this.company.numberOfEmployees = 0
+  //           this.companyService.getPassword(this.passwordSend).subscribe((data) => {
+  //             this.company.password = data.message
+  //             this.companyService.saveCompany(this.company).subscribe(() => {
+  //               this.loading = true
+  //               setTimeout(() => {
+  //                 this.showSuccess2()
+  //               }, 2000)
+  //               setTimeout(() => {
+  //                 this.showInfo()
+  //               }, 5000)
+  //               setTimeout(() => {
+  //                 this.router.navigate(['/login']).finally()
+  //               }, 7000)
+  //               return
+  //             })
+  //           })
+  //         });
+  //       })
+  //     ).subscribe()
+  //   } else {
+  //     this.loading = false
+  //     this.passwordSend.to = this.formRegister.get('email')?.value
+  //     this.passwordSend.subject = 'Congratulation you become a company!'
+  //     // @ts-ignore
+  //     this.passwordSend.message = this.formRegister.get('password')?.value
+  //     this.company = this.formRegister.value
+  //     this.company.status = true
+  //     this.company.avatar = ""
+  //     this.company.password = null
+  //     this.company.role = {id: 2, name: 'COMPANY'}
+  //     this.company.numberOfEmployees = 0
+  //     this.companyService.getPassword(this.passwordSend).subscribe((data) => {
+  //       this.company.password = data.message
+  //       this.companyService.saveCompany(this.company).subscribe(() => {
+  //         this.loading = true
+  //         setTimeout(() => {
+  //           this.showSuccess2()
+  //         }, 2000)
+  //         setTimeout(() => {
+  //           this.showInfo()
+  //         }, 5000)
+  //         setTimeout(() => {
+  //           this.router.navigate(['/login']).finally()
+  //         }, 7000)
+  //         return
+  //       })
+  //     })
+  //   }
+  // }
 
   checkName(name: string): void {
     this.companyService.findAllCompany().subscribe((data) => {
@@ -241,6 +243,73 @@ export class RegisterComponent {
       detail: 'Confirm to proceed'
     });
   }
+
+  onSubmit() {
+    this.loading = false
+    if (this.imageFile !== undefined) {
+      const imagePath = `${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
+      const fileRef = this.storage.ref(imagePath);
+      this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe(url => {
+            this.passwordSender.to = this.formRegister.get('email')?.value
+            this.passwordSender.subject = 'Congratulation you become a company!'
+            // @ts-ignore
+            this.passwordSender.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>" + "Click here to go to your login page: " +
+              "<a href=\"http://localhost:4200/login\">Login Now!</a>",
+              "text/html"
+            this.company = this.formRegister.value
+            this.company.status = true
+            this.company.avatar = url
+            this.company.password = null
+            this.company.role = {id: 2, name: 'COMPANY'}
+            this.company.numberOfEmployees = 0
+            this.companyService.getPasswordGmail(this.passwordSender).subscribe((data) => {
+              this.company.password = data.htmlContent
+              this.companyService.saveCompany(this.company).subscribe(() => {
+                this.loading = true
+                setTimeout(() => {
+                  this.showSuccess2()
+                }, 2000)
+                setTimeout(() => {
+                  this.showInfo()
+                }, 5000)
+                return
+              })
+            })
+          });
+        })
+      ).subscribe()
+    } else {
+      this.passwordSender.to = this.formRegister.get('email')?.value
+      this.passwordSender.subject = 'Congratulation you become a company!'
+      this.passwordSender.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>" + "Click here to go to your login page: " +
+        "<a href=\"http://localhost:4200/login\">Login Now!</a>" + "<br/>" + "<p>Password is:  </p>" +  (Math.random() + 1).toString(36).substring(2),
+        "text/html"
+      this.company = this.formRegister.value
+      this.company.status = true
+      this.company.avatar = ""
+      this.company.password = null
+      this.company.role = {id: 2, name: 'COMPANY'}
+      this.company.numberOfEmployees = 0
+      this.companyService.getPasswordGmail(this.passwordSender).subscribe((data) => {
+        this.company.password = data.htmlContent.slice(149,160)
+        this.companyService.saveCompany(this.company).subscribe(() => {
+          this.loading = true
+          setTimeout(() => {
+            this.showSuccess2()
+          }, 2000)
+          setTimeout(() => {
+            this.showInfo()
+          }, 5000)
+          return
+        })
+      })
+    }
+  }
 }
+
+
+
 
 
