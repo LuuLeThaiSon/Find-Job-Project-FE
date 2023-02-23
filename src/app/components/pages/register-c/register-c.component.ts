@@ -9,6 +9,7 @@ import firebase from "firebase/compat";
 import messaging = firebase.messaging;
 import {HeaderComponent} from "../../common/header/header.component";
 import {MessageService} from "primeng/api";
+import {getMatIconFailedToSanitizeLiteralError} from "@angular/material/icon";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class RegisterCComponent {
   candidates: Candidate[] = []
   formRegisterCandidate!: FormGroup
   passwordSend = {to: '', subject: '', messageC: '', message: null}
+  htmlSend = {to:'', subject:'', htmlContent: '', password: ''}
   role: Role[] = []
   imageFile: any
   path!: string
@@ -61,15 +63,56 @@ export class RegisterCComponent {
   }//
 
 
+  // onSubmit() {
+  //   this.candidate = this.formRegisterCandidate.value
+  //   this.passwordSend.to = this.formRegisterCandidate.get('email')?.value
+  //   this.passwordSend.subject = 'Register Successfully!'
+  //   // @ts-ignore
+  //   this.passwordSend.messageC = "WELCOME TO 404 TEAM" +
+  //     "    " +
+  //     +"   " +
+  //     + "CLick here to go page login: http://localhost:4200/login"
+  //   this.loading = false
+  //   this.companyService.getNotificationCandidate(this.passwordSend).subscribe((data) => {
+  //     // @ts-ignore
+  //     this.candidate.status = true
+  //     // @ts-ignore
+  //     this.candidate.avatar = null
+  //     // @ts-ignore
+  //     this.candidate.role = {id: '3', name: "CANDIDATE"}
+  //     // this.candidate.role = {id: 3}
+  //     this.companyService.saveCandidate(this.candidate).subscribe(() => {
+  //       this.loading = true
+  //       setTimeout(() => {
+  //         this.showSuccess3()
+  //       }, 1000)
+  //       setTimeout(() => {
+  //         this.showInfo()
+  //       }, 2000)
+  //       setTimeout(() => {
+  //         this.loading = false
+  //       },6000)
+  //       setTimeout(() => {
+  //         this.router.navigate(['/login']).finally()
+  //       }, 9000)
+  //       return
+  //     })
+  //   })
+  // }
+
+
   onSubmit() {
     this.loading = false;
     console.log(this.formRegisterCandidate.value)
     this.candidate = this.formRegisterCandidate.value
-    this.passwordSend.to = this.formRegisterCandidate.get('email')?.value
-    this.passwordSend.subject = 'Register Successfully!'
+    this.htmlSend.to = this.formRegisterCandidate.get('email')?.value
+    this.htmlSend.subject = 'Register Successfully!'
     // @ts-ignore
-    this.passwordSend.messageC = 'Welcome to 404 team ' + this.formRegisterCandidate.get('name')?.value
-    this.companyService.getNotificationCandidate(this.passwordSend).subscribe((data) => {
+    this.htmlSend.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>" + "Click here to go to your login page: " +
+      "<a href=\"http://localhost:4200/login\">Login Now!</a>",
+      "text/html"
+    this.loading = false
+    this.companyService.getNotificationCandidateGmail(this.htmlSend).subscribe((data) => {
       // @ts-ignore
       this.candidate.status = true
       // @ts-ignore
@@ -99,7 +142,7 @@ export class RegisterCComponent {
   checkEmail(mail: string): void {
     this.companyService.findAllCandidate().subscribe((data) => {
       for (let a of data) {
-        if (a.email.toLowerCase() === mail) {
+        if (a.email.toLowerCase() === mail.toLowerCase()) {
           setTimeout(() => {
             this.showError1()
             this.formRegisterCandidate.get('email')?.setValue('')
@@ -130,7 +173,7 @@ export class RegisterCComponent {
   }
 
   showInfo() {
-    this.messageService.add({severity: 'info', summary: 'Info', detail: 'Wish you have a good day!', key: 'abc'});
+    this.messageService.add({severity: 'info', summary: 'Info', detail: ' Loading Login Page....... ', key: 'abc'});
   }
 
   showWarn() {
