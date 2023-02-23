@@ -13,6 +13,8 @@ import {Category} from "../../model/category";
 import {CategoryService} from "../../service/category.service";
 import {CommonService} from "../../service/common.service";
 import {MessageService} from "primeng/api";
+import {GooglePlaceDirective} from "ngx-google-places-autocomplete";
+import {Address} from "ngx-google-places-autocomplete/objects/address";
 
 
 @Component({
@@ -82,6 +84,12 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     s7.type = "text/javascript";
     s7.src = "https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js";
     this.elementRef.nativeElement.appendChild(s7);
+
+    //google Map
+    // var s8 = document.createElement("script");
+    // s8.type = "text/javascript";
+    // s8.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCVud1tqiqM5yeJgZQfU5bGKrlb1L-nrHs&libraries=places&language=en";
+    // this.elementRef.nativeElement.appendChild(s8);
   }
 
   ngOnChanges() {
@@ -135,11 +143,11 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       code: new FormControl(''),
       email: new FormControl(''),
       password: new FormControl(''),
-      description: new FormControl('',Validators.required),
-      address: new FormControl('',Validators.required),
+      description: new FormControl(''),
+      address: new FormControl(''),
       numberOfEmployees: new FormControl(''),
       googleMap: new FormControl(''),
-      tel: new FormControl('',Validators.pattern(this.phoneRegex)),
+      tel: new FormControl('', Validators.compose([Validators.pattern(this.phoneRegex)])),
       website: new FormControl(''),
       role: new FormGroup({
         id: new FormControl('')
@@ -150,7 +158,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
 
     this.formChangePass = new FormGroup({
       currentPass: new FormControl('', Validators.required),
-      newPass: new FormControl('', Validators.compose([Validators.required,Validators.minLength(8)])),
+      newPass: new FormControl('', Validators.compose([Validators.required, Validators.minLength(8)])),
       confirmPass: new FormControl('', Validators.required),
     })
 
@@ -159,17 +167,17 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     })
 
     this.categoryService.findAll().subscribe(res => {
-      console.log(res)
       this.allCategories = res;
     })
-    console.log('all categories is' + this.allCategories)
 
     this.companyService.findCompany(this.companyId).subscribe(res => {
       this.company = res;
       this.path = this.company.avatar;
-      this.formCompany.patchValue(res)
+      this.formCompany.patchValue(res);
+      this.ggMapEmbed = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
       this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
       this.ggMap.setAttribute("style:width", "100%");
+      console.log(this.ggMapEmbed)
     })
 
   }
@@ -187,18 +195,22 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     this.jobService.findAllJobsByCompany(id).subscribe(res => {
       this.jobs = res;
     })
+
   }
 
   onSubmit() {
-    this.commonService.scrollTopWindow(0, 300);
+    // this.commonService.scrollTopWindow(0, 100);
     this.loading = false;
     if (this.imageFile == null) {
-      this.commonService.scrollTopWindow(0, 100);
+      // this.commonService.scrollTopWindow(0, 100);
       this.company = this.formCompany.value;
       this.company.avatar = this.path;
+      if(this.ggMapIframe != null) {
+        this.company.googleMap = this.ggMapIframe;
+      }
       this.companyService.update(this.company, this.companyId).subscribe(() => {
         this.loading = true;
-        window.scroll(0, 100);
+        // window.scroll(0, 100);
         this.showSuccess();
         sessionStorage.setItem("user", JSON.stringify(this.company));
         this.header?.ngOnInit();
@@ -213,8 +225,11 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
           fileRef.getDownloadURL().subscribe(url => {
             this.company = this.formCompany.value;
             this.company.avatar = url;
+            if(this.ggMapIframe != null) {
+              this.company.googleMap = this.ggMapIframe;
+            }
             this.companyService.update(this.company, this.companyId).subscribe(() => {
-              this.commonService.scrollTopWindow(0, 100);
+              // this.commonService.scrollTopWindow(0, 100);
               this.loading = true;
               sessionStorage.setItem("user", JSON.stringify(this.company));
               this.ggMap = this.company.googleMap;
@@ -304,21 +319,21 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     let newPass = this.formChangePass.get('newPass')?.value;
     let confirmPass = this.formChangePass.get('confirmPass')?.value;
 
-    if(currentPass != this.company.password) {
+    if (currentPass != this.company.password) {
       this.alertChangePass = false;
       this.passStatus = "Current pass incorrect ";
-      setTimeout(()=>{
+      setTimeout(() => {
         this.alertChangePass = true;
-      },1000)
+      }, 1000)
       return;
     }
 
-    if(confirmPass != currentPass) {
+    if (newPass != confirmPass) {
       this.alertChangePass = false;
       this.passStatus = "New pass not match";
-      setTimeout(()=>{
+      setTimeout(() => {
         this.alertChangePass = true;
-      },1000)
+      }, 1000)
       return;
     }
 
@@ -329,6 +344,9 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       this.loading = true;
       this.showSuccessChangePass = false;
       setTimeout(() => {
+        this.redirect = false;
+      }, 2000)
+      setTimeout(() => {
         this.router.navigate(['/login']).finally()
       }, 4000)
     })
@@ -338,4 +356,25 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
     this.messageService.add({severity: 'success', summary: 'success', detail: 'Update Successfully'})
   }
 
+  //redirect
+  redirect = true;
+
+  //googleMap
+  @ViewChild("placeRef") placeRef: GooglePlaceDirective | undefined;
+
+  public handleAddressChange(address: Address) {
+    console.log(address);
+    this.mapUrl = address.url;
+    console.log(this.mapUrl)
+    console.log(address.geometry.location.lat())
+    console.log(address.geometry.location.lng())
+    this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMMLA5z_Ao7TeeGKaWMmLxGZSvm0T6-8Y&q="+address.formatted_address+"&zoom=15"
+    console.log(this.mapUrl)
+    this.ggMapIframe = `<iframe src="`+this.mapUrl+`"></iframe>`
+    this.ggMapEmbed = this.sanitized.bypassSecurityTrustHtml(this.ggMapIframe);
+  }
+
+  mapUrl!:string;
+  ggMapEmbed!: any;
+  ggMapIframe!:string
 }

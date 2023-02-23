@@ -15,6 +15,19 @@
     </div>
   </div>
 
+  <div id="preloader" [hidden]="redirect" >
+    <div id="status">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+
   <!-- Start home -->
   <section class="page-title-box">
     <div class="container">
@@ -50,7 +63,6 @@
     </div>
   </div>
   <!-- END SHAPE -->
-
 
   <!-- START PROFILE -->
   <section class="section">
@@ -249,7 +261,7 @@
                         <div class="col-lg-6">
                           <div class="mb-3">
                             <label for="Name" class="form-label">Name
-                            <span class="text-danger">*</span></label>
+                              <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="Name" formControlName="name"/>
                           </div>
                           <div *ngIf="formCompany.get('name')?.errors?.['required'] && formCompany.get('name')?.touched"
@@ -266,8 +278,9 @@
                               <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="shortName" formControlName="shortName"/>
                           </div>
-                          <div *ngIf="formCompany.get('shortName')?.errors?.['required'] && formCompany.get('shortName')?.touched"
-                               class="alert bg-soft-danger" role="alert">
+                          <div
+                            *ngIf="formCompany.get('shortName')?.errors?.['required'] && formCompany.get('shortName')?.touched"
+                            class="alert bg-soft-danger" role="alert">
                             required
                           </div>
                         </div>
@@ -293,7 +306,7 @@
                     </div>
                     <!--end account-->
                     <div class="mt-4">
-                      <h5 class="fs-17 fw-semibold mb-3">Description<span class="text-danger"> *</span></h5>
+                      <h5 class="fs-17 fw-semibold mb-3">Description</h5>
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="mb-3">
@@ -308,7 +321,7 @@
                         <!--end col-->
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="address" class="form-label">Address<span class="text-danger">*</span></label>
+                            <label for="address" class="form-label">Address</label>
                             <input type="text" class="form-control" id="address"
                                    formControlName="address"
                             />
@@ -326,10 +339,23 @@
                         <!--end col-->
                         <div class="col-lg-12">
                           <div class="mb-3">
-                            <label for="googleMap" class="form-label">Google Map Address</label>
                             <input type="text" class="form-control" id="googleMap"
-                                   formControlName="googleMap"
+                                   formControlName="googleMap" hidden
                             />
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <!--google Map-->
+                        <div class="col-lg-12">
+                          <div class="mb-3">
+                            <label for="googleMapAPI" class="form-label">Google Map Address</label>
+                            <input
+                              class="form-control"
+                              id="googleMapAPI"
+                              ngx-google-places-autocomplete
+                            #placeRef="ngx-places" (onAddressChange)="handleAddressChange($event)">
+                          </div>
+                          <div [innerHTML]="ggMapEmbed">
                           </div>
                         </div>
                         <!--end col-->
@@ -341,14 +367,10 @@
                       <div class="row">
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="tel" class="form-label">Tel<span class="text-danger"> *</span></label>
+                            <label for="tel" class="form-label">Tel</label>
                             <input type="text" class="form-control" id="tel"
                                    formControlName="tel"
                             />
-                          </div>
-                          <div *ngIf="formCompany.get('tel')?.errors?.['required'] && formCompany.get('tel')?.touched"
-                               class="alert bg-soft-danger" role="alert">
-                            required
                           </div>
                           <div *ngIf="formCompany.get('tel')?.errors?.['pattern'] && formCompany.get('tel')?.touched"
                                class="alert bg-soft-danger" role="alert">

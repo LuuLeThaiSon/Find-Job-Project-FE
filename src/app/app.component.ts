@@ -96,5 +96,11 @@ export class AppComponent implements AfterViewInit{
     s17.src = "../../assets/js/pages/lightbox.init.js";
     this.elementRef.nativeElement.appendChild(s17);
 
+    //google Map
+    // var s18 = document.createElement("script");
+    // s18.type = "text/javascript";
+    // s18.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCVud1tqiqM5yeJgZQfU5bGKrlb1L-nrHs&libraries=places&language=en";
+    // this.elementRef.nativeElement.appendChild(s18);
+
   }
 }

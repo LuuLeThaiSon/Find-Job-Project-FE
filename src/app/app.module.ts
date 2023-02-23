@@ -41,6 +41,7 @@ import {JobListApplyComponent} from "./components/pages/job-list-apply/job-list-
 import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.component";
 import {MomentModule} from "ngx-moment";
 import {ConfirmationService, MessageService} from "primeng/api";
+import {GooglePlaceModule} from "ngx-google-places-autocomplete";
 // import { MomentModule } from 'ngx-moment';
 
 
@@ -103,7 +104,8 @@ import {ConfirmationService, MessageService} from "primeng/api";
       relativeTimeThresholdOptions: {
         'm': 59
       }
-    })
+    }),
+    GooglePlaceModule,
   ],
 
   providers: [
