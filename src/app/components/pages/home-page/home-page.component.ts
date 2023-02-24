@@ -52,7 +52,7 @@ export class HomePageComponent implements AfterViewInit{
   }
 
   findAll() {
-    return this.jobService.findAll().subscribe((data) => {
+    return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
       for (let i = 0; i < data.length; i++) {
         if (data[i].type) {

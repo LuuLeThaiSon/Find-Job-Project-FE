@@ -55,8 +55,6 @@ export class JobListComponent implements OnInit {
       this.role = this.user.role.id;
     }
 
-
-    this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
 
@@ -212,7 +210,7 @@ export class JobListComponent implements OnInit {
     }
     if (salary == "less200") {
       this.displayJobs = this.jobs.filter((obj) => {
-        return obj.salaryMax < 200;
+        return obj.salaryMin < 200;
       })
     }
     if (salary == "200-500") {
