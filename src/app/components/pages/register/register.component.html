@@ -46,16 +46,18 @@
                         </div>
                         <form action="index.html" class="auth-form" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
                           <div class="mb-3">
-                            <label for="usernameInput" class="form-label">Username <span class="text-danger">*</span></label>
+                            <label for="usernameInput" class="form-label">Username *</label>
                             <input type="text" class="form-control" id="usernameInput" placeholder="Enter your username"
-                                   formControlName="name" ngModel (change)="checkName(name.value)" #name>
+                                   formControlName="name" ngModel (change)="checkName(name.value)" #name
+                                   data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Required">
                           </div>
                           <p *ngIf="formRegister.get('name')?.errors?.['required'] && formRegister.get('name')?.touched"
                             style="color: orange; margin-top: 10px">Required</p>
                           <div class="mb-3">
-                            <label for="emailInput" class="form-label">Email <span class="text-danger">*</span></label>
+                            <label for="emailInput" class="form-label">Email *</label>
                             <input type="email" class="form-control" id="emailInput" placeholder="Enter your email"
-                                   formControlName="email" ngModel (change)="checkEmail(mail.value)" #mail>
+                                   formControlName="email" ngModel (change)="checkEmail(mail.value)" #mail
+                                   data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Required">
                           </div>
                           <p *ngIf="formRegister.get('email')?.errors?.['required'] && formRegister.get('email')?.touched"
                              style="color: orange; margin-top: 10px">Required</p>
@@ -67,14 +69,16 @@
                                    formControlName="address" ngModel>
                           </div>
                           <div class="mb-3">
-                            <label for="shortName" class="form-label">Short Name <span class="text-danger">*</span></label>
+                            <label for="shortName" class="form-label">Short Name *</label>
                             <input type="text" class="form-control" id="shortName" placeholder="Enter your address"
-                                   formControlName="shortName" ngModel>
+                                   formControlName="shortName" ngModel
+                                   data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Required">
                           </div>
                           <div class="mb-3">
-                            <label for="description" class="form-label">Description <span class="text-danger">*</span></label>
+                            <label for="description" class="form-label">Description *</label>
                             <textarea type="text" class="form-control" id="description" placeholder="Enter your description"
-                                   formControlName="description" ngModel>
+                                   formControlName="description" ngModel
+                                      data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Required">
                             </textarea>
                           </div>
                           <div class="mb-3">
