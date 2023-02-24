@@ -17,7 +17,6 @@ import {ApplyJob} from "../../model/apply-job";
 import {MessageService} from "primeng/api";
 
 
-
 @Component({
   selector: 'app-job-list-apply',
   templateUrl: './job-list-apply.component.html',
@@ -150,6 +149,7 @@ export class JobListApplyComponent {
   loading!: boolean;
 
 
+
   applyJobId(job: Job) {
     this.jobApply = job;
   }
@@ -159,15 +159,8 @@ export class JobListApplyComponent {
     window.scrollTo(0, 100)
   }
 
-  deleteJob(id: number, id1: number) {
-    this.applyJobService.removeApplyJobCandidate(id, id1).subscribe(() => {
-      this.showSuccess()
-      this.ngOnInit()
-    })
-  }
-
   showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'Delete Successfully!',key: 'td'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Delete Successfully!', key: 'td'})
   }
 
   showInfo() {
@@ -232,6 +225,18 @@ export class JobListApplyComponent {
 
   clear() {
     this.messageService.clear();
+  }
+
+
+  getDeleteJob(job: Job) {
+    this.applyJobId(job)
+  }
+
+  deleteJob(id: number, id1: number) {
+    this.applyJobService.removeApplyJobCandidate(id, id1).subscribe(() => {
+      this.showSuccess()
+      this.ngOnInit()
+    })
   }
 }
 

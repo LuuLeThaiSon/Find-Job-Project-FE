@@ -14,6 +14,7 @@ import {CommonService} from "../../service/common.service";
 import {NotifyService} from "../../service/notify.service";
 import {Notify} from "../../model/notify";
 import {NotifyType} from "../../model/notify-type";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-job-list',
@@ -39,11 +40,13 @@ export class JobListComponent implements OnInit {
   message!: string;
   notify = new Notify();
   notifyType: NotifyType[] = [];
+  value: Job[] = []
 
   ngOnInit(): void {
     this.commonService.scrollTopWindow(0, 300);
 
-    // @ts-ignore
+    console.log(sessionStorage.getItem("user"))
+
     if (sessionStorage.getItem("user") == null) {
       this.user = null;
       this.role = 0;
@@ -57,7 +60,6 @@ export class JobListComponent implements OnInit {
       message: new FormControl('')
     });
 
-    this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
 
@@ -83,6 +85,17 @@ export class JobListComponent implements OnInit {
         c_id: new FormControl('all_c')
       })
     })
+
+    if ( sessionStorage.getItem("arrayFilter") != null) {
+// @ts-ignore
+      this.jobs = JSON.parse(sessionStorage.getItem("arrayFilter")) as any;
+      // @ts-ignore
+      this.displayJobs = JSON.parse(sessionStorage.getItem("arrayFilter"));
+      console.log(this.jobs);
+      console.log(this.displayJobs);
+    } else {
+      this.findAllByStatusIsTrueAndAndExpiredDate()
+    }
 
   }
 
@@ -380,4 +393,5 @@ export class JobListComponent implements OnInit {
   reset() {
     this.ngOnInit()
   }
+
 }

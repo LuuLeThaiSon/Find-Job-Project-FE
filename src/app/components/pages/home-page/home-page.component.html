@@ -13,22 +13,25 @@
               applications.Carefully crafted after analyzing the needs of different
               industries.</p>
           </div>
-          <form action="#">
+          <form [formGroup]="searchJobs" id="formSearchJobTopBar" (ngSubmit)="searchJobsOnPage()">
             <div class="registration-form">
               <div class="row g-0">
                 <div class="col-md-4">
                   <div class="filter-search-form filter-border mt-3 mt-md-0">
                     <i class="uil uil-briefcase-alt"></i>
-                    <input type="search" id="job-title"
-                           class="form-control filter-input-box"
-                           placeholder="Job, Company name...">
+                    <input type="search"
+                           class="form-control filter-job-input-box border border-primary"
+                           id="exampleFormControlInput1" name="search"
+                           placeholder="Job, Company name..." formControlName="text">
                   </div>
                 </div><!--end col-->
                 <div class="col-md-4">
-                  <div class="filter-search-form mt-3 mt-md-0">
-                    <select class="form-select filter-input-box" data-trigger name="choices-single-location"
-                            aria-label="Default select example">
-                      <option value="">Choose location</option>
+                  <div class="filter-search-form mt-3 mt-md-0" formGroupName="location">
+                    <select class="form-select"
+                            data-trigger name="choices-single-location"
+                            aria-label="Default select example"
+                            formControlName="l_id">
+                      <option value="all_l">Choose location</option>
                       <option *ngFor="let l of locations" [value]="l.id">{{l.name}}</option>
                     </select>
                   </div>
@@ -36,7 +39,7 @@
                 <div class="col-md-4">
                   <div class="mt-3 mt-md-0 h-100">
                     <button class="btn btn-primary submit-btn w-100 h-100" type="submit"><i
-                      class="uil uil-search me-1"></i> Find Job
+                      class="uil uil-search me-1" ></i> Find Job
                     </button>
                   </div>
                 </div><!--end col-->
