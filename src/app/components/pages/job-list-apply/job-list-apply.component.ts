@@ -159,15 +159,15 @@ export class JobListApplyComponent {
     window.scrollTo(0, 100)
   }
 
-  deleteJob(id: number, id1: number) {
-    this.applyJobService.removeApplyJobCandidate(id, id1).subscribe(() => {
-      this.showSuccess()
-      this.ngOnInit()
-    })
-  }
+  // deleteJob(id: number, id1: number) {
+  //   this.applyJobService.removeApplyJobCandidate(id, id1).subscribe(() => {
+  //     this.showSuccess()
+  //     this.ngOnInit()
+  //   })
+  // }
 
   showSuccess() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'Delete Successfully!',key: 'tc'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Delete Successfully!',key: 'td'})
   }
 
   showInfo() {
@@ -232,6 +232,18 @@ export class JobListApplyComponent {
 
   clear() {
     this.messageService.clear();
+  }
+
+
+  getDeleteJob(job: Job) {
+    this.applyJobId(job)
+  }
+
+  deleteJob(id: number, id1: number) {
+    this.applyJobService.removeApplyJobCandidate(id, id1).subscribe(() => {
+      this.showSuccess()
+      this.ngOnInit()
+    })
   }
 }
 
