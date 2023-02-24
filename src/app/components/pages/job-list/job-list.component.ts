@@ -14,8 +14,8 @@ import {CommonService} from "../../service/common.service";
 import {NotifyService} from "../../service/notify.service";
 import {Notify} from "../../model/notify";
 import {NotifyType} from "../../model/notify-type";
-import {Router} from "@angular/router";
 import {set} from "@angular/fire/database";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-job-list',
@@ -40,11 +40,12 @@ export class JobListComponent implements OnInit {
   alertApply: boolean = true;
   notify = new Notify();
   notifyType: NotifyType[] = [];
+  value: Job[] = []
 
   ngOnInit(): void {
     this.commonService.scrollTopWindow(0, 300);
 
-    // @ts-ignore
+
     if (sessionStorage.getItem("user") == null) {
       this.user = null;
       this.role = 0;
@@ -81,6 +82,18 @@ export class JobListComponent implements OnInit {
         c_id: new FormControl('all_c')
       })
     })
+
+    if (sessionStorage.getItem("arrayFilter") != null) {
+// @ts-ignore
+      this.jobs = JSON.parse(sessionStorage.getItem("arrayFilter")) as any;
+      // @ts-ignore
+      this.displayJobs = JSON.parse(sessionStorage.getItem("arrayFilter"));
+      // @ts-ignore
+      // sessionStorage.removeItem(sessionStorage.getItem("arrayFilter"))
+    } else {
+      this.findAllByStatusIsTrueAndAndExpiredDate()
+
+    }
 
   }
 
@@ -376,7 +389,10 @@ export class JobListComponent implements OnInit {
   @ViewChild('formSearchJobTopBar') formSearchJobTopBar: ElementRef | undefined;
 
   reset() {
-    this.ngOnInit()
+    this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe(res => {
+      this.jobs = res;
+      this.displayJobs = res
+    })
   }
 
   //open Modal
@@ -406,4 +422,5 @@ export class JobListComponent implements OnInit {
     }, 3000)
     this.router.navigate(["/register"])
   }
+
 }

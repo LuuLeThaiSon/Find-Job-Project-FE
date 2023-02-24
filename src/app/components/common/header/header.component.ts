@@ -82,6 +82,14 @@ export class HeaderComponent implements AfterViewInit{
         this.notifyCandidate = data;
       })
     }
+    if (this.role == 0) {
+      this.notifyService.countUnreadCandidateNotify(this.user.id).subscribe((data) => {
+        this.countUnreadCandidate = data;
+      })
+      this.notifyService.findAllCandidateNotify(this.user.id).subscribe((data) => {
+        this.notifyCandidate = data;
+      })
+    }
   }}
 
   ngOnChanges() {

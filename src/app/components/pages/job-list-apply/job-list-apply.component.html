@@ -97,28 +97,12 @@
                     </ul>
                   </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="text-md-end">
-                    <a *ngIf="checkApplyJob[i]" href="#applyNow" (click)="applyJobId(j)" data-bs-toggle="modal"
-                       class="primary-link">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
-                    <a (click)="deleteJob(this.candidateId,j?.id)" data-bs-toggle="modal" class="primary-link" href="">Cancel
-                      Job <i class="mdi mdi-chevron-double-right"></i></a>
-                  </div>
-                </div>
-                <!--end col-->
-                <!--                <div class="col-md-4">-->
-                <!--                  <div class="text-md-end" *ngIf="role == 3">-->
-                <!--                    <a *ngIf="checkApplyJob[i]" href="#applyNow" data-bs-toggle="modal" class="primary-link"-->
-                <!--                       (click)="applyJobId(j)">Apply Now <i-->
-                <!--                      class="mdi mdi-chevron-double-right"></i></a>-->
-                <!--                  </div>-->
-                <!--                </div>-->
-                <!--end col-->
               </div>
               <!--end row-->
             </div>
           </div>
           <!--end job-box-->
+
 
 
           <div class="row">
@@ -132,15 +116,13 @@
     </div>
   </section>
 
-</div>
-
-<!-- END JOB-LIST -->
+</div><!-- END JOB-LIST -->
 
 <!-- End Page-content -->
 <app-footer></app-footer>
 
 
-<!--show notification-->
+show notification
 <p-toast></p-toast>
 <p-toast position="top-left" key="tl"></p-toast>
 <p-toast position="top-center" key="tc"></p-toast>
@@ -190,6 +172,4 @@
   <button type="button" pButton pRipple (click)="showConfirm()" label="Confirm" class="ui-button-warning"></button>
 </div>
 
-<!--loading-->
-<p-progressSpinner strokeWidth="5" fill="#03fc24"
-                   animationDuration="1s"></p-progressSpinner>
+

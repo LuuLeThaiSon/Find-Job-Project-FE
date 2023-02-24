@@ -1,9 +1,12 @@
-import {AfterViewInit, Component, ElementRef} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import {JobService} from "../../service/job.service";
 import {Job} from "../../model/job";
 import {Locations} from "../../model/locations";
 import {LocationsService} from "../../service/locations.service";
 import {MessageService} from "primeng/api";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FormControl, FormGroup} from "@angular/forms";
+import {CommonService} from "../../service/common.service";
 
 @Component({
   selector: 'app-home-page',
@@ -18,16 +21,35 @@ export class HomePageComponent implements AfterViewInit{
   locations: Locations[] = [];
   highDemandJobs: Job[] = [];
   topOfferJobs:Job[] = [];
+  displayJobs: Job[] = [];
+  searchJobs!: FormGroup
+  filterJobs!: FormGroup;
+
+
 
   constructor(private elementRef:ElementRef,
               private jobService: JobService,
               private locationsService: LocationsService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private routerActive: ActivatedRoute,
+              private router: Router,
+              private commonService: CommonService) {
     this.findAll();
     this.findAllLocations();
     this.findTopOfferJobs();
     this.findTopDemandJobs()
   };
+
+  ngOnInit(): void {
+    this.commonService.scrollTopWindow(0, 300);
+    //form search on top
+    this.searchJobs = new FormGroup({
+      text: new FormControl(),
+      location: new FormGroup({
+        l_id: new FormControl('all_l')
+      })
+    })
+  }
 
   findAll() {
     return this.jobService.findAll().subscribe((data) => {
@@ -164,5 +186,57 @@ export class HomePageComponent implements AfterViewInit{
 
   clear() {
     this.messageService.clear();
+  }
+
+  @ViewChild('formSearchJobTopBar') formSearchJobTopBarOnPage: ElementRef | undefined;
+
+  // @ts-ignore
+  searchJobsOnPage() {
+    // @ts-ignore
+    this.formSearchJobTopBarOnPage?.nativeElement.submit();
+    let text = this.searchJobs.get('text')?.value;
+    let location = this.searchJobs.get('location')?.value;
+
+    if (text != null && location.l_id == "all_l") {
+      return this.jobService.findJobsByTitleContainingOrCompanyName(text).subscribe((data) => {
+        this.jobs = data;
+        this.displayJobs = this.jobs;
+        // @ts-ignore
+        sessionStorage.setItem("arrayFilter",JSON.stringify(this.displayJobs));
+        this.router.navigate(['job']).finally()
+      })
+    }
+
+    if (text == null && location.l_id != "all_l") {
+      return this.jobService.findJobsByLocationId(location.l_id).subscribe((data) => {
+        this.jobs = data;
+        this.displayJobs = this.jobs;
+        // @ts-ignore
+        sessionStorage.setItem("arrayFilter",JSON.stringify(this.displayJobs));
+        this.router.navigate(['job']).finally()
+      })
+    }
+
+
+    if (text != null && location.l_id != "all_l") {
+      return this.jobService.findJobsByTitleContainingAndLocationId(text, location.l_id).subscribe((data) => {
+        this.jobs = data;
+        this.displayJobs = this.jobs;
+        // @ts-ignore
+        sessionStorage.setItem("arrayFilter",JSON.stringify(this.displayJobs));
+        this.router.navigate(['job']).finally()
+
+      })
+    }
+
+    if (text == null && location.l_id == "all_l") {
+      return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe(res => {
+        sessionStorage.setItem("arrayFilter",JSON.stringify(res));
+        this.router.navigate(['job']).finally()
+      })
+    }
+
+
+    console.log(this.displayJobs)
   }
 }
