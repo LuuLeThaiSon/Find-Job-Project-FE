@@ -44,7 +44,6 @@ export class JobListComponent implements OnInit {
   ngOnInit(): void {
     this.commonService.scrollTopWindow(0, 300);
 
-    console.log(sessionStorage.getItem("user"))
 
     if (sessionStorage.getItem("user") == null) {
       this.user = null;
@@ -83,15 +82,16 @@ export class JobListComponent implements OnInit {
       })
     })
 
-    if ( sessionStorage.getItem("arrayFilter") != null) {
+    if (sessionStorage.getItem("arrayFilter") != null) {
 // @ts-ignore
       this.jobs = JSON.parse(sessionStorage.getItem("arrayFilter")) as any;
       // @ts-ignore
       this.displayJobs = JSON.parse(sessionStorage.getItem("arrayFilter"));
-      console.log(this.jobs);
-      console.log(this.displayJobs);
+      // @ts-ignore
+      // sessionStorage.removeItem(sessionStorage.getItem("arrayFilter"))
     } else {
       this.findAllByStatusIsTrueAndAndExpiredDate()
+
     }
 
   }
@@ -387,7 +387,10 @@ export class JobListComponent implements OnInit {
   @ViewChild('formSearchJobTopBar') formSearchJobTopBar: ElementRef | undefined;
 
   reset() {
-    this.ngOnInit()
+    this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe(res => {
+      this.jobs = res;
+      this.displayJobs = res
+    })
   }
 
 }

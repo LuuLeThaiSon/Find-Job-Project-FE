@@ -214,9 +214,10 @@ export class HomePageComponent implements AfterViewInit{
     }
 
     if (text == null && location.l_id == "all_l") {
-      // @ts-ignore
-      // sessionStorage.setItem("arrayFilter", null);
-      this.router.navigate(['job']).finally()
+      return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe(res => {
+        sessionStorage.setItem("arrayFilter",JSON.stringify(res));
+        this.router.navigate(['job']).finally()
+      })
     }
 
 
