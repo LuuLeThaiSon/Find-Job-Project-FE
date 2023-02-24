@@ -14,6 +14,8 @@ import {CommonService} from "../../service/common.service";
 import {NotifyService} from "../../service/notify.service";
 import {Notify} from "../../model/notify";
 import {NotifyType} from "../../model/notify-type";
+import {Router} from "@angular/router";
+import {set} from "@angular/fire/database";
 
 @Component({
   selector: 'app-job-list',
@@ -53,7 +55,6 @@ export class JobListComponent implements OnInit {
     }
 
 
-
     this.findAllByStatusIsTrueAndAndExpiredDate();
     this.findAllLocations();
     this.findAllCategories();
@@ -89,7 +90,8 @@ export class JobListComponent implements OnInit {
               private storage: AngularFireStorage,
               private applyJobService: ApplyJobService,
               private notifyService: NotifyService,
-              private commonService: CommonService) {
+              private commonService: CommonService,
+              private router: Router) {
 
   }
 
@@ -375,5 +377,33 @@ export class JobListComponent implements OnInit {
 
   reset() {
     this.ngOnInit()
+  }
+
+  //open Modal
+  openModalStatus = false;
+
+  openModal() {
+    // @ts-ignore
+    document.getElementById("clickModal").click();
+  }
+
+  toLoginPage() {
+    this.loading = false;
+    // @ts-ignore
+    document.getElementById("clickModal").click();
+    setTimeout(() => {
+      this.loading = true;
+    }, 3000)
+    this.router.navigate(["/login"])
+  }
+
+  toRegisterPage() {
+    this.loading = false;
+    // @ts-ignore
+    document.getElementById("clickModal").click();
+    setTimeout(() => {
+      this.loading = true;
+    }, 3000)
+    this.router.navigate(["/register"])
   }
 }

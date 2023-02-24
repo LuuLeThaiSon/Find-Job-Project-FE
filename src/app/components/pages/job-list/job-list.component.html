@@ -65,42 +65,42 @@
         <div class="col-lg-9">
           <div class="me-lg-5">
             <div class="job-list-header">
-<!--              <form action="#">-->
-<!--                <div class="row g-2">-->
-<!--                  <div class="col-lg-3 col-md-6">-->
-<!--                    <div class="filler-job-form">-->
-<!--                      <i class="uil uil-briefcase-alt"></i>-->
-<!--                      <input type="search" class="form-control filter-job-input-box border border-primary"-->
-<!--                             id="exampleFormControlInput1" placeholder="Job, company... "-->
-<!--                             name="search" [(ngModel)]="searchText">-->
-<!--                    </div>-->
-<!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
-<!--                  <div class="col-lg-3 col-md-6">-->
-<!--                    <div class="filler-job-form">-->
-<!--                      <select class="form-select" data-trigger-->
-<!--                              name="choices-single-location"-->
-<!--                              aria-label="Default select example">-->
-<!--                        <option [value]="">Chose location</option>-->
-<!--                        <option [value]="l.id" *ngFor="let l of locations">{{l.name}}</option>-->
-<!--                      </select>-->
-<!--                    </div>-->
-<!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
-<!--                  <div class="col-lg-3 col-md-6">-->
-<!--                    <div class="filler-job-form">-->
-<!--                      <select class="form-select " data-trigger-->
-<!--                              id="choices-single-categories"-->
-<!--                              aria-label="Default select example">-->
-<!--                        <option [value]="">Chose category</option>-->
-<!--                        <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>-->
-<!--                      </select>-->
-<!--                    </div>-->
-<!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
-<!--                  <div class="col-lg-3 col-md-6">-->
-<!--                    <a href="javascript:void(0)" class="btn btn-primary w-100"><i-->
-<!--                      class="uil uil-filter"></i> Filter</a>-->
-<!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
-<!--                </div>&lt;!&ndash;end row&ndash;&gt;-->
-<!--              </form>-->
+              <!--              <form action="#">-->
+              <!--                <div class="row g-2">-->
+              <!--                  <div class="col-lg-3 col-md-6">-->
+              <!--                    <div class="filler-job-form">-->
+              <!--                      <i class="uil uil-briefcase-alt"></i>-->
+              <!--                      <input type="search" class="form-control filter-job-input-box border border-primary"-->
+              <!--                             id="exampleFormControlInput1" placeholder="Job, company... "-->
+              <!--                             name="search" [(ngModel)]="searchText">-->
+              <!--                    </div>-->
+              <!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
+              <!--                  <div class="col-lg-3 col-md-6">-->
+              <!--                    <div class="filler-job-form">-->
+              <!--                      <select class="form-select" data-trigger-->
+              <!--                              name="choices-single-location"-->
+              <!--                              aria-label="Default select example">-->
+              <!--                        <option [value]="">Chose location</option>-->
+              <!--                        <option [value]="l.id" *ngFor="let l of locations">{{l.name}}</option>-->
+              <!--                      </select>-->
+              <!--                    </div>-->
+              <!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
+              <!--                  <div class="col-lg-3 col-md-6">-->
+              <!--                    <div class="filler-job-form">-->
+              <!--                      <select class="form-select " data-trigger-->
+              <!--                              id="choices-single-categories"-->
+              <!--                              aria-label="Default select example">-->
+              <!--                        <option [value]="">Chose category</option>-->
+              <!--                        <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>-->
+              <!--                      </select>-->
+              <!--                    </div>-->
+              <!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
+              <!--                  <div class="col-lg-3 col-md-6">-->
+              <!--                    <a href="javascript:void(0)" class="btn btn-primary w-100"><i-->
+              <!--                      class="uil uil-filter"></i> Filter</a>-->
+              <!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
+              <!--                </div>&lt;!&ndash;end row&ndash;&gt;-->
+              <!--              </form>-->
               <form [formGroup]="searchJobs" id="formSearchJobTopBar" (ngSubmit)="searchJobsMethod()">
                 <div class="row g-2">
                   <div class="col-lg-4 col-md-6">
@@ -118,7 +118,7 @@
                               aria-label="Default select example"
                               formControlName="l_id">
                         <option value="all_l">Location</option>
-                        <option [value]="l.id" *ngFor="let l of locations" >{{l.name}}</option>
+                        <option [value]="l.id" *ngFor="let l of locations">{{l.name}}</option>
                       </select>
                     </div>
                   </div><!--end col-->
@@ -129,71 +129,72 @@
                               aria-label="Default select example"
                               formControlName="c_id">
                         <option value="all_c">Category</option>
-                        <option [value]="c.id" *ngFor="let c of categories" >{{c.name}}</option>
+                        <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>
                       </select>
                     </div>
                   </div><!--end col-->
                   <div class="col-lg-2 col-md-6">
-                    <button class="btn btn-soft-primary w-100" type="submit" ><i
-                      class="uil uil-filter"></i> Filter</button>
+                    <button class="btn btn-soft-primary w-100" type="submit"><i
+                      class="uil uil-filter"></i> Filter
+                    </button>
                   </div><!--end col-->
                   <div class="col-lg-2 col-md-6">
-                    <a class="btn btn-soft-dark w-100" (click)="reset()" ><i
+                    <a class="btn btn-soft-dark w-100" (click)="reset()"><i
                       class="mdi mdi-repeat"></i> Reset</a>
                   </div><!--end col-->
                 </div><!--end row-->
               </form>
             </div><!--end job-list-header-->
-<!--            <div class="wedget-popular-title mt-4">-->
-<!--              <h6>Popular</h6>-->
-<!--              <ul class="list-inline">-->
-<!--                <li class="list-inline-item">-->
-<!--                  <div class="popular-box d-flex align-items-center">-->
-<!--                    <div class="number flex-shrink-0 me-2">-->
-<!--                      20-->
-<!--                    </div>-->
-<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">UI/UX-->
-<!--                      designer</h6></a>-->
-<!--                  </div>-->
-<!--                </li>-->
-<!--                <li class="list-inline-item">-->
-<!--                  <div class="popular-box d-flex align-items-center">-->
-<!--                    <div class="number flex-shrink-0 me-2">-->
-<!--                      18-->
-<!--                    </div>-->
-<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">HR-->
-<!--                      manager</h6></a>-->
-<!--                  </div>-->
-<!--                </li>-->
-<!--                <li class="list-inline-item">-->
-<!--                  <div class="popular-box d-flex align-items-center">-->
-<!--                    <div class="number flex-shrink-0 me-2">-->
-<!--                      10-->
-<!--                    </div>-->
-<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">Product-->
-<!--                      manager</h6></a>-->
-<!--                  </div>-->
-<!--                </li>-->
-<!--                <li class="list-inline-item">-->
-<!--                  <div class="popular-box d-flex align-items-center">-->
-<!--                    <div class="number flex-shrink-0 me-2">-->
-<!--                      15-->
-<!--                    </div>-->
-<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">Sales-->
-<!--                      manager</h6></a>-->
-<!--                  </div>-->
-<!--                </li>-->
-<!--                <li class="list-inline-item">-->
-<!--                  <div class="popular-box d-flex align-items-center">-->
-<!--                    <div class="number flex-shrink-0 me-2">-->
-<!--                      28-->
-<!--                    </div>-->
-<!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">-->
-<!--                      Developer</h6></a>-->
-<!--                  </div>-->
-<!--                </li>-->
-<!--              </ul>-->
-<!--            </div>&lt;!&ndash;end wedget-popular-title&ndash;&gt;-->
+            <!--            <div class="wedget-popular-title mt-4">-->
+            <!--              <h6>Popular</h6>-->
+            <!--              <ul class="list-inline">-->
+            <!--                <li class="list-inline-item">-->
+            <!--                  <div class="popular-box d-flex align-items-center">-->
+            <!--                    <div class="number flex-shrink-0 me-2">-->
+            <!--                      20-->
+            <!--                    </div>-->
+            <!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">UI/UX-->
+            <!--                      designer</h6></a>-->
+            <!--                  </div>-->
+            <!--                </li>-->
+            <!--                <li class="list-inline-item">-->
+            <!--                  <div class="popular-box d-flex align-items-center">-->
+            <!--                    <div class="number flex-shrink-0 me-2">-->
+            <!--                      18-->
+            <!--                    </div>-->
+            <!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">HR-->
+            <!--                      manager</h6></a>-->
+            <!--                  </div>-->
+            <!--                </li>-->
+            <!--                <li class="list-inline-item">-->
+            <!--                  <div class="popular-box d-flex align-items-center">-->
+            <!--                    <div class="number flex-shrink-0 me-2">-->
+            <!--                      10-->
+            <!--                    </div>-->
+            <!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">Product-->
+            <!--                      manager</h6></a>-->
+            <!--                  </div>-->
+            <!--                </li>-->
+            <!--                <li class="list-inline-item">-->
+            <!--                  <div class="popular-box d-flex align-items-center">-->
+            <!--                    <div class="number flex-shrink-0 me-2">-->
+            <!--                      15-->
+            <!--                    </div>-->
+            <!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">Sales-->
+            <!--                      manager</h6></a>-->
+            <!--                  </div>-->
+            <!--                </li>-->
+            <!--                <li class="list-inline-item">-->
+            <!--                  <div class="popular-box d-flex align-items-center">-->
+            <!--                    <div class="number flex-shrink-0 me-2">-->
+            <!--                      28-->
+            <!--                    </div>-->
+            <!--                    <a href="javascript:void(0)" class="primary-link stretched-link"><h6 class="fs-14 mb-0">-->
+            <!--                      Developer</h6></a>-->
+            <!--                  </div>-->
+            <!--                </li>-->
+            <!--              </ul>-->
+            <!--            </div>&lt;!&ndash;end wedget-popular-title&ndash;&gt;-->
             <!-- Job-list -->
             <div>
               <div *ngIf="role == 3">
@@ -204,7 +205,7 @@
                       <div class="col-md-2">
                         <div class="text-center mb-4 mb-md-0">
                           <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
-                            width="55" height ="55"
+                            width="55" height="55"
                             src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                             alt=""
                             class="img-fluid rounded-3"></a>
@@ -239,8 +240,8 @@
                       <!--end col-->
                       <div class="col-md-2">
                         <div>
-                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full time</span>
-                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
+                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-success fs-13 mt-1" *ngIf="!j.type">Part time</span>
                         </div>
                       </div>
                       <!--end col-->
@@ -252,7 +253,8 @@
                       <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Experience:</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
+                            class="text-dark">Experience:</span> {{j.expYear == 0 ? 'Not Required' : j.expYear + '+ years'}}
+                          </p>
                         </div>
                       </div>
                       <!--end col-->
@@ -292,7 +294,7 @@
                       <div class="col-md-2">
                         <div class="text-center mb-4 mb-md-0">
                           <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
-                            width="55" height ="55"
+                            width="55" height="55"
                             src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                             alt=""
                             class="img-fluid rounded-3"></a>
@@ -327,8 +329,8 @@
                       <!--end col-->
                       <div class="col-md-2">
                         <div>
-                          <span class="badge bg-soft-danger fs-13 mt-1" *ngIf="j.type">Full time</span>
-                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
+                          <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="j.type">Full time</span>
+                          <span class="badge bg-soft-success fs-13 mt-1" *ngIf="!j.type">Part time</span>
                         </div>
                       </div>
                       <!--end col-->
@@ -340,7 +342,8 @@
                       <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Experience:</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
+                            class="text-dark">Experience:</span> {{j.expYear == 0 ? 'Not Required' : j.expYear + '+ years'}}
+                          </p>
                         </div>
                       </div>
                       <!--end col-->
@@ -437,7 +440,8 @@
                       <div class="col-md-4">
                         <div>
                           <p class="text-muted mb-0"><span
-                            class="text-dark">Experience:</span> {{j.expYear==0?'Not Required':j.expYear + '+ years'}}</p>
+                            class="text-dark">Experience:</span> {{j.expYear == 0 ? 'Not Required' : j.expYear + '+ years'}}
+                          </p>
                         </div>
                       </div>
                       <!--end col-->
@@ -449,8 +453,8 @@
                       </div>
                       <!--end col-->
                       <div class="col-md-4 text-lg-end">
-                        <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
-                        <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="!j.type">Part time</span>
+                        <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="j.type">Full time</span>
+                        <span class="badge bg-soft-success fs-13 mt-1" *ngIf="!j.type">Part time</span>
                       </div>
                       <!--end col-->
                     </div>
@@ -475,7 +479,8 @@
               <form [formGroup]="filterJobs" id="formFilterJob">
                 <div class="accordion-item">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#jobsalary"
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#jobsalary"
                             aria-expanded="false" aria-controls="jobsalary">
                       Offered Salary
                     </button>
@@ -540,7 +545,8 @@
                 </div><!-- end accordion-item -->
                 <div class="accordion-item mt-3">
                   <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#jobexp"
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#jobexp"
                             aria-expanded="false" aria-controls="jobexp">
                       Work Experience
                     </button>
@@ -679,7 +685,7 @@
                           <input formControlName="gender"
                                  (change)="filterJobsMethod($event)"
                                  value="male"
-                                 class="form-check-input" type="radio" name="gender" id="JobGender2" >
+                                 class="form-check-input" type="radio" name="gender" id="JobGender2">
                           <label class="form-check-label ms-2 text-muted" for="JobGender2">
                             Male
                           </label>
@@ -688,7 +694,7 @@
                           <input formControlName="gender"
                                  (change)="filterJobsMethod($event)"
                                  value="female"
-                                 class="form-check-input" type="radio" name="gender" id="JobGender3" >
+                                 class="form-check-input" type="radio" name="gender" id="JobGender3">
                           <label class="form-check-label ms-2 text-muted" for="JobGender3">
                             Female
                           </label>
@@ -700,10 +706,6 @@
 
               </form>
             </div><!--end accordion-->
-
-          </div><!--end side-bar-->
-
-          <div *ngIf="role == 0" class="side-bar ms-lg-1">
             <div class="mt-4">
               <div class="text-center">
                 <img src="assets/images/contact.png" alt="" class="img-fluid">
@@ -744,6 +746,263 @@
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.9242911494603!2d105.76602881479187!3d21.035715092917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b9444c676b%3A0xe713200541b7456d!2sCodeGym!5e0!3m2!1sen!2s!4v1676621226422!5m2!1sen!2s"
                   width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div><!--end side-bar-->
+
+          <div *ngIf="role == 0" class="side-bar ms-lg-1">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#jobsalary"
+                          aria-expanded="false" aria-controls="jobsalary">
+                    Offered Salary
+                  </button>
+                </h2>
+                <div id="jobsalary" class="accordion-collapse collapse" aria-labelledby="jobSalary">
+                  <div class="accordion-body">
+                    <div class="side-title">
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="allsalary"
+                               name="salary"
+                               class="form-check-input" type="radio" id="JobSalaryAll">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalaryAll">
+                          All
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="less200"
+                               name="salary"
+                               class="form-check-input" type="radio" id="JobSalary1">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalary1">
+                          Less Than $200
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="200-500"
+                               class="form-check-input" type="radio"
+                               name="salary" id="JobSalary2">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalary2">
+                          $200 - $500
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="500-800"
+                               class="form-check-input" type="radio"
+                               name="salary" id="JobSalary3">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalary3">
+                          $500 - $800
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="more800"
+                               name="salary"
+                               class="form-check-input" type="radio"
+                               id="JobSalary4">
+                        <label class="form-check-label ms-2 text-muted" for="JobSalary4">
+                          More Than $800
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- end accordion-item -->
+              <div class="accordion-item mt-3">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#jobexp"
+                          aria-expanded="false" aria-controls="jobexp">
+                    Work Experience
+                  </button>
+                </h2>
+                <div id="jobexp" class="accordion-collapse collapse" aria-labelledby="jobExp">
+                  <div class="accordion-body">
+                    <div class="side-title">
+                      <div class="form-check mt-2">
+                        <input class="form-check-input"
+                               (click)="openModal()"
+                               name="years"
+                               value="allyears"
+                               type="radio"
+                               id="JobExpAll">
+                        <label class="form-check-label ms-2 text-muted" for="JobExpAll">
+                          All
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input class="form-check-input"
+                               (click)="openModal()"
+                               value="0"
+                               type="radio"
+                               name="years"
+                               id="JobExp1">
+                        <label class="form-check-label ms-2 text-muted" for="JobExp1">
+                          No Experience
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input class="form-check-input"
+                               (click)="openModal()"
+                               value="0-3"
+                               type="radio"
+                               name="years"
+                               id="JobExp2">
+                        <label class="form-check-label ms-2 text-muted" for="JobExp2">
+                          0 - 3 years
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input class="form-check-input"
+                               (click)="openModal()"
+                               value="3-6"
+                               type="radio"
+                               name="years"
+                               id="JobExp3">
+                        <label class="form-check-label ms-2 text-muted" for="JobExp3">
+                          3 - 6 years
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input class="form-check-input"
+                               (click)="openModal()"
+                               value="more6"
+                               type="radio"
+                               name="years"
+                               id="JobExp4">
+                        <label class="form-check-label ms-2 text-muted" for="JobExp4">
+                          More than 6 years
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- end accordion-item -->
+              <div class="accordion-item mt-3">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#jobtype" aria-expanded="false" aria-controls="jobtype">
+                    Type of Employment
+                  </button>
+                </h2>
+                <div id="jobtype" class="accordion-collapse collapse" aria-labelledby="jobType">
+                  <div class="accordion-body">
+                    <div class="side-title">
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="alltypes"
+                               class="form-check-input" type="radio" name="types" id="JobTypeAll">
+                        <label class="form-check-label ms-2 text-muted" for="JobTypeAll">
+                          Any
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input class="form-check-input"
+                               (click)="openModal()"
+                               value="full"
+                               type="radio"
+                               name="types" id="JobType2">
+                        <label class="form-check-label ms-2 text-muted" for="JobType2">
+                          Full Time
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="part"
+                               class="form-check-input" type="radio"
+                               name="types" id="JobType3">
+                        <label class="form-check-label ms-2 text-muted" for="JobType3">
+                          Part Time
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- end accordion-item -->
+              <div class="accordion-item mt-3">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#jobgender" aria-expanded="false" aria-controls="jobgender">
+                    Gender
+                  </button>
+                </h2>
+                <div id="jobgender" class="accordion-collapse collapse" aria-labelledby="jobGender">
+                  <div class="accordion-body">
+                    <div class="side-title">
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="any"
+                               class="form-check-input" type="radio" name="gender" id="JobGender1">
+                        <label class="form-check-label ms-2 text-muted" for="JobGender1">
+                          Any
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="male"
+                               class="form-check-input" type="radio" name="gender" id="JobGender2">
+                        <label class="form-check-label ms-2 text-muted" for="JobGender2">
+                          Male
+                        </label>
+                      </div>
+                      <div class="form-check mt-2">
+                        <input (click)="openModal()"
+                               value="female"
+                               class="form-check-input" type="radio" name="gender" id="JobGender3">
+                        <label class="form-check-label ms-2 text-muted" for="JobGender3">
+                          Female
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- end accordion-item -->
+              <div class="mt-4">
+                <div class="text-center">
+                  <img src="assets/images/contact.png" alt="" class="img-fluid">
+                </div>
+                <div class="mt-4 pt-3">
+
+                  <div class="d-flex text-muted align-items-center mt-2">
+                    <div class="flex-shrink-0 fs-22 text-primary">
+                      <i class="uil uil-map-marker"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-2">
+                      <p class="mb-0">C0822I1, CodeGym My Dinh, Hanoi, Vietnam</p>
+                    </div>
+                  </div>
+                  <div class="d-flex text-muted align-items-center mt-2">
+                    <div class="flex-shrink-0 fs-22 text-primary">
+                      <i class="uil uil-envelope"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-2">
+                      <p class="mb-0">contactus@404team.com</p>
+                    </div>
+                  </div>
+                  <div class="d-flex text-muted align-items-center mt-2">
+                    <div class="flex-shrink-0 fs-22 text-primary">
+                      <i class="uil uil-phone-alt"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-2">
+                      <p class="mb-0">(+123) 456 789</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4">
+                <h6 class="fs-17 fw-medium mb-4">Location</h6>
+
+                <div class="text-center">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.9242911494603!2d105.76602881479187!3d21.035715092917!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b9444c676b%3A0xe713200541b7456d!2sCodeGym!5e0!3m2!1sen!2s!4v1676621226422!5m2!1sen!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
               </div>
             </div>
           </div>
@@ -795,5 +1054,27 @@
   </div><!-- END APPLY MODAL -->
 
 </div>
+
+
+<button id="clickModal" type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+        data-bs-target="#myModal" hidden="true">Standard modal
+</button>
+<!-- SIMPLE MODALS -->
+<div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" style="display: none;"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p class="text-dark">To access the content, you need to <a type="button" (click)="toLoginPage()">Sign In</a>  or <a href="" (click)="toRegisterPage()">Sign Up</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary waves-effect btn-sm" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary waves-effect waves-light btn-sm" (click)="toLoginPage()">Proceed</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- SIMPLE MODALS -->
+
+<!--end modal-->
 <!-- End Page-content -->
 <app-footer></app-footer>

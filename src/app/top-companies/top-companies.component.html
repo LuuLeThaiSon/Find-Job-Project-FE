@@ -73,21 +73,21 @@
                   </div>
                   <div class="ms-3">
                     <a href="" [routerLink]="['/company-detail/',c.id]" class="primary-link"><h5 class="fs-17">{{c.name}}</h5></a>
-                    <span class="badge bg-soft-info fs-13">{{c.email}}</span>
+                    <span class="badge bg-soft-primary fs-13">{{c.email.toLowerCase()}}</span>
                   </div>
                 </div>
                 <div class="border rounded mb-4">
                   <div class="row g-0">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                       <div class="border-end px-3 py-2 text-center">
-                        <a href="{{c.website}}" class="text-primary mb-0">{{c.website}}</a>
+                        <a href="{{c.website}}" class="text-purple mb-0">{{c.website.toLowerCase()}}</a>
                       </div>
                     </div><!--end col-->
-                    <div class="col-lg-6">
-                      <div class="px-3 py-2 text-center">
-                        <p class="text-muted mb-0">{{c.tel}}</p>
-                      </div>
-                    </div><!--end col-->
+<!--                    <div class="col-lg-12">-->
+<!--                      <div class="px-3 py-2 text-center">-->
+<!--                        <p class="text-muted mb-0">{{c.tel}}</p>-->
+<!--                      </div>-->
+<!--                    </div>&lt;!&ndash;end col&ndash;&gt;-->
                   </div><!--end row-->
                 </div>
                 <p class="text-muted">{{c.description.substring(0,100)}}...</p>

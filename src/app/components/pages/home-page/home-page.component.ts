@@ -16,12 +16,17 @@ export class HomePageComponent implements AfterViewInit{
   partTimeJobs: Job[] = [];
   fullTimeJobs: Job[] = [];
   locations: Locations[] = [];
+  highDemandJobs: Job[] = [];
+  topOfferJobs:Job[] = [];
+
   constructor(private elementRef:ElementRef,
               private jobService: JobService,
               private locationsService: LocationsService,
               private messageService: MessageService) {
     this.findAll();
     this.findAllLocations();
+    this.findTopOfferJobs();
+    this.findTopDemandJobs()
   };
 
   findAll() {
@@ -33,7 +38,19 @@ export class HomePageComponent implements AfterViewInit{
         } else {
           this.partTimeJobs.push(data[i])
         }
-      }
+      };
+    })
+  }
+
+  findTopDemandJobs(){
+    return this.jobService.findAll().subscribe((data) => {
+      this.highDemandJobs = data.sort((a, b) => a.quantity - b.quantity);
+    })
+  }
+
+  findTopOfferJobs() {
+    return this.jobService.findAll().subscribe((data) => {
+      this.topOfferJobs = data.sort((a, b) => a.salaryMax - b.salaryMax);
     })
   }
 
