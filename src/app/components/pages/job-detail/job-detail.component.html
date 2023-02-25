@@ -56,18 +56,6 @@
 <!-- START JOB-DEATILS -->
 <section class="section">
   <div class="container">
-    <div class="alert bg-soft-success alert-dismissible fade show" role="alert" [hidden]="alertApply">
-      Apply Successfully!
-      <button type="button" class="btn-close" data-bs-dismiss="alert"
-              aria-label="Close">
-      </button>
-    </div>
-    <div class="alert bg-soft-success alert-dismissible fade show" role="alert" [hidden]="decline">
-      Decline success
-      <button type="button" class="btn-close" data-bs-dismiss="alert"
-              aria-label="Close">
-      </button>
-    </div>
     <div class="row">
       <div class="col-lg-8">
         <div class="card job-detail overflow-hidden">
@@ -466,5 +454,8 @@
 </div>
 <!-- END Cancel Job MODAL -->
 <app-footer></app-footer>
+<p-toast position="top-right"></p-toast>
+
+
 
 
