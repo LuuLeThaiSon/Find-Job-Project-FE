@@ -15,6 +15,7 @@ import {CommonService} from "../../service/common.service";
 import {MessageService} from "primeng/api";
 import {GooglePlaceDirective} from "ngx-google-places-autocomplete";
 import {Address} from "ngx-google-places-autocomplete/objects/address";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   imageBannerFile: any;
   pathBannerName!: string;
   phoneRegex = `^(\\+\\d{1,2}\\s?)?1?\\-?\\.?\\s?\\(?\\d{3}\\)?[\\s.-]?\\d{3}[\\s.-]?\\d{4}$`
+  public Editor = ClassicEditor;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -174,6 +176,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       this.company = res;
       this.path = this.company.avatar;
       this.formCompany.patchValue(res);
+      this.description = this.sanitized.bypassSecurityTrustHtml(res.description);
       this.ggMapEmbed = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
       this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
       this.ggMap.setAttribute("style:width", "100%");
@@ -185,6 +188,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   findCompanyById(id: number) {
     this.companyService.findCompany(id).subscribe(res => {
       this.company = res;
+      this.description = this.sanitized.bypassSecurityTrustHtml(res.description);
       this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
       this.ggMap.setAttribute("style:width", "100%");
       this.formCompany.patchValue(res)
@@ -215,6 +219,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
         sessionStorage.setItem("user", JSON.stringify(this.company));
         this.header?.ngOnInit();
         this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
+        this.description = this.sanitized.bypassSecurityTrustHtml(this.company.description);
         this.ggMap.setAttribute("style:width", "100%");
       })
     } else {
@@ -235,6 +240,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
               this.ggMap = this.company.googleMap;
               this.header?.ngOnInit();
               this.showSuccess();
+              this.description = this.sanitized.bypassSecurityTrustHtml(this.company.description);
               this.ggMap = this.sanitized.bypassSecurityTrustHtml(this.company.googleMap);
               this.ggMap.setAttribute("style:width", "100%");
             })
@@ -377,4 +383,5 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   mapUrl!:string;
   ggMapEmbed!: any;
   ggMapIframe!:string
+  description: any;
 }

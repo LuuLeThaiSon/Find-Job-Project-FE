@@ -172,7 +172,7 @@
 
               <div class="mb-5">
                 <h6 class="fs-17 fw-medium mb-4">About Company</h6>
-                <p class="text-muted">{{company.description}}</p>
+                <div [innerHTML]="description"></div>
               </div>
 
               <div id="currentOpeningJobs" *ngIf="currentOpeningJobs.length != 0">
