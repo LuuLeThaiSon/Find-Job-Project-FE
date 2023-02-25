@@ -10,6 +10,7 @@ import {ApplyJob} from "../../model/apply-job";
 import {NotifyType} from "../../model/notify-type";
 import {NotifyService} from "../../service/notify.service";
 import {Notify} from "../../model/notify";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-job-detail',
@@ -40,7 +41,8 @@ export class JobDetailComponent {
               private commonService: CommonService,
               private applyJobService: ApplyJobService,
               private storage: AngularFireStorage,
-              private notifyService: NotifyService) {
+              private notifyService: NotifyService,
+              private messageService: MessageService) {
     this.activatedRoute.params.subscribe(params => {
       this.jobId = params['id'];
       this.findOne(this.jobId);
@@ -92,6 +94,7 @@ export class JobDetailComponent {
 
   onTop(x: number, y: number) {
     window.scrollTo(x, y);
+    this.ngOnInit()
   }
 
   removeApplyJob() {
@@ -99,10 +102,7 @@ export class JobDetailComponent {
       this.decline = false;
       this.findALl();
       this.flag = false;
-      setTimeout(() => {
-        this.decline = true;
-      }, 3000)
-      console.log(this.job)
+      this.messageService.add({severity:'success', summary: 'Error', detail: 'Cancel successfully'});
       this.sendNotify(2, this.job)
     });
   }
@@ -115,6 +115,10 @@ export class JobDetailComponent {
 
 
   apply() {
+    if (this.cvFileName == null) {
+      return this.messageService.add({severity:'error', summary: 'Error', detail: 'Must be upload your CV'});
+
+    }
     this.loading = false;
     this.checkUpload = true;
     this.applyJob.candidate = this.user;
@@ -128,10 +132,7 @@ export class JobDetailComponent {
           this.applyJobService.save(this.applyJob).subscribe(() => {
             this.findOne(this.jobId)
             this.btnModal.nativeElement.click();
-            this.alertApply = false;
-            setTimeout(() => {
-              this.alertApply = true;
-            }, 3000);
+            this.messageService.add({severity:'success', summary: 'Error', detail: 'Apply successfully'});
             this.sendNotify(1, this.job);
           })
           this.loading = true;
