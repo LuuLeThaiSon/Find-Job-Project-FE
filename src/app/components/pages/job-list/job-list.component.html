@@ -68,42 +68,6 @@
         <div class="col-lg-9">
           <div class="me-lg-5">
             <div class="job-list-header">
-              <!--              <form action="#">-->
-              <!--                <div class="row g-2">-->
-              <!--                  <div class="col-lg-3 col-md-6">-->
-              <!--                    <div class="filler-job-form">-->
-              <!--                      <i class="uil uil-briefcase-alt"></i>-->
-              <!--                      <input type="search" class="form-control filter-job-input-box border border-primary"-->
-              <!--                             id="exampleFormControlInput1" placeholder="Job, company... "-->
-              <!--                             name="search" [(ngModel)]="searchText">-->
-              <!--                    </div>-->
-              <!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
-              <!--                  <div class="col-lg-3 col-md-6">-->
-              <!--                    <div class="filler-job-form">-->
-              <!--                      <select class="form-select" data-trigger-->
-              <!--                              name="choices-single-location"-->
-              <!--                              aria-label="Default select example">-->
-              <!--                        <option [value]="">Chose location</option>-->
-              <!--                        <option [value]="l.id" *ngFor="let l of locations">{{l.name}}</option>-->
-              <!--                      </select>-->
-              <!--                    </div>-->
-              <!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
-              <!--                  <div class="col-lg-3 col-md-6">-->
-              <!--                    <div class="filler-job-form">-->
-              <!--                      <select class="form-select " data-trigger-->
-              <!--                              id="choices-single-categories"-->
-              <!--                              aria-label="Default select example">-->
-              <!--                        <option [value]="">Chose category</option>-->
-              <!--                        <option [value]="c.id" *ngFor="let c of categories">{{c.name}}</option>-->
-              <!--                      </select>-->
-              <!--                    </div>-->
-              <!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
-              <!--                  <div class="col-lg-3 col-md-6">-->
-              <!--                    <a href="javascript:void(0)" class="btn btn-primary w-100"><i-->
-              <!--                      class="uil uil-filter"></i> Filter</a>-->
-              <!--                  </div>&lt;!&ndash;end col&ndash;&gt;-->
-              <!--                </div>&lt;!&ndash;end row&ndash;&gt;-->
-              <!--              </form>-->
               <form [formGroup]="searchJobs" id="formSearchJobTopBar" (ngSubmit)="searchJobsMethod()">
                 <div class="row g-2">
                   <div class="col-lg-4 col-md-6">
@@ -350,7 +314,7 @@
                   </div>
                   <div class="p-3 bg-light">
                     <div class="row justify-content-between">
-                      <div class="col-md-5">
+                      <div class="col-md-3">
                         <div>
                           <p class="text-muted mb-0"><span
                             class="text-dark">Experience:</span> {{j.expYear == 0 ? 'Not Required' : j.expYear + '+ years'}}
@@ -377,6 +341,13 @@
                         <div *ngSwitchCase="3">
                           <p class="text-muted mb-0"><span
                             class="text-dark">Gender:</span> Any</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2">
+                        <div class="text-start text-md-end">
+                          <a href="" [routerLink]="['/job-detail/',j.id]" data-bs-toggle="modal" class="link-purple">Details <i
+                            class="mdi mdi-chevron-double-right"></i></a>
                         </div>
                       </div>
                       <!--end col-->
@@ -448,7 +419,7 @@
                   </div>
                   <div class="p-3 bg-light">
                     <div class="row justify-content-between">
-                      <div class="col-md-4">
+                      <div class="col-md-3">
                         <div>
                           <p class="text-muted mb-0"><span
                             class="text-dark">Experience:</span> {{j.expYear == 0 ? 'Not Required' : j.expYear + '+ years'}}
@@ -456,16 +427,33 @@
                         </div>
                       </div>
                       <!--end col-->
-                      <div class="col-md-4 text-center">
+                      <div class="col-md-5">
                         <div>
                           <p class="text-muted mb-0"><span
                             class="text-dark">Category:</span> {{j.category.name}}</p>
                         </div>
                       </div>
                       <!--end col-->
-                      <div class="col-md-4 text-lg-end">
-                        <span class="badge bg-soft-purple fs-13 mt-1" *ngIf="j.type">Full time</span>
-                        <span class="badge bg-soft-success fs-13 mt-1" *ngIf="!j.type">Part time</span>
+                      <div class="col-md-2" [ngSwitch]="j.gender">
+                        <div *ngSwitchCase="1">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender:</span> Male</p>
+                        </div>
+                        <div *ngSwitchCase="2">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender:</span> Female</p>
+                        </div>
+                        <div *ngSwitchCase="3">
+                          <p class="text-muted mb-0"><span
+                            class="text-dark">Gender:</span> Any</p>
+                        </div>
+                      </div>
+                      <!--end col-->
+                      <div class="col-md-2">
+                        <div class="text-start text-md-end">
+                          <a href="" [routerLink]="['/job-detail/',j.id]" data-bs-toggle="modal" class="link-purple">Details <i
+                            class="mdi mdi-chevron-double-right"></i></a>
+                        </div>
                       </div>
                       <!--end col-->
                     </div>
