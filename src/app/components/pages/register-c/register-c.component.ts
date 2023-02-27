@@ -44,7 +44,7 @@ export class RegisterCComponent {
       confirmPassword: new FormControl('', [Validators.required, Validators.min(6), Validators.pattern(this.RegexAlphaNumeric)]),
       tel: new FormControl('', [Validators.required,Validators.pattern(/^0\d{8,9}$/)]),
       role: new FormGroup({
-        id: new FormControl('', [Validators.required])
+        id: new FormControl('', )
       }),
     }, {
       validators: matchpassword

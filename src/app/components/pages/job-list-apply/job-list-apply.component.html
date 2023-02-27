@@ -97,12 +97,44 @@
                     </ul>
                   </div>
                 </div>
+                <div class="col-lg-2 col-md-3">
+                  <div class="text-start text-md-end">
+                    <a  data-bs-toggle="modal" href="#cancelModal{{j.id}}" class="primary-link">Cancel Job <i
+                      class="mdi mdi-chevron-double-right"></i></a>
+                  </div>
+                </div>
               </div>
+
+
               <!--end row-->
             </div>
+            <div class="modal fade" id="cancelModal{{j.id}}" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Reject Job</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div>
+                      <h6 class="text-danger"><i
+                        class="uil uil-exclamation-triangle"></i> Are you sure to reject this job?
+                      </h6>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Cancel
+                    </button>
+
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal" (click)="deleteJob(this.candidateId, j?.id)">Yes, reject it
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
           <!--end job-box-->
-
 
 
           <div class="row">
@@ -117,6 +149,7 @@
   </section>
 
 </div><!-- END JOB-LIST -->
+<!-- Reject Job Modal -->
 
 <!-- End Page-content -->
 <app-footer></app-footer>

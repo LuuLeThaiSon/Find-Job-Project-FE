@@ -128,7 +128,7 @@
                   </div>
                 </div>
                 <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                  <form [formGroup]="formCandidate" (ngSubmit)="onSubmit()">
+                  <form [formGroup]="formCandidate">
                     <input type="text" class="form-control" formControlName="id" hidden/>
                     <div>
                       <h5 class="fs-17 fw-semibold mb-3 mb-0">My Account</h5>
@@ -204,7 +204,9 @@
                     </div>
 
                     <div class="mt-4 text-end">
-                      <button type="submit" class="btn btn-primary">Update</button>
+                      <button type="submit" class="btn btn-primary" data-bs-target="#confirmUpdateModal1"
+                              data-bs-toggle="modal"
+                              [disabled]="formCandidate.invalid">Update</button>
                     </div>
                   </form>
                   <!--end form-->
@@ -228,7 +230,7 @@
                         <div class="col-lg-12">
                           <div class="mb-3">
                             <label for="current-password-input" class="form-label">Current
-                              password</label>
+                              password <span class="text-danger">*</span></label>
                             <input type="{{showPassFields?'password':'text'}}" class="form-control"
                                    placeholder="Enter Current password"
                                    formControlName=currentPass
@@ -239,8 +241,10 @@
                         <div class="col-lg-6">
                           <div class="mb-3">
                             <label for="new-password-input" class="form-label">New
-                              password</label>
+                              password <span class="text-danger">*</span></label>
                             <input class="form-control"
+                                   data-bs-toggle="tooltip" data-bs-placement="bottom" title=""
+                                   data-bs-original-title="No space allowed"
                                    type="{{showPassFields?'password':'text'}}"
                                    placeholder="Enter new password"
                                    formControlName=newPass
@@ -250,7 +254,7 @@
                         <!--end col-->
                         <div class="col-lg-6">
                           <div class="mb-3">
-                            <label for="confirm-password-input" class="form-label">Confirm Password</label>
+                            <label for="confirm-password-input" class="form-label">Confirm Password <span class="text-danger">*</span></label>
                             <input class="form-control"
                                    type="{{showPassFields?'password':'text'}}"
                                    placeholder="Confirm Password"
@@ -270,6 +274,20 @@
                         </div>
                         <!--end col-->
                       </div>
+                      <div *ngIf="(formChangePass.get('currentPass')?.errors?.['required']
+                      && formChangePass.valid)||
+                      (formChangePass.get('newPass')?.errors?.['required']
+                      && formChangePass.get('newPass')?.touched)||
+                      (formChangePass.get('confirmPass')?.errors?.['required']
+                      && formChangePass.get('confirmPass')?.touched)"
+                           class="alert bg-soft-danger" role="alert">
+                        All fields required!
+                      </div>
+                      <div
+                        *ngIf="formChangePass.get('newPass')?.errors?.['minlength']"
+                        class="alert bg-soft-danger alert-dismissible" role="alert">
+                        New pass must be at least 8 characters
+                      </div>
                       <!--end row-->
                     </div>
                     <!--end Change-password-->
@@ -281,7 +299,7 @@
                       </button>
                     </div>
                     <div class="mt-4 text-end">
-                      <button type="submit" class="btn btn-primary">Update</button>
+                      <button type="submit" class="btn btn-primary" [disabled]="formChangePass.invalid">Update</button>
                     </div>
                   </form>
                   <!--end form-->
@@ -372,3 +390,31 @@
   </section>
 </div>
 <app-footer></app-footer>
+<div class="modal fade" id="confirmUpdateModal1" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Update Candidate Profile</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <h6 class="text-secondary"><i
+            class="mdi mdi-account"></i> Are you sure to update?
+          </h6>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-bs-dismiss="modal">Cancel
+        </button>
+
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                (click)="onSubmit()">Yes, update it
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast position="top-right"></p-toast>
+

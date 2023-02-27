@@ -12,11 +12,13 @@ import {Candidate} from "../../model/candidate";
 import {CommonService} from "../../service/common.service";
 import {finalize} from "rxjs";
 import {CandidateService} from "../../service/candidate.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-manage-candidate-profile',
   templateUrl: './manage-candidate-profile.component.html',
-  styleUrls: ['./manage-candidate-profile.component.css']
+  styleUrls: ['./manage-candidate-profile.component.css'],
+  providers:[MessageService]
 })
 export class ManageCandidateProfileComponent {
   candidate!: Candidate;
@@ -40,7 +42,8 @@ export class ManageCandidateProfileComponent {
               private storage: AngularFireStorage,
               private categoryService: CategoryService,
               private commonService: CommonService,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private messageService: MessageService) {
   }
 
   ngAfterViewInit(): void {
@@ -145,9 +148,9 @@ export class ManageCandidateProfileComponent {
       this.formCandidate.patchValue(res)
     })
     this.formChangePass = new FormGroup({
-      currentPass: new FormControl(''),
-      newPass: new FormControl(''),
-      confirmPass: new FormControl(''),
+      currentPass: new FormControl('',Validators.required),
+      newPass: new FormControl('',Validators.compose([Validators.required, Validators.minLength(8)])),
+      confirmPass: new FormControl('', Validators.required),
     })
   }
 
@@ -181,16 +184,16 @@ export class ManageCandidateProfileComponent {
   loading!: boolean;
 
   onSubmit() {
-    console.log(this.formCandidate.value)
     this.loading = false
     if (this.imageFile == null) {
       this.candidate = this.formCandidate.value
       this.candidate.avatar = this.path
       this.candidateService.updateCandidate(this.candidate, this.candidateId).subscribe(() => {
-        this.edited = false
+        this.loading = true
+        this.showSuccess();
         sessionStorage.setItem("user", JSON.stringify(this.candidate))
         this.header?.ngOnInit()
-        window.scroll(0, 300);
+        // window.scroll(0, 300);
       })
     } else {
       const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
@@ -201,18 +204,16 @@ export class ManageCandidateProfileComponent {
             this.candidate = this.formCandidate.value;
             this.candidate.avatar = url;
             this.candidateService.updateCandidate(this.candidate, this.candidateId).subscribe(() => {
+              this.loading = true
               sessionStorage.setItem("user", JSON.stringify(this.candidate));
-              this.edited = false;
-              this.commonService.scrollTopWindow(0, 300);
+              // this.commonService.scrollTopWindow(0, 300);
               this.header?.ngOnInit();
+              this.showSuccess()
             })
           });
         })
       ).subscribe()
     }
-    setTimeout(() => {
-      this.loading = true;
-    }, 1000);
   }
 
   updateBannerCandidate(event: any) {
@@ -290,5 +291,9 @@ export class ManageCandidateProfileComponent {
       // @ts-ignore
       t < 1 ? (t += .5, e.style.opacity = String(t)) : clearInterval(r)
     }, 200)
+  }
+
+  showSuccess() {
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Update Successfully'})
   }
 }
