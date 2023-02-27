@@ -23,6 +23,7 @@ export class CompanyDetailComponent {
   currentOpeningJobs: Job[] = [];
   ggMap!: any;
   categories!: Category[];
+  description: any;
 
   constructor(private activatedRoute: ActivatedRoute,
               private companyService: CompanyService,
@@ -45,6 +46,7 @@ export class CompanyDetailComponent {
     this.companyService.findCompany(id).subscribe(res => {
       this.company = res;
       this.ggMap = this.sanitized.bypassSecurityTrustHtml(res.googleMap);
+      this.description = this.sanitized.bypassSecurityTrustHtml(res.description);
       this.ggMap.setAttribute("style:width", "100%");
     })
   }

@@ -144,7 +144,7 @@
                       <div class="d-flex">
                         <label>Webiste</label>
                         <div>
-                          <a href="{{company.website}}" class="text-primary mb-0">{{company.website}}</a>
+                          <a href="{{company.website}}" class="text-primary text-break mb-0">{{company.website}}</a>
                         </div>
                       </div>
                     </li>
@@ -226,9 +226,8 @@
                   </div><!-- end portfolio -->
                   <div>
                     <h5 class="fs-18 fw-bold">Description</h5>
-                    <p class="text-muted mt-4">
-                      {{company.description}}
-                    </p>
+                    <div [innerHTML]="description">
+                    </div>
                     <div class="mt-4" *ngIf="categories.length!=0">
                       <h5 class="fs-18 fw-bold">Categories</h5>
                       <span class="badge fs-13 bg-soft-blue mt-2"
@@ -312,10 +311,15 @@
                           <div class="mb-3">
                             <label for="description"
                                    class="form-label">Introduce Your Company</label>
-                            <textarea class="form-control" id="description"
-                                      rows="5"
+<!--                            <textarea class="form-control" id="description"-->
+<!--                                      rows="5"-->
+<!--                                      formControlName="description"-->
+<!--                            ></textarea>-->
+                            <ckeditor [editor]="Editor" data="{{company.description}}"
+                                      id = "description"
                                       formControlName="description"
-                            ></textarea>
+                                      class="form-control"
+                            ></ckeditor>
                           </div>
                         </div>
                         <!--end col-->

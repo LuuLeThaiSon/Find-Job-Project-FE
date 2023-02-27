@@ -42,7 +42,9 @@ import {ComingsoonComponent} from "./components/pages/comingsoon/comingsoon.comp
 import {MomentModule} from "ngx-moment";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {GooglePlaceModule} from "ngx-google-places-autocomplete";
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 // import { MomentModule } from 'ngx-moment';
+
 
 
 @NgModule({
@@ -106,6 +108,7 @@ import {GooglePlaceModule} from "ngx-google-places-autocomplete";
       }
     }),
     GooglePlaceModule,
+    CKEditorModule
   ],
 
   providers: [
