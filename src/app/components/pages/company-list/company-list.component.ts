@@ -26,6 +26,9 @@ export class CompanyListComponent {
     })
   }
 
+  scrollTop() {
+    window.scrollTo(0,300)
+  }
 }
 
 export class CountJobs {

@@ -203,7 +203,6 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   }
 
   onSubmit() {
-    // this.commonService.scrollTopWindow(0, 100);
     this.loading = false;
     if (this.imageFile == null) {
       // this.commonService.scrollTopWindow(0, 100);
@@ -214,7 +213,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
       }
       this.companyService.update(this.company, this.companyId).subscribe(() => {
         this.loading = true;
-        // window.scroll(0, 100);
+        window.scroll(0, 300);
         this.showSuccess();
         sessionStorage.setItem("user", JSON.stringify(this.company));
         this.header?.ngOnInit();
@@ -234,7 +233,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
               this.company.googleMap = this.ggMapIframe;
             }
             this.companyService.update(this.company, this.companyId).subscribe(() => {
-              // this.commonService.scrollTopWindow(0, 100);
+              this.commonService.scrollTopWindow(0, 300);
               this.loading = true;
               sessionStorage.setItem("user", JSON.stringify(this.company));
               this.ggMap = this.company.googleMap;

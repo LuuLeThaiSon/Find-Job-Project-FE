@@ -405,6 +405,19 @@ export class JobListComponent implements OnInit {
       this.jobs = res;
       this.displayJobs = res
       this.showFilterResult = true;
+      this.filterJobs.get('salary')?.setValue('allsalary');
+      this.filterJobs.get('years')?.setValue('allyears');
+      this.filterJobs.get('types')?.setValue('alltypes');
+      this.filterJobs.get('gender')?.setValue('any');
+      this.searchJobs.setValue({
+        text:'',
+        location:{
+          l_id:'all_l'
+        },
+        category:{
+          c_id:'all_c'
+        }
+      })
     })
   }
 

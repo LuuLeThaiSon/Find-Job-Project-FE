@@ -132,6 +132,14 @@
                       <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i>
                         ${{j.salaryMin}} - ${{j.salaryMax}} / month</p>
                     </li>
+                    <li class="list-inline-item">
+                      <p class="text-muted fs-14 mb-0"><i class="mdi mdi-clock-outline"></i>
+                        {{j.expiredDate}}</p>
+                    </li>
+                    <li class="list-inline-item">
+                      <p class="text-muted fs-14 mb-0"><i class="mdi mdi-human-male-male"></i>
+                        {{j.quantity}}</p>
+                    </li>
                   </ul>
                   <div class="mt-2">
                     <span class="badge bg-soft-success fs-13 mt-1" *ngIf="j.type">Full time</span>
@@ -563,7 +571,7 @@
           <div class="row" *ngIf="applyJobs.length == 0">
             Empty
           </div>
-          <div class="row" *ngIf="this.jobs.length != 0">
+          <div class="row" *ngIf="applyJobs.length != 0">
             <pagination-controls class="text-center mt-5" (pageChange)="pp = $event">
             </pagination-controls>
           </div><!--end col-->

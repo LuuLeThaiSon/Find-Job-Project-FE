@@ -251,7 +251,8 @@ export class RegisterComponent {
                 this.loading = true
                 setTimeout(() => {
                   this.showSuccess2()
-                }, 3000)
+                }, 3000);
+                this.formRegister.reset();
                 return
               })
             })
@@ -277,6 +278,7 @@ export class RegisterComponent {
           setTimeout(() => {
             this.showSuccess2()
           }, 3000)
+          this.formRegister.reset();
           return
         })
       })
