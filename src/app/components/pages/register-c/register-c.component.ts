@@ -30,7 +30,7 @@ export class RegisterCComponent {
   pathName!: string
   selectedOption: any;
   showPassFields = true;
-  RegexAlphaNumeric = "^[a-zA-Z0-9]{6,8}|[a-zA-Z0-9]{10,12}$"
+  RegexAlphaNumeric = "^[a-zA-Z0-9]{8,10}|[a-zA-Z0-9]{12,14}$"
   showSuccessRegister = true
 
 
@@ -40,8 +40,8 @@ export class RegisterCComponent {
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.pattern(this.RegexAlphaNumeric)]),
-      confirmPassword: new FormControl('', [Validators.required, Validators.min(6), Validators.pattern(this.RegexAlphaNumeric)]),
+      password: new FormControl('', [Validators.required, Validators.pattern(this.RegexAlphaNumeric)]),
+      confirmPassword: new FormControl('', [Validators.required, Validators.pattern(this.RegexAlphaNumeric)]),
       tel: new FormControl('', [Validators.required,Validators.pattern(/^0\d{8,9}$/)]),
       role: new FormGroup({
         id: new FormControl('', )
@@ -125,15 +125,15 @@ export class RegisterCComponent {
         setTimeout(() => {
           this.showSuccess3()
         }, 1000)
-        setTimeout(() => {
-          this.showInfo()
-        }, 2000)
+        // setTimeout(() => {
+        //   this.showInfo()
+        // }, 2000)
         setTimeout(() => {
           this.loading = false
         }, 6000)
-        setTimeout(() => {
-          this.router.navigate(['/login']).finally()
-        }, 9000)
+        // setTimeout(() => {
+        //   this.router.navigate(['/login']).finally()
+        // }, 9000)
         return
       })
     })

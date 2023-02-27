@@ -41,7 +41,7 @@ export class RegisterComponent {
       shortName: new FormControl('',[Validators.required]),
       code: new FormControl(''),
       avatar: new FormControl(''),
-      description: new FormControl(''),
+      description: new FormControl('',[Validators.required]),
       address: new FormControl(''),
       numberOfEmployees: new FormControl(''),
       googleMap: new FormControl(''),
@@ -193,7 +193,7 @@ export class RegisterComponent {
   }
 
   showSuccess2() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'Register Successfully! Pls check your mail box to get password!', key:'ab'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Register Successfully! Check ur mail to get password!', key:'ab'})
   }
 
   showSuccess1() {
@@ -251,10 +251,7 @@ export class RegisterComponent {
                 this.loading = true
                 setTimeout(() => {
                   this.showSuccess2()
-                }, 2000)
-                setTimeout(() => {
-                  this.showInfo()
-                }, 5000)
+                }, 3000)
                 return
               })
             })
@@ -279,10 +276,7 @@ export class RegisterComponent {
           this.loading = true
           setTimeout(() => {
             this.showSuccess2()
-          }, 2000)
-          setTimeout(() => {
-            this.showInfo()
-          }, 5000)
+          }, 3000)
           return
         })
       })
