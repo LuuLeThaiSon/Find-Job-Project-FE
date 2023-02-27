@@ -107,7 +107,7 @@
                                style="color: pink; margin-top: 10px" #a >Minimum of 8 characters</p>
                           </div>
                           <div class="mb-3">
-                            <label for="tel" class="form-label">Tel</label>
+                            <label for="tel" class="form-label">Tel *</label>
                             <input type="text" class="form-control" id="tel"
                                    placeholder="Enter your tel" formControlName="tel" ngModel (change)="checkTel()">
                             <p *ngIf="formRegisterCandidate.get('tel')?.errors?.['required'] && formRegisterCandidate.get('tel')?.touched"
@@ -134,7 +134,7 @@
                           <br/>
 
                           <div class="text-center">
-                            <button type="submit" class="btn btn-white btn-hover w-100">Sign Up</button>
+                            <button type="submit" class="btn btn-white btn-hover w-100" [disabled]="!formRegisterCandidate.valid">Sign Up</button>
                           </div>
                         </form>
                         <div class="mt-3 text-center">

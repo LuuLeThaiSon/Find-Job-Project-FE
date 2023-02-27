@@ -36,18 +36,18 @@ export class RegisterComponent {
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
-      password: new FormControl('', [Validators.required, Validators.min(8)]),
-      tel: new FormControl('', [Validators.required]),
-      shortName: new FormControl('', [Validators.required]),
-      code: new FormControl('', [Validators.required]),
-      avatar: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      address: new FormControl('', [Validators.required]),
-      numberOfEmployees: new FormControl('', [Validators.required]),
-      googleMap: new FormControl('', [Validators.required]),
-      website: new FormControl('', [Validators.required]),
+      password: new FormControl(''),
+      tel: new FormControl(''),
+      shortName: new FormControl('',[Validators.required]),
+      code: new FormControl(''),
+      avatar: new FormControl(''),
+      description: new FormControl('',[Validators.required]),
+      address: new FormControl(''),
+      numberOfEmployees: new FormControl(''),
+      googleMap: new FormControl(''),
+      website: new FormControl(''),
       role: new FormGroup({
-        id: new FormControl('', [Validators.required])
+        id: new FormControl('')
       })
 
     })
@@ -193,7 +193,7 @@ export class RegisterComponent {
   }
 
   showSuccess2() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'Register Successfully! Pls check your mail box to get password!', key:'ab'})
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Register Successfully! Check ur mail to get password!', key:'ab'})
   }
 
   showSuccess1() {
@@ -251,10 +251,7 @@ export class RegisterComponent {
                 this.loading = true
                 setTimeout(() => {
                   this.showSuccess2()
-                }, 2000)
-                setTimeout(() => {
-                  this.showInfo()
-                }, 5000)
+                }, 3000)
                 return
               })
             })
@@ -279,10 +276,7 @@ export class RegisterComponent {
           this.loading = true
           setTimeout(() => {
             this.showSuccess2()
-          }, 2000)
-          setTimeout(() => {
-            this.showInfo()
-          }, 5000)
+          }, 3000)
           return
         })
       })

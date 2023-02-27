@@ -13,6 +13,7 @@ import {CommonService} from "../../service/common.service";
 import {finalize} from "rxjs";
 import {CandidateService} from "../../service/candidate.service";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {MessageService} from "primeng/api";
 
 
 @Component({
@@ -45,7 +46,8 @@ export class ManageCandidateProfileComponent {
               private storage: AngularFireStorage,
               private categoryService: CategoryService,
               private commonService: CommonService,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private messageService: MessageService) {
   }
 
   ngAfterViewInit(): void {
@@ -152,14 +154,10 @@ export class ManageCandidateProfileComponent {
 
     })
     this.formChangePass = new FormGroup({
-      currentPass: new FormControl(''),
-      newPass: new FormControl(''),
-      confirmPass: new FormControl(''),
+      currentPass: new FormControl('',Validators.required),
+      newPass: new FormControl('',Validators.compose([Validators.required, Validators.minLength(8)])),
+      confirmPass: new FormControl('', Validators.required),
     })
-
-
-    console.log(this.description)
-
   }
 
 
@@ -198,7 +196,8 @@ export class ManageCandidateProfileComponent {
       this.candidate = this.formCandidate.value
       this.candidate.avatar = this.path
       this.candidateService.updateCandidate(this.candidate, this.candidateId).subscribe(() => {
-        this.edited = false
+        this.loading = true
+        this.showSuccess();
         sessionStorage.setItem("user", JSON.stringify(this.candidate))
         this.header?.ngOnInit()
         window.scroll(0, 300);
@@ -213,19 +212,18 @@ export class ManageCandidateProfileComponent {
             this.candidate = this.formCandidate.value;
             this.candidate.avatar = url;
             this.candidateService.updateCandidate(this.candidate, this.candidateId).subscribe(() => {
+              this.loading = true
               sessionStorage.setItem("user", JSON.stringify(this.candidate));
               this.edited = false;
               this.commonService.scrollTopWindow(0, 300);
               this.header?.ngOnInit();
+              this.showSuccess()
               this.description = this.sanitized.bypassSecurityTrustHtml(this.candidate.description);
             })
           });
         })
       ).subscribe()
     }
-    setTimeout(() => {
-      this.loading = true;
-    }, 1000);
   }
 
   updateBannerCandidate(event: any) {
@@ -270,7 +268,7 @@ export class ManageCandidateProfileComponent {
     let currentPass = this.formChangePass.get('currentPass')?.value;
     let newPass = this.formChangePass.get('newPass')?.value;
     let confirmPass = this.formChangePass.get('confirmPass')?.value;
-    if (currentPass != this.candidate.password && newPass != confirmPass) {
+    if(currentPass != this.candidate.password && newPass != confirmPass){
       this.passStatus = "Current Password incorrect and New Password not match";
       this.alertChangePass = false;
       this.formChangePass.reset();
@@ -286,24 +284,28 @@ export class ManageCandidateProfileComponent {
     } else {
       this.candidate.password = newPass;
       this.loading = false;
-      this.candidateService.updateCandidate(this.candidate, this.candidateId).subscribe(res => {
+      this.candidateService.updateCandidate(this.candidate,this.candidateId).subscribe(res => {
         // @ts-ignore
         setTimeout(() => {
           this.loading = true;
           this.showSuccessChangePass = false;
 
         }, 2000)
-        setTimeout(() => {
+        setTimeout(()=>{
           this.router.navigate(['/login']).finally()
-        }, 6000)
+        },6000)
       })
     }
   }
 
-  fadein() {
+  fadein(){
     let e = document.getElementById("error-candidate-name"), t = 0, r = setInterval(function () {
       // @ts-ignore
       t < 1 ? (t += .5, e.style.opacity = String(t)) : clearInterval(r)
     }, 200)
+  }
+
+  showSuccess() {
+    this.messageService.add({severity: 'success', summary: 'success', detail: 'Update Successfully'})
   }
 }
