@@ -88,6 +88,7 @@ export class JobListComponent implements OnInit {
       this.displayJobs = JSON.parse(sessionStorage.getItem("arrayFilter"));
       // @ts-ignore
       // sessionStorage.removeItem(sessionStorage.getItem("arrayFilter"))
+      this.showFilterResult = false;
     } else {
       this.findAllByStatusIsTrueAndAndExpiredDate()
 
@@ -200,6 +201,7 @@ export class JobListComponent implements OnInit {
     this.filterExpYears(years);
     this.filterJobTypes(types);
     this.filterJobGender(gender);
+    this.showFilterResult = false;
   }
 
   filterSalary(salary: string) {
@@ -331,6 +333,7 @@ export class JobListComponent implements OnInit {
       return this.jobService.findJobsByTitleContainingOrCompanyName(text).subscribe((data) => {
         this.jobs = data;
         this.displayJobs = this.jobs;
+        this.showFilterResult = false;
       })
     }
 
@@ -338,6 +341,7 @@ export class JobListComponent implements OnInit {
       return this.jobService.findJobsByLocationId(location.l_id).subscribe((data) => {
         this.jobs = data;
         this.displayJobs = this.jobs;
+        this.showFilterResult = false;
       })
     }
 
@@ -345,6 +349,7 @@ export class JobListComponent implements OnInit {
       return this.jobService.findJobsByCategoryId(category.c_id).subscribe((data) => {
         this.jobs = data;
         this.displayJobs = this.jobs;
+        this.showFilterResult = false;
       })
     }
 
@@ -352,6 +357,7 @@ export class JobListComponent implements OnInit {
       return this.jobService.findJobsByTitleContainingAndLocationId(text, location.l_id).subscribe((data) => {
         this.jobs = data;
         this.displayJobs = this.jobs;
+        this.showFilterResult = false;
       })
     }
 
@@ -359,6 +365,7 @@ export class JobListComponent implements OnInit {
       return this.jobService.findJobsByTitleContainingAndCategoryId(text, category.c_id).subscribe((data) => {
         this.jobs = data;
         this.displayJobs = this.jobs;
+        this.showFilterResult = false;
       })
     }
 
@@ -366,6 +373,7 @@ export class JobListComponent implements OnInit {
       return this.jobService.findJobsByLocationIdAndCategoryId(location.l_id, category.c_id).subscribe((data) => {
         this.jobs = data;
         this.displayJobs = this.jobs;
+        this.showFilterResult = false;
       })
     }
 
@@ -373,11 +381,16 @@ export class JobListComponent implements OnInit {
       return this.jobService.findJobsByTitleAndLocationAndCompany(text, location.l_id, category.c_id).subscribe((data) => {
         this.jobs = data;
         this.displayJobs = this.jobs;
+        this.showFilterResult = false;
       })
     }
 
     if (text == null && location.l_id == "all_l" && category.c_id == "all_c") {
-      return this.ngOnInit();
+      return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
+        this.jobs = data;
+        this.displayJobs = this.jobs;
+        this.showFilterResult = false;
+      })
     }
 
 
@@ -387,9 +400,11 @@ export class JobListComponent implements OnInit {
   @ViewChild('formSearchJobTopBar') formSearchJobTopBar: ElementRef | undefined;
 
   reset() {
+    this.showFilterResult = true;
     this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe(res => {
       this.jobs = res;
       this.displayJobs = res
+      this.showFilterResult = true;
     })
   }
 
@@ -420,5 +435,9 @@ export class JobListComponent implements OnInit {
     }, 3000)
     this.router.navigate(["/register"])
   }
+
+  //show search result
+  showFilterResult = true;
+
 
 }

@@ -12,6 +12,7 @@ import {NotifyType} from "../../model/notify-type";
 import {Notify} from "../../model/notify";
 import {NotifyService} from "../../service/notify.service";
 import {MessageService} from "primeng/api";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 
 @Component({
@@ -45,6 +46,8 @@ export class BookmarksJobsComponent implements OnInit {
   rejectJob!: Job | undefined;
 
   jobStatus!: Boolean;
+//ckEditor
+  public Editor = ClassicEditor;
 
   ngOnInit(): void {
     // @ts-ignore
@@ -103,7 +106,7 @@ export class BookmarksJobsComponent implements OnInit {
 
   delete(id: number) {
     return this.jobService.deleteJob(id).subscribe(() => {
-      this.messageService.add({severity:'success', summary: 'Delete', detail: 'Successfully!'});
+      this.messageService.add({severity: 'success', summary: 'Delete', detail: 'Successfully!'});
       this.ngOnInit();
     })
   }
@@ -115,9 +118,9 @@ export class BookmarksJobsComponent implements OnInit {
   blockJob(job: Job) {
     return this.jobService.blockJob(job.id, job).subscribe(() => {
       if (job.status) {
-        this.messageService.add({severity:'success', summary: 'Block', detail: 'Successfully!'});
+        this.messageService.add({severity: 'success', summary: 'Block', detail: 'Successfully!'});
       } else {
-        this.messageService.add({severity:'success', summary: 'UnBlock', detail: 'Successfully!'});
+        this.messageService.add({severity: 'success', summary: 'UnBlock', detail: 'Successfully!'});
       }
       this.findAll();
 
@@ -151,7 +154,7 @@ export class BookmarksJobsComponent implements OnInit {
         this.findAll();
         this.btnModal.nativeElement.click();
         this.jobForm.reset();
-        this.messageService.add({severity:'success', summary: 'Create', detail: 'Successfully!'});
+        this.messageService.add({severity: 'success', summary: 'Create', detail: 'Successfully!'});
       });
     } else {
       this.job.status = this.jobStatus;
@@ -159,7 +162,7 @@ export class BookmarksJobsComponent implements OnInit {
         this.findAll();
         this.btnModal.nativeElement.click();
         this.jobForm.reset();
-        this.messageService.add({severity:'success', summary: 'Update', detail: 'Successfully!'});
+        this.messageService.add({severity: 'success', summary: 'Update', detail: 'Successfully!'});
       });
     }
 
@@ -214,7 +217,7 @@ export class BookmarksJobsComponent implements OnInit {
         // @ts-ignore
         document.getElementById(id).setAttribute("hidden", 'true');
         this.sendNotify(4, this.rejectJob)
-        this.messageService.add({severity:'success', summary: 'Reject', detail: 'Successfully!'});
+        this.messageService.add({severity: 'success', summary: 'Reject', detail: 'Successfully!'});
       })
     })
 
@@ -228,7 +231,7 @@ export class BookmarksJobsComponent implements OnInit {
       // @ts-ignore
       document.getElementById('reject' + applyJob.id).setAttribute("disabled", 'true');
       this.sendNotify(3, applyJob.job)
-      this.messageService.add({severity:'success', summary: 'Accept', detail: 'Successfully!'});
+      this.messageService.add({severity: 'success', summary: 'Accept', detail: 'Successfully!'});
 
     })
   }
@@ -262,6 +265,6 @@ export class BookmarksJobsComponent implements OnInit {
   @ViewChild('profile') profile: ElementRef;
 
   showInfo() {
-    this.messageService.add({severity:'success', summary: 'Info', detail: 'Message Content'});
+    this.messageService.add({severity: 'success', summary: 'Info', detail: 'Message Content'});
   }
 }

@@ -42,7 +42,14 @@
   <section class="section">
     <div class="container">
       <div class="row mt-4">
-        <div class="col-lg-12">
+        <div class="col-lg-12" *ngIf="this.jobs.length == 0">
+          <div class="mt-4">
+            <h6 class="fs-22 text-center">There are no result</h6>
+          </div>
+        </div>
+      </div><!--end col-->
+      <div class="row mt-4">
+        <div class="col-lg-12" *ngIf="this.jobs.length != 0">
           <div class="mt-4">
             <h6 class="fs-16">Showing all results</h6>
           </div>
@@ -58,6 +65,7 @@
                 <div class="col-lg-2">
                   <a href="" [routerLink]="['/company-detail/', j.company.id]">
                     <img
+                      height="55" width="55"
                       src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                       alt="" class="img-fluid rounded-3"></a>
                 </div>
@@ -73,7 +81,8 @@
                         <p class="text-muted fs-14 mb-0"><i class="mdi mdi-map-marker"></i> {{j.location.name}}</p>
                       </li>
                       <li class="list-inline-item">
-                        <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> ${{j.salaryMin}} - ${{j.salaryMax}}
+                        <p class="text-muted fs-14 mb-0"><i class="uil uil-wallet"></i> ${{j.salaryMin}} -
+                          ${{j.salaryMax}}
                           /month
                         </p>
                       </li>
@@ -87,25 +96,29 @@
               </div><!--end row-->
             </div>
             <div class="p-3 bg-light">
-              <div class="row justify-content-between">
-                <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-10">
                   <div>
-                    <ul class="list-inline mb-0">
-                      <li class="list-inline-item"><i class="uil uil-tag"></i> Keywords :</li>
-                      <li class="list-inline-item"><a href="javascript:void(0)"
-                                                      class="primary-link text-muted">{{j.position}}</a></li>
-                    </ul>
+                    <p class="text-muted mb-0"><span
+                      class="text-dark">Experience :</span> {{j?.expYear}}+ years</p>
                   </div>
                 </div>
+                <!--end col-->
+                <div class="col-lg-2 col-md-2">
+                  <div class="text-start text-md-end">
+                    <a href="" (click)="openCancelModal(j.id)" data-bs-toggle="modal" class="primary-link"
+                    >Cancel Job<i
+                      class="mdi mdi-chevron-double-right"></i></a>
+                  </div>
+                </div>
+                <!--end col-->
               </div>
               <!--end row-->
             </div>
           </div>
           <!--end job-box-->
 
-
-
-          <div class="row">
+          <div class="row" *ngIf="this.jobs.length != 0">
             <pagination-controls class="text-center mt-5" (pageChange)="p = $event">
             </pagination-controls>
           </div><!--end col-->
@@ -121,55 +134,38 @@
 <!-- End Page-content -->
 <app-footer></app-footer>
 
+<p-toast position="top-right"></p-toast>
 
-show notification
-<p-toast></p-toast>
-<p-toast position="top-left" key="tl"></p-toast>
-<p-toast position="top-center" key="tc"></p-toast>
-<p-toast position="bottom-center" key="bc"></p-toast>
-
-<p-toast position="bottom-center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
-  <ng-template let-message pTemplate="message">
-    <div class="flex flex-column" style="flex: 1">
-      <div class="text-center">
-        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
-        <h4>{{message.summary}}</h4>
-        <p>{{message.detail}}</p>
+<!-- Reject Job Modal -->
+<button type="button" class="btn btn-primary waves-effect waves-light"
+   id="openCancelModal"
+   hidden="true"
+   data-bs-toggle="modal" data-bs-target="#cancelJobModal"></button>
+<div class="modal fade" id="cancelJobModal" tabindex="-1" aria-labelledby="deleteModal"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Cancel Job</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="grid p-fluid">
-        <div class="col-6">
-          <button type="button" pButton (click)="onConfirm()" label="Yes" class="p-button-success"></button>
+      <div class="modal-body">
+        <div>
+          <h6 class="text-danger"><i
+            class="uil uil-exclamation-triangle"></i> Are you sure to cancel?
+          </h6>
         </div>
-        <div class="col-6">
-          <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Cancel
+        </button>
+
+        <button type="button" class="btn btn-danger btn-sm"
+                data-bs-dismiss="modal"
+                (click)="deleteJobId(modalId)">Yes, reject it
+        </button>
       </div>
     </div>
-  </ng-template>
-</p-toast>
-
-<div class="card">
-  <h5>Severities</h5>
-  <button type="button" pButton pRipple (click)="showSuccess()" label="Success" class="p-button-success mb-2"></button>
-  <button type="button" pButton pRipple (click)="showInfo()" label="Info" class="p-button-info mb-2"></button>
-  <button type="button" pButton pRipple (click)="showWarn()" label="Warn" class="p-button-warning mb-2"></button>
-  <button type="button" pButton pRipple (click)="showError()" label="Error" class="p-button-danger mb-2"></button>
-
-  <h5>Positions</h5>
-  <button type="button" pButton pRipple (click)="showTopLeft()" label="Top Left"></button>
-  <button type="button" pButton pRipple (click)="showTopCenter()" label="Top Center" class="p-button-warning"></button>
-  <button type="button" pButton pRipple (click)="showBottomCenter()" label="Bottom Center"
-          class="p-button-success"></button>
-
-  <h5>Multiple</h5>
-  <button type="button" pButton pRipple (click)="showMultiple()" label="Multiple" class="p-button-warning"></button>
-  <button type="button" pButton pRipple (click)="showSticky()" label="Sticky"></button>
-
-  <h5>Clear</h5>
-  <button type="button" pButton pRipple (click)="clear()" icon="pi pi-times" label="Clear"></button>
-
-  <h5>Template</h5>
-  <button type="button" pButton pRipple (click)="showConfirm()" label="Confirm" class="ui-button-warning"></button>
+  </div>
 </div>
-
-
+<!-- END Reject Job MODAL -->

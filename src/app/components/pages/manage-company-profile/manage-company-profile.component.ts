@@ -17,7 +17,7 @@ import {GooglePlaceDirective} from "ngx-google-places-autocomplete";
 import {Address} from "ngx-google-places-autocomplete/objects/address";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-
+const api = "AIzaSyAAI5c0zilqeIi3E9b9h1cedWZlcj9KghA"
 @Component({
   selector: 'app-manage-company-profile',
   templateUrl: './manage-company-profile.component.html',
@@ -371,10 +371,7 @@ export class ManageCompanyProfileComponent implements AfterViewInit {
   public handleAddressChange(address: Address) {
     console.log(address);
     this.mapUrl = address.url;
-    console.log(this.mapUrl)
-    console.log(address.geometry.location.lat())
-    console.log(address.geometry.location.lng())
-    this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBMMLA5z_Ao7TeeGKaWMmLxGZSvm0T6-8Y&q="+address.formatted_address+"&zoom=15"
+    this.mapUrl = "https://www.google.com/maps/embed/v1/place?key=" +api+ "&q=" + address.formatted_address+"&zoom=15"
     console.log(this.mapUrl)
     this.ggMapIframe = `<iframe src="`+this.mapUrl+`"></iframe>`
     this.ggMapEmbed = this.sanitized.bypassSecurityTrustHtml(this.ggMapIframe);

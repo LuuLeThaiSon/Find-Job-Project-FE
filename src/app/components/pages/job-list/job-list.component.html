@@ -61,6 +61,9 @@
                 aria-label="Close">
         </button>
       </div>
+      <div class="alert bg-soft-success alert fade show" role="alert" [hidden]="showFilterResult">
+        There are {{displayJobs.length}} results !
+      </div>
       <div class="row">
         <div class="col-lg-9">
           <div class="me-lg-5">
@@ -250,7 +253,7 @@
                   </div>
                   <div class="p-3 bg-light">
                     <div class="row justify-content-between">
-                      <div class="col-md-5">
+                      <div class="col-md-3">
                         <div>
                           <p class="text-muted mb-0"><span
                             class="text-dark">Experience:</span> {{j.expYear == 0 ? 'Not Required' : j.expYear + '+ years'}}
@@ -280,9 +283,17 @@
                         </div>
                       </div>
                       <!--end col-->
+                      <div class="col-md-2">
+                        <div class="text-start text-md-end">
+                          <a href="" [routerLink]="['/job-detail/',j.id]" data-bs-toggle="modal" class="link-purple">Details <i
+                            class="mdi mdi-chevron-double-right"></i></a>
+                        </div>
+                      </div>
+                      <!--end col-->
                     </div>
                     <!--end row-->
                   </div>
+
                 </div>
                 <!--end job-box-->
               </div>
@@ -465,7 +476,7 @@
               </div>
             </div>
             <!-- End Job-list -->
-            <div class="row">
+            <div class="row" *ngIf="displayJobs.length != 0">
               <pagination-controls class="text-center mt-5" (pageChange)="p = $event" (click)="scrollTop()">
               </pagination-controls>
             </div><!-- end row -->

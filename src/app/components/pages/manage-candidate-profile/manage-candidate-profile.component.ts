@@ -12,6 +12,8 @@ import {Candidate} from "../../model/candidate";
 import {CommonService} from "../../service/common.service";
 import {finalize} from "rxjs";
 import {CandidateService} from "../../service/candidate.service";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 @Component({
   selector: 'app-manage-candidate-profile',
@@ -30,6 +32,9 @@ export class ManageCandidateProfileComponent {
   edited!: boolean;
   imageBannerFile: any;
   pathBannerName!: string;
+//ckEditor
+  public Editor = ClassicEditor;
+
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
@@ -142,13 +147,19 @@ export class ManageCandidateProfileComponent {
     })
     this.companyService.findCandidate(this.candidateId).subscribe(res => {
       this.candidate = res;
-      this.formCandidate.patchValue(res)
+      this.formCandidate.patchValue(res);
+      this.description = this.sanitized.bypassSecurityTrustHtml(this.candidate.description);
+
     })
     this.formChangePass = new FormGroup({
       currentPass: new FormControl(''),
       newPass: new FormControl(''),
       confirmPass: new FormControl(''),
     })
+
+
+    console.log(this.description)
+
   }
 
 
@@ -191,6 +202,7 @@ export class ManageCandidateProfileComponent {
         sessionStorage.setItem("user", JSON.stringify(this.candidate))
         this.header?.ngOnInit()
         window.scroll(0, 300);
+        this.description = this.sanitized.bypassSecurityTrustHtml(this.candidate.description);
       })
     } else {
       const imagePath = `image/${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
@@ -205,6 +217,7 @@ export class ManageCandidateProfileComponent {
               this.edited = false;
               this.commonService.scrollTopWindow(0, 300);
               this.header?.ngOnInit();
+              this.description = this.sanitized.bypassSecurityTrustHtml(this.candidate.description);
             })
           });
         })
@@ -245,8 +258,10 @@ export class ManageCandidateProfileComponent {
   alertChangePass = true;
   showPassFields = true;
   showSuccessChangePass = true;
+  //ckEditor
+  description: any;
 
-  showPass(){
+  showPass() {
     this.showPassFields = !this.showPassFields;
   }
 
@@ -255,7 +270,7 @@ export class ManageCandidateProfileComponent {
     let currentPass = this.formChangePass.get('currentPass')?.value;
     let newPass = this.formChangePass.get('newPass')?.value;
     let confirmPass = this.formChangePass.get('confirmPass')?.value;
-    if(currentPass != this.candidate.password && newPass != confirmPass){
+    if (currentPass != this.candidate.password && newPass != confirmPass) {
       this.passStatus = "Current Password incorrect and New Password not match";
       this.alertChangePass = false;
       this.formChangePass.reset();
@@ -271,21 +286,21 @@ export class ManageCandidateProfileComponent {
     } else {
       this.candidate.password = newPass;
       this.loading = false;
-      this.candidateService.updateCandidate(this.candidate,this.candidateId).subscribe(res => {
+      this.candidateService.updateCandidate(this.candidate, this.candidateId).subscribe(res => {
         // @ts-ignore
         setTimeout(() => {
           this.loading = true;
           this.showSuccessChangePass = false;
 
         }, 2000)
-        setTimeout(()=>{
+        setTimeout(() => {
           this.router.navigate(['/login']).finally()
-        },6000)
+        }, 6000)
       })
     }
   }
 
-  fadein(){
+  fadein() {
     let e = document.getElementById("error-candidate-name"), t = 0, r = setInterval(function () {
       // @ts-ignore
       t < 1 ? (t += .5, e.style.opacity = String(t)) : clearInterval(r)

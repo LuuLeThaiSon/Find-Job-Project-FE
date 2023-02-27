@@ -11,6 +11,7 @@ import {NotifyType} from "../../model/notify-type";
 import {NotifyService} from "../../service/notify.service";
 import {Notify} from "../../model/notify";
 import {MessageService} from "primeng/api";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-job-detail',
@@ -42,7 +43,8 @@ export class JobDetailComponent {
               private applyJobService: ApplyJobService,
               private storage: AngularFireStorage,
               private notifyService: NotifyService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private sanitized: DomSanitizer,) {
     this.activatedRoute.params.subscribe(params => {
       this.jobId = params['id'];
       this.findOne(this.jobId);
@@ -73,6 +75,7 @@ export class JobDetailComponent {
   findOne(id: number) {
     return this.jobService.findOne(id).subscribe((data) => {
       this.job = data;
+      this.description = this.sanitized.bypassSecurityTrustHtml(data.description);
       if(this.role == 0) {
         return
       } else {
@@ -165,4 +168,5 @@ export class JobDetailComponent {
 
   //loading screen
   loading = true;
+  description: any;
 }

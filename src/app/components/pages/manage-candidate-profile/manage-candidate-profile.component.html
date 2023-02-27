@@ -122,9 +122,7 @@
                   </div><!-- end portfolio -->
                   <div>
                     <h5 class="fs-18 fw-bold">Description</h5>
-                    <p class="text-muted mt-4">
-                      {{candidate.description}}
-                    </p>
+                    <div [innerHTML]="description"></div>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -194,9 +192,14 @@
                           <div class="mb-3">
                             <label for="exampleFormControlTextarea1"
                                    class="form-label">Introduce Yourself</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1"
+<!--                            <textarea class="form-control" id="exampleFormControlTextarea1"-->
+<!--                                      formControlName="description"-->
+<!--                                      rows="5">{{candidate.description}}.</textarea>-->
+                            <ckeditor [editor]="Editor" data="{{candidate.description}}"
+                                      id = "exampleFormControlTextarea1"
                                       formControlName="description"
-                                      rows="5">{{candidate.description}}.</textarea>
+                                      class="form-control"
+                            ></ckeditor>
                           </div>
                         </div>
                       </div>

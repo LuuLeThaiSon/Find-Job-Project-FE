@@ -429,10 +429,15 @@
                 <div class="mb-3">
                   <label for="description"
                          class="form-label">Job description <span style="color: red">*</span></label>
-                  <textarea class="form-control"
-                            id="description"
-                            rows="5" formControlName="description" style="height: 50px">
-                  </textarea>
+<!--                  <textarea class="form-control"-->
+<!--                            id="description"-->
+<!--                            rows="5" formControlName="description" style="height: 50px">-->
+<!--                  </textarea>-->
+                  <ckeditor [editor]="Editor" data="{{job.description}}"
+                            id = "description"
+                            formControlName="description"
+                            class="form-control"
+                  ></ckeditor>
                   <div *ngIf="jobForm.get('description')?.errors?.['required'] && jobForm.get('description')?.touched"
                        class="alert  bg-soft-danger mt-1" role="alert">
                     Required
