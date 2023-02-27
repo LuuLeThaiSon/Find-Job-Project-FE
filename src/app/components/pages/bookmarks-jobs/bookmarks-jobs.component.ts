@@ -23,6 +23,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class BookmarksJobsComponent implements OnInit {
   dateCurrent = new Date()
   minDate?: string;
+  pp!: number;
 
   user!: any;
   role!: any;

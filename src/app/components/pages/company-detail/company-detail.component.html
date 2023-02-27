@@ -177,11 +177,12 @@
 
               <div id="currentOpeningJobs" *ngIf="currentOpeningJobs.length != 0">
                 <h6 class="fs-17 fw-medium mb-4">Current Opening</h6>
-                <div class="job-box card mt-4" *ngFor="let j of currentOpeningJobs">
+                <div class="job-box card mt-4" *ngFor="let j of currentOpeningJobs|paginate: { itemsPerPage: 3, currentPage: p }">
                   <div class="p-4">
                     <div class="row">
                       <div class="col-lg-2">
                         <img
+                          height="55" width="55"
                           src="{{j.company.avatar?j.company.avatar : 'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                           alt="" class="img-fluid rounded-3">
                       </div>
@@ -244,6 +245,10 @@
                   <!--                  </div>-->
                 </div><!--end job-box-->
               </div>
+              <div class="row" *ngIf="currentOpeningJobs.length != 0">
+                <pagination-controls class="text-center mt-5" (pageChange)="p = $event">
+                </pagination-controls>
+              </div><!--end col-->
             </div><!-- card body end -->
           </div><!--end card-->
         </div><!--end col-->

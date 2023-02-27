@@ -24,6 +24,7 @@ export class CompanyDetailComponent {
   ggMap!: any;
   categories!: Category[];
   description: any;
+  p!:number;
 
   constructor(private activatedRoute: ActivatedRoute,
               private companyService: CompanyService,

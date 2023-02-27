@@ -59,7 +59,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="job-box card mt-4"
-               *ngFor="let j of jobs | paginate: { itemsPerPage: 2, currentPage: p }| search: searchText,index as i">
+               *ngFor="let j of jobs | paginate: { itemsPerPage: 5, currentPage: p }| search: searchText,index as i">
             <div class="p-4">
               <div class="row">
                 <div class="col-lg-2">
@@ -121,7 +121,7 @@
           <div class="row" *ngIf="this.jobs.length != 0">
             <pagination-controls class="text-center mt-5" (pageChange)="p = $event">
             </pagination-controls>
-          </div><!--end col-->
+          </div><!--end row-->
         </div><!-- end row -->
 
         <!--end container-->
@@ -138,9 +138,9 @@
 
 <!-- Reject Job Modal -->
 <button type="button" class="btn btn-primary waves-effect waves-light"
-   id="openCancelModal"
-   hidden="true"
-   data-bs-toggle="modal" data-bs-target="#cancelJobModal"></button>
+        id="openCancelModal"
+        hidden="true"
+        data-bs-toggle="modal" data-bs-target="#cancelJobModal"></button>
 <div class="modal fade" id="cancelJobModal" tabindex="-1" aria-labelledby="deleteModal"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

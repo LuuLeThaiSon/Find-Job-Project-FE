@@ -152,7 +152,7 @@
               <div class="row align-items-center">
                 <div class="col-md-2">
                   <div class="text-center mb-4 mb-md-0">
-                    <a href="company-details.html"><img
+                    <a href=""><img
                       height="55" width="55"
                       src="{{j.company.avatar}}" alt=""
                       class="img-fluid rounded-3"></a>
@@ -216,6 +216,14 @@
                     <p class="text-muted mb-0"><span
                       class="text-dark">Expired Date:</span>
                       {{j.expiredDate}} </p>
+                  </div>
+                </div>
+                <!--end col-->
+                <div class="col-md-2">
+                  <div class="text-start text-md-end">
+                    <a href="" [routerLink]="['/job-detail', j.id]"
+                       (click)="onTop(0, 600)" class="link-purple">Details <i
+                      class="mdi mdi-chevron-double-right"></i></a>
                   </div>
                 </div>
                 <!--end col-->

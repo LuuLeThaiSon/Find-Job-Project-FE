@@ -365,6 +365,7 @@
                       <div class="col-md-2">
                         <div class="text-center mb-4 mb-md-0">
                           <a href="" [routerLink]="['/company-detail/',j.company.id]"><img
+                            width="55" height="55"
                             src="{{j.company.avatar?j.company.avatar:'https://res.cloudinary.com/dunsguide/image/upload/b_white,c_pad,d_defaults:default_company_logo.png,dpr_auto,h_180,w_180/v1/defaults/default_company_logo.png'}}"
                             alt=""
                             class="img-fluid rounded-3"></a>
@@ -1063,7 +1064,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
-        <p class="text-dark">To access the content, you need to <a type="button" (click)="toLoginPage()">Sign In</a>  or <a href="" (click)="toRegisterPage()">Sign Up</a>
+        <p class="text-dark">To access the content, you need to <a class="text-primary" type="button" (click)="toLoginPage()">Sign In</a>  or <a class="text-primary" type="button" (click)="toRegisterPage()">Sign Up</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary waves-effect btn-sm" data-bs-dismiss="modal">Close</button>

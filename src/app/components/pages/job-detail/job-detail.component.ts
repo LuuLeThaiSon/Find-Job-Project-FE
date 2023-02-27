@@ -67,7 +67,7 @@ export class JobDetailComponent {
   }
 
   findALl() {
-    return this.jobService.findAll().subscribe((data) => {
+    return this.jobService.findAllByStatusIsTrueAndAndExpiredDate().subscribe((data) => {
       this.jobs = data;
     })
   }
@@ -105,7 +105,7 @@ export class JobDetailComponent {
       this.decline = false;
       this.findALl();
       this.flag = false;
-      this.messageService.add({severity:'success', summary: 'Error', detail: 'Cancel successfully'});
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'Cancel successfully'});
       this.sendNotify(2, this.job)
     });
   }
@@ -135,7 +135,7 @@ export class JobDetailComponent {
           this.applyJobService.save(this.applyJob).subscribe(() => {
             this.findOne(this.jobId)
             this.btnModal.nativeElement.click();
-            this.messageService.add({severity:'success', summary: 'Error', detail: 'Apply successfully'});
+            this.messageService.add({severity:'success', summary: 'Success', detail: 'Apply successfully'});
             this.sendNotify(1, this.job);
           })
           this.loading = true;
