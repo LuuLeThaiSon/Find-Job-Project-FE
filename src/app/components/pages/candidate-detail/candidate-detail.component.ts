@@ -124,7 +124,8 @@ export class CandidateDetailComponent {
       this.candidateId = params['id'];
     });
     this.candidateService.findOneCandidate(this.candidateId).subscribe((data) => {
-      this.candidate = data
+      this.candidate = data;
+      this.description = this.sanitized.bypassSecurityTrustHtml(data.description);
     })
   }
 
@@ -132,6 +133,7 @@ export class CandidateDetailComponent {
   header: HeaderComponent | undefined;
 
   loading!: boolean;
+  description: any;
 
 
 

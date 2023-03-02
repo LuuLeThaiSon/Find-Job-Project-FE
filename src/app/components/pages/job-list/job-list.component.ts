@@ -82,7 +82,7 @@ export class JobListComponent implements OnInit {
     })
 
     if (sessionStorage.getItem("arrayFilter") != null) {
-// @ts-ignore
+      // @ts-ignore
       this.jobs = JSON.parse(sessionStorage.getItem("arrayFilter")) as any;
       // @ts-ignore
       this.displayJobs = JSON.parse(sessionStorage.getItem("arrayFilter"));
@@ -405,6 +405,7 @@ export class JobListComponent implements OnInit {
       this.jobs = res;
       this.displayJobs = res
       this.showFilterResult = true;
+      sessionStorage.removeItem('arrayFilter')
       this.filterJobs.get('salary')?.setValue('allsalary');
       this.filterJobs.get('years')?.setValue('allyears');
       this.filterJobs.get('types')?.setValue('alltypes');

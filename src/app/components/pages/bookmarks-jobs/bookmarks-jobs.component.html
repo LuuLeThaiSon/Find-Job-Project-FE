@@ -496,7 +496,7 @@
       <div class="modal-body">
         <div class="candidate-list">
           <div class="row" *ngIf="applyJobs.length != 0">
-            <div id="{{aj.id}}" class="col-lg-4 col-md-6" *ngFor="let aj of applyJobs|paginate: { itemsPerPage: 6, currentPage: pp }">
+            <div id="{{aj.id}}" class="col-lg-4 col-md-6" *ngFor="let aj of applyJobs">
               <div class="candidate-grid-box bookmark-post card mt-4">
                 <div class="card-body p-4">
                   <div class="d-flex mb-4">
@@ -507,7 +507,7 @@
                         class="avatar-md rounded">
                     </div>
                     <div class="ms-3">
-                      <a href="candidate-details.html" class="primary-link"><h5 class="fs-17">
+                      <a href="" class="primary-link"><h5 class="fs-17">
                         {{aj.candidate?.name}}</h5></a>
                       <span class="badge bg-soft-secondary fs-13">Email: {{aj.candidate?.email}}</span> <br>
                       <span class="badge bg-soft-secondary fs-13">Phone number: {{aj.candidate?.tel}}</span>
@@ -571,10 +571,10 @@
           <div class="row" *ngIf="applyJobs.length == 0">
             Empty
           </div>
-          <div class="row" *ngIf="applyJobs.length != 0">
-            <pagination-controls class="text-center mt-5" (pageChange)="pp = $event">
-            </pagination-controls>
-          </div><!--end col-->
+<!--          <div class="row" *ngIf="applyJobs.length != 0">-->
+<!--            <pagination-controls class="text-center mt-5" (pageChange)="pp = $event">-->
+<!--            </pagination-controls>-->
+<!--          </div>&lt;!&ndash;end col&ndash;&gt;-->
         </div><!--end candidate-list-->
       </div>
       <div class="modal-footer">
