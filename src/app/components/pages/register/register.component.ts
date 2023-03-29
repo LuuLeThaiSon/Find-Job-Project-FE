@@ -8,6 +8,9 @@ import {finalize} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {HeaderComponent} from "../../common/header/header.component";
 import {MessageService} from "primeng/api";
+import {environments} from "../../../../environment/enviroments";
+
+const apiUrlFE = environments.apiUrlFE
 
 @Component({
   selector: 'app-register',
@@ -237,7 +240,7 @@ export class RegisterComponent {
             this.passwordSender.subject = 'Congratulation you become a company!'
             // @ts-ignore
             this.passwordSender.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>" + "Click here to go to your login page: " +
-              "<a href=\"http://localhost:4200/login\">Login Now!</a>",
+              "<a href=\"" + apiUrlFE + "/login\">Login Now!</a>",
               "text/html"
             this.company = this.formRegister.value
             this.company.status = true
@@ -263,7 +266,7 @@ export class RegisterComponent {
       this.passwordSender.to = this.formRegister.get('email')?.value
       this.passwordSender.subject = 'Congratulation you become a company!'
       this.passwordSender.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>" + "Click here to go to your login page: " +
-        "<a href=\"http://localhost:4200/login\">Login Now!</a>" + "<br/>" + "<p>Password is:  </p>" +  (Math.random() + 1).toString(36).substring(2),
+        "<a href=\"" + apiUrlFE + "/login\">Login Now!</a>" + "<br/>" + "<p>Password is:  </p>" +  (Math.random() + 1).toString(36).substring(2),
         "text/html"
       this.company = this.formRegister.value
       this.company.status = true

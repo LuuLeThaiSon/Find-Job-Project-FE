@@ -25,6 +25,6 @@ export class CandidateService {
   }
 
   findOneCandidate(id: number): Observable<Candidate> {
-    return this.httpClient.get<Candidate>("http://localhost:8080/candidates/" + id)
+    return this.httpClient.get<Candidate>(`${apiUrl}/candidates/` + id)
   }
 }

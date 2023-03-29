@@ -21,7 +21,7 @@ export class CompanyService {
   }
 
   findAll(): Observable<Company[]> {
-    return this.httpClient.get<Company[]>("http://localhost:8080/companies")
+    return this.httpClient.get<Company[]>(`${apiUrl}/companies`)
   }
 
   findAllCompany(): Observable<Company[]> {

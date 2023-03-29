@@ -10,7 +10,9 @@ import messaging = firebase.messaging;
 import {HeaderComponent} from "../../common/header/header.component";
 import {MessageService} from "primeng/api";
 import {getMatIconFailedToSanitizeLiteralError} from "@angular/material/icon";
+import {environments} from "../../../../environment/enviroments";
 
+const apiUrlFE = environments.apiUrlFE
 
 @Component({
   selector: 'app-register-c',
@@ -108,8 +110,9 @@ export class RegisterCComponent {
     this.htmlSend.to = this.formRegisterCandidate.get('email')?.value
     this.htmlSend.subject = 'Register Successfully!'
     // @ts-ignore
-    this.htmlSend.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>" + "Click here to go to your login page: " +
-      "<a href=\"http://localhost:4200/login\">Login Now!</a>",
+    this.htmlSend.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>"
+      + "Click here to go to your login page: "
+      + "<a href=\"" + apiUrlFE + "/login\">Login Now!</a>",
       "text/html"
     this.loading = false
     this.companyService.getNotificationCandidateGmail(this.htmlSend).subscribe((data) => {
