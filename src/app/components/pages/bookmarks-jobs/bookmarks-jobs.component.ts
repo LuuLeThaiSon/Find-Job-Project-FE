@@ -190,19 +190,17 @@ export class BookmarksJobsComponent implements OnInit {
   }
 
   validateSalary() {
-    // @ts-ignore
-    this.salaryMax = +document.getElementById('salaryMax').value
-    if (this.salaryMax < this.salaryMin) {
-      this.salary = true;
-    } else {
-      this.salary = false;
-    }
+    const salaryMaxElement = document.getElementById('salaryMax') as HTMLInputElement;
+    this.salaryMax = +salaryMaxElement.value;
+    this.salary = this.salaryMax < this.salaryMin;
   }
 
+
   getSalaryMin() {
-    // @ts-ignore
-    this.salaryMin = +document.getElementById('salaryMin').value;
+    const salaryMinElement = document.getElementById('salaryMin') as HTMLInputElement;
+    this.salaryMin = +salaryMinElement.value;
   }
+
 
   findAllApplyJobByJob(id: number) {
     return this.applyjobService.findAllApplyJobByJob(id).subscribe((data) => {
@@ -215,32 +213,36 @@ export class BookmarksJobsComponent implements OnInit {
       this.rejectJob = data.job;
       this.applyjobService.removeApplyJob(id).subscribe(() => {
         this.findAllApplyJobByJob(id);
-        // @ts-ignore
-        document.getElementById(id).setAttribute("hidden", 'true');
-        this.sendNotify(4, this.rejectJob)
+        const element = document.getElementById(id);
+        if (element) {
+          element.setAttribute("hidden", 'true');
+        }
+        this.sendNotify(4, this.rejectJob);
         this.messageService.add({severity: 'success', summary: 'Reject', detail: 'Successfully!'});
-      })
-    })
-
+      });
+    });
   }
-
 
   acceptJob(applyJob: ApplyJob) {
     return this.applyjobService.acceptJob(applyJob).subscribe(() => {
-      // @ts-ignore
-      document.getElementById('accept' + applyJob.id).setAttribute("disabled", 'true');
-      // @ts-ignore
-      document.getElementById('reject' + applyJob.id).setAttribute("disabled", 'true');
-      this.sendNotify(3, applyJob.job)
+      const acceptElement = document.getElementById('accept' + applyJob.id);
+      if (acceptElement) {
+        acceptElement.setAttribute("disabled", 'true');
+      }
+      const rejectElement = document.getElementById('reject' + applyJob.id);
+      if (rejectElement) {
+        rejectElement.setAttribute("disabled", 'true');
+      }
+      this.sendNotify(3, applyJob.job);
       this.messageService.add({severity: 'success', summary: 'Accept', detail: 'Successfully!'});
-
-    })
+    });
   }
 
   getApplyJob(aj: ApplyJob) {
     this.applyJob = aj;
-    // @ts-ignore
-    this.applyJobId = +aj.id;
+    if (aj.id !== undefined) {
+      this.applyJobId = +aj.id;
+    }
   }
 
   sendNotify(nt: number, job: Job | undefined) {

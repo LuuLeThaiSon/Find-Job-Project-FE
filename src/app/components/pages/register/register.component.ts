@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Role} from "../../model/role";
 import {Company} from "../../model/company";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -13,7 +13,7 @@ import {MessageService} from "primeng/api";
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers:[MessageService]
+  providers: [MessageService]
 })
 export class RegisterComponent {
   companies: Company[] = []
@@ -28,8 +28,6 @@ export class RegisterComponent {
   selectedOption: any;
 
 
-
-
   ngOnInit(): void {
     this.loading = true
     this.formRegister = new FormGroup({
@@ -38,10 +36,10 @@ export class RegisterComponent {
       email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
       password: new FormControl(''),
       tel: new FormControl(''),
-      shortName: new FormControl('',[Validators.required]),
+      shortName: new FormControl('', [Validators.required]),
       code: new FormControl(''),
       avatar: new FormControl(''),
-      description: new FormControl('',[Validators.required]),
+      description: new FormControl('', [Validators.required]),
       address: new FormControl(''),
       numberOfEmployees: new FormControl(''),
       googleMap: new FormControl(''),
@@ -86,82 +84,13 @@ export class RegisterComponent {
     }
   }
 
-  // onSubmit() {
-  //   this.loading = false
-  //   if (this.imageFile !== undefined) {
-  //     const imagePath = `${this.imageFile.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-  //     const fileRef = this.storage.ref(imagePath);
-  //     this.storage.upload(imagePath, this.imageFile).snapshotChanges().pipe(
-  //       finalize(() => {
-  //         fileRef.getDownloadURL().subscribe(url => {
-  //           this.passwordSend.to = this.formRegister.get('email')?.value
-  //           this.passwordSend.subject = 'Congratulation you become a company!'
-  //           // @ts-ignore
-  //           this.passwordSend.message = this.formRegister.get('password')?.value
-  //           this.company = this.formRegister.value
-  //           this.company.status = true
-  //           this.company.avatar = url
-  //           this.company.password = null
-  //           this.company.role = {id: 2, name: 'COMPANY'}
-  //           this.company.numberOfEmployees = 0
-  //           this.companyService.getPassword(this.passwordSend).subscribe((data) => {
-  //             this.company.password = data.message
-  //             this.companyService.saveCompany(this.company).subscribe(() => {
-  //               this.loading = true
-  //               setTimeout(() => {
-  //                 this.showSuccess2()
-  //               }, 2000)
-  //               setTimeout(() => {
-  //                 this.showInfo()
-  //               }, 5000)
-  //               setTimeout(() => {
-  //                 this.router.navigate(['/login']).finally()
-  //               }, 7000)
-  //               return
-  //             })
-  //           })
-  //         });
-  //       })
-  //     ).subscribe()
-  //   } else {
-  //     this.loading = false
-  //     this.passwordSend.to = this.formRegister.get('email')?.value
-  //     this.passwordSend.subject = 'Congratulation you become a company!'
-  //     // @ts-ignore
-  //     this.passwordSend.message = this.formRegister.get('password')?.value
-  //     this.company = this.formRegister.value
-  //     this.company.status = true
-  //     this.company.avatar = ""
-  //     this.company.password = null
-  //     this.company.role = {id: 2, name: 'COMPANY'}
-  //     this.company.numberOfEmployees = 0
-  //     this.companyService.getPassword(this.passwordSend).subscribe((data) => {
-  //       this.company.password = data.message
-  //       this.companyService.saveCompany(this.company).subscribe(() => {
-  //         this.loading = true
-  //         setTimeout(() => {
-  //           this.showSuccess2()
-  //         }, 2000)
-  //         setTimeout(() => {
-  //           this.showInfo()
-  //         }, 5000)
-  //         setTimeout(() => {
-  //           this.router.navigate(['/login']).finally()
-  //         }, 7000)
-  //         return
-  //       })
-  //     })
-  //   }
-  // }
-
-
   checkName(name: string): void {
     this.companyService.findAllCompany().subscribe((data) => {
       for (let a of data) {
         if (a.name.toLowerCase() === name.toLowerCase()) {
           setTimeout(() => {
             this.showError()
-          },50,1)
+          }, 50, 1)
           this.formRegister.get('name')?.setValue('')
         }
       }
@@ -175,7 +104,7 @@ export class RegisterComponent {
           setTimeout(() => {
             this.showError1()
             this.formRegister.get('email')?.setValue('')
-          },50,1)
+          }, 50, 1)
         }
       }
     })
@@ -193,7 +122,12 @@ export class RegisterComponent {
   }
 
   showSuccess2() {
-    this.messageService.add({severity: 'success', summary: 'success', detail: 'Register Successfully! Check ur mail to get password!', key:'ab'})
+    this.messageService.add({
+      severity: 'success',
+      summary: 'success',
+      detail: 'Register Successfully! Check ur mail to get password!',
+      key: 'ab'
+    })
   }
 
   showSuccess1() {
@@ -209,11 +143,21 @@ export class RegisterComponent {
   }
 
   showError() {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Username existed. Please choose another name!', key:'ab'});
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Username existed. Please choose another name!',
+      key: 'ab'
+    });
   }
 
   showError1() {
-    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Email existed. Please choose another email!', key:'ab'});
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Email existed. Please choose another email!',
+      key: 'ab'
+    });
   }
 
   clear() {
@@ -222,7 +166,13 @@ export class RegisterComponent {
 
   showConfirm() {
     this.messageService.clear();
-    this.messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
+    this.messageService.add({
+      key: 'c',
+      sticky: true,
+      severity: 'warn',
+      summary: 'Are you sure?',
+      detail: 'Confirm to proceed'
+    });
   }
 
   onSubmit() {
@@ -235,7 +185,6 @@ export class RegisterComponent {
           fileRef.getDownloadURL().subscribe(url => {
             this.passwordSender.to = this.formRegister.get('email')?.value
             this.passwordSender.subject = 'Congratulation you become a company!'
-            // @ts-ignore
             this.passwordSender.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>" + "Click here to go to your login page: " +
               "<a href=\"http://localhost:4200/login\">Login Now!</a>",
               "text/html"
@@ -263,7 +212,7 @@ export class RegisterComponent {
       this.passwordSender.to = this.formRegister.get('email')?.value
       this.passwordSender.subject = 'Congratulation you become a company!'
       this.passwordSender.htmlContent = "<h1>Welcome to 404 Team!</h1><br/>" + "Click here to go to your login page: " +
-        "<a href=\"http://localhost:4200/login\">Login Now!</a>" + "<br/>" + "<p>Password is:  </p>" +  (Math.random() + 1).toString(36).substring(2),
+        "<a href=\"http://localhost:4200/login\">Login Now!</a>" + "<br/>" + "<p>Password is:  </p>" + (Math.random() + 1).toString(36).substring(2),
         "text/html"
       this.company = this.formRegister.value
       this.company.status = true
@@ -272,7 +221,7 @@ export class RegisterComponent {
       this.company.role = {id: 2, name: 'COMPANY'}
       this.company.numberOfEmployees = 0
       this.companyService.getPasswordGmail(this.passwordSender).subscribe((data) => {
-        this.company.password = data.htmlContent.slice(149,160)
+        this.company.password = data.htmlContent.slice(149, 160)
         this.companyService.saveCompany(this.company).subscribe(() => {
           this.loading = true
           setTimeout(() => {

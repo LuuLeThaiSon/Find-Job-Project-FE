@@ -1,8 +1,6 @@
-import {Component, OnChanges} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {Company} from "../../model/company";
-import {map} from "rxjs";
-import {HttpClient} from "@angular/common/http";
 import {CompanyService} from "../../service/company.service";
 import {JobService} from "../../service/job.service";
 import {Job} from "../../model/job";

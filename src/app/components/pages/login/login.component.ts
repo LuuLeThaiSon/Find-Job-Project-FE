@@ -47,76 +47,57 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.candidate = this.formLogin.value
-    this.company = this.formLogin.value
-    this.admin = this.formLogin.value
-    this.companyService.findAllCandidate().subscribe((data) => {
-      for (let i = 0; i < data.length; i++) {
-        if (this.candidate.email.toLowerCase() == data[i].email.toLowerCase() && this.candidate.password == data[i].password) {
-          sessionStorage.setItem("user", JSON.stringify(data[i]));
-          setTimeout(() => {
-            this.loading = true
-          },1000)
-          setTimeout(() => {
-            this.showSuccess()
-          },1000)
-          setTimeout(() => {
-            this.loading = false
-          }, 2000)
-          setTimeout(() => {
-            this.loading = true
-            this.router.navigate(['']).finally()
-          },4000)
-          return
-        }
+    const user = this.formLogin.value;
+
+    this.companyService.findAllCandidate().subscribe((candidateData) => {
+      const candidate = candidateData.find((c) =>
+        c.email.toLowerCase() === user.email.toLowerCase() && c.password === user.password
+      );
+
+      if (candidate) {
+        this.loginSuccess(candidate);
+        return;
       }
-      this.companyService.findAllCompany().subscribe((data) => {
-        for (let j = 0; j < data.length; j++) {
-          if (this.company.email.toLowerCase() == data[j].email.toLowerCase() && this.company.password == data[j].password) {
-            sessionStorage.setItem("user", JSON.stringify(data[j]));
-            setTimeout(() => {
-              this.loading = true
-            },1000)
-            setTimeout(() => {
-              this.showSuccess()
-            },1000)
-            setTimeout(() => {
-              this.loading = false
-            }, 2000)
-            setTimeout(() => {
-              this.loading = true
-              this.router.navigate(['']).finally()
-            },4000)
-            return
-          }
+
+      this.companyService.findAllCompany().subscribe((companyData) => {
+        const company = companyData.find((c) =>
+          c.email.toLowerCase() === user.email.toLowerCase() && c.password === user.password
+        );
+
+        if (company) {
+          this.loginSuccess(company);
+          return;
         }
-        this.companyService.findAllAdmin().subscribe((data) => {
-          for (let j = 0; j < data.length; j++) {
-            if (this.admin.email == data[j].email && this.admin.password == data[j].password) {
-              sessionStorage.setItem("user", JSON.stringify(data[j]));
-              setTimeout(() => {
-                this.loading = true
-              },1000)
-              setTimeout(() => {
-                this.showSuccess()
-              },1000)
-              setTimeout(() => {
-                this.loading = false
-              }, 2000)
-              setTimeout(() => {
-                this.loading = true
-                this.router.navigate(['']).finally()
-              },4000)
-              return
-            }
+
+        this.companyService.findAllAdmin().subscribe((adminData) => {
+          const admin = adminData.find((a) =>
+            a.email === user.email && a.password === user.password
+          );
+
+          if (admin) {
+            this.loginSuccess(admin);
+            return;
           }
-          setTimeout(() => {
-            this.loading = true
-            this.showError()
-          }, 100)
-        })
-      })
-    })
+
+          this.showError();
+        });
+      });
+    });
+  }
+
+  loginSuccess(data: any) {
+    sessionStorage.setItem("user", JSON.stringify(data));
+    setTimeout(() => {
+      this.loading = true;
+      this.showSuccess();
+    }, 1000);
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
+    setTimeout(() => {
+      this.loading = true;
+      this.router.navigate(['']).finally();
+    }, 4000);
   }
 
 

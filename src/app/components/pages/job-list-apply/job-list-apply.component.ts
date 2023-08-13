@@ -17,7 +17,6 @@ import {ApplyJob} from "../../model/apply-job";
 import {MessageService} from "primeng/api";
 
 
-
 @Component({
   selector: 'app-job-list-apply',
   templateUrl: './job-list-apply.component.html',
@@ -182,19 +181,19 @@ export class JobListApplyComponent {
   }
 
   deleteJobId(id: number) {
-    this.applyJobService.removeApplyJobCandidate(this.candidateId,id).subscribe(() => {
+    this.applyJobService.removeApplyJobCandidate(this.candidateId, id).subscribe(() => {
       this.showSuccess()
       this.ngOnInit()
     })
   }
 
-  openCancelModal(id:number) {
+  openCancelModal(id: number) {
     this.modalId = id;
     // @ts-ignore
     document.getElementById(`openCancelModal`).click();
   }
 
-  modalId!:number;
+  modalId!: number;
 }
 
 

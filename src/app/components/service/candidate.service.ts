@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
-import {Company} from "../model/company";
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {environments} from "../../../environment/enviroments";
 import {HttpClient} from "@angular/common/http";
 import {Candidate} from "../model/candidate";
-import {Job} from "../model/job";
 
 const apiUrl = environments.apiUrl
 

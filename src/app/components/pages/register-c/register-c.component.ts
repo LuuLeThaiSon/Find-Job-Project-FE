@@ -1,15 +1,12 @@
 import {Component, ViewChild} from '@angular/core';
 import {Candidate} from "../../model/candidate";
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Role} from "../../model/role";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CompanyService} from "../../service/company.service";
 import {matchpassword} from "./matchpassword.validator";
-import firebase from "firebase/compat";
-import messaging = firebase.messaging;
 import {HeaderComponent} from "../../common/header/header.component";
 import {MessageService} from "primeng/api";
-import {getMatIconFailedToSanitizeLiteralError} from "@angular/material/icon";
 
 
 @Component({
@@ -23,7 +20,7 @@ export class RegisterCComponent {
   candidates: Candidate[] = []
   formRegisterCandidate!: FormGroup
   passwordSend = {to: '', subject: '', messageC: '', message: null}
-  htmlSend = {to:'', subject:'', htmlContent: '', password: ''}
+  htmlSend = {to: '', subject: '', htmlContent: '', password: ''}
   role: Role[] = []
   imageFile: any
   path!: string
@@ -39,12 +36,12 @@ export class RegisterCComponent {
     this.formRegisterCandidate = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+      email: new FormControl('', [Validators.required, Validators.pattern(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
       password: new FormControl('', [Validators.required, Validators.pattern(this.RegexAlphaNumeric)]),
       confirmPassword: new FormControl('', [Validators.required, Validators.pattern(this.RegexAlphaNumeric)]),
-      tel: new FormControl('', [Validators.required,Validators.pattern(/^0\d{8,9}$/)]),
+      tel: new FormControl('', [Validators.required, Validators.pattern(/^0\d{8,9}$/)]),
       role: new FormGroup({
-        id: new FormControl('', )
+        id: new FormControl('',)
       }),
     }, {
       validators: matchpassword
@@ -60,46 +57,7 @@ export class RegisterCComponent {
               private router: Router,
               private companyService: CompanyService,
               private messageService: MessageService) {
-  }//
-
-
-  // onSubmit() {
-  //   this.candidate = this.formRegisterCandidate.value
-  //   this.passwordSend.to = this.formRegisterCandidate.get('email')?.value
-  //   this.passwordSend.subject = 'Register Successfully!'
-  //   // @ts-ignore
-  //   this.passwordSend.messageC = "WELCOME TO 404 TEAM" +
-  //     "    " +
-  //     +"   " +
-  //     + "CLick here to go page login: http://localhost:4200/login"
-  //   this.loading = false
-  //   this.companyService.getNotificationCandidate(this.passwordSend).subscribe((data) => {
-  //     // @ts-ignore
-  //     this.candidate.status = true
-  //     // @ts-ignore
-  //     this.candidate.avatar = null
-  //     // @ts-ignore
-  //     this.candidate.role = {id: '3', name: "CANDIDATE"}
-  //     // this.candidate.role = {id: 3}
-  //     this.companyService.saveCandidate(this.candidate).subscribe(() => {
-  //       this.loading = true
-  //       setTimeout(() => {
-  //         this.showSuccess3()
-  //       }, 1000)
-  //       setTimeout(() => {
-  //         this.showInfo()
-  //       }, 2000)
-  //       setTimeout(() => {
-  //         this.loading = false
-  //       },6000)
-  //       setTimeout(() => {
-  //         this.router.navigate(['/login']).finally()
-  //       }, 9000)
-  //       return
-  //     })
-  //   })
-  // }
-
+  }
 
   onSubmit() {
     this.loading = false;
@@ -112,7 +70,7 @@ export class RegisterCComponent {
       "<a href=\"http://localhost:4200/login\">Login Now!</a>",
       "text/html"
     this.loading = false
-    this.companyService.getNotificationCandidateGmail(this.htmlSend).subscribe((data) => {
+    this.companyService.getNotificationCandidateGmail(this.htmlSend).subscribe(() => {
       // @ts-ignore
       this.candidate.status = true
       // @ts-ignore
@@ -125,15 +83,9 @@ export class RegisterCComponent {
         setTimeout(() => {
           this.showSuccess3()
         }, 1000)
-        // setTimeout(() => {
-        //   this.showInfo()
-        // }, 2000)
         setTimeout(() => {
           this.loading = false
         }, 6000)
-        // setTimeout(() => {
-        //   this.router.navigate(['/login']).finally()
-        // }, 9000)
         return
       })
     })
@@ -153,7 +105,7 @@ export class RegisterCComponent {
   }
 
   checkTel() {
-    if (this.formRegisterCandidate.get('tel')?.errors?.['pattern'] && this.formRegisterCandidate.get('tel')?.touched ) {
+    if (this.formRegisterCandidate.get('tel')?.errors?.['pattern'] && this.formRegisterCandidate.get('tel')?.touched) {
       this.formRegisterCandidate.get('tel')?.setValue('')
     }
   }

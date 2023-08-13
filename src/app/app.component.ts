@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
-import {CategoryService} from "./components/service/category.service";
+import {AfterViewInit, Component, ElementRef} from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

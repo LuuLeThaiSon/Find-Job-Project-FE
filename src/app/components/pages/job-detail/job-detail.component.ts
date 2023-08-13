@@ -34,7 +34,7 @@ export class JobDetailComponent {
   checkApplyJob: Boolean[] = [];
   checkUpload: boolean = false;
   decline: boolean = true;
-  notifyType: NotifyType[] =[];
+  notifyType: NotifyType[] = [];
   notify = new Notify();
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -76,7 +76,7 @@ export class JobDetailComponent {
     return this.jobService.findOne(id).subscribe((data) => {
       this.job = data;
       this.description = this.sanitized.bypassSecurityTrustHtml(data.description);
-      if(this.role == 0) {
+      if (this.role == 0) {
         return
       } else {
         this.applyJobService.findAllApplyJobByCandidateId(this.user.id).subscribe((data1) => {
@@ -105,7 +105,7 @@ export class JobDetailComponent {
       this.decline = false;
       this.findALl();
       this.flag = false;
-      this.messageService.add({severity:'success', summary: 'Success', detail: 'Cancel successfully'});
+      this.messageService.add({severity: 'success', summary: 'Success', detail: 'Cancel successfully'});
       this.sendNotify(2, this.job)
     });
   }
@@ -119,7 +119,7 @@ export class JobDetailComponent {
 
   apply() {
     if (this.cvFileName == null) {
-      return this.messageService.add({severity:'error', summary: 'Error', detail: 'Must be upload your CV'});
+      return this.messageService.add({severity: 'error', summary: 'Error', detail: 'Must be upload your CV'});
 
     }
     this.loading = false;
@@ -135,7 +135,7 @@ export class JobDetailComponent {
           this.applyJobService.save(this.applyJob).subscribe(() => {
             this.findOne(this.jobId)
             this.btnModal.nativeElement.click();
-            this.messageService.add({severity:'success', summary: 'Success', detail: 'Apply successfully'});
+            this.messageService.add({severity: 'success', summary: 'Success', detail: 'Apply successfully'});
             this.sendNotify(1, this.job);
           })
           this.loading = true;
@@ -158,7 +158,7 @@ export class JobDetailComponent {
         this.notify.notifyType = this.notifyType[i];
         this.notify.job = job;
         this.notify.company = job.company;
-        this.notify.candidate= this.user;
+        this.notify.candidate = this.user;
         this.notifyService.sendNotify(this.notify).subscribe(() => {
           this.ngOnInit()
         });

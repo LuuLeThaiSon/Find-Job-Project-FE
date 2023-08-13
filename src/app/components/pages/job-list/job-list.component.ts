@@ -14,8 +14,7 @@ import {CommonService} from "../../service/common.service";
 import {NotifyService} from "../../service/notify.service";
 import {Notify} from "../../model/notify";
 import {NotifyType} from "../../model/notify-type";
-import {set} from "@angular/fire/database";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-job-list',
@@ -91,7 +90,6 @@ export class JobListComponent implements OnInit {
       this.showFilterResult = false;
     } else {
       this.findAllByStatusIsTrueAndAndExpiredDate()
-
     }
 
   }
@@ -279,6 +277,7 @@ export class JobListComponent implements OnInit {
     }
   }
 
+
   filterJobGender(gender: string) {
     if (gender == "any") {
       this.displayJobs = this.displayJobs.filter((obj) => {
@@ -411,12 +410,12 @@ export class JobListComponent implements OnInit {
       this.filterJobs.get('types')?.setValue('alltypes');
       this.filterJobs.get('gender')?.setValue('any');
       this.searchJobs.setValue({
-        text:'',
-        location:{
-          l_id:'all_l'
+        text: '',
+        location: {
+          l_id: 'all_l'
         },
-        category:{
-          c_id:'all_c'
+        category: {
+          c_id: 'all_c'
         }
       })
     })
@@ -426,32 +425,38 @@ export class JobListComponent implements OnInit {
   openModalStatus = false;
 
   openModal() {
-    // @ts-ignore
-    document.getElementById("clickModal").click();
+    const clickModalElement = document.getElementById("clickModal") as HTMLElement;
+    clickModalElement.click();
   }
 
   toLoginPage() {
     this.loading = false;
-    // @ts-ignore
-    document.getElementById("clickModal").click();
+    const clickModalElement = document.getElementById("clickModal") as HTMLElement;
+    clickModalElement.click();
     setTimeout(() => {
       this.loading = true;
-    }, 3000)
-    this.router.navigate(["/login"])
+    }, 3000);
+    this.router.navigate(["/login"]).then(() => {
+      // Handle the completion of the navigation if needed
+    }).catch(() => {
+      // Handle any error that occurred during navigation
+    });
   }
 
   toRegisterPage() {
     this.loading = false;
-    // @ts-ignore
-    document.getElementById("clickModal").click();
+    const clickModalElement = document.getElementById("clickModal") as HTMLElement;
+    clickModalElement.click();
     setTimeout(() => {
       this.loading = true;
-    }, 3000)
-    this.router.navigate(["/register"])
+    }, 3000);
+    this.router.navigate(["/register"]).then(() => {
+      // Handle the completion of the navigation if needed
+    }).catch(() => {
+      // Handle any error that occurred during navigation
+    });
   }
 
   //show search result
   showFilterResult = true;
-
-
 }

@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {CompanyService} from "../../service/company.service";
 import {Company} from "../../model/company";
-import {Locations} from "../../model/locations";
-import {LocationsService} from "../../service/locations.service";
 
 @Component({
   selector: 'app-company-list',
